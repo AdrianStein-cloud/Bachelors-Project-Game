@@ -219,8 +219,10 @@ MonoBehaviour:
   mouseSensitivity: 25
   rotationAngle: 90
   followSpeed: 25
+  runFOVChangeAmount: 1.1
+  runFOVChangeSpeed: 5
   cameraPosition: {fileID: 5697493602818644934}
-  player: {fileID: 4653813234916721798}
+  player: {fileID: 5852719042983267109}
 --- !u!114 &8881323201046055355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +241,7 @@ MonoBehaviour:
   walkingBobbingAmount: 0.005
   runningBobbingSpeed: 13
   runningBobbingAmount: 0.0075
-  movement: {fileID: 5852719042983267109}
+  player: {fileID: 5852719042983267109}
 --- !u!1 &6358394087113186272
 GameObject:
   m_ObjectHideFlags: 0
