@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using static Unity.VisualScripting.Metadata;
 
@@ -17,7 +18,8 @@ public class DungeonGenerator : MonoBehaviour
 
     void Start()
     {
-        SetSeed(seed);
+        GameSettings.Instance.SetSeed(seed);
+        Random.InitState(seed);
         LoadRooms();
         GenerateDungeon();
     }
@@ -40,15 +42,7 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    private void SetSeed(int seed)
-    {
-        if (seed == -1)
-        {
-            seed = Random.Range(1, 10000000);
-        }
-        Debug.Log("Seed: " + seed);
-        Random.InitState(seed);
-    }
+    
 
     private void GenerateDungeon()
     {
