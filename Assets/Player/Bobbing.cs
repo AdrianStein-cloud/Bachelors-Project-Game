@@ -10,7 +10,7 @@ public class Bobbing : MonoBehaviour
     [SerializeField] float walkingBobbingAmount;
     [SerializeField] float runningBobbingSpeed;
     [SerializeField] float runningBobbingAmount;
-    [SerializeField] PlayerMovement movement;
+    [SerializeField] PlayerMovement player;
 
     float currentBobbingSpeed;
     float currentBobbingAmount;
@@ -18,8 +18,8 @@ public class Bobbing : MonoBehaviour
 
     void Update()
     {
-        currentBobbingSpeed = movement.IsRunning ? runningBobbingSpeed : (movement.IsWalking ? walkingBobbingSpeed : idleBobbingSpeed);
-        currentBobbingAmount = movement.IsRunning ? runningBobbingAmount : (movement.IsWalking ? walkingBobbingAmount : idleBobbingAmount);
+        currentBobbingSpeed = player.IsRunning ? runningBobbingSpeed : (player.IsWalking ? walkingBobbingSpeed : idleBobbingSpeed);
+        currentBobbingAmount = player.IsRunning ? runningBobbingAmount : (player.IsWalking ? walkingBobbingAmount : idleBobbingAmount);
 
         timer += Time.deltaTime * currentBobbingSpeed;
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + Mathf.Sin(timer) * currentBobbingAmount, transform.localPosition.z);
