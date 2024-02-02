@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlashlightController : MonoBehaviour
+public class FlashlightController : Item
 {
     Light flashlight;
     float normalIntensity;
@@ -14,13 +14,7 @@ public class FlashlightController : MonoBehaviour
         normalIntensity = flashlight.intensity;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            ToggleFlashlight();
-        }
-    }
+    public override void Primary() => ToggleFlashlight();
 
     public void ToggleFlashlight()
     {
