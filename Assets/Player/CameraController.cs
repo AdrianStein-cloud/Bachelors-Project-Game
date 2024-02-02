@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraLook : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     [SerializeField] float mouseSensitivity;
     [SerializeField, Range(50, 90)] int rotationAngle;
-    [SerializeField] Transform playerBody;
+    [SerializeField] float followSpeed;
+    [SerializeField] Transform cameraPosition;
+    [SerializeField] Transform player;
 
     Vector2 dir;
     float xRotation = 0f;
@@ -18,19 +20,22 @@ public class CameraLook : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void OnLook(InputValue value)
+    public void Look(InputAction.CallbackContext context)
     {
-        dir = value.Get<Vector2>();
+        dir = context.ReadValue<Vector2>();
     }
 
     private void Update()
     {
+        transform.position = Vector3.Lerp(transform.position, cameraPosition.position, followSpeed * Time.deltaTime);
+
         var mouseDir = mouseSensitivity * Time.deltaTime * dir;
+        var yRotation = transform.localRotation.eulerAngles.y + mouseDir.x;
 
         xRotation -= mouseDir.y;
         xRotation = Mathf.Clamp(xRotation, -rotationAngle, rotationAngle);
 
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        playerBody.Rotate(Vector3.up * mouseDir.x);
+        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        player.Rotate(Vector3.up * mouseDir.x);
     }
 }
