@@ -84,7 +84,6 @@ public class Room : MonoBehaviour
     {
         if(other.tag == "Room")
         {
-            Debug.Log("Colliding...");
             isColliding = true;
         }
     }

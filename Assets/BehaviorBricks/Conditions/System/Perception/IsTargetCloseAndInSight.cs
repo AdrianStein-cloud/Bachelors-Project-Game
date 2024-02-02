@@ -9,8 +9,6 @@ namespace BBUnity.Conditions
     [Help("Checks whether a target is close and in sight depending on a given distance and an angle")]
     public class IsTargetCloseAndInSight : GOCondition
     {
-        LayerMask layerMask = 6;
-
         ///<value>Input Target Parameter to to check the distance and angle.</value>
         [InParam("target")]
         [Help("Target to check the distance and angle")]
@@ -28,6 +26,9 @@ namespace BBUnity.Conditions
 
         [InParam("Direction Object")]
         public GameObject dirObject;
+
+        [InParam("LayerMask")]
+        public LayerMask layerMask;
 
         /// <summary>
         /// Checks whether a target is close and in sight depending on a given distance and an angle, 
@@ -48,8 +49,9 @@ namespace BBUnity.Conditions
             Vector3 dir = (playerPos - dirObject.transform.position);
             
             RaycastHit hit;
-            if (Physics.Raycast(dirObject.transform.position, dir, out hit))
+            if (Physics.Raycast(dirObject.transform.position, dir, out hit, Mathf.Infinity, layerMask))
             {
+                Debug.Log(hit.collider.gameObject.name);
                 return hit.collider.gameObject == target && Vector3.Angle(dir, dirObject.transform.forward) < angle * 0.5f;
             }
             return false;

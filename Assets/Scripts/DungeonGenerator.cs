@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] int depth = 1;
     [SerializeField] int seed = -1; // -1 = random seed
     [SerializeField] int lookahead = 3;
+    [SerializeField] NavMeshSurface navmeshSurface;
 
     private List<GameObject> rooms = new List<GameObject>();
 
@@ -20,7 +22,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         SetSeed(seed);
         LoadRooms();
-        GenerateDungeon();
+        StartCoroutine(GenerateDungeon());
     }
     public void SetSeed(int seed)
     {
@@ -53,12 +55,16 @@ public class DungeonGenerator : MonoBehaviour
 
     
 
-    private void GenerateDungeon()
+    private IEnumerator GenerateDungeon()
     {
         //instantiate first object in rooms
         GameObject entrance = Instantiate(rooms[0], new Vector3(0, 0, 0), transform.rotation);
 
-        StartCoroutine(SpawnRoomsAtDoorsCoroutine(entrance.GetComponent<Room>().GetDoors(), 0));
+        yield return StartCoroutine(SpawnRoomsAtDoorsCoroutine(entrance.GetComponent<Room>().GetDoors(), 0));
+
+        Debug.Log("Done");
+        yield return new WaitForSeconds(1f);
+        navmeshSurface.BuildNavMesh();
     }
 
     IEnumerator SpawnRoomsAtDoorsCoroutine(List<Door> doors, int depth)
@@ -67,7 +73,7 @@ public class DungeonGenerator : MonoBehaviour
 
         foreach (Door door in doors)
         {
-            StartCoroutine(SpawnRoomAtDoor(door, depth));
+            yield return StartCoroutine(SpawnRoomAtDoor(door, depth));
         }
     }
 
