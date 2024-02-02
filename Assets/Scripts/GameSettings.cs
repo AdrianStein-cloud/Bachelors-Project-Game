@@ -9,11 +9,7 @@ public class GameSettings : Singleton<GameSettings>
 
     public void SetSeed(int seed)
     {
-        if (seed == -1)
-        {
-            seed = Random.Range(1, 10000000);
-        }
-        Debug.Log("Seed: " + seed);
+        this.seed = seed;
     }
 
     public int GetSeed()
