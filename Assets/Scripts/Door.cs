@@ -6,7 +6,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     public quaternion direction;
-    public bool doorConnected = false;
+    private bool doorConnected = false;
     public bool debugHighlight = false;
 
     [Header("Bounding Box")]
@@ -15,10 +15,29 @@ public class Door : MonoBehaviour
     [SerializeField] float bounding_z = 2;
     [Header("Setup")]
     [SerializeField] public bool isEntrance = false;
+    [SerializeField] GameObject doorWallBlocker;
 
     private void Awake()
     {
         direction = transform.rotation;
+        if (doorWallBlocker != null)
+        {
+            doorWallBlocker.SetActive(true);
+        }
+    }
+
+    public void SetDoorConnected(bool connected)
+    {
+        doorConnected = connected;
+        if(doorWallBlocker != null)
+        {
+            doorWallBlocker.SetActive(!connected);
+        }
+    }
+
+    public bool GetDoorConnected()
+    {
+        return doorConnected;
     }
 
     void OnDrawGizmos()

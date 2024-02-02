@@ -53,9 +53,9 @@ public class DungeonGenerator : MonoBehaviour
     private void GenerateDungeon()
     {
         //instantiate first object in rooms
-        Instantiate(rooms[0], new Vector3(0, 0, 0), transform.rotation);
+        GameObject entrance = Instantiate(rooms[0], new Vector3(0, 0, 0), transform.rotation);
 
-        StartCoroutine(SpawnRoomsAtDoorsCoroutine(rooms[0].GetComponent<Room>().GetDoors(), 0));
+        StartCoroutine(SpawnRoomsAtDoorsCoroutine(entrance.GetComponent<Room>().GetDoors(), 0));
     }
 
     IEnumerator SpawnRoomsAtDoorsCoroutine(List<Door> doors, int depth)
@@ -76,7 +76,7 @@ public class DungeonGenerator : MonoBehaviour
         GameObject newRoom = null;
         door.debugHighlight = true;
 
-        while (!roomFound && newRoom is null && !door.doorConnected && tries <= generationTriesPerRoom)
+        while (!roomFound && newRoom is null && !door.GetDoorConnected() && tries <= generationTriesPerRoom)
         {
             int roomIndexNumber = Random.Range(1, rooms.Count);
             newRoom = Instantiate(rooms[roomIndexNumber], door.gameObject.transform.position, door.direction);
@@ -90,8 +90,8 @@ public class DungeonGenerator : MonoBehaviour
             }
             else
             {
-                door.doorConnected = true;
-                newRoom.GetComponent<Room>().GetEntrance().GetComponent<Door>().doorConnected = true;
+                door.SetDoorConnected(true);
+                newRoom.GetComponent<Room>().GetEntrance().GetComponent<Door>().SetDoorConnected(true);
                 roomFound = true;
             }
 
