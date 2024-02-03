@@ -27,18 +27,6 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "a3d6ff96-8c38-40bc-ad2a-f8dd5ea1d677",
-                    "name": "PreviousItem",
-                    "type": "PassThrough",
-                    "id": "79ddf57c-9621-4c97-bc73-6936610e5652",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "NextItem",
-                    "type": "PassThrough",
-                    "id": "8484eaca-74e7-4e01-afb0-c249279d6381",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
@@ -57,9 +45,6 @@
                     "name": "Run",
                     "type": "Button",
                     "id": "9201329a-1935-49d2-a456-dd11aaa7e399",
-                    "name": "ItemSecondary",
-                    "type": "Button",
-                    "id": "498452af-01bf-478e-bc7a-156005cb88d0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -70,10 +55,24 @@
                     "type": "Button",
                     "id": "dd2c05a3-f975-445d-9823-5a5f28e91d03",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "SwitchItem",
                     "type": "PassThrough",
-                    "id": "991f7b14-582f-48d8-9b43-1646451e09c2",
+                    "id": "283c697c-f140-4d91-8bf3-be0d24638947",
                     "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ItemSecondary",
+                    "type": "Button",
+                    "id": "e0e88275-5955-47e5-be8b-c4e0e6d055a3",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -220,12 +219,6 @@
                     "processors": "",
                     "groups": "Mouse and Keyboard",
                     "action": "Jump",
-                    "id": "f4aff089-4e10-4536-a9ca-64934a8cba16",
-                    "path": "<Mouse>/scroll/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PreviousItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -237,12 +230,6 @@
                     "processors": "",
                     "groups": "Mouse and Keyboard",
                     "action": "Run",
-                    "id": "10c58748-13ef-491d-9466-33a9cccc441c",
-                    "path": "<Mouse>/scroll/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "NextItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -254,14 +241,6 @@
                     "processors": "",
                     "groups": "Mouse and Keyboard",
                     "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                    "id": "77eec1fd-d13e-4352-bfe6-fe9a972d6e4a",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ItemPrimary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -308,6 +287,17 @@
                     "action": "SwitchItem",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "9f02b43f-50aa-4f52-950d-db3098e76552",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ItemPrimary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

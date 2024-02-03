@@ -46,18 +46,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""PreviousItem"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""79ddf57c-9621-4c97-bc73-6936610e5652"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""NextItem"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""8484eaca-74e7-4e01-afb0-c249279d6381"",
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""a3d6ff96-8c38-40bc-ad2a-f8dd5ea1d677"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -73,9 +64,18 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ItemSecondary"",
+                    ""name"": ""Run"",
                     ""type"": ""Button"",
-                    ""id"": ""498452af-01bf-478e-bc7a-156005cb88d0"",
+                    ""id"": ""9201329a-1935-49d2-a456-dd11aaa7e399"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd2c05a3-f975-445d-9823-5a5f28e91d03"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -84,8 +84,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""SwitchItem"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""991f7b14-582f-48d8-9b43-1646451e09c2"",
+                    ""id"": ""283c697c-f140-4d91-8bf3-be0d24638947"",
                     ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ItemSecondary"",
+                    ""type"": ""Button"",
+                    ""id"": ""e0e88275-5955-47e5-be8b-c4e0e6d055a3"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -226,34 +235,34 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f4aff089-4e10-4536-a9ca-64934a8cba16"",
-                    ""path"": ""<Mouse>/scroll/up"",
+                    ""id"": ""cde7fb5c-2113-447f-8bde-aadbe78c5f8d"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PreviousItem"",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""10c58748-13ef-491d-9466-33a9cccc441c"",
-                    ""path"": ""<Mouse>/scroll/down"",
+                    ""id"": ""2d85fe03-af4f-4335-8599-d6895e5984ef"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextItem"",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""77eec1fd-d13e-4352-bfe6-fe9a972d6e4a"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""id"": ""1c1d1904-ce0f-489d-9e51-d387fc7dfca8"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ItemPrimary"",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -300,6 +309,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""SwitchItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f02b43f-50aa-4f52-950d-db3098e76552"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ItemPrimary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -799,11 +819,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
-        m_Player_PreviousItem = m_Player.FindAction("PreviousItem", throwIfNotFound: true);
-        m_Player_NextItem = m_Player.FindAction("NextItem", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_ItemPrimary = m_Player.FindAction("ItemPrimary", throwIfNotFound: true);
-        m_Player_ItemSecondary = m_Player.FindAction("ItemSecondary", throwIfNotFound: true);
+        m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
+        m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_SwitchItem = m_Player.FindAction("SwitchItem", throwIfNotFound: true);
+        m_Player_ItemSecondary = m_Player.FindAction("ItemSecondary", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -879,22 +900,24 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
-    private readonly InputAction m_Player_PreviousItem;
-    private readonly InputAction m_Player_NextItem;
+    private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_ItemPrimary;
-    private readonly InputAction m_Player_ItemSecondary;
+    private readonly InputAction m_Player_Run;
+    private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_SwitchItem;
+    private readonly InputAction m_Player_ItemSecondary;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
         public PlayerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
-        public InputAction @PreviousItem => m_Wrapper.m_Player_PreviousItem;
-        public InputAction @NextItem => m_Wrapper.m_Player_NextItem;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @ItemPrimary => m_Wrapper.m_Player_ItemPrimary;
-        public InputAction @ItemSecondary => m_Wrapper.m_Player_ItemSecondary;
+        public InputAction @Run => m_Wrapper.m_Player_Run;
+        public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @SwitchItem => m_Wrapper.m_Player_SwitchItem;
+        public InputAction @ItemSecondary => m_Wrapper.m_Player_ItemSecondary;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -910,21 +933,24 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
-            @PreviousItem.started += instance.OnPreviousItem;
-            @PreviousItem.performed += instance.OnPreviousItem;
-            @PreviousItem.canceled += instance.OnPreviousItem;
-            @NextItem.started += instance.OnNextItem;
-            @NextItem.performed += instance.OnNextItem;
-            @NextItem.canceled += instance.OnNextItem;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
             @ItemPrimary.started += instance.OnItemPrimary;
             @ItemPrimary.performed += instance.OnItemPrimary;
             @ItemPrimary.canceled += instance.OnItemPrimary;
-            @ItemSecondary.started += instance.OnItemSecondary;
-            @ItemSecondary.performed += instance.OnItemSecondary;
-            @ItemSecondary.canceled += instance.OnItemSecondary;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
+            @Crouch.started += instance.OnCrouch;
+            @Crouch.performed += instance.OnCrouch;
+            @Crouch.canceled += instance.OnCrouch;
             @SwitchItem.started += instance.OnSwitchItem;
             @SwitchItem.performed += instance.OnSwitchItem;
             @SwitchItem.canceled += instance.OnSwitchItem;
+            @ItemSecondary.started += instance.OnItemSecondary;
+            @ItemSecondary.performed += instance.OnItemSecondary;
+            @ItemSecondary.canceled += instance.OnItemSecondary;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -935,21 +961,24 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
-            @PreviousItem.started -= instance.OnPreviousItem;
-            @PreviousItem.performed -= instance.OnPreviousItem;
-            @PreviousItem.canceled -= instance.OnPreviousItem;
-            @NextItem.started -= instance.OnNextItem;
-            @NextItem.performed -= instance.OnNextItem;
-            @NextItem.canceled -= instance.OnNextItem;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
             @ItemPrimary.started -= instance.OnItemPrimary;
             @ItemPrimary.performed -= instance.OnItemPrimary;
             @ItemPrimary.canceled -= instance.OnItemPrimary;
-            @ItemSecondary.started -= instance.OnItemSecondary;
-            @ItemSecondary.performed -= instance.OnItemSecondary;
-            @ItemSecondary.canceled -= instance.OnItemSecondary;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
+            @Crouch.started -= instance.OnCrouch;
+            @Crouch.performed -= instance.OnCrouch;
+            @Crouch.canceled -= instance.OnCrouch;
             @SwitchItem.started -= instance.OnSwitchItem;
             @SwitchItem.performed -= instance.OnSwitchItem;
             @SwitchItem.canceled -= instance.OnSwitchItem;
+            @ItemSecondary.started -= instance.OnItemSecondary;
+            @ItemSecondary.performed -= instance.OnItemSecondary;
+            @ItemSecondary.canceled -= instance.OnItemSecondary;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1107,11 +1136,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
-        void OnPreviousItem(InputAction.CallbackContext context);
-        void OnNextItem(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
         void OnItemPrimary(InputAction.CallbackContext context);
-        void OnItemSecondary(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
         void OnSwitchItem(InputAction.CallbackContext context);
+        void OnItemSecondary(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
