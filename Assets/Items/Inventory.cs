@@ -16,15 +16,27 @@ public class Inventory : MonoBehaviour
     {
         /*InputManager.Actions.Player.PreviousItem.performed += (_) => PreviousItem();
         InputManager.Actions.Player.NextItem.performed += (_) => NextItem();*/
-        InputManager.Actions.Player.SwitchItem.performed += (ctx) =>
+        /*InputManager.Actions.Player.SwitchItem.performed += (ctx) =>
         {
             float scroll = ctx.ReadValue<float>();
             if (scroll > 0) NextItem();
             else if (scroll < 0) PreviousItem();
         };
 
-        InputManager.Actions.Player.ItemPrimary.performed += (_) => items[itemIndex]?.Primary();
-        InputManager.Actions.Player.ItemSecondary.performed += (_) => items[itemIndex]?.Secondary();
+        InputManager.Actions.Player.ItemPrimary.performed += (ctx) => items[itemIndex]?.Primary();
+        InputManager.Actions.Player.ItemSecondary.performed += (ctx) => items[itemIndex]?.Secondary();*/
+    }
+
+    private void Update()
+    {
+        if (InputManager.Player.SwitchItem.triggered)
+        {
+            float scroll = InputManager.Player.SwitchItem.ReadValue<float>();
+            if (scroll > 0) NextItem();
+            else if (scroll < 0) PreviousItem();
+        }
+        else if(InputManager.Player.ItemPrimary.triggered) items[itemIndex]?.Primary();
+        else if(InputManager.Player.ItemSecondary.triggered) items[itemIndex]?.Secondary();
     }
 
     /*public void AddPrefabItem(GameObject prefabItem)
