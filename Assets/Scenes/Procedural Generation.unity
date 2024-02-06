@@ -13897,6 +13897,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 757691193816745377, guid: 044e996819c938c46b38608df2920ef3,
+        type: 3}
+      propertyPath: collectText
+      value: 
+      objectReference: {fileID: 1824767394}
     - target: {fileID: 946639617877281387, guid: 044e996819c938c46b38608df2920ef3,
         type: 3}
       propertyPath: m_Name
@@ -36439,6 +36444,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1824767394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6106697715772250433, guid: 12311705e3030ab4aa48c58cf8664e57,
+    type: 3}
+  m_PrefabInstance: {fileID: 1414814841}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1843540227
 Mesh:
   m_ObjectHideFlags: 0

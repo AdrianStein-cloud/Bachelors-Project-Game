@@ -22,7 +22,7 @@ public class Collectable : Interactable
 
     public override void DisableInteractability()
     {
-        collectText.SetActive(false);
+        collectText?.SetActive(false);
     }
 
 }
