@@ -45,16 +45,15 @@ namespace BBUnity.Conditions
             var playerPos = target.transform.position;
             var tempPlayerPos = new Vector3(playerPos.x, 0, playerPos.z);
             if (Vector3.Distance(tempPos, tempPlayerPos) > closeDistance) return false;
-            
+
             Vector3 dir = (playerPos - dirObject.transform.position);
-            
+
             RaycastHit hit;
             if (Physics.Raycast(dirObject.transform.position, dir, out hit, Mathf.Infinity, layerMask))
             {
-                Debug.Log(hit.collider.gameObject.name);
                 return hit.collider.gameObject == target && Vector3.Angle(dir, dirObject.transform.forward) < angle * 0.5f;
             }
             return false;
-		}
+        }
     }
 }

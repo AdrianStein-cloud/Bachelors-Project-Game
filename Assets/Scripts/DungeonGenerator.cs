@@ -33,7 +33,7 @@ public class DungeonGenerator : MonoBehaviour
         }
         Random.InitState(seed);
         GameSettings.Instance.SetSeed(seed);
-        Debug.Log("Seed: " + seed);
+        //Debug.Log("Seed: " + seed);
     }
 
     private void LoadRooms()
@@ -44,7 +44,7 @@ public class DungeonGenerator : MonoBehaviour
         // Add the child GameObjects to the list
         rooms.AddRange(childObjects);
 
-        Debug.Log("There are " + rooms.Count + " different rooms...");
+        //Debug.Log("There are " + rooms.Count + " different rooms...");
 
         sourceRooms.SetActive(false);
 
@@ -87,11 +87,11 @@ public class DungeonGenerator : MonoBehaviour
         GameObject newRoom = null;
         door.debugHighlight = true;
 
-        Debug.Log("Room List: " + rooms.Count);
+        //Debug.Log("Room List: " + rooms.Count);
 
         List<GameObject> shuffledRooms = ShuffleList(rooms);
 
-        Debug.Log("Shuffled List: " + shuffledRooms.Count);
+        //Debug.Log("Shuffled List: " + shuffledRooms.Count);
 
         foreach(GameObject room in shuffledRooms)
         {

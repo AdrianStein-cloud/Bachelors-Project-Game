@@ -16,6 +16,12 @@ namespace BBUnity.Actions
         [Help("Target game object towards this game object will be moved")]
         public GameObject target;
 
+        [OutParam("lastlocation")]
+        public Vector3 lastPos;
+
+        [OutParam("justchased")]
+        public bool chased;
+
         private UnityEngine.AI.NavMeshAgent navAgent;
 
         private Transform targetTransform;
@@ -37,13 +43,9 @@ namespace BBUnity.Actions
                 Debug.LogWarning("The " + gameObject.name + " game object does not have a Nav Mesh Agent component to navigate. One with default values has been added", gameObject);
                 navAgent = gameObject.AddComponent<UnityEngine.AI.NavMeshAgent>();
             }
-			navAgent.SetDestination(targetTransform.position);
-            
-            #if UNITY_5_6_OR_NEWER
-                navAgent.isStopped = false;
-            #else
-                navAgent.Resume();
-            #endif
+            navAgent.SetDestination(targetTransform.position);
+
+            navAgent.isStopped = false;
         }
 
         /// <summary>Method of Update of MoveToGameObject.</summary>
@@ -51,27 +53,15 @@ namespace BBUnity.Actions
         /// y, the task is running, if it is still moving to the target.</remarks>
         public override TaskStatus OnUpdate()
         {
-            if (target == null)
-                return TaskStatus.FAILED;
-            if (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance)
-                return TaskStatus.COMPLETED;
-            else if (navAgent.destination != targetTransform.position)
-                navAgent.SetDestination(targetTransform.position);
-            return TaskStatus.RUNNING;
+            lastPos = target.transform.position;
+
+            return TaskStatus.COMPLETED;
         }
         /// <summary>Abort method of MoveToGameObject </summary>
         /// <remarks>When the task is aborted, it stops the navAgentMesh.</remarks>
         public override void OnAbort()
         {
-
-        #if UNITY_5_6_OR_NEWER
-            if(navAgent!=null)
-                navAgent.isStopped = true;
-        #else
-            if (navAgent!=null)
-                navAgent.Stop();
-        #endif
-
+            if (navAgent != null) navAgent.isStopped = true;
         }
     }
 }
