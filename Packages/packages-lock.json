@@ -180,15 +180,6 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
-    "com.unity.universal-forwardplus-volumetric": {
-      "version": "file:C:/Users/Adrian/Desktop/volfog/URP-VolumetricFog-ForwardPlus-main",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {
-        "com.unity.render-pipelines.core": "14.0.8",
-        "com.unity.render-pipelines.universal": "14.0.8"
-      }
-    },
     "com.unity.visualscripting": {
       "version": "1.9.1",
       "depth": 0,

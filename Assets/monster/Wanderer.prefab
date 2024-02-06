@@ -36,17 +36,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0cfba307549cf4d4ebe3ad270040881d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 59.593513
+      value: -12.878792
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0cfba307549cf4d4ebe3ad270040881d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5528259
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0cfba307549cf4d4ebe3ad270040881d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 67.194855
+      value: 39.414604
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0cfba307549cf4d4ebe3ad270040881d,
         type: 3}
@@ -56,17 +56,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0cfba307549cf4d4ebe3ad270040881d,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0cfba307549cf4d4ebe3ad270040881d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0cfba307549cf4d4ebe3ad270040881d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0cfba307549cf4d4ebe3ad270040881d,
         type: 3}
@@ -341,8 +341,14 @@ MonoBehaviour:
     boolParams: 
     boolParamsNames: []
     boolParamsLostDefaultValue: 
-    floatParams: []
-    floatParamsNames: []
+    floatParams:
+    - 80
+    - 40
+    - 0
+    floatParamsNames:
+    - Chase speed
+    - Wander speed
+    - Idle speed
     floatParamsLostDefaultValue: 
     stringParams: []
     stringParamsNames: []

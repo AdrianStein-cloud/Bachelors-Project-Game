@@ -11,7 +11,7 @@ public class WanderingBehaviour : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        GetComponent<BehaviorExecutor>().SetBehaviorParam("target", GameObject.FindGameObjectWithTag("Player"));
+        //GetComponent<BehaviorExecutor>().SetBehaviorParam("target", GameObject.FindGameObjectWithTag("Player"));
     }
 
     public void UpdateState(WanderingState newstate)

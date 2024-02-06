@@ -17,6 +17,7 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] NavMeshSurface navmeshSurface;
 
     private List<GameObject> rooms = new List<GameObject>();
+    private List<GameObject> spawnedRooms = new List<GameObject>();
 
     void Start()
     {
@@ -61,10 +62,13 @@ public class DungeonGenerator : MonoBehaviour
         GameObject entrance = Instantiate(rooms[0], new Vector3(0, 0, 0), transform.rotation);
 
         yield return StartCoroutine(SpawnRoomsAtDoorsCoroutine(entrance.GetComponent<Room>().GetDoors(), 0));
-
-        Debug.Log("Done");
+        
+        //Done spawning dungeon
         yield return new WaitForSeconds(1f);
         navmeshSurface.BuildNavMesh();
+
+        yield return new WaitForSeconds(1f);
+        GetComponent<SimpleEnemySpawner>().SpawnEnemies(spawnedRooms);
     }
 
     IEnumerator SpawnRoomsAtDoorsCoroutine(List<Door> doors, int depth)
@@ -105,6 +109,7 @@ public class DungeonGenerator : MonoBehaviour
                 door.SetDoorConnected(true);
                 newRoom.GetComponent<Room>().GetEntrance().GetComponent<Door>().SetDoorConnected(true);
                 roomFound = true;
+                spawnedRooms.Add(newRoom);
                 break;
             }
         }

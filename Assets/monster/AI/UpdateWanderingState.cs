@@ -28,10 +28,6 @@ public class UpdateWanderingState : GOAction
 
     public override void OnStart()
     {
-        /*
-        wanderer = gameObject.GetComponent<WanderingBehaviour>();
-        wanderer.UpdateState(newState);
-        */
         gameObject.GetComponent<NavMeshAgent>().speed = movespeed;
         gameObject.GetComponent<Animator>().SetFloat("Blend", SpeedValue/100);
         gameObject.GetComponent<Animator>().SetBool("Attack", newState == WanderingState.Attack);
