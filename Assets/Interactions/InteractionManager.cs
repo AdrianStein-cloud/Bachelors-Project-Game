@@ -28,7 +28,7 @@ public class InteractionManager : MonoBehaviour
         //Debug.DrawLine(transform.position, transform.position + dir.normalized * interactRange, Color.red);
         if (Physics.Raycast(transform.position, dir, out hit, interactRange, interactableMask))
         {
-            Debug.Log(hit.transform.name);
+            //Debug.Log(hit.transform.name);
             var newInteractable = hit.transform.GetComponent<Interactable>();
 
 
