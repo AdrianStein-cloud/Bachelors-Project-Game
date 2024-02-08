@@ -45,6 +45,8 @@ namespace BBUnity.Actions
             }
             navAgent.SetDestination(targetTransform.position);
 
+            lastPos = target.transform.position;
+
             navAgent.isStopped = false;
         }
 
@@ -53,10 +55,11 @@ namespace BBUnity.Actions
         /// y, the task is running, if it is still moving to the target.</remarks>
         public override TaskStatus OnUpdate()
         {
-            lastPos = target.transform.position;
+            Debug.Log(lastPos);
 
             return TaskStatus.COMPLETED;
         }
+
         /// <summary>Abort method of MoveToGameObject </summary>
         /// <remarks>When the task is aborted, it stops the navAgentMesh.</remarks>
         public override void OnAbort()
