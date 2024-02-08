@@ -12,7 +12,7 @@ using UnityEngine.AI;
 public class SearchRoom : GOAction
 {
     [InParam("WanderRadius")]
-    public float wanderRadius = 5f;
+    public float wanderRadius;
 
     [InParam("CurrentRoom")]
     public GameObject roomToSearch;
@@ -31,6 +31,8 @@ public class SearchRoom : GOAction
         var dest = RandomNavSphere(roomScript.centerObject.transform.position, wanderRadius, -1);
         navAgent.SetDestination(dest);
         navAgent.isStopped = false;
+
+        Debug.DrawLine(gameObject.transform.position, dest);
     }
 
     public override TaskStatus OnUpdate()

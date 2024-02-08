@@ -29,7 +29,6 @@ public class RoamState : GOAction
 
         if (!wander.once)
         {
-            Debug.Log("Once please");
             rooms = new List<GameObject>(GameObject.FindObjectOfType<DungeonGenerator>().spawnedRooms);
             wander.once = true;
         }

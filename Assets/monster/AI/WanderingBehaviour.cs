@@ -10,6 +10,7 @@ public class WanderingBehaviour : MonoBehaviour
     public List<GameObject> roomsCopy;
     public GameObject wanderingTo;
     public bool once = false;
+    public GameObject doorToOpen;
 
     // Start is called before the first frame update
     void Start()
