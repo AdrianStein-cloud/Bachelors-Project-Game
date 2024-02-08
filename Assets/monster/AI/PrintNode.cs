@@ -19,4 +19,9 @@ public class PrintNode : GOAction
         Debug.Log(message);
     }
 
+    public override TaskStatus OnUpdate()
+    {
+        return TaskStatus.COMPLETED;
+    }
+
 }

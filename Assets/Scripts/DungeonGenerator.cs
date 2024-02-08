@@ -17,7 +17,7 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] NavMeshSurface navmeshSurface;
 
     private List<GameObject> rooms = new List<GameObject>();
-    private List<GameObject> spawnedRooms = new List<GameObject>();
+    public List<GameObject> spawnedRooms = new List<GameObject>();
 
     void Start()
     {
