@@ -12,9 +12,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask groundMask;
 
     [Header("Movement Speeds")]
-    [SerializeField] float walkSpeed;
-    [SerializeField] float runSpeed;
-    [SerializeField] float crouchSpeed;
+    [SerializeField] public float walkSpeed;
+    [SerializeField] public float runSpeed;
+    [SerializeField] public float crouchSpeed;
 
     [Header("Crouch Settings")]
     [SerializeField] float crouchHeight;
