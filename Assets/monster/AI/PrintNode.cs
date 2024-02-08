@@ -1,18 +1,22 @@
+using BBUnity.Actions;
+using Pada1.BBCore;
+using Pada1.BBCore.Framework;
+using Pada1.BBCore.Framework.Internal;
+using Pada1.BBCore.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class PrintNode : MonoBehaviour
+[Action("Print custom message")]
+public class PrintNode : GOAction
 {
-    // Start is called before the first frame update
-    void Start()
+    [InParam("PrintMessage")]
+    public string message;
+
+    public override void OnStart()
     {
-        
+        Debug.Log(message);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
