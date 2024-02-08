@@ -82,7 +82,7 @@ public class Room : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Room")
+        if(other.CompareTag("Room"))
         {
             isColliding = true;
         }
