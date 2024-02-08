@@ -26,7 +26,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 1, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4653813234916721798}
@@ -300,10 +300,10 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 75
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5010387950151882824
 MonoBehaviour:
@@ -469,10 +469,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 5697493602818644934}
-  groundCheck: {fileID: 219154082105818692}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 64
   walkSpeed: 4
   runSpeed: 7
   crouchSpeed: 2
@@ -480,10 +476,11 @@ MonoBehaviour:
   cameraCrouchOffset: -0.5
   smoothCrouchTime: 1
   smoothCrouchSpeed: 6
+  jumpHeight: 1.5
+  gravity: 1000
+  airGravity: 32
   toggleRun: 0
   toggleCrouch: 1
-  jumpHeight: 1.5
-  gravity: 32
 --- !u!1 &6995078530207280390
 GameObject:
   m_ObjectHideFlags: 0
