@@ -438,7 +438,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 5
+  m_StepOffset: 2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
@@ -623,7 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 5697493602818644934}
   walkSpeed: 30
-  runSpeed: 60
+  runSpeed: 50
   crouchSpeed: 20
   crouchHeight: 1
   cameraCrouchOffset: -0.5
