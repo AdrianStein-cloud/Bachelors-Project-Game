@@ -55,7 +55,7 @@ namespace BBUnity.Actions
         /// y, the task is running, if it is still moving to the target.</remarks>
         public override TaskStatus OnUpdate()
         {
-            Debug.Log(lastPos);
+            //Debug.Log(lastPos);
 
             return TaskStatus.COMPLETED;
         }
