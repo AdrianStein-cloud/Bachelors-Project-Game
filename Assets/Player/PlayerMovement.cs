@@ -8,8 +8,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Assignables")]
     [SerializeField] Transform cam;
-    [SerializeField] Transform groundCheck;
-    [SerializeField] LayerMask groundMask;
+    //[SerializeField] Transform groundCheck;
+    //[SerializeField] LayerMask groundMask;
 
     [Header("Movement Speeds")]
     [SerializeField] public float walkSpeed;
@@ -22,11 +22,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float smoothCrouchTime;
     [SerializeField] float smoothCrouchSpeed;
 
+    [Header("Jump and Gravity")]
+    [SerializeField] float jumpHeight;
+    [SerializeField] float gravity;
+    [SerializeField] float airGravity;
+
     [Header("Other")]
     [SerializeField] bool toggleRun;
     [SerializeField] bool toggleCrouch;
-    [SerializeField] float jumpHeight;
-    [SerializeField] float gravity;
 
     CharacterController controller;
     Vector3 velocity;
@@ -77,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isGrounded || !context.performed) return;
         StopCrouch();
-        velocity.y = Mathf.Sqrt(jumpHeight * 2f * gravity);
+        velocity.y = Mathf.Sqrt(jumpHeight * 2f * airGravity);
         airSpeed = currentSpeed;
     }
 
@@ -92,10 +95,13 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator SmoothCrouch()
     {
         var time = 0f;
-        Vector3 cameraStart = cam.localPosition;
-        Vector3 cameraEnd = IsCrouching ? cameraPosition + new Vector3(0f, cameraCrouchOffset, 0f) : cameraPosition;
+
+        var cameraStart = cam.localPosition;
+        var cameraEnd = IsCrouching ? cameraPosition + new Vector3(0f, cameraCrouchOffset, 0f) : cameraPosition;
+
         var heightStart = controller.height;
         var heightEnd = IsCrouching ? crouchHeight : controllerHeight;
+
         while (time < smoothCrouchTime)
         {
             time += Time.deltaTime * smoothCrouchSpeed;
@@ -113,12 +119,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Gravity()
     {
-        isGrounded = controller.isGrounded; // Physics.CheckSphere(groundCheck.position, 0.4f, groundMask);
+        isGrounded = controller.isGrounded;// Physics.CheckSphere(groundCheck.position, 0.4f, groundMask);
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
-        velocity.y -= gravity * Time.deltaTime;
-        //controller.Move(velocity * Time.deltaTime);
+        velocity.y -= (isGrounded ? gravity : airGravity) * Time.deltaTime;
     }
 }

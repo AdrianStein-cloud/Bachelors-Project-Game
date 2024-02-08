@@ -413,7 +413,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 109595602070898728}
-  - {fileID: 219154082105818692}
   - {fileID: 5697493602818644934}
   m_Father: {fileID: 8969642763786446042}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -439,9 +438,9 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 5
+  m_StepOffset: 2
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5010387950151882824
 MonoBehaviour:
@@ -623,10 +622,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 5697493602818644934}
-  groundCheck: {fileID: 219154082105818692}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 64
   walkSpeed: 30
   runSpeed: 50
   crouchSpeed: 20
@@ -634,10 +629,11 @@ MonoBehaviour:
   cameraCrouchOffset: -0.5
   smoothCrouchTime: 1
   smoothCrouchSpeed: 6
+  jumpHeight: 12
+  gravity: 1000
+  airGravity: 320
   toggleRun: 0
   toggleCrouch: 1
-  jumpHeight: 12
-  gravity: 320
 --- !u!114 &2661798902502877448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,37 +767,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &9114196951438315014
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 219154082105818692}
-  m_Layer: 9
-  m_Name: Ground Check
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &219154082105818692
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9114196951438315014}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4653813234916721798}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &711985326396167024
 PrefabInstance:
   m_ObjectHideFlags: 0
