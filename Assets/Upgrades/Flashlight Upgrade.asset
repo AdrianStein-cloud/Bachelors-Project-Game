@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e6eb8c06cb5064ba77fcf813da9a03, type: 3}
+  m_Name: Flashlight Upgrade
+  m_EditorClassIdentifier: 
+  Name: Flashlight
+  description: Grants you a {0}
+  item: {fileID: 1560761939752334157, guid: 1039ae690f4de0c43a2533c10c8c87f7, type: 3}
