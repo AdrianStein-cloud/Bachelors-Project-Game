@@ -1,17 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Collectable : Interactable
 {
     public GameObject collectText;
 
+    public Action onCollect;
+
+    private void Start()
+    {
+        collectText = FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None).FirstOrDefault(g => g.name == "CollectText");
+    }
+
 
     void Update()
     {
         if (collectText.activeInHierarchy && InputManager.Player.Interact.triggered)
         {
-            Debug.LogWarning("Collect not yet implemented");
+            onCollect?.Invoke();
+            DisableInteractability();
         }
     }
 

@@ -2,36 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.AI.Navigation;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using static Unity.VisualScripting.Metadata;
+using Random = System.Random;
 
 public class DungeonGenerator : MonoBehaviour
 {
     [SerializeField] GameObject sourceRooms;
+    public GameObject playerSpawnPosition;
+
+
     [Header("Generation Settings")]
     [SerializeField] int depth = 1;
     [SerializeField] int seed = -1; // -1 = random seed
     [SerializeField] int lookahead = 3;
     [SerializeField] NavMeshSurface navmeshSurface;
+    Random random;
 
     private List<GameObject> rooms = new List<GameObject>();
-    private List<GameObject> spawnedRooms = new List<GameObject>();
+    public List<GameObject> spawnedRooms = new List<GameObject>();
+    public List<(GameObject, int)> spawnedRoomsDepth = new List<(GameObject, int)>();
 
-    void Start()
+    void Awake()
     {
         SetSeed(seed);
         LoadRooms();
-        StartCoroutine(GenerateDungeon());
+        //StartCoroutine(GenerateDungeon());
+        //RegenerateDungeon();
     }
     public void SetSeed(int seed)
     {
         if (seed == -1)
         {
-            seed = Random.Range(1000, 10000000);
+            seed = new Random().Next(1000, 10000000);
         }
-        Random.InitState(seed);
+        random = new Random(seed);
         GameSettings.Instance.SetSeed(seed);
         //Debug.Log("Seed: " + seed);
     }
@@ -56,32 +61,37 @@ public class DungeonGenerator : MonoBehaviour
 
     
 
-    private IEnumerator GenerateDungeon()
+    public IEnumerator GenerateDungeon(Transform dungeon)
     {
-        //instantiate first object in rooms
-        GameObject entrance = Instantiate(rooms[0], new Vector3(0, 0, 0), transform.rotation);
+        spawnedRooms = new List<GameObject>();
+        spawnedRoomsDepth = new List<(GameObject, int)>();
 
-        yield return StartCoroutine(SpawnRoomsAtDoorsCoroutine(entrance.GetComponent<Room>().GetDoors(), 0));
+        //instantiate first object in rooms
+        GameObject entrance = Instantiate(rooms[0], new Vector3(0, 0, 0), transform.rotation, dungeon);
+        spawnedRooms.Add(entrance);
+
+        yield return SpawnRoomsAtDoorsCoroutine(entrance.GetComponent<Room>().GetDoors(), 0, dungeon);
         
         //Done spawning dungeon
         yield return new WaitForSeconds(1f);
         navmeshSurface.BuildNavMesh();
 
         yield return new WaitForSeconds(1f);
-        GetComponent<SimpleEnemySpawner>().SpawnEnemies(spawnedRooms);
+        //GetComponent<SimpleEnemySpawner>().SpawnEnemies(spawnedRooms);
+        //GetComponent<ObjectiveSpawner>().SpawnObjectives(spawnedRoomsDepth);
     }
 
-    IEnumerator SpawnRoomsAtDoorsCoroutine(List<Door> doors, int depth)
+    IEnumerator SpawnRoomsAtDoorsCoroutine(List<Door> doors, int depth, Transform dungeon)
     {
         if (doors is null || doors.Count == 0 || depth >= this.depth) yield break;
 
         foreach (Door door in doors)
         {
-            yield return StartCoroutine(SpawnRoomAtDoor(door, depth));
+            yield return SpawnRoomAtDoor(door, depth, dungeon);
         }
     }
 
-    IEnumerator SpawnRoomAtDoor(Door door, int depth)
+    IEnumerator SpawnRoomAtDoor(Door door, int depth, Transform dungeon)
     {
         bool roomFound = false;
         GameObject newRoom = null;
@@ -95,9 +105,9 @@ public class DungeonGenerator : MonoBehaviour
 
         foreach(GameObject room in shuffledRooms)
         {
-            newRoom = Instantiate(room, door.gameObject.transform.position, door.direction);
+            newRoom = Instantiate(room, door.gameObject.transform.position, door.direction, dungeon);
 
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(Time.deltaTime * 10);
 
             if (newRoom.GetComponent<Room>().isColliding == true)
             {
@@ -110,6 +120,7 @@ public class DungeonGenerator : MonoBehaviour
                 newRoom.GetComponent<Room>().GetEntrance().GetComponent<Door>().SetDoorConnected(true);
                 roomFound = true;
                 spawnedRooms.Add(newRoom);
+                spawnedRoomsDepth.Add((newRoom, depth));
                 break;
             }
         }
@@ -118,7 +129,7 @@ public class DungeonGenerator : MonoBehaviour
 
         if (roomFound)
         {
-            yield return StartCoroutine(SpawnRoomsAtDoorsCoroutine(newRoom.GetComponent<Room>().GetDoors(), depth + 1));
+            yield return SpawnRoomsAtDoorsCoroutine(newRoom.GetComponent<Room>().GetDoors(), depth + 1, dungeon);
         }
     }
 
@@ -130,7 +141,7 @@ public class DungeonGenerator : MonoBehaviour
 
         for (int i = 1; i < listCount; i++)
         {
-            int index = Random.Range(1, temp.Count - 1);
+            int index = random.Next(1, temp.Count - 1);
             shuffled.Add(temp[index]);
             temp.RemoveAt(index);
         }
