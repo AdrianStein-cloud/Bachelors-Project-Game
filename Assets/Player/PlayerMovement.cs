@@ -28,10 +28,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump and Gravity")]
     [SerializeField] bool enableJump = true;
     [SerializeField] float jumpHeight;
+    [SerializeField] float groundCheckRadius = 0.4f;
     [SerializeField] float gravity;
     [SerializeField] float airGravity;
 
     CharacterController controller;
+    new Audio audio;
     Vector3 velocity;
     Vector2 dir;
     float currentSpeed;
@@ -51,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+        audio = GetComponent<Audio>();
         airSpeed = currentSpeed = walkSpeed;
         cameraPosition = cam.localPosition;
         controllerHeight = controller.height;
@@ -74,6 +77,22 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(Time.deltaTime * ((isGrounded ? currentSpeed : airSpeed) * move + velocity));
 
         Gravity();
+
+        if (isGrounded && IsWalking && !audio.IsPlaying("Walk")) 
+        {
+            audio.Pause("Run");
+            audio.Play("Walk");
+        }
+        else if (isGrounded && IsRunning && !audio.IsPlaying("Run"))
+        {
+            audio.Pause("Walk");
+            audio.Play("Run");
+        }
+        else if (!IsWalking && !IsRunning || !isGrounded)
+        {
+            audio.Pause("Run");
+            audio.Pause("Walk");
+        }
     }
 
     public void Run(InputAction.CallbackContext context)
@@ -135,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Gravity()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.4f, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundMask);
         if ((isGrounded || !isGrounded && !ungrounded) && velocity.y < 0)
         {
             velocity.y = -2f;
@@ -143,5 +162,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         velocity.y -= (isGrounded && !jumping ? gravity : airGravity) * Time.deltaTime;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 }
