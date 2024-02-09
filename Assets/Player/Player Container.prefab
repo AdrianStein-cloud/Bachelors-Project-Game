@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2069725099065601414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5304497399029511674}
+  m_Layer: 9
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5304497399029511674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069725099065601414}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4653813234916721798}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2994622128118365023
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,6 +445,7 @@ Transform:
   m_Children:
   - {fileID: 109595602070898728}
   - {fileID: 5697493602818644934}
+  - {fileID: 5304497399029511674}
   m_Father: {fileID: 8969642763786446042}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &6547420971884855375
@@ -622,18 +654,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 5697493602818644934}
+  groundCheck: {fileID: 5304497399029511674}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  toggleRun: 0
   walkSpeed: 30
   runSpeed: 50
   crouchSpeed: 20
+  toggleCrouch: 1
   crouchHeight: 1
   cameraCrouchOffset: -0.5
   smoothCrouchTime: 1
   smoothCrouchSpeed: 6
+  ceilingCheckDistance: 12.8
+  enableJump: 1
   jumpHeight: 12
   gravity: 10000
   airGravity: 320
-  toggleRun: 0
-  toggleCrouch: 1
 --- !u!114 &2661798902502877448
 MonoBehaviour:
   m_ObjectHideFlags: 0
