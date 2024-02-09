@@ -45,8 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b50d366e6eb004faa6787e94f83b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 4
-  items: []
+  size: 5
+  items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  itemIndex: 0
 --- !u!1001 &65046528364845147
 PrefabInstance:
   m_ObjectHideFlags: 0

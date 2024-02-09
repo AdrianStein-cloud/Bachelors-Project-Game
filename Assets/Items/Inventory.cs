@@ -38,12 +38,18 @@ public class Inventory : MonoBehaviour
     void PreviousItem()
     {
         //Debug.Log("Previous item");
-        itemIndex = (itemIndex + size - 1) % size;
+        SetItemIndex((itemIndex + size - 1) % size);
     }
 
     void NextItem()
     {
         //Debug.Log("Next item");
-        itemIndex = (itemIndex + 1) % size;
+        SetItemIndex((itemIndex + 1) % size);
+    }
+
+    void SetItemIndex(int value)
+    {
+        itemIndex = value;
+        InventoryUI.Instance.SetCurrentSlot(value);
     }
 }
