@@ -99,7 +99,8 @@ public class DungeonGenerator : MonoBehaviour
 
         //Debug.Log("Room List: " + rooms.Count);
 
-        List<GameObject> shuffledRooms = ShuffleList(rooms);
+        List<GameObject> shuffledRooms = new (rooms);
+        shuffledRooms.Shuffle();
 
         //Debug.Log("Shuffled List: " + shuffledRooms.Count);
 
@@ -109,7 +110,7 @@ public class DungeonGenerator : MonoBehaviour
 
             yield return new WaitForSeconds(Time.deltaTime * 10);
 
-            if (newRoom.GetComponent<Room>().isColliding == true)
+            if (newRoom.GetComponent<Room>().isColliding)
             {
                 Destroy(newRoom);
                 newRoom = null;
@@ -131,21 +132,5 @@ public class DungeonGenerator : MonoBehaviour
         {
             yield return SpawnRoomsAtDoorsCoroutine(newRoom.GetComponent<Room>().GetDoors(), depth + 1, dungeon);
         }
-    }
-
-    public List<GameObject> ShuffleList(List<GameObject> list)
-    {
-        List<GameObject> shuffled = new List<GameObject>();
-        List<GameObject> temp = new List<GameObject>(list);
-        int listCount = list.Count;
-
-        for (int i = 1; i < listCount; i++)
-        {
-            int index = random.Next(1, temp.Count - 1);
-            shuffled.Add(temp[index]);
-            temp.RemoveAt(index);
-        }
-
-        return shuffled;
     }
 }

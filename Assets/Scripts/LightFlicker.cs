@@ -45,7 +45,6 @@ public class LightFlicker : MonoBehaviour
 
     private void TurnOff()
     {
-        Debug.Log("Turned of light");
         for (int i = 0; i < childObjects.Length; i++)
         {
             childObjects[i].GetComponent<Light>().intensity = 0;
