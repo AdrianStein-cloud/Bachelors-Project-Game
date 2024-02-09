@@ -3,7 +3,32 @@ guid: 634e2515ab57c6b45b60bd6e86a21ad9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lamp accesses
+    second: {fileID: 2100000, guid: fcd9f9dad8be58b42ae2de112c151890, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light bulb
+    second: {fileID: 2100000, guid: 8299229ad7fbc974583f4b24827e3b58, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light bulb.001
+    second: {fileID: 2100000, guid: f02c430d79f3eec41a61a5294668c601, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass
+    second: {fileID: 2100000, guid: e016dbbe9f7eaba4c902d3f8739a7ce0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: issuer
+    second: {fileID: 2100000, guid: e2a05aab729d0e843b22a05ae90953a6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
