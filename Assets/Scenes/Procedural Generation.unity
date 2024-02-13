@@ -3608,9 +3608,26 @@ MonoBehaviour:
   sourceRooms: {fileID: 464683563}
   playerSpawnPosition: {fileID: 1326731401}
   depth: 5
-  seed: 1778159
+  seed: -1
   lookahead: 3
   navmeshSurface: {fileID: 137134224}
+  randomRooms:
+  - room: {fileID: 1894993633}
+    <Weight>k__BackingField: 1
+  - room: {fileID: 1003067318}
+    <Weight>k__BackingField: 1
+  - room: {fileID: 2144708313}
+    <Weight>k__BackingField: 1
+  - room: {fileID: 868244220}
+    <Weight>k__BackingField: 1
+  - room: {fileID: 192576593}
+    <Weight>k__BackingField: 1
+  - room: {fileID: 1177114662}
+    <Weight>k__BackingField: 1
+  minimumRooms:
+  - room: {fileID: 1125741737}
+    minmax: {x: 1, y: 1}
+  startRoom: {fileID: 1872932740}
   spawnedRooms: []
 --- !u!114 &181535698
 MonoBehaviour:

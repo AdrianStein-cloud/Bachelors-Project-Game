@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.AI.Navigation;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 using Random = System.Random;
 
 public class DungeonGenerator : MonoBehaviour
@@ -19,9 +20,13 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] NavMeshSurface navmeshSurface;
     Random random;
 
-    private List<GameObject> rooms = new List<GameObject>();
+    public WeightedRoom[] randomRooms;
+    [field: SerializeField] public MinMaxRoom[] minimumRooms;
+    public GameObject startRoom;
+
     public List<GameObject> spawnedRooms = new List<GameObject>();
     public List<(GameObject, int)> spawnedRoomsDepth = new List<(GameObject, int)>();
+    private Queue<(Door, int)> doorQueue = new Queue<(Door, int)>();
 
     void Awake()
     {
@@ -43,23 +48,15 @@ public class DungeonGenerator : MonoBehaviour
 
     private void LoadRooms()
     {
-        // Get all the child GameObjects
-        GameObject[] childObjects = sourceRooms.transform.Cast<Transform>().Select(t => t.gameObject).ToArray();
-
-        // Add the child GameObjects to the list
-        rooms.AddRange(childObjects);
-
         //Debug.Log("There are " + rooms.Count + " different rooms...");
 
         sourceRooms.SetActive(false);
 
-        foreach (GameObject room in rooms)
+        foreach (WeightedRoom room in randomRooms)
         {
-            room.transform.position = Vector3.zero;
+            room.room.transform.position = Vector3.zero;
         }
     }
-
-    
 
     public IEnumerator GenerateDungeon(Transform dungeon)
     {
@@ -67,10 +64,20 @@ public class DungeonGenerator : MonoBehaviour
         spawnedRoomsDepth = new List<(GameObject, int)>();
 
         //instantiate first object in rooms
-        GameObject entrance = Instantiate(rooms[0], new Vector3(0, 0, 0), transform.rotation, dungeon);
+        GameObject entrance = Instantiate(startRoom, new Vector3(0, 0, 0), transform.rotation, dungeon);
+        playerSpawnPosition = entrance.transform.Find("PlayerSpawnPosition").gameObject;
         spawnedRooms.Add(entrance);
 
-        yield return SpawnRoomsAtDoorsCoroutine(entrance.GetComponent<Room>().GetDoors(), 0, dungeon);
+        foreach (Door door in entrance.GetComponent<Room>().GetDoors())
+        {
+            doorQueue.Enqueue((door, 0));
+        }
+
+        while(doorQueue.Count > 0)
+        {
+            (Door, int) element = doorQueue.Dequeue();
+            yield return SpawnRoomAtDoor(element.Item1, element.Item2, dungeon);
+        }
         
         //Done spawning dungeon
         yield return new WaitForSeconds(1f);
@@ -81,33 +88,25 @@ public class DungeonGenerator : MonoBehaviour
         //GetComponent<ObjectiveSpawner>().SpawnObjectives(spawnedRoomsDepth);
     }
 
-    IEnumerator SpawnRoomsAtDoorsCoroutine(List<Door> doors, int depth, Transform dungeon)
-    {
-        if (doors is null || doors.Count == 0 || depth >= this.depth) yield break;
-
-        foreach (Door door in doors)
-        {
-            yield return SpawnRoomAtDoor(door, depth, dungeon);
-        }
-    }
-
     IEnumerator SpawnRoomAtDoor(Door door, int depth, Transform dungeon)
     {
         bool roomFound = false;
         GameObject newRoom = null;
         door.debugHighlight = true;
+        List<Door> doors = null;
 
-        //Debug.Log("Room List: " + rooms.Count);
+        List<WeightedRoom> tempRandomRooms = new (randomRooms);
 
-        List<GameObject> shuffledRooms = new (rooms);
-        shuffledRooms.Shuffle(random);
-
-        //Debug.Log("Shuffled List: " + shuffledRooms.Count);
-        List<Door> doors;
-
-        foreach(GameObject room in shuffledRooms)
+        while (!roomFound || tempRandomRooms.Count > 0)
         {
-            newRoom = Instantiate(room, door.gameObject.transform.position, door.direction, dungeon);
+            WeightedRoom randomRoom;
+
+            if (tempRandomRooms.Count < 1) break;
+
+            if (tempRandomRooms.Count > 1) randomRoom = tempRandomRooms.GetRollFromWeights(random);
+            else randomRoom = tempRandomRooms[0];
+
+            newRoom = Instantiate(randomRoom.room, door.gameObject.transform.position, door.direction, dungeon);
             doors = newRoom.GetComponent<Room>().GetDoors();
 
             yield return new WaitForSeconds(Time.deltaTime * 10);
@@ -117,14 +116,15 @@ public class DungeonGenerator : MonoBehaviour
                 Destroy(newRoom);
                 newRoom = null;
                 doors = null;
+                tempRandomRooms.Remove(randomRoom);
             }
             else
             {
                 door.SetDoorConnected(true);
                 newRoom.GetComponent<Room>().GetEntrance().GetComponent<Door>().SetDoorConnected(true);
-                roomFound = true;
                 spawnedRooms.Add(newRoom);
                 spawnedRoomsDepth.Add((newRoom, depth));
+                roomFound = true;
                 break;
             }
         }
@@ -133,7 +133,75 @@ public class DungeonGenerator : MonoBehaviour
 
         if (roomFound)
         {
-            yield return SpawnRoomsAtDoorsCoroutine(newRoom.GetComponent<Room>().GetDoors(), depth + 1, dungeon);
+            foreach (Door doorTemp in doors)
+            {
+                if(depth + 1 < this.depth) doorQueue.Enqueue((doorTemp, depth + 1));
+                else yield return SpawnMinMaxRoomAtDoor(doorTemp, dungeon);
+            }
+        }
+
+        yield break;
+    }
+
+    IEnumerator SpawnMinMaxRoomAtDoor(Door door, Transform dungeon)
+    {
+        bool roomFound = false;
+        GameObject newRoom = null;
+        door.debugHighlight = true;
+        List<Door> doors = null;
+
+        foreach (MinMaxRoom room in minimumRooms)
+        {
+            if(room.minmax.y < 1)
+            {
+                continue;
+            }
+
+            newRoom = Instantiate(room.room, door.gameObject.transform.position, door.direction, dungeon);
+            doors = newRoom.GetComponent<Room>().GetDoors();
+
+            yield return new WaitForSeconds(Time.deltaTime * 10);
+
+            if (newRoom.GetComponent<Room>().isColliding)
+            {
+                Destroy(newRoom);
+                newRoom = null;
+                doors = null;
+            }
+            else
+            {
+                door.SetDoorConnected(true);
+                newRoom.GetComponent<Room>().GetEntrance().GetComponent<Door>().SetDoorConnected(true);
+                spawnedRooms.Add(newRoom);
+                spawnedRoomsDepth.Add((newRoom, depth));
+
+                if(random.Next(0, 2) == 1) room.minmax -= new Vector2(1, 1);
+                else room.minmax -= new Vector2(1, 2);
+
+                roomFound = true;
+                break;
+            }
+        }
+
+        door.debugHighlight = false;
+
+        if (roomFound)
+        {
+            yield break;
         }
     }
+}
+
+[System.Serializable]
+public class WeightedRoom : IWeighted
+{
+    public GameObject room;
+    [field: SerializeField] public int Weight { get; set; }
+}
+
+[System.Serializable]
+public class MinMaxRoom
+{
+    public GameObject room;
+    public Vector2 minmax;
 }
