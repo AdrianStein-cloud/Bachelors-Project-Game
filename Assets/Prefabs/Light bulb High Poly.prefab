@@ -287,7 +287,7 @@ MonoBehaviour:
   offFlickerSpeedMax: 0.2
   onFlickerSpeedMin: 0.05
   onFlickerSpeedMax: 20
-  failPercentage: 30
+  failPercentage: 50
 --- !u!1001 &8903026544892024006
 PrefabInstance:
   m_ObjectHideFlags: 0

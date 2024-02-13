@@ -21,7 +21,7 @@ public static class Extensions
     {
         var totalWeight = weights.Sum(w => w.Weight);
 
-        var roll = random.Next(1, totalWeight);
+        var roll = random.Next(1, totalWeight + 1);
         var tempWeight = 0f;
         foreach (var w in weights)
         {
