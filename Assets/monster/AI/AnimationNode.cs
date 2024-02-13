@@ -6,7 +6,6 @@ using Pada1.BBCore;           // Code attributes
 using Pada1.BBCore.Tasks;     // TaskStatus
 using Pada1.BBCore.Framework; // BasePrimitiveAction
 using BBUnity.Actions;
-using static UnityEditor.Progress;
 using UnityEditor;
 
 [Action("MyActions/DoAnimation")]
