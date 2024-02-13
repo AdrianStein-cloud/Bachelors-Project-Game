@@ -23,6 +23,7 @@ public class DungeonGenerator : MonoBehaviour
     public WeightedRoom[] randomRooms;
     [field: SerializeField] public MinMaxRoom[] minimumRooms;
     public GameObject startRoom;
+    private List<GameObject> rooms = new List<GameObject>();
 
     public List<GameObject> spawnedRooms = new List<GameObject>();
     public List<(GameObject, int)> spawnedRoomsDepth = new List<(GameObject, int)>();

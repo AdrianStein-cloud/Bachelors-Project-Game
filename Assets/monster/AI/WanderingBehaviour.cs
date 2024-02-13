@@ -7,6 +7,15 @@ public class WanderingBehaviour : MonoBehaviour
     Animator anim;
     public WanderingState state;
 
+    public List<GameObject> roomsCopy;
+    public GameObject wanderingTo;
+    public bool once = false;
+    public GameObject doorToOpen;
+
+    public GameObject currentRoom;
+
+    public bool hasReachedRoom = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,16 +25,14 @@ public class WanderingBehaviour : MonoBehaviour
 
     public void UpdateState(WanderingState newstate)
     {
-        if (state != newstate)
+        state = newstate;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Room"))
         {
-            Debug.Log("Setting: " + state.ToString() + " to false.");
-            anim.SetBool(state.ToString(), false);
-
-            state = newstate;
-
-            Debug.Log("Setting: " + state.ToString() + " to true.");
-            anim.SetBool(state.ToString(), true);
-
+            currentRoom = other.gameObject;
         }
     }
 }

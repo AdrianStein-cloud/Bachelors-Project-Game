@@ -32,5 +32,10 @@ public class UpdateWanderingState : GOAction
         gameObject.GetComponent<Animator>().SetFloat("Blend", SpeedValue/100);
         gameObject.GetComponent<Animator>().SetBool("Attack", newState == WanderingState.Attack);
     }
+
+    public override TaskStatus OnUpdate()
+    {
+        return TaskStatus.COMPLETED;
+    }
 }   
 

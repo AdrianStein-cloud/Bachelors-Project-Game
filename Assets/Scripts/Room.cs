@@ -21,6 +21,10 @@ public class Room : MonoBehaviour
 
     public bool isColliding = false;
 
+    public GameObject centerObject;
+
+    public bool isCorridor;
+
     private void Awake()
     {
         BoxCollider boxCollider = GetComponent<BoxCollider>();

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8605223307445634414}
   - component: {fileID: 592667723674402778}
   - component: {fileID: 4258157125829656480}
-  - component: {fileID: 2775281082059206933}
   m_Layer: 0
   m_Name: WallWithDoor
   m_TagString: Untagged
@@ -28,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7992109247775748784}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 24.5, y: 15, z: 25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -837,7 +836,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 8
+  m_VersionIndex: 17
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -849,28 +848,6 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7992109247775748784}
-  m_Mesh: {fileID: 0}
---- !u!64 &2775281082059206933
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7992109247775748784}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1001 &5998554371452188005
 PrefabInstance:
@@ -938,7 +915,12 @@ PrefabInstance:
     - target: {fileID: 4715493894088877685, guid: 44d0f75508b97004f9e96fa0dbf0857b,
         type: 3}
       propertyPath: m_TagString
-      value: Respawn
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 7365415742221516363, guid: 44d0f75508b97004f9e96fa0dbf0857b,
+        type: 3}
+      propertyPath: m_Carve
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -948,6 +930,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6101242492942713564}
+    - targetCorrespondingSourceObject: {fileID: 8898609600373379941, guid: 44d0f75508b97004f9e96fa0dbf0857b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8166185667007692165}
   m_SourcePrefab: {fileID: 100100000, guid: 44d0f75508b97004f9e96fa0dbf0857b, type: 3}
 --- !u!1 &1319530354695394064 stripped
 GameObject:
@@ -982,6 +968,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &2900620678957164032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8898609600373379941, guid: 44d0f75508b97004f9e96fa0dbf0857b,
+    type: 3}
+  m_PrefabInstance: {fileID: 5998554371452188005}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8166185667007692165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2900620678957164032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!4 &5022017667174751553 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1625499430606727204, guid: 44d0f75508b97004f9e96fa0dbf0857b,

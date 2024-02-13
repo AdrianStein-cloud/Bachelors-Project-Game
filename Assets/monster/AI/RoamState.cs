@@ -3,51 +3,83 @@ using Pada1.BBCore;
 using Pada1.BBCore.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
-[Action("Animation/RoamState")]
-[Help("Roams")]
+[Action("Roam")]
+[Help("Roams the map")]
 public class RoamState : GOAction
 {
     private UnityEngine.AI.NavMeshAgent navAgent;
 
-    ///<value>Input game object Parameter that must have a BoxCollider or SphereColider, which will determine the area from which the position is extracted.</value>
-    [InParam("area")]
-    [Help("game object that must have a BoxCollider or SphereColider, which will determine the area from which the position is extracted")]
-    public GameObject area;
+    [InParam("stopRange")]
+    public int stopRange;
 
-    [InParam("range")]
-    public int range;
+    [OutParam("RoomToSearch")]
+    public GameObject outRoom;
 
-    /// <summary>Initialization Method of MoveToRandomPosition.</summary>
-    /// <remarks>Check if there is a NavMeshAgent to assign it one by default and assign it
-    /// to the NavMeshAgent the destination a random position calculated with <see cref="getRandomPosition()"/> </remarks>
+    private List<GameObject> rooms;
+    private WanderingBehaviour wander;
+
     public override void OnStart()
     {
-        gameObject.GetComponent<WanderingBehaviour>().UpdateState(WanderingState.Wander);
+        wander = gameObject.GetComponent<WanderingBehaviour>();
+
+        if (!wander.once)
+        {
+            rooms = new List<GameObject>(GameObject.FindObjectOfType<DungeonGenerator>().spawnedRooms);
+            wander.once = true;
+        }
+        else rooms = wander.roomsCopy;
+
+        var room = wander.wanderingTo;
+        if (wander.hasReachedRoom)
+        {
+            room = GetRandomPosition();
+            wander.hasReachedRoom = false;
+        }
+
+        var roomscript = room.GetComponent<Room>();
 
         navAgent = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
-
-        navAgent.SetDestination(getRandomPosition());
-
+        navAgent.SetDestination(roomscript.centerObject.transform.position);
         navAgent.isStopped = false;
+
+        wander.roomsCopy = rooms;
+        wander.wanderingTo = room;
+        outRoom = room;
     }
-    /// <summary>Method of Update of MoveToRandomPosition </summary>
-    /// <remarks>Check the status of the task, if it has traveled the road or is close to the goal it is completed
-    /// and otherwise it will remain in operation.</remarks>
+
     public override TaskStatus OnUpdate()
     {
-        if (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance)
+        if (wander.state == WanderingState.Chase 
+            || (!navAgent.pathPending && navAgent.remainingDistance <= stopRange))
+        {
+            wander.hasReachedRoom = true;
             return TaskStatus.COMPLETED;
+        }
         return TaskStatus.RUNNING;
     }
 
-    private Vector3 getRandomPosition()
+    private GameObject GetRandomPosition()
     {
-        return gameObject.transform.position + new Vector3(Random.Range(-range, range), 0, Random.Range(-range, range));
+        //When room count is 0 (has roamed entire map), resets the list and begins roaming again
+        if (rooms.Count <= 0) rooms = new List<GameObject>(GameObject.FindObjectOfType<DungeonGenerator>().spawnedRooms);
+
+        rooms = rooms.OrderBy(r => Vector3.Distance(new Vector3(0, gameObject.transform.position.y, 0), 
+            new Vector3(0, r.transform.position.y, 0)))
+            .OrderBy(r => Vector3.Distance(new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z), 
+            new Vector3(r.transform.position.x, 0, r.transform.position.z))).ToList();
+
+        var room = rooms[0];
+        rooms.Remove(room);
+        //rooms.Add(room);
+        wander.roomsCopy = rooms;
+        return room;
     }
-    /// <summary>Abort method of MoveToRandomPosition </summary>
-    /// <remarks>When the task is aborted, it stops the navAgentMesh.</remarks>
+
     public override void OnAbort()
     {
         navAgent.isStopped = true;

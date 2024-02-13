@@ -23,18 +23,9 @@ namespace BBUnity.Actions
         public override void OnStart()
         {
             navAgent = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
-            if (navAgent == null)
-            {
-                Debug.LogWarning("The " + gameObject.name + " game object does not have a Nav Mesh Agent component to navigate. One with default values has been added", gameObject);
-                navAgent = gameObject.AddComponent<UnityEngine.AI.NavMeshAgent>();
-            }
             navAgent.SetDestination(target);
 
-            #if UNITY_5_6_OR_NEWER
-                navAgent.isStopped = false;
-            #else
-                navAgent.Resume();
-            #endif
+            navAgent.isStopped = false;
         }
 
         /// <summary>Method of Update of MoveToPosition </summary>
