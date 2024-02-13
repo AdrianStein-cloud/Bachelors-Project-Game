@@ -33,11 +33,11 @@ public class CheckDoor : GOCondition
             {
                 wander = gameObject.GetComponent<WanderingBehaviour>();
 
-                var doorscript = hit.transform.parent.GetComponent<ToggleDoor>();
+                var doorscript = hit.transform.GetComponent<ToggleDoor>();
 
                 if (doorscript.open) return false;
 
-                wander.doorToOpen = hit.transform.parent.gameObject;
+                wander.doorToOpen = hit.transform.gameObject;
                 return true;
             }
         }

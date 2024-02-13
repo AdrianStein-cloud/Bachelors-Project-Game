@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ToggleDoor : MonoBehaviour
+public class ToggleDoor : Interactable
 {
     public bool isLocked = false;
     public bool open = false;
+
+    bool inFocus = false;
 
     public float openDist;
 
@@ -21,7 +23,7 @@ public class ToggleDoor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = transform.parent.GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         cam = Camera.main.gameObject;
         navObstacle = GetComponentInChildren<NavMeshObstacle>();
@@ -30,7 +32,7 @@ public class ToggleDoor : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) Interact(player);
+        if (inFocus && InputManager.Player.Interact.triggered) Interact(player);
     }
 
     public void Interact(GameObject user)
@@ -55,5 +57,15 @@ public class ToggleDoor : MonoBehaviour
         open = false;
         navObstacle.enabled = false;
         anim.SetTrigger("Toggle");
+    }
+
+    public override void EnableInteractability()
+    {
+        inFocus = true;
+    }
+
+    public override void DisableInteractability()
+    {
+        inFocus = false;
     }
 }

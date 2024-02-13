@@ -945,7 +945,8 @@ PrefabInstance:
       propertyPath: m_Carve
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6552183894553662071, guid: 44d0f75508b97004f9e96fa0dbf0857b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -953,6 +954,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6101242492942713564}
+    - targetCorrespondingSourceObject: {fileID: 4715493894088877685, guid: 44d0f75508b97004f9e96fa0dbf0857b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5596071740999342851}
     - targetCorrespondingSourceObject: {fileID: 8898609600373379941, guid: 44d0f75508b97004f9e96fa0dbf0857b,
         type: 3}
       insertIndex: -1
@@ -991,6 +996,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &5596071740999342851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319530354695394064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ef2bfbddf3544429e8ffed3442b657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLocked: 0
+  open: 0
+  openDist: 0
 --- !u!1 &2900620678957164032 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8898609600373379941, guid: 44d0f75508b97004f9e96fa0dbf0857b,
