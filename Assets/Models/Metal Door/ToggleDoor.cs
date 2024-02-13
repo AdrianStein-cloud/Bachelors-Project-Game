@@ -30,7 +30,7 @@ public class ToggleDoor : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.E)) Interact();
+        if (Input.GetKeyDown(KeyCode.E)) Interact(player);
     }
 
     public void Interact(GameObject user)
