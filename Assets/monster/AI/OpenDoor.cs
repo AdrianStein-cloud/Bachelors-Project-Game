@@ -8,10 +8,13 @@ using UnityEngine;
 [Action("Action/OpenDoor")]
 public class OpenDoor : GOAction
 {
+    private WanderingBehaviour wander;
 
     public override void OnStart()
     {
-        gameObject.GetComponent<WanderingBehaviour>().doorToOpen.GetComponent<ToggleDoor>().Interact();
-        gameObject.GetComponent<WanderingBehaviour>().doorToOpen = null;
+        wander = gameObject.GetComponent<WanderingBehaviour>();
+        var door = wander.doorToOpen?.GetComponent<ToggleDoor>();
+        door?.Interact(gameObject);
+        wander.doorToOpen = null;
     }
 }

@@ -3,6 +3,7 @@ using BBUnity.Conditions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ToggleDoor : MonoBehaviour
 {
@@ -15,21 +16,26 @@ public class ToggleDoor : MonoBehaviour
     GameObject player;
     GameObject cam;
 
+    private NavMeshObstacle navObstacle;
+
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         cam = Camera.main.gameObject;
+        navObstacle = GetComponentInChildren<NavMeshObstacle>();
+        if (!isLocked) navObstacle.enabled = false;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) Interact();
+        //if (Input.GetKeyDown(KeyCode.E)) Interact();
     }
 
-    public void Interact()
+    public void Interact(GameObject user)
     {
+        anim.SetBool("Otherway", Vector3.Angle(user.transform.forward, transform.right) > 80);
         if (!isLocked)
         {
             if (!open) Open();
@@ -41,11 +47,13 @@ public class ToggleDoor : MonoBehaviour
     {
         open = true;
         anim.SetTrigger("Toggle");
+        navObstacle.enabled = true;
     }
 
     void Close()
     {
         open = false;
+        navObstacle.enabled = false;
         anim.SetTrigger("Toggle");
     }
 }

@@ -12,6 +12,10 @@ public class WanderingBehaviour : MonoBehaviour
     public bool once = false;
     public GameObject doorToOpen;
 
+    public GameObject currentRoom;
+
+    public bool hasReachedRoom = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,14 @@ public class WanderingBehaviour : MonoBehaviour
     public void UpdateState(WanderingState newstate)
     {
         state = newstate;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Room"))
+        {
+            currentRoom = other.gameObject;
+        }
     }
 }
 

@@ -19,10 +19,13 @@ public class SearchRoom : GOAction
 
     private NavMeshAgent navAgent;
     private WanderingBehaviour wander;
+    private Room currentRoom;
 
     public override void OnStart()
     {
         wander = gameObject.GetComponent<WanderingBehaviour>();
+        currentRoom = wander.currentRoom.GetComponent<Room>();
+        if (currentRoom.isCorridor) return;
 
         navAgent = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
@@ -37,6 +40,8 @@ public class SearchRoom : GOAction
 
     public override TaskStatus OnUpdate()
     {
+        if (currentRoom.isCorridor) return TaskStatus.FAILED;
+
         if (wander.state == WanderingState.Chase || (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance))
         {
             return TaskStatus.COMPLETED;
@@ -47,7 +52,7 @@ public class SearchRoom : GOAction
     // Generates a random point within a sphere
     Vector3 RandomNavSphere(Vector3 origin, float distance, int layermask)
     {
-        Vector3 randomDirection = Random.insideUnitSphere * distance;
+        Vector3 randomDirection = new Vector3(Random.Range(0.5f, 1f), origin.y, Random.Range(0.5f, 1f)) * distance;
 
         randomDirection += origin;
 

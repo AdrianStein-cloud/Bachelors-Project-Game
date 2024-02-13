@@ -23,6 +23,8 @@ public class Room : MonoBehaviour
 
     public GameObject centerObject;
 
+    public bool isCorridor;
+
     private void Awake()
     {
         BoxCollider boxCollider = GetComponent<BoxCollider>();

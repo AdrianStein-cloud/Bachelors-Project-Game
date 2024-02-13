@@ -16,21 +16,29 @@ public class CheckDoor : GOCondition
     [InParam("closeDistance")]
     public float closeDistance;
 
+    [InParam("dirObject")]
+    public GameObject dirObject;
+
     [InParam("layerMask")]
     public LayerMask layerMask;
 
+    private WanderingBehaviour wander;
+
     public override bool Check()
     {
-        var colliders = Physics.OverlapSphere(gameObject.transform.position, closeDistance, layerMask);
-        foreach (var col in colliders)
+        RaycastHit hit;
+        if (Physics.Raycast(dirObject.transform.position, dirObject.transform.forward, out hit, closeDistance, layerMask))
         {
-            if (col.CompareTag(doortag))
+            if (hit.transform.CompareTag(doortag))
             {
-                var door = col.transform.parent.gameObject;
-                var doorScript = door.GetComponent<ToggleDoor>();
-                if (doorScript.isLocked) Debug.Log("Needs to implement if door is locked");
-                gameObject.GetComponent<WanderingBehaviour>().doorToOpen = door;
-                return !doorScript.open;
+                wander = gameObject.GetComponent<WanderingBehaviour>();
+
+                var doorscript = hit.transform.parent.GetComponent<ToggleDoor>();
+
+                if (doorscript.open) return false;
+
+                wander.doorToOpen = hit.transform.parent.gameObject;
+                return true;
             }
         }
         return false;
