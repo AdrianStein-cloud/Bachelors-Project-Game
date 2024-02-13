@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Speed Upgrade
   m_EditorClassIdentifier: 
   Name: Speed
-  description: Makes you {0} times faster
-  speedMultiplier: 1.2
+  description: Makes you {0}% faster
+  speedPercentIncrease: 20

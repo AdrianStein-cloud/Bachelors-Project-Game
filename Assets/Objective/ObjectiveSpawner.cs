@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +12,13 @@ public class ObjectiveSpawner : MonoBehaviour
     public GameObject objectiveTracker;
     public Image objectiveFill;
 
-
-    public void SpawnObjectives(List<(GameObject room, int depth)> roomsDepth, Transform dungeon)
+    public void SpawnObjectives(List<(GameObject room, int depth)> roomsDepth, Transform dungeon, Action leave)
     {
-        //This is very wack
-        
-        var rooms = roomsDepth.OrderByDescending(t => t.depth).Select(t => t.room);
-
         var tracker = Instantiate(objectiveTracker, dungeon).GetComponent<ObjectiveTracker>();
-        tracker.ObjectiveFill = objectiveFill;
-        tracker.MaxObjectives = objectiveAmount;
-        tracker.LeaveThreshold = objectiveAmount; //Temporary
+        tracker.Init(objectiveAmount, objectiveAmount, objectiveFill, leave);
+
+        //The spawning is very wack
+        var rooms = roomsDepth.OrderByDescending(t => t.depth).Select(t => t.room);
 
         int i = objectiveAmount;
         foreach (var room in rooms)
