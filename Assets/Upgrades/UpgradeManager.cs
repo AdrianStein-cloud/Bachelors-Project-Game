@@ -2,26 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using System.Linq;
+using System;
 
 public class UpgradeManager : MonoBehaviour
 {
     public List<Upgrade> Upgrades;
 
-    public GameObject card;
-    public GameObject player;
+    UpgradeUIController upgradeUIController;
+    GameObject player;
 
-    Upgrade upgrade;
+    Action upgradeChosen;
 
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.R)) DisplayRandomUpgrade();
-        if (Input.GetKeyDown(KeyCode.P)) upgrade.Apply(player);
+        upgradeUIController = FindAnyObjectByType<UpgradeUIController>();
+        upgradeUIController.SetOnUpgradeCallback(ChooseUpgrade);
     }
 
-    public void DisplayRandomUpgrade()
+    public void DisplayUpgrades(int amount, GameObject player, Action upgradeChosen)
     {
-        upgrade = Upgrades[Random.Range(0, Upgrades.Count)];
-        card.transform.Find("Name").GetComponent<TextMeshProUGUI>().text = upgrade.Name;
-        card.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = upgrade.Description;
+        this.player = player;
+        this.upgradeChosen = upgradeChosen;
+        var upgrades = Enumerable.Range(0, amount).Select(_ => Upgrades[UnityEngine.Random.Range(0, Upgrades.Count)]);
+        upgradeUIController.EnableCards(upgrades);
+    }
+
+    void ChooseUpgrade(Upgrade upgrade)
+    {
+        upgrade.Apply(player);
+        upgradeChosen();
     }
 }

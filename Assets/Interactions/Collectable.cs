@@ -22,6 +22,7 @@ public class Collectable : Interactable
         {
             onCollect?.Invoke();
             DisableInteractability();
+            gameObject.SetActive(false);
         }
     }
 
