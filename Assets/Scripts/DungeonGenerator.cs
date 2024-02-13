@@ -100,7 +100,7 @@ public class DungeonGenerator : MonoBehaviour
         //Debug.Log("Room List: " + rooms.Count);
 
         List<GameObject> shuffledRooms = new (rooms);
-        shuffledRooms.Shuffle();
+        shuffledRooms.Shuffle(random);
 
         //Debug.Log("Shuffled List: " + shuffledRooms.Count);
 
