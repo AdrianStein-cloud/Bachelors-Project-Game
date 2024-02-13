@@ -5,19 +5,16 @@ using UnityEngine;
 
 public class Audio : MonoBehaviour
 {
-    [SerializeField] List<NamedAudio> audioClips;
-
     Dictionary<string, AudioSource> sources;
 
     private void Awake()
     {
         sources = new();
-        foreach (var audio in audioClips)
+
+        foreach (Transform audio in transform.Find("Audio"))
         {
-            var source = gameObject.AddComponent<AudioSource>();
-            source.clip = audio.Clip;
-            source.playOnAwake = false;
-            sources.Add(audio.Name, source);
+            var source = audio.GetComponent<AudioSource>();
+            sources.Add(audio.gameObject.name, source);
         }
     }
 
@@ -37,11 +34,4 @@ public class Audio : MonoBehaviour
     }
 
     public bool IsPlaying(string name) => sources[name].isPlaying;
-}
-
-[Serializable]
-public class NamedAudio
-{
-    public string Name;
-    public AudioClip Clip;
 }
