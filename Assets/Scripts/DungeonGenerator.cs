@@ -15,7 +15,7 @@ public class DungeonGenerator : MonoBehaviour
     [Header("Generation Settings")]
     [SerializeField] int depth = 1;
     [SerializeField] int seed = -1; // -1 = random seed
-    [SerializeField] int lookahead = 3;
+    [SerializeField] int lookahead = 2;
     [SerializeField] NavMeshSurface navmeshSurface;
     Random random;
 
@@ -103,17 +103,20 @@ public class DungeonGenerator : MonoBehaviour
         shuffledRooms.Shuffle();
 
         //Debug.Log("Shuffled List: " + shuffledRooms.Count);
+        List<Door> doors;
 
         foreach(GameObject room in shuffledRooms)
         {
             newRoom = Instantiate(room, door.gameObject.transform.position, door.direction, dungeon);
+            doors = newRoom.GetComponent<Room>().GetDoors();
 
             yield return new WaitForSeconds(Time.deltaTime * 10);
 
-            if (newRoom.GetComponent<Room>().isColliding)
+            if (newRoom.GetComponent<Room>().isColliding || (doors.Count == 0 && depth % lookahead != 0))
             {
                 Destroy(newRoom);
                 newRoom = null;
+                doors = null;
             }
             else
             {
