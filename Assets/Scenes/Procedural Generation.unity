@@ -3136,7 +3136,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c256337abb724bd478c57bffbfd457ef,
         type: 3}
       propertyPath: m_Name
-      value: SM_BulkheadLamp
+      value: NotReadyLamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14132,6 +14132,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a78eefb17f920d4bbc29a69b3ed7f2e, type: 3}
+--- !u!1 &629621982 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c256337abb724bd478c57bffbfd457ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 2051836575}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &632710141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21058,8 +21064,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2624b206ff3673498757f1fcda9f0b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReadyLamp: {fileID: 0}
-  NotReadyLamp: {fileID: 0}
+  ReadyLamp: {fileID: 629621982}
+  NotReadyLamp: {fileID: 1845408577}
 --- !u!1 &923349152
 GameObject:
   m_ObjectHideFlags: 0
@@ -31699,7 +31705,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1711277796}
+  m_Mesh: {fileID: 157237539}
 --- !u!33 &1361280732
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -44908,6 +44914,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0.5, y: 0.5, z: 0.5}
+--- !u!1 &1845408577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c256337abb724bd478c57bffbfd457ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 134005301}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1845824432
 GameObject:
   m_ObjectHideFlags: 0
@@ -51992,7 +52004,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c256337abb724bd478c57bffbfd457ef,
         type: 3}
       propertyPath: m_Name
-      value: SM_BulkheadLamp (1)
+      value: ReadyLamp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
