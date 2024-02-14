@@ -117,9 +117,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (toggleRun && !context.performed || context.started) return;
         run = context.performed;
-
-        //StopCrouch();
-        //IsRunning = isGrounded && !IsCrouching && dir.y > 0 && (toggleRun || context.performed);
     }
 
     private void Jump(InputAction.CallbackContext context)
