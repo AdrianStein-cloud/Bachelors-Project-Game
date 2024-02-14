@@ -17,12 +17,14 @@ public class ToggleDoor : Interactable
     Animator anim;
     GameObject player;
     GameObject cam;
+    AudioSource audioSource;
 
     private NavMeshObstacle navObstacle;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         anim = transform.parent.GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         cam = Camera.main.gameObject;
@@ -50,6 +52,7 @@ public class ToggleDoor : Interactable
         open = true;
         anim.SetTrigger("Toggle");
         navObstacle.enabled = true;
+        audioSource.Play();
     }
 
     void Close()
