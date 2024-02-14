@@ -20,7 +20,6 @@ public class DungeonEntrance : Interactable
         {
             if (DungeonIsAvailable)
             {
-                Debug.Log("Enter dungeon");
                 EnterDungeon();
             }
             else
@@ -48,11 +47,13 @@ public class DungeonEntrance : Interactable
     public override void EnableInteractability()
     {
         inFocus = true;
+        InteractionUIText.Instance.SetText("Press E to enter dungeon");
     }
 
     public override void DisableInteractability()
     {
         inFocus = false;
+        InteractionUIText.Instance.SetText("");
     }
 
 }

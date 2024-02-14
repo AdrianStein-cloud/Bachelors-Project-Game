@@ -13,9 +13,9 @@ public class ObjectiveTracker : MonoBehaviour
 
     int collectedObjectives = 0;
 
-    private void Update()
+    private void Awake()
     {
-        if(Input.GetKeyDown(KeyCode.L)) AttemptLeave();
+        GameObject.Find("DungeonExit").GetComponent<DungeonExit>().LeaveDungeon = AttemptLeave;
     }
 
     public void Init(int maxObjectives, int leaveThreshold, Image objectiveFill, Action leave)
@@ -32,16 +32,14 @@ public class ObjectiveTracker : MonoBehaviour
         objectiveFill.fillAmount = collectedObjectives / (float)maxObjectives;
     }
 
-    public void AttemptLeave()
+    public bool AttemptLeave()
     {
         if (collectedObjectives >= leaveThreshold)
         {
             leave();
+            return true;
         }
-        else
-        {
-            Debug.LogWarning("Should display: \"Can't leave\"");
-        }
+        return false;
     }
 
     private void OnDestroy()
