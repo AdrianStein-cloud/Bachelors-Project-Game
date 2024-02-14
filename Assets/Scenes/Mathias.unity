@@ -1051,11 +1051,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5852719042983267109, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
-      propertyPath: toggleRun
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5852719042983267109, guid: 190f930b5f042b247adeab89b9c2a294,
-        type: 3}
       propertyPath: walkSpeed
       value: 4
       objectReference: {fileID: 0}

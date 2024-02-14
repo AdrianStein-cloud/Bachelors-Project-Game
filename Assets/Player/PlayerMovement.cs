@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     bool canStand;
     bool ungrounded;
     bool jumping;
+    bool run;
 
     public bool IsWalking { get; private set; }
     public bool IsRunning { get; private set; }
@@ -60,14 +61,26 @@ public class PlayerMovement : MonoBehaviour
         groundCheckPosition = groundCheck.localPosition;
     }
 
-    public void Move(InputAction.CallbackContext context) 
+    private void Start()
     {
-        dir = context.ReadValue<Vector2>();
+        var input = InputManager.Player;
+        input.Move.OnAnyEvent(Move);
+        input.Jump.OnAnyEvent(Jump);
+        input.Run.OnAnyEvent(Run);
+        input.Crouch.OnAnyEvent(Crouch);
     }
 
     private void Update()
     {
-        if (dir.y <= 0) IsRunning = false;
+        if (run && dir.y > 0 && isGrounded)
+        {
+            StopCrouch();
+            IsRunning = true;
+        }
+        else IsRunning = false;
+
+        if (dir.y <= 0 && toggleRun) run = false;
+
         currentSpeed = IsRunning ? runSpeed : (IsCrouching ? crouchSpeed : walkSpeed);
         IsWalking = dir.magnitude > 0f && !IsRunning && isGrounded;
 
@@ -95,14 +108,21 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void Run(InputAction.CallbackContext context)
+    private void Move(InputAction.CallbackContext context)
     {
-        if (toggleRun && !context.performed || context.started) return;
-        StopCrouch();
-        IsRunning = isGrounded && !IsCrouching && dir.y > 0 && (toggleRun || context.performed);
+        dir = context.ReadValue<Vector2>();
     }
 
-    public void Jump(InputAction.CallbackContext context)
+    private void Run(InputAction.CallbackContext context)
+    {
+        if (toggleRun && !context.performed || context.started) return;
+        run = context.performed;
+
+        //StopCrouch();
+        //IsRunning = isGrounded && !IsCrouching && dir.y > 0 && (toggleRun || context.performed);
+    }
+
+    private void Jump(InputAction.CallbackContext context)
     {
         if (!enableJump || jumping || !isGrounded || !context.performed) return;
         StopCrouch();
@@ -112,17 +132,18 @@ public class PlayerMovement : MonoBehaviour
         Invoke(nameof(ResetJump), 0.2f);
     }
 
-    void ResetJump() => jumping = false;
+    private void ResetJump() => jumping = false;
 
-    public void Crouch(InputAction.CallbackContext context)
+    private void Crouch(InputAction.CallbackContext context)
     {
         if (toggleCrouch && !context.performed || context.started || (IsCrouching && !canStand)) return;
         IsCrouching = isGrounded && (toggleCrouch ? !IsCrouching : context.performed);
         IsRunning = false;
+        run = false;
         StartCoroutine(SmoothCrouch());
     }
 
-    IEnumerator SmoothCrouch()
+    private IEnumerator SmoothCrouch()
     {
         var time = 0f;
 
@@ -145,14 +166,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void StopCrouch()
+    private void StopCrouch()
     {
         if (IsCrouching && !canStand) return;
         IsCrouching = false;
         StartCoroutine(SmoothCrouch());
     }
 
-    void Gravity()
+    private void Gravity()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundMask);
         if ((isGrounded || !isGrounded && !ungrounded) && velocity.y < 0)

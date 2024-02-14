@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public static class Extensions
 {
@@ -30,6 +31,13 @@ public static class Extensions
         }
 
         throw new Exception("No roll");
+    }
+
+    public static void OnAnyEvent(this InputAction inputAction, Action<InputAction.CallbackContext> action)
+    {
+        inputAction.started += action;
+        inputAction.performed += action;
+        inputAction.canceled += action;
     }
 }
 
