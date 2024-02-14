@@ -9,50 +9,58 @@ public class GameManager : MonoBehaviour
     ObjectiveSpawner objectiveSpawner;
     SimpleEnemySpawner enemySpawner;
     UpgradeManager upgradeManager;
+    GameObject waitingRoomSpawnPoint;
+    DungeonEntrance dungeonEntrance;
 
     GameObject dungeon;
 
     private void Start()
     {
+        waitingRoomSpawnPoint = GameObject.Find("WaitingRoomSpawnPoint");
         player = GameObject.FindGameObjectWithTag("Player");
         dungeonGenerator = GetComponent<DungeonGenerator>();
         objectiveSpawner = GetComponent<ObjectiveSpawner>();
         enemySpawner = GetComponent<SimpleEnemySpawner>();
         upgradeManager = GetComponent<UpgradeManager>();
-        StartCoroutine(StartRound());
+        dungeonEntrance = FindAnyObjectByType<DungeonEntrance>();
+        dungeonEntrance.EnterDungeon = StartLevel;
+        player.transform.position = waitingRoomSpawnPoint.transform.position;
+        StartCoroutine(SpawnDungeon());
     }
 
-
-    private void Update()
+    IEnumerator SpawnDungeon()
     {
-        if (Input.GetKeyDown(KeyCode.R)) StartCoroutine(StartRound());
-    }
-
-    IEnumerator StartRound()
-    {
+        dungeonEntrance.DungeonIsAvailable = false;
         dungeon = new GameObject("Dungeon");
         yield return dungeonGenerator.GenerateDungeon(dungeon.transform);
-        //player.transform.position = dungeonGenerator.playerSpawnPosition.transform.position;
+        dungeonEntrance.DungeonIsAvailable = true;
+    }
+
+    void StartLevel()
+    {
         enemySpawner.SpawnEnemies(dungeonGenerator.spawnedRooms, dungeon.transform);
         objectiveSpawner.SpawnObjectives(dungeonGenerator.spawnedRoomsDepth, dungeon.transform, SwitchToUpgrades);
+        player.SetActive(false);
+        player.transform.position = dungeonGenerator.playerSpawnPosition.transform.position;
+        player.SetActive(true);
     }
 
     public void SwitchToUpgrades()
     {
+        InputManager.Player.Disable();
         player.SetActive(false);
+        player.transform.position = waitingRoomSpawnPoint.transform.position;
+        player.SetActive(true);
         Destroy(dungeon);
+        StartCoroutine(SpawnDungeon());
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        InputManager.Player.Disable();
-        upgradeManager.DisplayUpgrades(3, player, GoToNextLevel);
+        upgradeManager.DisplayUpgrades(3, player, ExitUpgrades);
     }
-
-    void GoToNextLevel()
+    void ExitUpgrades()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         InputManager.Player.Enable();
-        player.SetActive(true);
-        StartCoroutine(StartRound());
     }
 }
