@@ -18,18 +18,17 @@ public class UpdateWanderingState : GOAction
     [Help("State to transition to")]
     public WanderingState newState;
 
-    [InParam("Blend Value")]
-    [Help("Speed value for animation blend tree")]
-    public float SpeedValue;
-
     [InParam("Movespeed value")]
     public float movespeed;
 
     public override void OnStart()
     {
         gameObject.GetComponent<NavMeshAgent>().speed = movespeed;
-        gameObject.GetComponent<Animator>().SetFloat("Blend", SpeedValue/100);
-        gameObject.GetComponent<Animator>().SetBool("Attack", newState == WanderingState.Attack);
+        //gameObject.GetComponent<Animator>().SetFloat("Blend", SpeedValue/100);
+        //gameObject.GetComponent<Animator>().SetBool("Attack", newState == WanderingState.Attack);
+        var wander = gameObject.GetComponent<WanderingBehaviour>();
+
+        wander.UpdateState(newState);
     }
 
     public override TaskStatus OnUpdate()

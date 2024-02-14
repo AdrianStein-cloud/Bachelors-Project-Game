@@ -14,24 +14,29 @@ public class ChasePlayer : GOAction
     [Help("Target game object towards this game object will be moved")]
     public GameObject target;
 
+    [OutParam("justChased")]
+    public bool justChased;
+
     private UnityEngine.AI.NavMeshAgent navAgent;
 
     private Transform targetTransform;
+
+    private WanderingBehaviour wander;
 
     /// <summary>Initialization Method of MoveToGameObject.</summary>
     /// <remarks>Check if GameObject object exists and NavMeshAgent, if there is no NavMeshAgent, the default one is added.</remarks>
     public override void OnStart()
     {
-        if (target == null)
-        {
-            Debug.LogError("The movement target of this game object is null", gameObject);
-            return;
-        }
+        wander = gameObject.GetComponent<WanderingBehaviour>();
+        wander.hasReachedRoom = true;
+
         targetTransform = target.transform;
 
         navAgent = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
         navAgent.SetDestination(targetTransform.position);
 
+        //justChased = true;
+        wander.once = false;
         navAgent.isStopped = false;
     }
 
@@ -40,12 +45,13 @@ public class ChasePlayer : GOAction
     /// y, the task is running, if it is still moving to the target.</remarks>
     public override TaskStatus OnUpdate()
     {
-        if (target == null)
-            return TaskStatus.FAILED;
+        wander.lastLocation = targetTransform.position;
+
         if (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance)
+        {
             return TaskStatus.COMPLETED;
-        else if (navAgent.destination != targetTransform.position)
-            navAgent.SetDestination(targetTransform.position);
+        }
+        else if (navAgent.destination != targetTransform.position) navAgent.SetDestination(targetTransform.position);
         return TaskStatus.RUNNING;
     }
 }

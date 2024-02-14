@@ -22,8 +22,9 @@ namespace BBUnity.Actions
         /// <remarks>Check if there is a NavMeshAgent to assign a default one and assign the destination to the NavMeshAgent the given position.</remarks>
         public override void OnStart()
         {
+            var wander = gameObject.GetComponent<WanderingBehaviour>();
             navAgent = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
-            navAgent.SetDestination(target);
+            navAgent.SetDestination(wander.lastLocation);
 
             navAgent.isStopped = false;
         }
@@ -37,19 +38,6 @@ namespace BBUnity.Actions
                 return TaskStatus.COMPLETED;
 
             return TaskStatus.RUNNING;
-        }
-
-        /// <summary>Abort method of MoveToPosition.</summary>
-        /// <remarks>When the task is aborted, it stops the navAgentMesh.</remarks>
-        public override void OnAbort()
-        {
-#if UNITY_5_6_OR_NEWER
-            if(navAgent!=null)
-                navAgent.isStopped = true;
-#else
-            if (navAgent != null)
-                navAgent.Stop();
-            #endif
         }
     }
 }

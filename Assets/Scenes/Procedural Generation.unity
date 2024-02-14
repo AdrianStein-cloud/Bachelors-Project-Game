@@ -18951,10 +18951,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 51947737927121011, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.886
+      objectReference: {fileID: 0}
     - target: {fileID: 2994622128118365023, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
       propertyPath: m_Name
       value: Player Container
+      objectReference: {fileID: 0}
+    - target: {fileID: 4855921842794447810, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: Priority
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 4855921842794447810, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4855921842794447810, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5852719042983267109, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
@@ -18965,6 +18985,11 @@ PrefabInstance:
         type: 3}
       propertyPath: groundCheckRadius
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287702692255530417, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.886
       objectReference: {fileID: 0}
     - target: {fileID: 8969642763786446042, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
@@ -19030,6 +19055,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055781215775615827, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: Priority
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055781215775615827, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055781215775615827, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28650,7 +28690,7 @@ Transform:
   m_GameObject: {fileID: 1274824135}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 33}
+  m_LocalPosition: {x: -1.2, y: 7.8, z: 85.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

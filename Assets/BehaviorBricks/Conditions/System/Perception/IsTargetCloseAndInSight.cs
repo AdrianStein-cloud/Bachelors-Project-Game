@@ -42,15 +42,18 @@ namespace BBUnity.Conditions
             if (target == null) return false;
             var pos = gameObject.transform.position;
             var tempPos = new Vector3(pos.x, 0, pos.z);
-            var playerPos = target.transform.position;
+            var playerPos = Camera.main.transform.position;
             var tempPlayerPos = new Vector3(playerPos.x, 0, playerPos.z);
             if (Vector3.Distance(tempPos, tempPlayerPos) > closeDistance) return false;
 
-            Vector3 dir = (playerPos - dirObject.transform.position);
+            var dirobjectcenter = dirObject.GetComponent<SkinnedMeshRenderer>().bounds.center;
+            Vector3 dir = (playerPos - dirobjectcenter);
+
 
             RaycastHit hit;
-            if (Physics.Raycast(dirObject.transform.position, dir, out hit, Mathf.Infinity, layerMask))
+            if (Physics.Raycast(dirobjectcenter, dir, out hit, Mathf.Infinity, layerMask))
             {
+                Debug.DrawLine(dirobjectcenter, hit.point);
                 return hit.collider.gameObject == target && Vector3.Angle(dir, dirObject.transform.forward) < angle * 0.5f;
             }
             return false;

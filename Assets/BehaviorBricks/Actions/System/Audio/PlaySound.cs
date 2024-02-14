@@ -18,6 +18,9 @@ namespace BBUnity.Actions
         [Help("The clip that must be played")]
         public AudioClip clip;
 
+        [InParam("audiosource")]
+        public GameObject audiosource;
+
         ///<value>Volume of the clip.</value>
         [InParam("volume")]
         [Help("Volume of the clip")]
@@ -34,7 +37,9 @@ namespace BBUnity.Actions
         /// <remarks>Associate the sound clip and inacialize the elapsed time.</remarks>
         public override void OnStart()
         {
-            AudioSource.PlayClipAtPoint(clip, gameObject.transform.position, volume);
+            var source = gameObject.GetComponent<AudioSource>();
+            source.clip = clip;
+            source.Play();
 
             elapsedTime = Time.time;
         }
