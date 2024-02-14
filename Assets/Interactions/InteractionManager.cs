@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class InteractionManager : MonoBehaviour
@@ -14,7 +15,7 @@ public class InteractionManager : MonoBehaviour
     Vector3 start;
     Vector3 end;
 
-    private void Update()
+    private void FixedUpdate()
     {
         CheckForInteraction();
     }
@@ -24,26 +25,16 @@ public class InteractionManager : MonoBehaviour
     {       
         Vector3 dir = transform.rotation * Vector3.forward;
 
-        RaycastHit hit;
-        //Debug.DrawLine(transform.position, transform.position + dir.normalized * interactRange, Color.red);
-        if (Physics.Raycast(transform.position, dir, out hit, interactRange, interactableMask))
+        var hits = Physics.RaycastAll(transform.position, dir, interactRange, interactableMask);
+
+        var interatable = hits.Select(hit => hit.collider.transform.GetComponent<Interactable>()).FirstOrDefault(i => i != null);
+        if (interatable != null)
         {
-            //Debug.Log(hit.transform.name);
-            var newInteractable = hit.transform.GetComponent<Interactable>();
-
-
-            /*if (newInteractable == null)
-            {
-                //Debug.LogError("Couldn't find interactable script on object");
-                hoveredInteractable?.DisableInteractability();
-                return;
-            }*/
-
-            if (hoveredInteractable != newInteractable)
+            if (hoveredInteractable != interatable)
             {
                 hoveredInteractable?.DisableInteractability();
-                newInteractable?.EnableInteractability();
-                hoveredInteractable = newInteractable;
+                interatable?.EnableInteractability();
+                hoveredInteractable = interatable;
             }
         }
         else

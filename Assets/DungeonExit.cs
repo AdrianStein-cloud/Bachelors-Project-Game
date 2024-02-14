@@ -1,33 +1,32 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class Collectable : Interactable
+public class DungeonExit : Interactable
 {
-    public Action onCollect;
+    public Func<bool> LeaveDungeon { get; set; }
+    bool inFocus = false;
 
-    bool inFocus;
-
-    void Update()
+    private void Update()
     {
         if (inFocus && InputManager.Player.Interact.triggered)
         {
-            onCollect();
-            gameObject.SetActive(false);
+            if (!LeaveDungeon())
+            {
+                Debug.LogWarning("Display can't leave dungeon yet");
+            }
         }
     }
-
     public override void EnableInteractability()
     {
         inFocus = true;
-        InteractionUIText.Instance.SetText("Press E to pickup ball");
-
+        InteractionUIText.Instance.SetText("Press E to exit dungeon");
     }
 
     public override void DisableInteractability()
     {
+        inFocus = false;
         InteractionUIText.Instance.SetText("");
     }
 
