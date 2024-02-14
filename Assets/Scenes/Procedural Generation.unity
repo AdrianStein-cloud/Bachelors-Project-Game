@@ -3865,8 +3865,9 @@ MonoBehaviour:
   objectiveAmount: 3
   collectablePrefab: {fileID: 946639617877281387, guid: 044e996819c938c46b38608df2920ef3,
     type: 3}
-  objectiveTracker: {fileID: 0}
-  objectiveFill: {fileID: 0}
+  objectiveTracker: {fileID: 3537125783118854772, guid: 95e9da84e43557e4f8ef1fcdf0554c86,
+    type: 3}
+  objectiveFill: {fileID: 1434252155}
 --- !u!114 &181535701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32202,6 +32203,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300002, guid: b47f5c9ac3a4adc4582f259efbe3c8e5, type: 3}
+--- !u!114 &1434252155 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4575749428433624507, guid: 12311705e3030ab4aa48c58cf8664e57,
+    type: 3}
+  m_PrefabInstance: {fileID: 1414814841}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1445893076
 PrefabInstance:
   m_ObjectHideFlags: 0
