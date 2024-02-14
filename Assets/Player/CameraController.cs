@@ -22,9 +22,10 @@ public class CameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         startingFOV = Camera.main.fieldOfView;
+        InputManager.Player.Look.OnAnyEvent(Look);
     }
 
-    public void Look(InputAction.CallbackContext context)
+    private void Look(InputAction.CallbackContext context)
     {
         dir = context.ReadValue<Vector2>();
     }
