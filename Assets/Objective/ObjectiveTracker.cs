@@ -30,6 +30,10 @@ public class ObjectiveTracker : MonoBehaviour
     {
         collectedObjectives++;
         objectiveFill.fillAmount = collectedObjectives / (float)maxObjectives;
+        if(collectedObjectives >= leaveThreshold)
+        {
+            GameObject.Find("DungeonExit").GetComponent<DungeonExit>().CanLeaveDungeon = true;
+        }
     }
 
     public bool AttemptLeave()
