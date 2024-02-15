@@ -4152,13 +4152,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sourceRooms: {fileID: 464683563}
   playerSpawnPosition: {fileID: 1326731401}
-  depth: 2
+  depth: 5
   seed: -1
   lookahead: 3
   navmeshSurface: {fileID: 137134224}
   randomRooms:
   - room: {fileID: 1894993633}
-    <Weight>k__BackingField: 2
+    <Weight>k__BackingField: 1
   - room: {fileID: 1003067318}
     <Weight>k__BackingField: 2
   - room: {fileID: 2144708313}
