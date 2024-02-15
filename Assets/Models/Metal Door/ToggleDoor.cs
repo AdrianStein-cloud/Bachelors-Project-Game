@@ -9,15 +9,18 @@ public class ToggleDoor : Interactable
 {
     public bool isLocked = false;
     public bool open = false;
+    public bool canInteract;
+    public float delay;
+    private float lastInteract;
 
     bool inFocus = false;
-
-    public float openDist;
 
     Animator anim;
     GameObject player;
     GameObject cam;
     AudioSource audioSource;
+
+    public AudioClip openSound, closeSound;
 
     private NavMeshObstacle navObstacle;
 
@@ -35,31 +38,27 @@ public class ToggleDoor : Interactable
     private void Update()
     {
         if (inFocus && InputManager.Player.Interact.triggered) Interact(player);
+        if (lastInteract + delay <= Time.time) canInteract = true;
     }
 
     public void Interact(GameObject user)
     {
         anim.SetBool("Otherway", Vector3.Angle(user.transform.forward, transform.right) > 80);
-        if (!isLocked)
+        if (canInteract && !isLocked)
         {
-            if (!open) Open();
-            else Close();
+            canInteract = false;
+            lastInteract = Time.time;
+            anim.SetTrigger("Toggle");
+            navObstacle.enabled = true;
+
+            if (user == player) audioSource.volume = 0.5f;
+            else audioSource.volume = 1f;
+
+            audioSource.clip = open ? closeSound : openSound;
+
+            audioSource.Play();
+            open = !open;
         }
-    }
-
-    void Open()
-    {
-        open = true;
-        anim.SetTrigger("Toggle");
-        navObstacle.enabled = true;
-        audioSource.Play();
-    }
-
-    void Close()
-    {
-        open = false;
-        navObstacle.enabled = false;
-        anim.SetTrigger("Toggle");
     }
 
     public override void EnableInteractability()
