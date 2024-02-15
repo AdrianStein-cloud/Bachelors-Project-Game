@@ -4158,22 +4158,22 @@ MonoBehaviour:
   navmeshSurface: {fileID: 137134224}
   randomRooms:
   - room: {fileID: 1894993633}
-    <Weight>k__BackingField: 1
+    <Weight>k__BackingField: 100
   - room: {fileID: 1003067318}
-    <Weight>k__BackingField: 2
+    <Weight>k__BackingField: 200
   - room: {fileID: 2144708313}
-    <Weight>k__BackingField: 2
+    <Weight>k__BackingField: 150
   - room: {fileID: 868244220}
-    <Weight>k__BackingField: 3
+    <Weight>k__BackingField: 300
   - room: {fileID: 192576593}
-    <Weight>k__BackingField: 3
+    <Weight>k__BackingField: 300
   - room: {fileID: 1177114662}
-    <Weight>k__BackingField: 3
+    <Weight>k__BackingField: 300
   - room: {fileID: 186437145}
-    <Weight>k__BackingField: 2
+    <Weight>k__BackingField: 200
   minimumRooms:
   - room: {fileID: 1125741737}
-    minmax: {x: 1, y: 1}
+    minmax: {x: 0, y: 2}
   startRoom: {fileID: 1872932740}
   spawnedRooms: []
 --- !u!114 &181535698
@@ -18972,7 +18972,7 @@ PrefabInstance:
     - target: {fileID: 8969642763786446042, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8969642763786446042, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}

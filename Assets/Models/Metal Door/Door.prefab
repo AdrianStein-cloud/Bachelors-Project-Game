@@ -48,7 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLocked: 0
   open: 0
-  openDist: 0
+  canInteract: 0
+  delay: 0
+  openSound: {fileID: 0}
+  closeSound: {fileID: 0}
 --- !u!95 &6953535057042053032
 Animator:
   serializedVersion: 5
