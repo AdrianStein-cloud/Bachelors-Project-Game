@@ -38,6 +38,7 @@ namespace BBUnity.Actions
         public override void OnStart()
         {
             var source = gameObject.GetComponent<AudioSource>();
+            source.volume = volume;
             source.clip = clip;
             source.Play();
 

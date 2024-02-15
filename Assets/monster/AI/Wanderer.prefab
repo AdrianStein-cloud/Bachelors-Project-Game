@@ -572,11 +572,15 @@ MonoBehaviour:
     - {fileID: 5357962527643391269}
     - {fileID: 0}
     - {fileID: 8300000, guid: 2ed9d6db8d620244da55566b68ca1e84, type: 3}
+    - {fileID: 8300000, guid: fca2af9408bf60f4e9118843daae5f93, type: 3}
+    - {fileID: 8300000, guid: 003ed3c3816d9214b93abee528eaf076, type: 3}
     objectParamsNames:
     - target
     - eyes
     - RoomToSearch
     - clip
+    - playerGoneClip
+    - foundPlayerClip
     objectParamsLostDefaultValue: 
     layerMaskParams:
     - serializedVersion: 2
