@@ -25,6 +25,8 @@ public class WanderingBehaviour : MonoBehaviour
     public List<AudioClip> screamSounds;
     private List<AudioClip> tempFootsteps = new List<AudioClip>();
 
+    public float lastAttackTime;
+
     // Start is called before the first frame update
     void Start()
     {
