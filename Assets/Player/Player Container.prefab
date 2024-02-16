@@ -413,12 +413,12 @@ MonoBehaviour:
   horizontalSensitivity: 20
   verticalSensitivity: 90
   rotationAngle: 90
-  followSpeed: 25
+  followSmoothTime: 5
   runFOVChangeAmount: 1.1
   runFOVChangeSpeed: 5
   cameraPosition: {fileID: 5697493602818644934}
   player: {fileID: 5852719042983267109}
-  smoothTime: 0.03
+  smoothTime: 0
   horiRotHelper: {fileID: 8539900549924396746}
 --- !u!114 &8881323201046055355
 MonoBehaviour:

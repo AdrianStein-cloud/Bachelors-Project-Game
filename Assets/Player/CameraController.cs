@@ -6,10 +6,11 @@ using UnityEngine.InputSystem;
 //https://github.com/deadlykam/TutorialFPSRotation/blob/20c94069f25b51205404a644a49f7b378506668e/TutorialFPSRotation/Assets/TutorialFPSRotation/Scripts/PlayerRotateSmooth.cs
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] float horizontalSensitivity;
-    [SerializeField] float verticalSensitivity;
+    [field: SerializeField] public float HorizontalSensitivity { get; set; }
+    [field: SerializeField] public float VerticalSensitivity { get; set; }
+
     [SerializeField, Range(50, 90)] int rotationAngle;
-    [SerializeField] float followSpeed;
+    [SerializeField] float followSmoothTime;
     [SerializeField] float runFOVChangeAmount;
     [SerializeField] float runFOVChangeSpeed;
     [SerializeField] Transform cameraPosition;
@@ -20,6 +21,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] Transform horiRotHelper;
 
     Vector2 dir;
+    Vector3 velocity = Vector3.zero;
     float xRotation = 0f;
     float startingFOV;
 
@@ -46,16 +48,16 @@ public class CameraController : MonoBehaviour
     {
         Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, startingFOV * (player.IsRunning ? runFOVChangeAmount : 1f), runFOVChangeSpeed * Time.deltaTime);
 
-        transform.position = Vector3.Lerp(transform.position, cameraPosition.position, followSpeed * Time.deltaTime);
+        transform.position = Vector3.SmoothDamp(transform.position, cameraPosition.position, ref velocity, followSmoothTime * Time.deltaTime);
 
-        var mouseDir = new Vector2(dir.x * horizontalSensitivity, dir.y * verticalSensitivity) * Time.deltaTime;
-        //var yRotation = transform.localRotation.eulerAngles.y + mouseDir.x;
+        var mouseDir = new Vector2(dir.x * HorizontalSensitivity, dir.y * VerticalSensitivity) * Time.deltaTime;
 
         xOld = xRotation;
         xRotation -= mouseDir.y;
         xRotation = Mathf.SmoothDampAngle(xOld, xRotation, ref xAngularVelocity, smoothTime);
         xRotation = Mathf.Clamp(xRotation, -rotationAngle, rotationAngle);
         var yRotation = Mathf.SmoothDampAngle(transform.localEulerAngles.y, horiRotHelper.localEulerAngles.y, ref yAngularVelocity, smoothTime);
+        //var yRotation = transform.localRotation.eulerAngles.y + mouseDir.x;
 
         horiRotHelper.Rotate(Vector3.up * mouseDir.x, Space.Self);
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
