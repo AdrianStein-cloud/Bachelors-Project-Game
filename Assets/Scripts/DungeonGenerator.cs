@@ -109,11 +109,13 @@ public class DungeonGenerator : MonoBehaviour
             else randomRoom = tempRandomRooms[0];
 
             newRoom = Instantiate(randomRoom.room, door.gameObject.transform.position, door.direction, dungeon);
-            doors = newRoom.GetComponent<Room>().GetDoors();
+            Room newRoomSript = newRoom.GetComponent<Room>();
+            newRoomSript.depth = depth;
+            doors = newRoomSript.GetDoors();
 
             yield return new WaitForSeconds(Time.deltaTime * 10);
 
-            if (newRoom.GetComponent<Room>().isColliding || (doors.Count == 0 && depth % lookahead != 0))
+            if (newRoomSript.isColliding || (doors.Count == 0 && depth % lookahead != 0))
             {
                 Destroy(newRoom);
                 newRoom = null;

@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     void StartLevel()
     {
-        enemySpawner.SpawnEnemies(dungeonGenerator.spawnedRooms, dungeon.transform);
+        enemySpawner.SpawnEnemies(dungeonGenerator.spawnedRooms, dungeon.transform, dungeonStartDepth + (Wave / 2) - 1);
         objectiveSpawner.SpawnObjectives(dungeonGenerator.spawnedRoomsDepth, dungeon.transform, SwitchToUpgrades);
         player.SetActive(false);
         player.transform.position = dungeonGenerator.playerSpawnPosition.transform.position;

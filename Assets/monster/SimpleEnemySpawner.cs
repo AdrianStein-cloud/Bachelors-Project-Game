@@ -8,12 +8,17 @@ public class SimpleEnemySpawner : MonoBehaviour
     public int amountToSpawn;
     public GameObject enemyPrefab;
 
-    public void SpawnEnemies(List<GameObject> rooms, Transform dungeon)
+    public void SpawnEnemies(List<GameObject> rooms, Transform dungeon, int depth)
     {
         rooms = new List<GameObject>(rooms);
         for (int i = 0; i < amountToSpawn; i++)
         {
             GameObject room = rooms[UnityEngine.Random.Range(0, rooms.Count)];
+
+            while (room.GetComponent<Room>().depth != depth)
+            {
+                room = rooms[UnityEngine.Random.Range(0, rooms.Count)];
+            }
 
             Instantiate(enemyPrefab, room.transform.localPosition, Quaternion.identity, dungeon);
 

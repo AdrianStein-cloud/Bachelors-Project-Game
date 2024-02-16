@@ -25,6 +25,8 @@ public class Room : MonoBehaviour
 
     public bool isCorridor;
 
+    public int depth = 0;
+
     private void Awake()
     {
         BoxCollider boxCollider = GetComponent<BoxCollider>();
