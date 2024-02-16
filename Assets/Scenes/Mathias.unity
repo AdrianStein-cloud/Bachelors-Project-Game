@@ -276,7 +276,7 @@ Terrain:
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: 611c7a4427cc7c943b49cf6dae32e8bf, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -1020,6 +1020,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1138077963468153909, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: field of view
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 2069725099065601414, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
       propertyPath: m_Name
@@ -1122,12 +1127,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7043069868871636880, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
+      propertyPath: followSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7043069868871636880, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
       propertyPath: _horiRotHelper
       value: 
       objectReference: {fileID: 1203608508}
     - target: {fileID: 7043069868871636880, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
       propertyPath: mouseSensitivity
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7043069868871636880, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: verticalSensitivity
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7043069868871636880, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: horizontalSensitivity
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8969642763786446042, guid: 190f930b5f042b247adeab89b9c2a294,
@@ -1210,12 +1230,12 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1646600008}
+  - {fileID: 596329034}
   - {fileID: 125779200}
-  - {fileID: 1181454409}
-  - {fileID: 82888815}
   - {fileID: 1828836094}
   - {fileID: 1558540005}
   - {fileID: 2031286047}
-  - {fileID: 5811743874523032197}
-  - {fileID: 596329034}
   - {fileID: 699309335}
+  - {fileID: 5811743874523032197}
+  - {fileID: 1181454409}
+  - {fileID: 82888815}
