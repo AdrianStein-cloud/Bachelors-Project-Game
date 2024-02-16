@@ -3,6 +3,7 @@ using Pada1.BBCore;
 using Pada1.BBCore.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Action("GrabPlayer")]
@@ -17,10 +18,15 @@ public class GrabPlayer : GOAction
     public override void OnStart()
     {
         InputManager.Player.Disable();
+        var wander = gameObject.GetComponent<WanderingBehaviour>();
+        wander.lastAttackTime = Time.time;
+    }
 
-        //player camera look at enemy
+    public override TaskStatus OnUpdate()
+    {
         var dirobjectcenter = dirObject.GetComponent<SkinnedMeshRenderer>().bounds.center;
         Camera.main.transform.parent.LookAt(dirobjectcenter);
+        return TaskStatus.COMPLETED;
     }
 
 }

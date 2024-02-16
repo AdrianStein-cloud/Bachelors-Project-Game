@@ -410,8 +410,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48d168ab5798e04e9c1f94a69b0e8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSensitivity: 20
-  verticalSensitivity: 90
+  <HorizontalSensitivity>k__BackingField: 0
+  <VerticalSensitivity>k__BackingField: 0
   rotationAngle: 90
   followSmoothTime: 5
   runFOVChangeAmount: 1.1
@@ -587,6 +587,7 @@ GameObject:
   - component: {fileID: 5852719042983267109}
   - component: {fileID: 3983175553815203831}
   - component: {fileID: 2661798902502877448}
+  - component: {fileID: 460354095488287093}
   m_Layer: 9
   m_Name: Player Controller
   m_TagString: Player
@@ -809,6 +810,20 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!114 &460354095488287093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6358394087113186272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2009ad4b5b353fe4d81daa9b302f98f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  invulnerabilityTime: 0.5
 --- !u!1 &6995078530207280390
 GameObject:
   m_ObjectHideFlags: 0

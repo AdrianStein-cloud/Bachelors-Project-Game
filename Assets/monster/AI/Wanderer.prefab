@@ -547,10 +547,11 @@ MonoBehaviour:
     intParams: 
     intParamsNames: []
     intParamsLostDefaultValue: 
-    boolParams: 0000
+    boolParams: 000001
     boolParamsNames:
     - justChased
     - canSeePlayer
+    - canAttack
     boolParamsLostDefaultValue: 
     floatParams:
     - 32
@@ -645,6 +646,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8da1aec079cbcba43a854395a45b0bef, type: 3}
   - {fileID: 8300000, guid: 4586971883f2f14459427b2c50d1d603, type: 3}
   screamSounds: []
+  lastAttackTime: 0
+  attackDelay: 10
 --- !u!54 &4440772621059421347
 Rigidbody:
   m_ObjectHideFlags: 0
