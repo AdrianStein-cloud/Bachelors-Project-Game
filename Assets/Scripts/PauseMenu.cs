@@ -17,6 +17,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject settingsMenu;
     [SerializeField] Slider sensSlider;
     [SerializeField] TMP_InputField sensInputField;
+    [SerializeField] Toggle crosshairToggle;
+    [SerializeField] GameObject crosshair;
 
 
     private bool gamePaused = true;
@@ -39,7 +41,13 @@ public class PauseMenu : MonoBehaviour
         sensSlider.onValueChanged.AddListener(SetSensitivity);
         sensInputField.text = "20";
         sensInputField.onValueChanged.AddListener(SetSensitivity);
+        crosshairToggle.onValueChanged.AddListener(SetCrosshair);
         UnpauseGame();
+    }
+
+    private void SetCrosshair(bool arg0)
+    {
+        crosshair.SetActive(arg0);
     }
 
     private void SetSensitivity(float input)
