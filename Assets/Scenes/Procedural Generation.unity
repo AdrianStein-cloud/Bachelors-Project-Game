@@ -4713,6 +4713,7 @@ MonoBehaviour:
   isColliding: 0
   centerObject: {fileID: 1146779882}
   isCorridor: 0
+  depth: 0
 --- !u!1 &192576593
 GameObject:
   m_ObjectHideFlags: 0
@@ -4781,6 +4782,7 @@ MonoBehaviour:
   isColliding: 0
   centerObject: {fileID: 2019492867}
   isCorridor: 0
+  depth: 0
 --- !u!1001 &206646858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19729,6 +19731,7 @@ MonoBehaviour:
   isColliding: 0
   centerObject: {fileID: 273517432}
   isCorridor: 0
+  depth: 0
 --- !u!43 &872396542
 Mesh:
   m_ObjectHideFlags: 0
@@ -23224,6 +23227,7 @@ MonoBehaviour:
   isColliding: 0
   centerObject: {fileID: 1274824135}
   isCorridor: 0
+  depth: 0
 --- !u!1001 &1008119874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25927,6 +25931,7 @@ MonoBehaviour:
   isColliding: 0
   centerObject: {fileID: 40386182}
   isCorridor: 0
+  depth: 0
 --- !u!1 &1146779882
 GameObject:
   m_ObjectHideFlags: 0
@@ -27026,6 +27031,7 @@ MonoBehaviour:
   isColliding: 0
   centerObject: {fileID: 383894254}
   isCorridor: 0
+  depth: 0
 --- !u!1 &1205151526
 GameObject:
   m_ObjectHideFlags: 0
@@ -34001,6 +34007,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8394197025228560838, guid: 12311705e3030ab4aa48c58cf8664e57,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -47668,6 +47679,7 @@ MonoBehaviour:
   isColliding: 0
   centerObject: {fileID: 867326029}
   isCorridor: 0
+  depth: 0
 --- !u!1 &1878916387 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c256337abb724bd478c57bffbfd457ef,
@@ -48188,6 +48200,7 @@ MonoBehaviour:
   isColliding: 0
   centerObject: {fileID: 1266892711}
   isCorridor: 0
+  depth: 0
 --- !u!1 &1901660589
 GameObject:
   m_ObjectHideFlags: 0
@@ -56155,6 +56168,7 @@ MonoBehaviour:
   isColliding: 0
   centerObject: {fileID: 1393695737}
   isCorridor: 0
+  depth: 0
 --- !u!1001 &625754606495843882
 PrefabInstance:
   m_ObjectHideFlags: 0
