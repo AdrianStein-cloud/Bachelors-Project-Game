@@ -14,7 +14,7 @@ public class DungeonGenerator : MonoBehaviour
 
 
     [Header("Generation Settings")]
-    [SerializeField] int depth = 1;
+    int depth = 1;
     [SerializeField] int seed = -1; // -1 = random seed
     [SerializeField] int lookahead = 2;
     [SerializeField] NavMeshSurface navmeshSurface;
@@ -59,8 +59,9 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    public IEnumerator GenerateDungeon(Transform dungeon)
+    public IEnumerator GenerateDungeon(Transform dungeon, int depth)
     {
+        this.depth = depth;
         spawnedRooms = new List<GameObject>();
         spawnedRoomsDepth = new List<(GameObject, int)>();
 

@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     GameObject waitingRoomSpawnPoint;
     DungeonEntrance dungeonEntrance;
 
+    [SerializeField] int dungeonDepth;
+
     GameObject dungeon;
 
     private void Start()
@@ -32,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         dungeonEntrance.DungeonIsAvailable = false;
         dungeon = new GameObject("Dungeon");
-        yield return dungeonGenerator.GenerateDungeon(dungeon.transform);
+        yield return dungeonGenerator.GenerateDungeon(dungeon.transform, dungeonDepth);
         dungeonEntrance.DungeonIsAvailable = true;
     }
 

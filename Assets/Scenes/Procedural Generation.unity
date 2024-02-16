@@ -4152,7 +4152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sourceRooms: {fileID: 464683563}
   playerSpawnPosition: {fileID: 1326731401}
-  depth: 5
   seed: -1
   lookahead: 3
   navmeshSurface: {fileID: 137134224}
@@ -4233,6 +4232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364645020dccf994f804da3f3f1bdc7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dungeonDepth: 5
 --- !u!114 &181535702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33457,6 +33457,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1773698726988887517, guid: 12311705e3030ab4aa48c58cf8664e57,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2986513039033918250, guid: 12311705e3030ab4aa48c58cf8664e57,
         type: 3}
       propertyPath: m_Pivot.x
@@ -33561,6 +33566,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7866566094561814890, guid: 12311705e3030ab4aa48c58cf8664e57,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
