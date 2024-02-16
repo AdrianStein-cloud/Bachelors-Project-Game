@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,17 @@ public class GameManager : MonoBehaviour
     GameObject waitingRoomSpawnPoint;
     DungeonEntrance dungeonEntrance;
 
-    [SerializeField] int dungeonDepth;
+    [SerializeField] int dungeonStartDepth;
+    private int wave = 0;
+    public Action<int> OnDungeonGenerated;
+    public int Wave
+    {
+        get => wave;
+        set
+        {
+            wave = value;
+        }
+    }
 
     GameObject dungeon;
 
@@ -32,10 +43,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnDungeon()
     {
+        Wave++;
         dungeonEntrance.DungeonIsAvailable = false;
         dungeon = new GameObject("Dungeon");
-        yield return dungeonGenerator.GenerateDungeon(dungeon.transform, dungeonDepth);
+        yield return dungeonGenerator.GenerateDungeon(dungeon.transform, dungeonStartDepth + (Wave/2));
         dungeonEntrance.DungeonIsAvailable = true;
+        OnDungeonGenerated?.Invoke(Wave);
     }
 
     void StartLevel()
