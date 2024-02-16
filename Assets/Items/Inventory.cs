@@ -10,6 +10,14 @@ public class Inventory : MonoBehaviour
 
     public int itemIndex = 0;
 
+    private void Start()
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i] != null) InventoryUI.Instance.SetIcon(i, items[i].icon);
+        }
+    }
+
     private void Update()
     {
         if (InputManager.Player.SwitchItem.triggered)
@@ -33,6 +41,7 @@ public class Inventory : MonoBehaviour
         var itemObject = Instantiate(item.gameObject, transform);
         item = itemObject.GetComponent<Item>();
         items[index] = item;
+        InventoryUI.Instance.SetIcon(index, item.icon);
     }
 
     void PreviousItem()

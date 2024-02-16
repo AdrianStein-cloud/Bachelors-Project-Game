@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Item : MonoBehaviour
 {
     public string itemName;
+    public Sprite icon;
 
     public virtual void Primary() { }
     public virtual void Secondary() { }
