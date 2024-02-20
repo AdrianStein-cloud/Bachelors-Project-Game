@@ -14,9 +14,6 @@ public class ChasePlayer : GOAction
     [Help("Target game object towards this game object will be moved")]
     public GameObject target;
 
-    [OutParam("justChased")]
-    public bool justChased;
-
     private UnityEngine.AI.NavMeshAgent navAgent;
 
     private Transform targetTransform;

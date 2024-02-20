@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTasksPerTick: 500
-  behavior: {fileID: 11400000, guid: 6e42d5f1cafb59e44833eb1314117b5c, type: 2}
+  behavior: {fileID: 11400000, guid: 2fb3da94e511710448e344470fdf20c8, type: 2}
   paused: 0
   restartWhenFinished: 0
   blackboard:
@@ -647,7 +647,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4586971883f2f14459427b2c50d1d603, type: 3}
   screamSounds: []
   lastAttackTime: 0
-  attackDelay: 10
+  attackDelay: 2
 --- !u!54 &4440772621059421347
 Rigidbody:
   m_ObjectHideFlags: 0

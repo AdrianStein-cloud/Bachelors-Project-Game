@@ -19,10 +19,16 @@ namespace BBUnity.Conditions
         [Help("The view angle to consider that the target is in sight")]
         public float angle;
 
+        [InParam("farAngle")]
+        public float farAngle;
+
         ///<value>Input maximun distance Parameter to consider that the target is close.</value>
         [InParam("closeDistance")]
         [Help("The maximun distance to consider that the target is close")]
         public float closeDistance;
+
+        [InParam("farDistance")]
+        public float farDistance;
 
         [InParam("Direction Object")]
         public GameObject dirObject;
@@ -39,12 +45,17 @@ namespace BBUnity.Conditions
         /// and if the angle of forward vector with the  raycast direction is lower than the given angle, false therwase.</returns>
 		public override bool Check()
         {
+            return DoCheck(angle, closeDistance) || DoCheck(farAngle, farDistance);
+        }
+        
+        private bool DoCheck(float angle, float dist)
+        {
             if (target == null) return false;
             var pos = gameObject.transform.position;
             var tempPos = new Vector3(pos.x, 0, pos.z);
             var playerPos = Camera.main.transform.position;
             var tempPlayerPos = new Vector3(playerPos.x, 0, playerPos.z);
-            if (Vector3.Distance(tempPos, tempPlayerPos) > closeDistance) return false;
+            if (Vector3.Distance(tempPos, tempPlayerPos) > dist) return false;
 
             var dirobjectcenter = dirObject.GetComponent<SkinnedMeshRenderer>().bounds.center;
             Vector3 dir = (playerPos - dirobjectcenter);

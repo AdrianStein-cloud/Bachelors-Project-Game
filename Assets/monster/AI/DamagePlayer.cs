@@ -16,6 +16,8 @@ public class DamagePlayer : GOAction
 
     public override void OnStart()
     {
+        var wander = gameObject.GetComponent<WanderingBehaviour>();
+        wander.lastAttackTime = Time.time;
         target.GetComponent<PlayerHealth>().TakeDamage(damage);
     }
 
