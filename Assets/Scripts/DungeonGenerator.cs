@@ -67,6 +67,7 @@ public class DungeonGenerator : MonoBehaviour
 
         //instantiate first object in rooms
         GameObject entrance = Instantiate(startRoom, new Vector3(0, 0, 0), transform.rotation, dungeon);
+        entrance.GetComponent<Room>().SpawnRandomObjects(random);
         playerSpawnPosition = entrance.transform.Find("PlayerSpawnPosition").gameObject;
         spawnedRooms.Add(entrance);
 

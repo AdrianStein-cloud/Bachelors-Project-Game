@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -95,9 +94,12 @@ public class Room : MonoBehaviour
 
         foreach (RandomObjects _randomObjects in randomObjects)
         {
-            if(random.Next(1, 101) <= _randomObjects.percentageChance)
+            for (int i = 0; i < _randomObjects.maxAmount; i++)
             {
-                _randomObjects.randomObjects[random.Next(0, _randomObjects.randomObjects.Count)].SetActive(true);
+                if (random.Next(1, 101) <= _randomObjects.percentageChance)
+                {
+                    _randomObjects.randomObjects[random.Next(0, _randomObjects.randomObjects.Count)].SetActive(true);
+                }
             }
         }
     }
@@ -114,6 +116,7 @@ public class Room : MonoBehaviour
     public class RandomObjects
     {
         public string name;
+        public int maxAmount;
         public int percentageChance;
         public List<GameObject> randomObjects;
     }
