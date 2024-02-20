@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 282299c4b05d8ae4d9de63b1e3945e15, type: 3}
-  m_Name: Speed Upgrade
+  m_Script: {fileID: 11500000, guid: 76d9bd90450e3bc48a69488a55348d90, type: 3}
+  m_Name: Light Extension
   m_EditorClassIdentifier: 
-  Name: Speed
-  description: Makes you {0}% faster
-  NewlyAvailableUpgrades:
-  - {fileID: 11400000}
-  speedPercentIncrease: 20
+  Name: Light Extension
+  description: Increases the range of your flashlight by {1}
+  NewlyAvailableUpgrades: []
+  intensity: 0
+  range: 100

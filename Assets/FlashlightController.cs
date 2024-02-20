@@ -33,4 +33,11 @@ public class FlashlightController : Item
             audio.Play();
         }
     }
+
+    public void UpgradeLigthing(int intensity, int range)
+    {
+        normalIntensity += intensity;
+        flashlight.range += range;
+        if(on) flashlight.intensity = normalIntensity;
+    }
 }
