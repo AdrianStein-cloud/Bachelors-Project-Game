@@ -7814,6 +7814,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 844263302}
+    - target: {fileID: 5166502595539014042, guid: 74ffa464a58fede4ba1cfaf1f22922f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5768713838233237425, guid: 74ffa464a58fede4ba1cfaf1f22922f7,
         type: 3}
       propertyPath: m_Mesh
@@ -9764,7 +9769,7 @@ MonoBehaviour:
   - room: {fileID: 186437145}
     <Weight>k__BackingField: 200
   - room: {fileID: 795879503}
-    <Weight>k__BackingField: 100
+    <Weight>k__BackingField: 150
   minimumRooms:
   - room: {fileID: 1125741737}
     minmax: {x: 0, y: 2}
@@ -15746,6 +15751,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 162924396}
+    - target: {fileID: 5166502595539014042, guid: 74ffa464a58fede4ba1cfaf1f22922f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5768713838233237425, guid: 74ffa464a58fede4ba1cfaf1f22922f7,
         type: 3}
       propertyPath: m_Mesh
@@ -17755,7 +17765,7 @@ Transform:
   m_GameObject: {fileID: 359644810}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.0597}
+  m_LocalPosition: {x: 0, y: 0, z: 0.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36331,7 +36341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 795879504}
   - component: {fileID: 795879505}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BigDonutRoom
   m_TagString: Room
   m_Icon: {fileID: 0}
@@ -93080,6 +93090,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 988560453}
+    - target: {fileID: 5166502595539014042, guid: 74ffa464a58fede4ba1cfaf1f22922f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5768713838233237425, guid: 74ffa464a58fede4ba1cfaf1f22922f7,
         type: 3}
       propertyPath: m_Mesh
