@@ -15,6 +15,12 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    public void UpgradeHealth(int health)
+    {
+        maxHealth += health;
+        currentHealth += health;
+    }
+
     public void TakeDamage(int damage)
     {
         if (lastDamage + invulnerabilityTime < Time.time)

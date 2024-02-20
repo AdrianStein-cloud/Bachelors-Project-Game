@@ -5,7 +5,9 @@ using UnityEngine;
 public abstract class Upgrade : ScriptableObject
 {
     public string Name;
-    [SerializeField] string description;
+    [TextArea]
+    [SerializeField] protected string description;
+    public List<Upgrade> NewlyAvailableUpgrades;
     public string Description => string.Format(description, Args);
 
     protected virtual object[] Args => new object[0];

@@ -40,6 +40,12 @@ public class WanderingBehaviour : MonoBehaviour
     {
         if (state != newstate)
         {
+            if (newstate == WanderingState.Attack) 
+            {
+                anim.SetTrigger("Attack");
+                return;
+            }
+
             anim.SetBool(state.ToString(), false);
             state = newstate;
             anim.SetBool(state.ToString(), true);
