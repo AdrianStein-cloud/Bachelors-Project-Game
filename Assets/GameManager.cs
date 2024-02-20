@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
         player.SetActive(true);
     }
 
-    public void SwitchToUpgrades()
+    public void SwitchToUpgrades(int upgrades)
     {
         InputManager.Player.Disable();
         player.SetActive(false);
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpawnDungeon());
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        upgradeManager.DisplayUpgrades(3, player, ExitUpgrades);
+        upgradeManager.DisplayUpgrades(upgrades, player, ExitUpgrades);
     }
     void ExitUpgrades()
     {
