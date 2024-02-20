@@ -30,6 +30,8 @@ public class UpgradeManager : MonoBehaviour
 
     void ChooseUpgrade(Upgrade upgrade)
     {
+        Upgrades.Remove(upgrade);
+        Upgrades.AddRange(upgrade.NewlyAvailableUpgrades);
         upgrade.Apply(player);
         upgradeChosen();
     }
