@@ -27,6 +27,9 @@ public class Room : MonoBehaviour
 
     public int depth = 0;
 
+    [Header("Random Objects")]
+    [SerializeField] List<RandomObjects> randomObjects;
+
     private void Awake()
     {
         BoxCollider boxCollider = GetComponent<BoxCollider>();
@@ -86,11 +89,32 @@ public class Room : MonoBehaviour
         return doorScripts;
     }
 
+    public void SpawnRandomObjects(System.Random random)
+    {
+        if (randomObjects == null || randomObjects.Count < 1) return;
+
+        foreach (RandomObjects _randomObjects in randomObjects)
+        {
+            if(random.Next(1, 101) <= _randomObjects.percentageChance)
+            {
+                _randomObjects.randomObjects[random.Next(0, _randomObjects.randomObjects.Count)].SetActive(true);
+            }
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Room"))
         {
             isColliding = true;
         }
+    }
+
+    [System.Serializable]
+    public class RandomObjects
+    {
+        public string name;
+        public int percentageChance;
+        public List<GameObject> randomObjects;
     }
 }
