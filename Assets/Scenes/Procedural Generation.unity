@@ -36336,6 +36336,7 @@ Transform:
   - {fileID: 1840284092}
   - {fileID: 616538059}
   - {fileID: 2055479288}
+  - {fileID: 1617236524}
   m_Father: {fileID: 464683564}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &795879505
@@ -36362,7 +36363,7 @@ MonoBehaviour:
   offset_y: 0
   offset_z: 0
   isColliding: 0
-  centerObject: {fileID: 0}
+  centerObject: {fileID: 1617236523}
   isCorridor: 0
   depth: 0
   randomObjects: []
@@ -80913,6 +80914,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1612541314}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1617236523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1617236524}
+  m_Layer: 8
+  m_Name: CenterObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1617236524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617236523}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -52.4, y: 0, z: 181.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 795879504}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1618620565
 GameObject:
   m_ObjectHideFlags: 0
