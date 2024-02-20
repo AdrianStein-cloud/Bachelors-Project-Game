@@ -410,8 +410,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48d168ab5798e04e9c1f94a69b0e8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HorizontalSensitivity>k__BackingField: 0
-  <VerticalSensitivity>k__BackingField: 0
+  <HorizontalSensitivity>k__BackingField: 20
+  <VerticalSensitivity>k__BackingField: 20
   rotationAngle: 90
   followSmoothTime: 5
   runFOVChangeAmount: 1.1
@@ -1109,14 +1109,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 920619923721290914, guid: 0d020499de28d8e4787ea0eee981f697,
         type: 3}
-      propertyPath: items.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 920619923721290914, guid: 0d020499de28d8e4787ea0eee981f697,
-        type: 3}
       propertyPath: items.Array.data[0]
       value: 
       objectReference: {fileID: 2066762107517302886}
+    - target: {fileID: 920619923721290914, guid: 0d020499de28d8e4787ea0eee981f697,
+        type: 3}
+      propertyPath: items.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1642337084734469582, guid: 0d020499de28d8e4787ea0eee981f697,
         type: 3}
       propertyPath: m_Name

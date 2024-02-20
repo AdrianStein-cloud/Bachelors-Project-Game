@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4677103819200574497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6510690225951798887}
+  - component: {fileID: 8346296030083092963}
+  m_Layer: 0
+  m_Name: Sensor Gadget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6510690225951798887
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4677103819200574497}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8346296030083092963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4677103819200574497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c48184bdc2edf64b9d4fb26c2ec63a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Sensor
+  icon: {fileID: 21300000, guid: bd928b9a19c4ae54f82df1e7ff825336, type: 3}
+  sensorPrefab: {fileID: 1837672091656004237, guid: d08af12b6e5eee04095a9e580171d777,
+    type: 3}
+  validMaterial: {fileID: 2100000, guid: 7ba16966935462841af7f2401fb8eeb7, type: 2}
+  invalidMaterial: {fileID: 2100000, guid: bd37bf199de11c844890adf18983fceb, type: 2}
+  placeLayer:
+    serializedVersion: 2
+    m_Bits: 73
+  placeDistance: 30
+  laserDistance: 50
+  <SensorCount>k__BackingField: 3

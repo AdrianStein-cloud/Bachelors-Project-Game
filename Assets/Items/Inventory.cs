@@ -48,6 +48,7 @@ public class Inventory : MonoBehaviour
     {
         //Debug.Log("Previous item");
         SetItemIndex((itemIndex + size - 1) % size);
+
     }
 
     void NextItem()
@@ -58,7 +59,9 @@ public class Inventory : MonoBehaviour
 
     void SetItemIndex(int value)
     {
+        items[itemIndex]?.Deselect();
         itemIndex = value;
         InventoryUI.Instance.SetCurrentSlot(value);
+        items[itemIndex]?.Select();
     }
 }
