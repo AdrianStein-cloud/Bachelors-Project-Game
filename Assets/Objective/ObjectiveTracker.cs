@@ -9,7 +9,7 @@ public class ObjectiveTracker : MonoBehaviour
     int maxObjectives;
     int leaveThreshold;
     Image objectiveFill;
-    Action leave;
+    Action<int> leave;
 
     int collectedObjectives = 0;
 
@@ -18,7 +18,7 @@ public class ObjectiveTracker : MonoBehaviour
         GameObject.Find("DungeonExit").GetComponent<DungeonExit>().LeaveDungeon = AttemptLeave;
     }
 
-    public void Init(int maxObjectives, int leaveThreshold, Image objectiveFill, Action leave)
+    public void Init(int maxObjectives, int leaveThreshold, Image objectiveFill, Action<int> leave)
     {
         this.maxObjectives = maxObjectives;
         this.leaveThreshold = leaveThreshold;
@@ -40,7 +40,8 @@ public class ObjectiveTracker : MonoBehaviour
     {
         if (collectedObjectives >= leaveThreshold)
         {
-            leave();
+            int upgradesAmount = 2 * (collectedObjectives - leaveThreshold) / (maxObjectives - leaveThreshold) + 1;
+            leave(upgradesAmount);
             return true;
         }
         return false;
