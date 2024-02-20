@@ -24,8 +24,13 @@ public class UpgradeManager : MonoBehaviour
     {
         this.player = player;
         this.upgradeChosen = upgradeChosen;
-        var upgrades = Enumerable.Range(0, amount).Select(_ => Upgrades[UnityEngine.Random.Range(0, Upgrades.Count)]);
-        upgradeUIController.EnableCards(upgrades);
+        var upgradesCopy = new List<Upgrade>(Upgrades);
+        var randomUpgrades = Enumerable.Range(0, Math.Min(amount, upgradesCopy.Count)).Select(_ => {
+            var upgrade = upgradesCopy[UnityEngine.Random.Range(0, upgradesCopy.Count)];
+            upgradesCopy.Remove(upgrade);
+            return upgrade;
+        });
+        upgradeUIController.EnableCards(randomUpgrades);
     }
 
     void ChooseUpgrade(Upgrade upgrade)
