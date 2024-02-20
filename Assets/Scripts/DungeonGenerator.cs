@@ -67,6 +67,7 @@ public class DungeonGenerator : MonoBehaviour
 
         //instantiate first object in rooms
         GameObject entrance = Instantiate(startRoom, new Vector3(0, 0, 0), transform.rotation, dungeon);
+        entrance.GetComponent<Room>().SpawnRandomObjects(random);
         playerSpawnPosition = entrance.transform.Find("PlayerSpawnPosition").gameObject;
         spawnedRooms.Add(entrance);
 
@@ -109,23 +110,25 @@ public class DungeonGenerator : MonoBehaviour
             else randomRoom = tempRandomRooms[0];
 
             newRoom = Instantiate(randomRoom.room, door.gameObject.transform.position, door.direction, dungeon);
-            Room newRoomSript = newRoom.GetComponent<Room>();
-            newRoomSript.depth = depth;
-            doors = newRoomSript.GetDoors();
+            Room newRoomScript = newRoom.GetComponent<Room>();
+            newRoomScript.depth = depth;
+            doors = newRoomScript.GetDoors();
 
             yield return new WaitForSeconds(Time.deltaTime * 10);
 
-            if (newRoomSript.isColliding || (doors.Count == 0 && depth % lookahead != 0))
+            if (newRoomScript.isColliding || (doors.Count == 0 && depth % lookahead != 0))
             {
                 Destroy(newRoom);
                 newRoom = null;
                 doors = null;
+                newRoomScript = null;
                 tempRandomRooms.Remove(randomRoom);
             }
             else
             {
                 door.SetDoorConnected(true);
                 newRoom.GetComponent<Room>().GetEntrance().GetComponent<Door>().SetDoorConnected(true);
+                newRoomScript.SpawnRandomObjects(random);
                 spawnedRooms.Add(newRoom);
                 spawnedRoomsDepth.Add((newRoom, depth));
                 roomFound = true;
@@ -162,20 +165,25 @@ public class DungeonGenerator : MonoBehaviour
             }
 
             newRoom = Instantiate(room.room, door.gameObject.transform.position, door.direction, dungeon);
-            doors = newRoom.GetComponent<Room>().GetDoors();
+            Room newRoomSript = newRoom.GetComponent<Room>();
+            doors = newRoomSript.GetDoors();
+            
 
             yield return new WaitForSeconds(Time.deltaTime * 10);
 
-            if (newRoom.GetComponent<Room>().isColliding)
+            if (newRoomSript.isColliding)
             {
                 Destroy(newRoom);
                 newRoom = null;
+                newRoomSript = null;
                 doors = null;
             }
             else
             {
                 door.SetDoorConnected(true);
-                newRoom.GetComponent<Room>().GetEntrance().GetComponent<Door>().SetDoorConnected(true);
+                newRoomSript.GetEntrance().GetComponent<Door>().SetDoorConnected(true);
+                newRoomSript.SpawnRandomObjects(random);
+
                 spawnedRooms.Add(newRoom);
                 spawnedRoomsDepth.Add((newRoom, depth));
 
