@@ -38,10 +38,10 @@ public class ObjectiveTracker : MonoBehaviour
 
     public bool AttemptLeave()
     {
-        if (collectedObjectives >= leaveThreshold)
+        if (collectedObjectives >= 0)
         {
             int upgradesAmount = 2 * (collectedObjectives - leaveThreshold) / (maxObjectives - leaveThreshold) + 1;
-            leave(upgradesAmount);
+            leave(Math.Max(1, upgradesAmount));
             return true;
         }
         return false;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class ObjectiveSpawner : MonoBehaviour
 {
@@ -12,24 +13,35 @@ public class ObjectiveSpawner : MonoBehaviour
     public int maxObtainableObjectives = 12; 
     public GameObject collectablePrefab;
     public GameObject objectiveTracker;
-    public Image objectiveFill;
+
+
+    Image objectiveFill;
+
+    private void Awake()
+    {
+        objectiveFill = GameObject.Find("ObjectiveBar").transform.Find("Fill").GetComponent<Image>();
+    }
 
     public void SpawnObjectives(List<(GameObject room, int depth)> roomsDepth, Transform dungeon, Action<int> leave)
     {
         var tracker = Instantiate(objectiveTracker, dungeon).GetComponent<ObjectiveTracker>();
         tracker.Init(maxObtainableObjectives, leaveThreshold, objectiveFill, leave);
 
-        //The spawning is very wack
-        var rooms = roomsDepth.OrderByDescending(t => t.depth).Select(t => t.room);
+        var rooms = roomsDepth
+            .Select(t => new { room = t.room.GetComponent<Room>(), depth = t.depth })
+            .SelectMany(t => Enumerable.Range(0, t.depth).Select(_ => t.room)) //Weights
+            .ToList();
 
-        int i = objectiveAmount;
-        foreach (var room in rooms)
+        for (int i = objectiveAmount; i > 0 && rooms.Count > 0; i--)
         {
-            var pos = room.transform.position + room.transform.forward * 20;
-            var collectable = Instantiate(collectablePrefab, pos, Quaternion.identity, dungeon);
-            collectable.GetComponent<Collectable>().onCollect = tracker.ObjetiveCollected;
-            i--;
-            if (i == 0) break;
+            var randomRoom = rooms[UnityEngine.Random.Range(0, rooms.Count)];
+            rooms.Remove(randomRoom);
+            var spawnPostions = randomRoom.objectiveSpawnPositions;
+            var spawnPositionObj = spawnPostions[UnityEngine.Random.Range(0, spawnPostions.Count)];
+            spawnPostions.Remove(spawnPositionObj);
+            var spawnPoint = spawnPositionObj.transform.position;
+            var objectiveCollectable = Instantiate(collectablePrefab, spawnPoint, Quaternion.identity, dungeon);
+            objectiveCollectable.GetComponent<Collectable>().onCollect = tracker.ObjetiveCollected;
         }
     }
 }

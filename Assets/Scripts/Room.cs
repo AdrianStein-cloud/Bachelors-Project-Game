@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Room : MonoBehaviour
@@ -25,6 +26,8 @@ public class Room : MonoBehaviour
     public bool isCorridor;
 
     public int depth = 0;
+
+    public List<GameObject> objectiveSpawnPositions;
 
     [Header("Random Objects")]
     [SerializeField] List<RandomObjects> randomObjects;

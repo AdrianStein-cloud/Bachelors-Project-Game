@@ -9,8 +9,7 @@ using Random = System.Random;
 
 public class DungeonGenerator : MonoBehaviour
 {
-    [SerializeField] GameObject sourceRooms;
-    public GameObject playerSpawnPosition;
+    public GameObject playerSpawnPosition { get; private set; }
 
 
     [Header("Generation Settings")]
@@ -25,7 +24,7 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject startRoom;
     private List<GameObject> rooms = new List<GameObject>();
 
-    public List<GameObject> spawnedRooms = new List<GameObject>();
+    public List<GameObject> spawnedRooms { get; private set; } = new List<GameObject>();
     public List<(GameObject, int)> spawnedRoomsDepth = new List<(GameObject, int)>();
     private Queue<(Door, int)> doorQueue = new Queue<(Door, int)>();
 
@@ -51,7 +50,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         //Debug.Log("There are " + rooms.Count + " different rooms...");
 
-        sourceRooms.SetActive(false);
+        //sourceRooms.SetActive(false);
 
         foreach (WeightedRoom room in randomRooms)
         {
@@ -84,7 +83,7 @@ public class DungeonGenerator : MonoBehaviour
         
         //Done spawning dungeon
         yield return new WaitForSeconds(1f);
-        navmeshSurface.BuildNavMesh();
+        Instantiate(navmeshSurface, dungeon).BuildNavMesh();
 
         yield return new WaitForSeconds(1f);
         //GetComponent<SimpleEnemySpawner>().SpawnEnemies(spawnedRooms);
@@ -164,7 +163,9 @@ public class DungeonGenerator : MonoBehaviour
                 continue;
             }
 
-            newRoom = Instantiate(room.room, door.gameObject.transform.position, door.direction, dungeon);
+            newRoom = Instantiate(room.room, 
+                door.gameObject.transform.position, 
+                door.direction, dungeon);
             Room newRoomSript = newRoom.GetComponent<Room>();
             doors = newRoomSript.GetDoors();
             
