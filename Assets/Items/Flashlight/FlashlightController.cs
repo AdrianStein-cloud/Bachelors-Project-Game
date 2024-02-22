@@ -81,10 +81,18 @@ public class FlashlightController : Item
 
     private void UpdateBar() => flashlightFill.fillAmount = currentBatteryLife / batteryLife;
 
-    public void UpgradeLigthing(int intensity, int range)
+    public void Upgrade(int intensity, int range, int angle, int batteryLife)
     {
-        this.intensity += intensity;
         flashlight.range += range;
+
+        flashlight.spotAngle += angle;
+
+        this.intensity += intensity;
         if(on) flashlight.intensity = this.intensity;
+
+
+        this.batteryLife += batteryLife;
+        currentBatteryLife = this.batteryLife;
+        UpdateBar();
     }
 }

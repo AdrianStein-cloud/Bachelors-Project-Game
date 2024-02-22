@@ -7,12 +7,14 @@ public class FlashlightUpgrade : Upgrade
 {
     [SerializeField] int intensity;
     [SerializeField] int range;
+    [SerializeField] int angle;
+    [SerializeField] int batteryLife;
 
-    protected override object[] Args => new object[] { intensity, range };
+    protected override object[] Args => new object[] { intensity, range, angle, batteryLife };
 
     public override void Apply(GameObject playerObject)
     {
         var flashlight = playerObject.transform.parent.GetComponentInChildren<FlashlightController>();
-        flashlight.UpgradeLigthing(intensity, range);
+        flashlight.Upgrade(intensity, range, angle, batteryLife);
     }
 }
