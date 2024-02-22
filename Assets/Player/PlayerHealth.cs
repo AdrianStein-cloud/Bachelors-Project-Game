@@ -19,6 +19,11 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         health = maxHealth;
+        FindObjectOfType<GameManager>().OnWaveOver += () =>
+        {
+            health = maxHealth;
+            UpdateHealthBar();
+        };
         var healthBar = GameObject.Find("HealthBar").transform;
         healthBarFill = healthBar.Find("Fill").GetComponent<Image>();
         healthText = healthBar.Find("Number").GetComponent<TextMeshProUGUI>();

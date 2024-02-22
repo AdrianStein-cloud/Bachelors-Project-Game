@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     DangerScaler dangerScaler;
 
     public Action<int> OnDungeonGenerated;
+    public Action OnWaveOver;
 
     GameObject dungeon;
 
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
         player.transform.position = waitingRoomSpawnPoint.transform.position;
         player.SetActive(true);
         Destroy(dungeon);
+        OnWaveOver?.Invoke();
         StartCoroutine(SpawnDungeon());
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
