@@ -34,6 +34,7 @@ public class Room : MonoBehaviour
 
     private void Awake()
     {
+
         BoxCollider boxCollider = GetComponent<BoxCollider>();
 
         if (boxCollider == null)
@@ -105,6 +106,11 @@ public class Room : MonoBehaviour
                 }
             }
         }
+
+        objectiveSpawnPositions = GetComponentsInChildren<Transform>()
+            .Where(t => t.name.Contains("ObjectiveSpawnPoint"))
+            .Select(t => t.gameObject)
+            .ToList();
     }
 
     private void OnTriggerStay(Collider other)
