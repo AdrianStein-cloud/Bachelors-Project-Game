@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SensorController : Item
@@ -18,6 +19,8 @@ public class SensorController : Item
     List<GameObject> sensors;
 
     RaycastHit hit;
+    GameObject sensorCounter;
+    TextMeshProUGUI sensorText;
     GameObject ghostSensor;
     MeshRenderer sensorRenderer;
     bool isSelected;
@@ -29,7 +32,12 @@ public class SensorController : Item
         ghostSensor = Instantiate(sensorPrefab);
         ghostSensor.SetActive(false);
         sensorRenderer = ghostSensor.GetComponentInChildren<MeshRenderer>();
+
+        sensorCounter = FindObjectOfType<Canvas>().transform.Find("Sensor Counter").gameObject;
+        sensorText = sensorCounter.GetComponent<TextMeshProUGUI>();
+
         sensors = new();
+        UpdateCounter();
     }
 
     private void Update()
@@ -65,6 +73,7 @@ public class SensorController : Item
     public override void Select()
     {
         isSelected = true;
+        sensorCounter.SetActive(true);
     }
 
     public override void Deselect()
@@ -72,6 +81,7 @@ public class SensorController : Item
         isSelected = false;
         canPlace = false;
         ghostSensor.SetActive(false);
+        sensorCounter.SetActive(false);
     }
 
     private void TryPlace()
@@ -87,10 +97,14 @@ public class SensorController : Item
         sensors.Add(instance);
         currentSensorCount++;
 
+        UpdateCounter();
+
         if (maximumPlaced)
         {
             canPlace = false;
             ghostSensor.SetActive(false);
         }
     }
+
+    private void UpdateCounter() => sensorText.text = SensorCount - currentSensorCount + " / " + SensorCount;
 }
