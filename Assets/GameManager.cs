@@ -12,18 +12,9 @@ public class GameManager : MonoBehaviour
     UpgradeManager upgradeManager;
     GameObject waitingRoomSpawnPoint;
     DungeonEntrance dungeonEntrance;
+    DangerScaler dangerScaler;
 
-    [SerializeField] int dungeonStartDepth;
-    private int wave = 0;
     public Action<int> OnDungeonGenerated;
-    public int Wave
-    {
-        get => wave;
-        set
-        {
-            wave = value;
-        }
-    }
 
     GameObject dungeon;
 
@@ -38,22 +29,23 @@ public class GameManager : MonoBehaviour
         dungeonEntrance = FindAnyObjectByType<DungeonEntrance>();
         dungeonEntrance.EnterDungeon = StartLevel;
         player.transform.position = waitingRoomSpawnPoint.transform.position;
+        dangerScaler = new DangerScaler();
         StartCoroutine(SpawnDungeon());
     }
 
     IEnumerator SpawnDungeon()
     {
-        Wave++;
         dungeonEntrance.DungeonIsAvailable = false;
         dungeon = new GameObject("Dungeon");
-        yield return dungeonGenerator.GenerateDungeon(dungeon.transform, dungeonStartDepth + (Wave/2));
+        dangerScaler.ScaleDanger();
+        yield return dungeonGenerator.GenerateDungeon(dungeon.transform, GameSettings.Instance.CurrentDepth);
         dungeonEntrance.DungeonIsAvailable = true;
-        OnDungeonGenerated?.Invoke(Wave);
+        OnDungeonGenerated?.Invoke(GameSettings.Instance.Wave);
     }
 
     void StartLevel()
     {
-        enemySpawner.SpawnEnemies(dungeonGenerator.spawnedRooms, dungeon.transform, dungeonStartDepth + (Wave / 2) - 1);
+        enemySpawner.SpawnEnemies(dungeonGenerator.spawnedRooms, dungeon.transform, GameSettings.Instance.CurrentDepth - 1);
         objectiveSpawner.SpawnObjectives(dungeonGenerator.spawnedRoomsDepth, dungeon.transform, SwitchToUpgrades);
         player.SetActive(false);
         player.transform.position = dungeonGenerator.playerSpawnPosition.transform.position;

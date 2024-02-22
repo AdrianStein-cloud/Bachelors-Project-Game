@@ -15,7 +15,6 @@ public class DungeonGenerator : MonoBehaviour
     [Header("Generation Settings")]
     int depth = 1;
     [SerializeField] int seed = -1; // -1 = random seed
-    [SerializeField] int lookahead = 2;
     [SerializeField] NavMeshSurface navmeshSurface;
     Random random;
 
@@ -115,12 +114,10 @@ public class DungeonGenerator : MonoBehaviour
 
             yield return new WaitForSeconds(Time.deltaTime * 10);
 
-            if (newRoomScript.isColliding || (doors.Count == 0 && depth % lookahead != 0))
+            if (newRoomScript.isColliding || (doors.Count <= 1 && depth % GameSettings.Instance.GenerationLookahead != 0))
             {
                 Destroy(newRoom);
-                newRoom = null;
                 doors = null;
-                newRoomScript = null;
                 tempRandomRooms.Remove(randomRoom);
             }
             else
