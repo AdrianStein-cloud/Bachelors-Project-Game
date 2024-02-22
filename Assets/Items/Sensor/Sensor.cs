@@ -28,11 +28,6 @@ public class Sensor : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            source.Play();
-        }
-
         if (!placed) return;
 
         if (Physics.Raycast(transform.position, transform.up, out RaycastHit hit, Mathf.Infinity, hitLayer))
