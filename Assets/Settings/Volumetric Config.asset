@@ -31,8 +31,8 @@ MonoBehaviour:
   mipFogNear: 0
   mipFogFar: 1000
   baseHeight: 0
-  maximumHeight: 50
-  fogAttenuationDistance: 120
+  maximumHeight: 2000
+  fogAttenuationDistance: 400
   volumetricLighting: 1
   enableDirectionalLight: 1
   enablePointAndSpotLight: 1
@@ -41,7 +41,7 @@ MonoBehaviour:
   directionalScatteringIntensity: 1
   localScatteringIntensity: 10
   anisotropy: 0
-  depthExtent: 100
+  depthExtent: 200
   screenResolutionPercentage: 20
   volumeSliceCount: 128
   denoiseMode: 3

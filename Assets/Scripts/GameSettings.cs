@@ -29,6 +29,7 @@ public class GameSettings : Singleton<GameSettings>
 
     public int Wave { get; set; }
     public int CurrentDepth { get; set; }
+    public int LightFailPercentage { get; set; }
 
     public void SetSeed(int seed)
     {
