@@ -44,6 +44,7 @@ public class Inventory : MonoBehaviour
         item = itemObject.GetComponent<Item>();
         items[index] = item;
         InventoryUI.Instance.SetIcon(index, item.icon);
+        items[itemIndex]?.Select();
     }
 
     void PreviousItem()

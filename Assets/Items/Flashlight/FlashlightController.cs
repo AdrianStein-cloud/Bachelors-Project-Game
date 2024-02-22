@@ -17,7 +17,7 @@ public class FlashlightController : Item
     bool dead;
     AudioSource audio;
 
-    private void Start()
+    private void Awake()
     {
         flashlight = GetComponent<Light>();
         audio = GetComponent<AudioSource>();
