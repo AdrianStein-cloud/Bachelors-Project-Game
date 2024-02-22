@@ -16,6 +16,8 @@ public class Inventory : MonoBehaviour
         {
             if (items[i] != null) InventoryUI.Instance.SetIcon(i, items[i].icon);
         }
+
+        items[itemIndex]?.Select();
     }
 
     private void Update()
