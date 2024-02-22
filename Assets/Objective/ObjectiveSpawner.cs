@@ -39,8 +39,13 @@ public class ObjectiveSpawner : MonoBehaviour
             var spawnPositionObj = spawnPostions[UnityEngine.Random.Range(0, spawnPostions.Count)];
             spawnPostions.Remove(spawnPositionObj);
             var spawnPoint = spawnPositionObj.transform.position;
-            var objectiveCollectable = Instantiate(collectablePrefab, spawnPoint, Quaternion.identity, dungeon);
-            objectiveCollectable.GetComponent<Collectable>().onCollect = tracker.ObjetiveCollected;
+            var objectiveCollectable = Instantiate(collectablePrefab, spawnPoint, RandomRotation(), dungeon);
+            objectiveCollectable.GetComponentInChildren<Collectable>().onCollect = tracker.ObjetiveCollected;
         }
+    }
+
+    Quaternion RandomRotation()
+    {
+        return Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0);
     }
 }
