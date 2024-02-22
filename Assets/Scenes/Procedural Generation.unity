@@ -386,11 +386,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: randomRooms.Array.data[7].<Weight>k__BackingField
-      value: 75
-      objectReference: {fileID: 0}
     - target: {fileID: 4117347281418660289, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -440,21 +435,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251193281981130515, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: dungeonStartDepth
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251193281981130515, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: generationLookahead
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6251193281981130515, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: dungeonGenerationLookahead
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2705,7 +2685,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a38dca21e367f4cab8f44f642cc6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountToSpawn: 1
   enemyPrefab: {fileID: 4737690500217451602, guid: bf2deaa2de6a3bb46aca9881eb6c110c,
     type: 3}
 --- !u!114 &181535700
@@ -3778,7 +3757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 253121580}
   - component: {fileID: 253121579}
-  - component: {fileID: 253121578}
+  - component: {fileID: 253121581}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -3786,26 +3765,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &253121578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253121577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &253121579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3836,6 +3795,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &253121581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253121577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 30697fd5f85d1ca4c992de90d24d3e1c,
+    type: 3}
+  m_PointAction: {fileID: -635867682018434472, guid: 30697fd5f85d1ca4c992de90d24d3e1c,
+    type: 3}
+  m_MoveAction: {fileID: -2042245492955593524, guid: 30697fd5f85d1ca4c992de90d24d3e1c,
+    type: 3}
+  m_SubmitAction: {fileID: -6890590113462699802, guid: 30697fd5f85d1ca4c992de90d24d3e1c,
+    type: 3}
+  m_CancelAction: {fileID: -3818223470733448548, guid: 30697fd5f85d1ca4c992de90d24d3e1c,
+    type: 3}
+  m_LeftClickAction: {fileID: -2319938998538987501, guid: 30697fd5f85d1ca4c992de90d24d3e1c,
+    type: 3}
+  m_MiddleClickAction: {fileID: 3148139520260667167, guid: 30697fd5f85d1ca4c992de90d24d3e1c,
+    type: 3}
+  m_RightClickAction: {fileID: -6735994291761525983, guid: 30697fd5f85d1ca4c992de90d24d3e1c,
+    type: 3}
+  m_ScrollWheelAction: {fileID: -88487887433998012, guid: 30697fd5f85d1ca4c992de90d24d3e1c,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: -6514793316379684519, guid: 30697fd5f85d1ca4c992de90d24d3e1c,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: -435361831130577261, guid: 30697fd5f85d1ca4c992de90d24d3e1c,
+    type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!1 &263996469
 GameObject:
   m_ObjectHideFlags: 0
@@ -9535,6 +9535,11 @@ PrefabInstance:
         type: 3}
       propertyPath: groundCheckRadius
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219333887229627620, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_Range
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6287702692255530417, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}

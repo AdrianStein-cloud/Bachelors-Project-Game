@@ -16,7 +16,6 @@ public class LightFlicker : MonoBehaviour
     [SerializeField] float offFlickerSpeedMax = 0.4f;
     [SerializeField] float onFlickerSpeedMin = 0.05f;
     [SerializeField] float onFlickerSpeedMax = 2f;
-    [SerializeField] int failPercentage = 20;
 
     private void Start()
     {
@@ -31,7 +30,7 @@ public class LightFlicker : MonoBehaviour
             lightIntensities[i] = childObjects[i].GetComponent<Light>().intensity;
         }
 
-        bool failed = Random.Range(0, 100) < failPercentage;
+        bool failed = Random.Range(0, 100) < GameSettings.Instance.LightFailPercentage;
 
         if (!failed)
         {
