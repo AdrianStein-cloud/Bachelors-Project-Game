@@ -6,6 +6,29 @@ using UnityEngine;
 public class GameSettings : Singleton<GameSettings>
 {
     private int seed;
+    [SerializeField] private int dungeonStartDepth;
+    [SerializeField] private int generationLookahead;
+    public int DungeonStartDepth
+    {
+        get => dungeonStartDepth;
+        set
+        {
+            dungeonStartDepth = value;
+            CurrentDepth = value;
+        }
+    }
+
+    public int GenerationLookahead
+    {
+        get => generationLookahead;
+        set
+        {
+            generationLookahead = value;
+        }
+    }
+
+    public int Wave { get; set; }
+    public int CurrentDepth { get; set; }
 
     public void SetSeed(int seed)
     {
