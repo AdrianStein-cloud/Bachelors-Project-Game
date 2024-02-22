@@ -1,24 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth;
-    public int currentHealth { get; private set; }
+    int health;
 
     public float invulnerabilityTime = 0.5f;
     private float lastDamage;
 
+    Image healthBarFill;
+    TextMeshProUGUI healthText;
+
     private void Awake()
     {
-        currentHealth = maxHealth;
+        health = maxHealth;
+        var healthBar = GameObject.Find("HealthBar").transform;
+        healthBarFill = healthBar.Find("Fill").GetComponent<Image>();
+        healthText = healthBar.Find("Number").GetComponent<TextMeshProUGUI>();
+        UpdateHealthBar();
     }
 
     public void UpgradeHealth(int health)
     {
         maxHealth += health;
-        currentHealth += health;
+        this.health += health;
+        UpdateHealthBar();
     }
 
     public void TakeDamage(int damage)
@@ -26,12 +37,14 @@ public class PlayerHealth : MonoBehaviour
         if (lastDamage + invulnerabilityTime < Time.time)
         {
             Debug.Log("take damage");
-            currentHealth -= damage;
-            if (currentHealth <= 0)
+            health -= damage;
+            if (health <= 0)
             {
-                currentHealth = 0;
+                health = 0;
+                UpdateHealthBar();
                 Die();
             }
+            else UpdateHealthBar();
         }
 
         lastDamage = Time.time;
@@ -39,6 +52,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void Die()
     {
+        SceneManager.LoadScene("DeathScene");
         Debug.Log("He do be dead");
+    }
+
+    void UpdateHealthBar()
+    {
+        healthBarFill.fillAmount = health / (float)maxHealth;
+        healthText.text = health.ToString();
     }
 }
