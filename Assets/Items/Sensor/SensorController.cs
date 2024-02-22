@@ -14,7 +14,7 @@ public class SensorController : Item
 
     [field: SerializeField] public int SensorCount { get; private set; }
 
-    bool maximumPlaced => currentSensorCount >= SensorCount;
+    bool maximumPlaced => currentSensorCount == 0;
 
     List<GameObject> sensors;
 
@@ -101,7 +101,7 @@ public class SensorController : Item
         sensor.Init();
 
         sensors.Add(instance);
-        currentSensorCount++;
+        currentSensorCount--;
 
         UpdateCounter();
 
@@ -112,5 +112,5 @@ public class SensorController : Item
         }
     }
 
-    private void UpdateCounter() => sensorText.text = SensorCount - currentSensorCount + " / " + SensorCount;
+    private void UpdateCounter() => sensorText.text = currentSensorCount + " / " + SensorCount;
 }
