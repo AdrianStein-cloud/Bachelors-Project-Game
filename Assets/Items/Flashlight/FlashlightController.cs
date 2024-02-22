@@ -15,13 +15,18 @@ public class FlashlightController : Item
     Image flashlightFill;
     bool on = false;
     bool dead;
-    AudioSource audio;
+    new AudioSource audio;
 
     private void Awake()
     {
         flashlight = GetComponent<Light>();
         audio = GetComponent<AudioSource>();
         currentBatteryLife = batteryLife;
+        FindObjectOfType<GameManager>().OnWaveOver += () =>
+        {
+            currentBatteryLife = batteryLife;
+            UpdateBar();
+        };
         flashlightBar = FindObjectOfType<Canvas>().transform.Find("FlashlightBar").gameObject;
         flashlightFill = flashlightBar.transform.Find("Fill").GetComponent<Image>();
     }
