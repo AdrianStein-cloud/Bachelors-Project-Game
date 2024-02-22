@@ -19,6 +19,13 @@ public class DistanceController : Item
 
     private void Start()
     {
+        var entrance = FindObjectOfType<DungeonEntrance>();
+        if (entrance != null) 
+            entrance.EnterDungeon += () =>
+            {
+                var exit = FindObjectOfType<DungeonExit>();
+                if (exit != null) target = exit.transform;
+            };
         var exit = FindObjectOfType<DungeonExit>();
         if (target == null && exit != null) target = exit.transform;
     }

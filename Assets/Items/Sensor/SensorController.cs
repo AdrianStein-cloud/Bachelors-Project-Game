@@ -33,17 +33,20 @@ public class SensorController : Item
         ghostSensor.SetActive(false);
         sensorRenderer = ghostSensor.GetComponentInChildren<MeshRenderer>();
 
-
         sensorCounter = FindObjectOfType<Canvas>().transform.Find("Sensor Counter").gameObject;
         sensorText = sensorCounter.GetComponent<TextMeshProUGUI>();
 
+        currentSensorCount = SensorCount;
         sensors = new();
+
         UpdateCounter();
-        FindObjectOfType<GameManager>().OnWaveOver += () =>
-        {
-            currentSensorCount = SensorCount;
-            UpdateCounter();
-        };
+        var gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+            gameManager.OnWaveOver += () =>
+            {
+                currentSensorCount = SensorCount;
+                UpdateCounter();
+            };
     }
 
     private void Update()

@@ -22,11 +22,13 @@ public class FlashlightController : Item
         flashlight = GetComponent<Light>();
         audio = GetComponent<AudioSource>();
         currentBatteryLife = batteryLife;
-        FindObjectOfType<GameManager>().OnWaveOver += () =>
-        {
-            currentBatteryLife = batteryLife;
-            UpdateBar();
-        };
+        var gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null) 
+            gameManager.OnWaveOver += () =>
+            {
+                currentBatteryLife = batteryLife;
+                UpdateBar();
+            };
         flashlightBar = FindObjectOfType<Canvas>().transform.Find("FlashlightBar").gameObject;
         flashlightFill = flashlightBar.transform.Find("Fill").GetComponent<Image>();
     }
