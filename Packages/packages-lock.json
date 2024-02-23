@@ -180,6 +180,16 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "com.unity.universal-forwardplus-volumetric": {
+      "version": "https://github.com/mseonKim/URP-VolumetricFog-ForwardPlus.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.render-pipelines.core": "14.0.8",
+        "com.unity.render-pipelines.universal": "14.0.8"
+      },
+      "hash": "2a0cac0419b53964bdde3077f2dff61b5c599f09"
+    },
     "com.unity.visualscripting": {
       "version": "1.9.1",
       "depth": 0,
