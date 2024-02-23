@@ -19,18 +19,31 @@ public class FlashlightController : Item
 
     private void Awake()
     {
+        Debug.Log("Awake 1");
         flashlight = GetComponent<Light>();
+        Debug.Log("Awake 2");
         audio = GetComponent<AudioSource>();
+        Debug.Log("Awake 3");
         currentBatteryLife = batteryLife;
+        Debug.Log("Awake 4");
         var gameManager = FindObjectOfType<GameManager>();
-        if (gameManager != null) 
+        Debug.Log("Awake 5");
+        if (gameManager != null)
+        {
             gameManager.OnWaveOver += () =>
             {
                 currentBatteryLife = batteryLife;
                 UpdateBar();
             };
-        flashlightBar = FindObjectOfType<Canvas>().transform.Find("FlashlightBar").gameObject;
+        }
+        Debug.Log("Awake 6");
+        flashlightBar = GameObject.Find("Canvas")
+            .transform
+            .Find("FlashlightBar")
+            .gameObject;
+        Debug.Log("Awake 7");
         flashlightFill = flashlightBar.transform.Find("Fill").GetComponent<Image>();
+        Debug.Log($"Bar Awake: {flashlightBar}");
     }
 
     private void Update()
@@ -55,6 +68,7 @@ public class FlashlightController : Item
 
     public override void Select()
     {
+        Debug.Log($"Bar Select: {flashlightBar}");
         flashlightBar.SetActive(true);
         UpdateBar();
     }
