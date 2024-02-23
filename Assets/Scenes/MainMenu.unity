@@ -4136,6 +4136,16 @@ PrefabInstance:
       propertyPath: m_InnerSpotAngle
       value: 47.56507
       objectReference: {fileID: 0}
+    - target: {fileID: 4593300080386932359, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190120690759964263, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7065017095260895517, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
         type: 3}
       propertyPath: m_Range
@@ -4180,6 +4190,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Light bulb High Poly
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596402645481335191, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8937215363600675629, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
         type: 3}
