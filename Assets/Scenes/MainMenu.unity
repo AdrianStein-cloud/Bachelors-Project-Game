@@ -4108,6 +4108,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3441732571063021112, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
         type: 3}
+      propertyPath: alwaysOn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3441732571063021112, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
+        type: 3}
       propertyPath: failPercentage
       value: 0
       objectReference: {fileID: 0}
