@@ -27,7 +27,7 @@ public class SensorController : Item
     bool canPlace;
     int currentSensorCount;
 
-    private void Start()
+    private void Awake()
     {
         ghostSensor = Instantiate(sensorPrefab);
         ghostSensor.SetActive(false);
