@@ -2505,7 +2505,7 @@ MonoBehaviour:
   randomObjects:
   - name: Beds
     maxAmount: 6
-    percentageChance: 95
+    percentageChance: 100
     randomObjects:
     - {fileID: 623885257697208729}
     - {fileID: 3934454560643687480}

@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DeathScene.unity
     guid: be446e241ce93fa439d34d94dc115a2c
+  - enabled: 0
+    path: Assets/Scenes/VolumetricFogScene.unity
+    guid: 41cd428b7b2680e44b2333862b8123d6
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d69461f6d2580d147873f2d933e612bd,
       type: 2}

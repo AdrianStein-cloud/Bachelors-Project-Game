@@ -862,9 +862,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   toggleRun: 0
-  walkSpeed: 30
-  runSpeed: 50
-  crouchSpeed: 20
+  walkSpeed: 25
+  runSpeed: 40
+  crouchSpeed: 15
   toggleCrouch: 1
   crouchHeight: 0.9
   cameraCrouchOffset: -0.5
