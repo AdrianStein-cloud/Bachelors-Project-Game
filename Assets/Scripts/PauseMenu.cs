@@ -41,6 +41,7 @@ public class PauseMenu : MonoBehaviour
         sensSlider.onValueChanged.AddListener(SetSensitivity);
         sensInputField.text = "20";
         sensInputField.onValueChanged.AddListener(SetSensitivity);
+        crosshair.SetActive(false);
         crosshairToggle.onValueChanged.AddListener(SetCrosshair);
         UnpauseGame();
     }
