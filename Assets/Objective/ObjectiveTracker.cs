@@ -12,10 +12,12 @@ public class ObjectiveTracker : MonoBehaviour
     Action<int> leave;
 
     int collectedObjectives = 0;
+    DungeonExit exit;
 
     private void Awake()
     {
-        GameObject.Find("DungeonExit").GetComponent<DungeonExit>().LeaveDungeon = AttemptLeave;
+        exit = FindObjectOfType<DungeonExit>();
+        exit.LeaveDungeon = AttemptLeave;
     }
 
     private void Update()
@@ -37,7 +39,7 @@ public class ObjectiveTracker : MonoBehaviour
         objectiveFill.fillAmount = collectedObjectives / (float)maxObjectives;
         if(collectedObjectives >= leaveThreshold)
         {
-            GameObject.Find("DungeonExit").GetComponent<DungeonExit>().CanLeaveDungeon = true;
+            exit.CanLeaveDungeon = true;
         }
     }
 
