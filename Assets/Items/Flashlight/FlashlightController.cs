@@ -28,6 +28,7 @@ public class FlashlightController : Item
             gameManager.OnWaveOver += () =>
             {
                 currentBatteryLife = batteryLife;
+                dead = false;
                 UpdateBar();
             };
         }

@@ -17,6 +17,7 @@ public class ElevatorEntrance : MonoBehaviour
     {
         entrance = FindObjectOfType<DungeonEntrance>();
         anim = GetComponent<Animator>();
+        FindObjectOfType<GameManager>().OnWaveOver += () => anim.SetTrigger("Close");
     }
 
     private void Update()
