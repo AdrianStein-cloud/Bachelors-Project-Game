@@ -17,6 +17,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float runSpeed;
     [SerializeField] public float crouchSpeed;
 
+    [Header("Stamina Settings")]
+    [SerializeField] bool enableStamina = true;
+    [SerializeField] public float stamina;
+    [SerializeField] public float staminaDrainSpeed;
+    [SerializeField] public float staminaRecoverySpeed;
+
     [Header("Crouch Settings")]
     [SerializeField] bool toggleCrouch;
     [SerializeField] float crouchHeight;
@@ -34,13 +40,17 @@ public class PlayerMovement : MonoBehaviour
 
     CharacterController controller;
     new Audio audio;
+
     Vector3 velocity;
     Vector2 dir;
-    float currentSpeed;
-    float airSpeed;
     Vector3 cameraPosition;
     Vector3 groundCheckPosition;
+
+    float currentSpeed;
+    float currentStamina;
+    float airSpeed;
     float controllerHeight;
+
     bool isGrounded;
     bool canStand;
     bool ungrounded;
@@ -59,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
         cameraPosition = cam.localPosition;
         controllerHeight = controller.height;
         groundCheckPosition = groundCheck.localPosition;
+        currentStamina = stamina;
     }
 
     private void Start()
@@ -72,14 +83,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (run && dir.y > 0 && isGrounded)
+        if (run && dir.y > 0 && isGrounded && (currentStamina > 0 || !enableStamina))
         {
             StopCrouch();
             IsRunning = true;
+            currentStamina -= staminaDrainSpeed * Time.deltaTime;
         }
-        else IsRunning = false;
+        else
+        {
+            IsRunning = false;
+            currentStamina += staminaRecoverySpeed * Time.deltaTime;
+        }
 
-        if (dir.y <= 0 && toggleRun) run = false;
+        currentStamina = Mathf.Clamp(currentStamina, 0, stamina);
+
+        if (dir.y <= 0 && toggleRun || (currentStamina <= 0 && enableStamina)) run = false;
 
         currentSpeed = IsRunning ? runSpeed : (IsCrouching ? crouchSpeed : walkSpeed);
         IsWalking = dir.magnitude > 0f && !IsRunning && isGrounded;
