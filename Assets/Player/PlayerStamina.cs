@@ -23,6 +23,7 @@ public class PlayerStamina : MonoBehaviour
         player = GetComponent<PlayerMovement>();
         fill = GameObject.Find("Canvas").transform.Find("StaminaBar").GetChild(0);
         fill.gameObject.SetActive(false);
+        currentStamina = stamina;
     }
 
     private void Update()
