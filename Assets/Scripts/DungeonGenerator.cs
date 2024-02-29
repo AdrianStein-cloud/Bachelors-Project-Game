@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Unity.AI.Navigation;
 using UnityEditor;
@@ -40,6 +42,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             seed = new Random().Next(1000, 10000000);
         }
+        LogSeed(seed);
         random = new Random(seed);
         GameSettings.Instance.SetSeed(seed);
         //Debug.Log("Seed: " + seed);
@@ -198,6 +201,23 @@ public class DungeonGenerator : MonoBehaviour
         if (roomFound)
         {
             yield break;
+        }
+    }
+
+    void LogSeed(int seed)
+    {
+        string path = Application.dataPath + "/../Logs/Seeds.log";
+
+        string folderPath = Application.dataPath + "/../Logs";
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
+        using (StreamWriter writer = new StreamWriter(path, true))
+        {
+            writer.WriteLine(DateTime.Now.ToString("yyyy-MM-dd\tHH:mm:ss") + "\t" + seed);
+            writer.Flush();
         }
     }
 }

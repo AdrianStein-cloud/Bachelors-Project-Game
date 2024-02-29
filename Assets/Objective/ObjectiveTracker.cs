@@ -30,14 +30,17 @@ public class ObjectiveTracker : MonoBehaviour
         this.maxObjectives = maxObjectives;
         this.leaveThreshold = leaveThreshold;
         this.objectiveFill = objectiveFill;
+        objectiveFill.color = new Color(1, 0, 0, 1);
         this.leave = leave;
     }
 
     public void ObjetiveCollected()
     {
         collectedObjectives++;
-        objectiveFill.fillAmount = collectedObjectives / (float)maxObjectives;
-        if(collectedObjectives >= leaveThreshold)
+        float fill = collectedObjectives / (float)maxObjectives;
+        objectiveFill.fillAmount = fill;
+        objectiveFill.color = new Color(1 - fill, fill, 0, 1);
+        if (collectedObjectives >= leaveThreshold)
         {
             exit.CanLeaveDungeon = true;
         }
