@@ -925,6 +925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   invulnerabilityTime: 1
+  cameraShakePreset: {fileID: 11400000, guid: 46413c2d5dbf5ef41b425dd9241f3952, type: 2}
 --- !u!1 &6995078530207280390
 GameObject:
   m_ObjectHideFlags: 0

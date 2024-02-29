@@ -18,6 +18,8 @@ public class PlayerHealth : MonoBehaviour
     TextMeshProUGUI healthText;
     
     Coroutine fadeOutCoroutine;
+    CameraShake cameraShake;
+    public CameraShakePreset cameraShakePreset;
 
     private void Awake()
     {
@@ -32,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
                 UpdateHealthBar();
             };
         healthText = GameObject.Find("HealthNumber")?.GetComponent<TextMeshProUGUI>();
+        cameraShake = CameraShake.Instance;
         UpdateHealthBar();
     }
 
@@ -48,6 +51,7 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.Log("take damage");
             health -= damage;
+            cameraShake.Shake(cameraShakePreset);
             if (health <= 0)
             {
                 health = 0;
