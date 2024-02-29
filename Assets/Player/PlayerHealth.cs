@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEngine.ProBuilder.AutoUnwrapSettings;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -15,9 +16,13 @@ public class PlayerHealth : MonoBehaviour
 
     Image bloodScreen;
     TextMeshProUGUI healthText;
+    
+    Coroutine fadeOutCoroutine;
 
     private void Awake()
     {
+        bloodScreen = GameObject.Find("BloodScreen")?.GetComponent<Image>();
+        bloodScreen.color = new Color(1, 1, 1, 0);
         health = maxHealth;
         var gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
@@ -26,8 +31,6 @@ public class PlayerHealth : MonoBehaviour
                 health = maxHealth;
                 UpdateHealthBar();
             };
-        bloodScreen = GameObject.Find("BloodScreen")?.GetComponent<Image>();
-        bloodScreen.color = new Color(1, 1, 1, 0);
         healthText = GameObject.Find("HealthNumber")?.GetComponent<TextMeshProUGUI>();
         UpdateHealthBar();
     }
@@ -69,5 +72,20 @@ public class PlayerHealth : MonoBehaviour
         float fill = health / (float)maxHealth;
         bloodScreen.color = new Color(1, 1, 1, 1 - fill);
         healthText.text = health + "/" + maxHealth;
+
+        if (fadeOutCoroutine != null)
+            StopCoroutine(fadeOutCoroutine);
+
+        fadeOutCoroutine = StartCoroutine(fadeOut(fill));
+    }
+
+    IEnumerator fadeOut(float fill)
+    {
+        while (fill < 1)
+        {
+            yield return new WaitForSeconds(0.1f);
+            fill += 0.001f;
+            bloodScreen.color = new Color(1, 1, 1, 1 - fill);
+        }
     }
 }
