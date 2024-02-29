@@ -695,7 +695,7 @@ MonoBehaviour:
     - canAttack
     boolParamsLostDefaultValue: 
     floatParams:
-    - 32
+    - 35
     - 10
     - 0
     floatParamsNames:
@@ -791,7 +791,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4586971883f2f14459427b2c50d1d603, type: 3}
   screamSounds: []
   lastAttackTime: 0
-  attackDelay: 2
+  attackDelay: 1.5
 --- !u!54 &4440772621059421347
 Rigidbody:
   m_ObjectHideFlags: 0

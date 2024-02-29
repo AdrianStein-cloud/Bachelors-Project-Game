@@ -24,6 +24,8 @@ public class ToggleDoor : Interactable
 
     private NavMeshObstacle navObstacle;
 
+    public bool otherway;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +45,7 @@ public class ToggleDoor : Interactable
 
     public void Interact(GameObject user)
     {
+        otherway = Vector3.Angle(user.transform.forward, transform.parent.parent.transform.right) > 80;
         anim.SetBool("Otherway", Vector3.Angle(user.transform.forward, transform.right) > 80);
         if (canInteract && !isLocked)
         {

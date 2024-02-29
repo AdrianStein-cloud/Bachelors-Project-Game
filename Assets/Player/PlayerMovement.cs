@@ -33,14 +33,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float airGravity;
 
     CharacterController controller;
+    PlayerStamina stamina;
     new Audio audio;
+
     Vector3 velocity;
     Vector2 dir;
-    float currentSpeed;
-    float airSpeed;
     Vector3 cameraPosition;
     Vector3 groundCheckPosition;
+
+    float currentSpeed;
+    float airSpeed;
     float controllerHeight;
+    float lastRecoveryTime;
+
     bool isGrounded;
     bool canStand;
     bool ungrounded;
@@ -54,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+        stamina = GetComponent<PlayerStamina>();
         audio = GetComponent<Audio>();
         airSpeed = currentSpeed = walkSpeed;
         cameraPosition = cam.localPosition;
@@ -72,14 +78,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (run && dir.y > 0 && isGrounded)
+        if (run && dir.y > 0 && isGrounded && stamina.SufficientStamina)
         {
             StopCrouch();
             IsRunning = true;
         }
         else IsRunning = false;
 
-        if (dir.y <= 0 && toggleRun) run = false;
+        
+
+        if (dir.y <= 0 && toggleRun || !stamina.SufficientStamina) run = false;
 
         currentSpeed = IsRunning ? runSpeed : (IsCrouching ? crouchSpeed : walkSpeed);
         IsWalking = dir.magnitude > 0f && !IsRunning && isGrounded;

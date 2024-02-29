@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEngine.ProBuilder.AutoUnwrapSettings;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -13,11 +14,17 @@ public class PlayerHealth : MonoBehaviour
     public float invulnerabilityTime = 0.5f;
     private float lastDamage;
 
-    Image healthBarFill;
+    Image bloodScreen;
     TextMeshProUGUI healthText;
+    
+    Coroutine fadeOutCoroutine;
+    CameraShake cameraShake;
+    public CameraShakePreset cameraShakePreset;
 
     private void Awake()
     {
+        bloodScreen = GameObject.Find("BloodScreen")?.GetComponent<Image>();
+        bloodScreen.color = new Color(1, 1, 1, 0);
         health = maxHealth;
         var gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
@@ -26,9 +33,8 @@ public class PlayerHealth : MonoBehaviour
                 health = maxHealth;
                 UpdateHealthBar();
             };
-        var healthBar = GameObject.Find("HealthBar")?.transform;
-        healthBarFill = healthBar.Find("Fill")?.GetComponent<Image>();
-        healthText = healthBar.Find("Number")?.GetComponent<TextMeshProUGUI>();
+        healthText = GameObject.Find("HealthNumber")?.GetComponent<TextMeshProUGUI>();
+        cameraShake = CameraShake.Instance;
         UpdateHealthBar();
     }
 
@@ -41,10 +47,11 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (lastDamage + invulnerabilityTime < Time.time)
+        if (lastDamage + invulnerabilityTime <= Time.time)
         {
             Debug.Log("take damage");
             health -= damage;
+            cameraShake.Shake(cameraShakePreset);
             if (health <= 0)
             {
                 health = 0;
@@ -52,9 +59,10 @@ public class PlayerHealth : MonoBehaviour
                 Die();
             }
             else UpdateHealthBar();
+
+            lastDamage = Time.time;
         }
 
-        lastDamage = Time.time;
     }
 
     public void Die()
@@ -65,7 +73,23 @@ public class PlayerHealth : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        healthBarFill.fillAmount = health / (float)maxHealth;
-        healthText.text = health.ToString();
+        float fill = health / (float)maxHealth;
+        bloodScreen.color = new Color(1, 1, 1, 1 - fill);
+        healthText.text = health + "/" + maxHealth;
+
+        if (fadeOutCoroutine != null)
+            StopCoroutine(fadeOutCoroutine);
+
+        fadeOutCoroutine = StartCoroutine(fadeOut(fill));
+    }
+
+    IEnumerator fadeOut(float fill)
+    {
+        while (fill < 1)
+        {
+            yield return new WaitForSeconds(0.1f);
+            fill += 0.001f;
+            bloodScreen.color = new Color(1, 1, 1, 1 - fill);
+        }
     }
 }
