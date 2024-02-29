@@ -11,6 +11,6 @@ public class CanAttack : GOCondition
     public override bool Check()
     {
         var wander = gameObject.GetComponent<WanderingBehaviour>();
-        return (wander.lastAttackTime + wander.attackDelay <= Time.time);
+        return ((wander.lastAttackTime + wander.attackDelay) <= Time.time);
     }
 }

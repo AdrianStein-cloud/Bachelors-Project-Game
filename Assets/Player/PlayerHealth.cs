@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
     public float invulnerabilityTime = 0.5f;
     private float lastDamage;
 
-    Image healthBarFill;
+    Image bloodScreen;
     TextMeshProUGUI healthText;
 
     private void Awake()
@@ -26,9 +26,9 @@ public class PlayerHealth : MonoBehaviour
                 health = maxHealth;
                 UpdateHealthBar();
             };
-        var healthBar = GameObject.Find("HealthBar")?.transform;
-        healthBarFill = healthBar.Find("Fill")?.GetComponent<Image>();
-        healthText = healthBar.Find("Number")?.GetComponent<TextMeshProUGUI>();
+        bloodScreen = GameObject.Find("BloodScreen")?.GetComponent<Image>();
+        bloodScreen.color = new Color(1, 1, 1, 0);
+        healthText = GameObject.Find("HealthNumber")?.GetComponent<TextMeshProUGUI>();
         UpdateHealthBar();
     }
 
@@ -41,7 +41,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (lastDamage + invulnerabilityTime < Time.time)
+        if (lastDamage + invulnerabilityTime <= Time.time)
         {
             Debug.Log("take damage");
             health -= damage;
@@ -52,9 +52,10 @@ public class PlayerHealth : MonoBehaviour
                 Die();
             }
             else UpdateHealthBar();
+
+            lastDamage = Time.time;
         }
 
-        lastDamage = Time.time;
     }
 
     public void Die()
@@ -65,7 +66,8 @@ public class PlayerHealth : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        healthBarFill.fillAmount = health / (float)maxHealth;
-        healthText.text = health.ToString();
+        float fill = health / (float)maxHealth;
+        bloodScreen.color = new Color(1, 1, 1, 1 - fill);
+        healthText.text = health + "/" + maxHealth;
     }
 }
