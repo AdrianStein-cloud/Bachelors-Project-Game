@@ -136,7 +136,7 @@ MonoBehaviour:
   offFlickerSpeedMax: 0.2
   onFlickerSpeedMin: 0.05
   onFlickerSpeedMax: 20
-  failPercentage: 0
+  alwaysOn: 0
 --- !u!1 &338569807155055034
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +597,7 @@ MonoBehaviour:
   offFlickerSpeedMax: 0.2
   onFlickerSpeedMin: 0.05
   onFlickerSpeedMax: 20
-  failPercentage: 0
+  alwaysOn: 0
 --- !u!1 &1059268386280674972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1606,7 +1606,7 @@ MonoBehaviour:
   offFlickerSpeedMax: 0.2
   onFlickerSpeedMin: 0.05
   onFlickerSpeedMax: 20
-  failPercentage: 0
+  alwaysOn: 0
 --- !u!1 &3851332872523564371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1743,7 +1743,7 @@ MonoBehaviour:
   offFlickerSpeedMax: 0.2
   onFlickerSpeedMin: 0.05
   onFlickerSpeedMax: 20
-  failPercentage: 0
+  alwaysOn: 0
 --- !u!1 &4060929131285262805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1973,7 +1973,7 @@ MonoBehaviour:
   offFlickerSpeedMax: 0.2
   onFlickerSpeedMin: 0.05
   onFlickerSpeedMax: 20
-  failPercentage: 0
+  alwaysOn: 0
 --- !u!1 &4627818842136991742
 GameObject:
   m_ObjectHideFlags: 0
@@ -2141,7 +2141,7 @@ MonoBehaviour:
   offFlickerSpeedMax: 0.2
   onFlickerSpeedMin: 0.05
   onFlickerSpeedMax: 20
-  failPercentage: 0
+  alwaysOn: 0
 --- !u!1 &5911646721064814735
 GameObject:
   m_ObjectHideFlags: 0
@@ -2915,7 +2915,7 @@ MonoBehaviour:
   offFlickerSpeedMax: 0.2
   onFlickerSpeedMin: 0.05
   onFlickerSpeedMax: 20
-  failPercentage: 0
+  alwaysOn: 0
 --- !u!1 &7524809954577754322
 GameObject:
   m_ObjectHideFlags: 0
@@ -3052,7 +3052,7 @@ MonoBehaviour:
   offFlickerSpeedMax: 0.2
   onFlickerSpeedMin: 0.05
   onFlickerSpeedMax: 20
-  failPercentage: 0
+  alwaysOn: 0
 --- !u!1 &8674435991231664455
 GameObject:
   m_ObjectHideFlags: 0
@@ -3189,7 +3189,7 @@ MonoBehaviour:
   offFlickerSpeedMax: 0.2
   onFlickerSpeedMin: 0.05
   onFlickerSpeedMax: 20
-  failPercentage: 0
+  alwaysOn: 0
 --- !u!1 &8880649740482503865
 GameObject:
   m_ObjectHideFlags: 0
@@ -4625,32 +4625,37 @@ PrefabInstance:
     - target: {fileID: -1515449211899410445, guid: ef78bd332f75854429cad2adf4ca879d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.8
+      value: 26.45
       objectReference: {fileID: 0}
     - target: {fileID: -1515449211899410445, guid: ef78bd332f75854429cad2adf4ca879d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -30.93
+      value: -38.84
       objectReference: {fileID: 0}
     - target: {fileID: -1515449211899410445, guid: ef78bd332f75854429cad2adf4ca879d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9753424
+      value: 0.9673093
+      objectReference: {fileID: 0}
+    - target: {fileID: -1515449211899410445, guid: ef78bd332f75854429cad2adf4ca879d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -1515449211899410445, guid: ef78bd332f75854429cad2adf4ca879d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.2206974
+      value: -0.2535998
       objectReference: {fileID: 0}
     - target: {fileID: -1515449211899410445, guid: ef78bd332f75854429cad2adf4ca879d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -1515449211899410445, guid: ef78bd332f75854429cad2adf4ca879d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -25.5
+      value: -29.381
       objectReference: {fileID: 0}
     - target: {fileID: -1149304572297579480, guid: ef78bd332f75854429cad2adf4ca879d,
         type: 3}

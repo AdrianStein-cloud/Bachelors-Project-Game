@@ -10,9 +10,9 @@ public class Room : MonoBehaviour
     private GameObject entrance;
 
     [Header("Bounding Box")]
-    [SerializeField] float bounding_x = 50;
-    [SerializeField] float bounding_y = 30;
-    [SerializeField] float bounding_z = 50;
+    [SerializeField] public float bounding_x = 50;
+    [SerializeField] public float bounding_y = 30;
+    [SerializeField] public float bounding_z = 50;
 
     [Header("Offset")]
     [SerializeField] float offset_x = 0;

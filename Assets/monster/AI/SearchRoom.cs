@@ -20,29 +20,31 @@ public class SearchRoom : GOAction
     private NavMeshAgent navAgent;
     private WanderingBehaviour wander;
     private Room currentRoom;
+    bool iscorridor;
 
     public override void OnStart()
     {
         wander = gameObject.GetComponent<WanderingBehaviour>();
         currentRoom = wander.currentRoom.GetComponent<Room>();
-        if (currentRoom.isCorridor) return;
+        if (currentRoom.isCorridor)
+        {
+            iscorridor = true;
+            return;
+        }
 
         navAgent = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
-        var roomScript = roomToSearch.GetComponent<Room>();
+        var roomScript = currentRoom.GetComponent<Room>();
 
-        var dest = RandomNavSphere(roomScript.centerObject.transform.position, wanderRadius, -1);
+        var dest = RandomNavSphere(roomScript.centerObject.transform.position, roomScript.bounding_x, roomScript.bounding_z);
         navAgent.SetDestination(dest);
         navAgent.isStopped = false;
-
-        Debug.DrawLine(gameObject.transform.position, dest);
     }
 
     public override TaskStatus OnUpdate()
     {
-        if (currentRoom.isCorridor) return TaskStatus.FAILED;
-
-        if (wander.state == WanderingState.Chase || (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance))
+        if (wander.state == WanderingState.Chase || iscorridor
+            || (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance))
         {
             return TaskStatus.COMPLETED;
         }
@@ -50,15 +52,10 @@ public class SearchRoom : GOAction
     }
 
     // Generates a random point within a sphere
-    Vector3 RandomNavSphere(Vector3 origin, float distance, int layermask)
+    Vector3 RandomNavSphere(Vector3 origin, float distancex, float distancez)
     {
-        Vector3 randomDirection = new Vector3(Random.Range(0.5f, 1f), origin.y, Random.Range(0.5f, 1f)) * distance;
+        Vector3 randomDirection = new Vector3(Random.Range(0.5f, 0.9f) * distancex / 2, origin.y, Random.Range(0.5f, 0.9f) * distancez / 2);
 
-        randomDirection += origin;
-
-        NavMeshHit navHit;
-        NavMesh.SamplePosition(randomDirection, out navHit, distance, layermask);
-
-        return navHit.position;
+        return randomDirection += origin;
     }
 }
