@@ -865,6 +865,10 @@ MonoBehaviour:
   walkSpeed: 25
   runSpeed: 40
   crouchSpeed: 15
+  enableStamina: 1
+  stamina: 100
+  staminaDrainSpeed: 20
+  staminaRecoverySpeed: 40
   toggleCrouch: 1
   crouchHeight: 0.9
   cameraCrouchOffset: -0.5
