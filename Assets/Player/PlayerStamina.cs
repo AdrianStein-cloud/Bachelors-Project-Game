@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerStamina : MonoBehaviour
 {
     [SerializeField] bool enableStamina = true;
-    [SerializeField] public float stamina;
-    [SerializeField] public float staminaDrainSpeed;
-    [SerializeField] public float staminaRecoverySpeed;
-    [SerializeField] public float staminaRecoveryDelay;
+    [SerializeField] float stamina;
+    [SerializeField] float drainSpeed;
+    [SerializeField] float recoverySpeed;
+    [SerializeField] float recoveryDelay;
+    [SerializeField] float recoveryDelayAtZero;
 
     public bool SufficientStamina => currentStamina > 0 || !enableStamina;
 
@@ -30,12 +31,12 @@ public class PlayerStamina : MonoBehaviour
     {
         if (player.IsRunning)
         {
-            currentStamina -= staminaDrainSpeed * Time.deltaTime;
+            currentStamina -= drainSpeed * Time.deltaTime;
             lastRecoveryTime = Time.time;
         }
-        else if (Time.time > lastRecoveryTime + staminaRecoveryDelay)
+        else if (Time.time > lastRecoveryTime + (SufficientStamina ? recoveryDelay : recoveryDelayAtZero))
         {
-            currentStamina += staminaRecoverySpeed * Time.deltaTime;
+            currentStamina += recoverySpeed * Time.deltaTime;
         }
 
         currentStamina = Mathf.Clamp(currentStamina, 0, stamina);
