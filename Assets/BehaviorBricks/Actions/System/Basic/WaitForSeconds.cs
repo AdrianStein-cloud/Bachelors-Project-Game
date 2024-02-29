@@ -14,9 +14,9 @@ namespace BBCore.Actions
     public class WaitForSeconds : BasePrimitiveAction
     {
         ///<value>Input Amount of time to wait (in seconds) Parameter.</value>
-        [InParam("seconds", DefaultValue = 0.5f)]
+        [InParam("milliseconds", DefaultValue = 0.5f)]
         [Help("Amount of time to wait (in seconds)")]
-        public float seconds;
+        public float milliseconds;
 
         private float elapsedTime;
 
@@ -32,7 +32,7 @@ namespace BBCore.Actions
         public override TaskStatus OnUpdate()
         {
             elapsedTime += Time.deltaTime;
-            if (elapsedTime >= seconds)
+            if (elapsedTime >= milliseconds/1000)
                 return TaskStatus.COMPLETED;
             return TaskStatus.RUNNING;
         }

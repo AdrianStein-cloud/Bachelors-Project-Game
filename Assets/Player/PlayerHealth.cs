@@ -41,7 +41,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (lastDamage + invulnerabilityTime < Time.time)
+        if (lastDamage + invulnerabilityTime <= Time.time)
         {
             Debug.Log("take damage");
             health -= damage;
@@ -52,9 +52,10 @@ public class PlayerHealth : MonoBehaviour
                 Die();
             }
             else UpdateHealthBar();
+
+            lastDamage = Time.time;
         }
 
-        lastDamage = Time.time;
     }
 
     public void Die()
