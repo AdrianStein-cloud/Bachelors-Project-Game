@@ -551,7 +551,7 @@ MonoBehaviour:
   interactRange: 15
   interactableMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2049
 --- !u!1 &5789267958331835481
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,7 +920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  invulnerabilityTime: 0.5
+  invulnerabilityTime: 1
 --- !u!1 &6995078530207280390
 GameObject:
   m_ObjectHideFlags: 0

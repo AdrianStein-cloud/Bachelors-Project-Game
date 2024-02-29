@@ -18,8 +18,8 @@ public class WanderingBehaviour : MonoBehaviour
 
     public Vector3 lastLocation;
 
-    private AudioSource monsterSource, footstepSource;
-    public GameObject footstepSourceGO;
+    private AudioSource monsterSource, footstepSource, attackSource;
+    public GameObject footstepSourceGO, attackSourceGO;
 
     public List<AudioClip> footstepSounds;
     public List<AudioClip> screamSounds;
@@ -34,6 +34,7 @@ public class WanderingBehaviour : MonoBehaviour
         anim = GetComponent<Animator>();
         monsterSource = GetComponent<AudioSource>();
         footstepSource = footstepSourceGO.GetComponent<AudioSource>();
+        attackSource = attackSourceGO.GetComponent<AudioSource>();
     }
 
     public void UpdateState(WanderingState newstate)
@@ -66,7 +67,7 @@ public class WanderingBehaviour : MonoBehaviour
 
         var clip = tempFootsteps[Random.Range(0, tempFootsteps.Count)];
         footstepSource.clip = clip;
-        footstepSource.Play();
+        footstepSource.PlayOneShot(clip);
         tempFootsteps.Remove(clip);
     }
 
@@ -75,6 +76,11 @@ public class WanderingBehaviour : MonoBehaviour
         var clip = screamSounds[Random.Range(0, screamSounds.Count)];
         monsterSource.clip = clip;
         monsterSource.Play();
+    }
+
+    public void PlayAttackSound()
+    {
+        attackSource.Play();
     }
 }
 
