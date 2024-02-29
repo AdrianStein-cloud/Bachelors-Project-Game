@@ -1300,6 +1300,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wanderer
       objectReference: {fileID: 0}
+    - target: {fileID: 4737690500217451602, guid: bf2deaa2de6a3bb46aca9881eb6c110c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5401074636392001256, guid: bf2deaa2de6a3bb46aca9881eb6c110c,
         type: 3}
       propertyPath: m_LocalPosition.x
