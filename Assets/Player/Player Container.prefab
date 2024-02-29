@@ -685,6 +685,7 @@ GameObject:
   - component: {fileID: 3983175553815203831}
   - component: {fileID: 2661798902502877448}
   - component: {fileID: 460354095488287093}
+  - component: {fileID: 7433321139317267936}
   m_Layer: 9
   m_Name: Player Controller
   m_TagString: Player
@@ -865,10 +866,6 @@ MonoBehaviour:
   walkSpeed: 25
   runSpeed: 40
   crouchSpeed: 15
-  enableStamina: 1
-  stamina: 100
-  staminaDrainSpeed: 20
-  staminaRecoverySpeed: 40
   toggleCrouch: 1
   crouchHeight: 0.9
   cameraCrouchOffset: -0.5
@@ -926,6 +923,23 @@ MonoBehaviour:
   maxHealth: 100
   invulnerabilityTime: 1
   cameraShakePreset: {fileID: 11400000, guid: 46413c2d5dbf5ef41b425dd9241f3952, type: 2}
+--- !u!114 &7433321139317267936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6358394087113186272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ba39ef4549a254bb78757850b751cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableStamina: 1
+  stamina: 100
+  staminaDrainSpeed: 20
+  staminaRecoverySpeed: 40
+  staminaRecoveryDelay: 0.5
 --- !u!1 &6995078530207280390
 GameObject:
   m_ObjectHideFlags: 0

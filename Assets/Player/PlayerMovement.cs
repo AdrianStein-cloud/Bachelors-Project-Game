@@ -17,12 +17,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float runSpeed;
     [SerializeField] public float crouchSpeed;
 
-    [Header("Stamina Settings")]
-    [SerializeField] bool enableStamina = true;
-    [SerializeField] public float stamina;
-    [SerializeField] public float staminaDrainSpeed;
-    [SerializeField] public float staminaRecoverySpeed;
-
     [Header("Crouch Settings")]
     [SerializeField] bool toggleCrouch;
     [SerializeField] float crouchHeight;
@@ -39,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float airGravity;
 
     CharacterController controller;
+    PlayerStamina stamina;
     new Audio audio;
 
     Vector3 velocity;
@@ -47,9 +42,9 @@ public class PlayerMovement : MonoBehaviour
     Vector3 groundCheckPosition;
 
     float currentSpeed;
-    float currentStamina;
     float airSpeed;
     float controllerHeight;
+    float lastRecoveryTime;
 
     bool isGrounded;
     bool canStand;
@@ -64,12 +59,12 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+        stamina = GetComponent<PlayerStamina>();
         audio = GetComponent<Audio>();
         airSpeed = currentSpeed = walkSpeed;
         cameraPosition = cam.localPosition;
         controllerHeight = controller.height;
         groundCheckPosition = groundCheck.localPosition;
-        currentStamina = stamina;
     }
 
     private void Start()
@@ -83,21 +78,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (run && dir.y > 0 && isGrounded && (currentStamina > 0 || !enableStamina))
+        if (run && dir.y > 0 && isGrounded && stamina.SufficientStamina)
         {
             StopCrouch();
             IsRunning = true;
-            currentStamina -= staminaDrainSpeed * Time.deltaTime;
         }
-        else
-        {
-            IsRunning = false;
-            currentStamina += staminaRecoverySpeed * Time.deltaTime;
-        }
+        else IsRunning = false;
 
-        currentStamina = Mathf.Clamp(currentStamina, 0, stamina);
+        
 
-        if (dir.y <= 0 && toggleRun || (currentStamina <= 0 && enableStamina)) run = false;
+        if (dir.y <= 0 && toggleRun || !stamina.SufficientStamina) run = false;
 
         currentSpeed = IsRunning ? runSpeed : (IsCrouching ? crouchSpeed : walkSpeed);
         IsWalking = dir.magnitude > 0f && !IsRunning && isGrounded;
