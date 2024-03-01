@@ -2,9 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Unity.AI.Navigation;
-using UnityEditor;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 using Random = System.Random;
@@ -79,15 +78,17 @@ public class DungeonGenerator : MonoBehaviour
 
         while(doorQueue.Count > 0)
         {
+            Debug.Log("doorQueue.Count: " + doorQueue.Count);
             (Door, int) element = doorQueue.Dequeue();
+            Debug.Log("element: " + element.Item1.transform.parent.name);
             yield return SpawnRoomAtDoor(element.Item1, element.Item2, dungeon);
         }
         
         //Done spawning dungeon
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
         Instantiate(navmeshSurface, dungeon).BuildNavMesh();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
         //GetComponent<SimpleEnemySpawner>().SpawnEnemies(spawnedRooms);
         //GetComponent<ObjectiveSpawner>().SpawnObjectives(spawnedRoomsDepth);
     }
@@ -115,10 +116,29 @@ public class DungeonGenerator : MonoBehaviour
             newRoomScript.depth = depth;
             doors = newRoomScript.GetDoors();
 
-            yield return new WaitForSeconds(Time.deltaTime * 10);
+            Vector3 roomSize = new Vector3 (newRoomScript.bounding_x - 1, newRoomScript.bounding_y, newRoomScript.bounding_z - 1);
+            Vector3 offset = new Vector3 (newRoomScript.offset_x, newRoomScript.offset_y, newRoomScript.offset_z);
 
-            if (newRoomScript.isColliding || (doors.Count <= 1 && depth % GameSettings.Instance.GenerationLookahead != 0))
+
+            var roomCenter = door.transform.position + (door.transform.forward * newRoomScript.bounding_z / 2) + new Vector3(0, newRoomScript.bounding_y / 2, 0) + offset;
+            var colliders = Physics.OverlapBox(roomCenter, roomSize / 2, newRoom.transform.rotation, LayerMask.GetMask("ExcludeVision"));
+            bool isColliding = false;
+
+            //Debug.Log("Name: " + newRoomScript.gameObject.name);
+            //Debug.Log("roomSize: " + roomSize);
+            //Debug.Log("roomCenter: " + roomCenter);
+
+            foreach (var collider in colliders)
             {
+                if (collider.CompareTag("Room") && collider.gameObject != door.transform.parent.gameObject && collider.gameObject != newRoomScript.gameObject)
+                {
+                    isColliding = true;
+                }
+            }
+
+            if (isColliding || (doors.Count < 1 && depth % GameSettings.Instance.GenerationLookahead != 0))
+            {
+                Debug.Log("doors.Count: " + doors.Count);
                 Destroy(newRoom);
                 doors = null;
                 tempRandomRooms.Remove(randomRoom);
@@ -146,7 +166,7 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
 
-        yield break;
+        yield return null;
     }
 
     IEnumerator SpawnMinMaxRoomAtDoor(Door door, Transform dungeon)
