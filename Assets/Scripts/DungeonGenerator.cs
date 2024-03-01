@@ -117,7 +117,7 @@ public class DungeonGenerator : MonoBehaviour
             newRoomScript.depth = depth;
             doors = newRoomScript.GetDoors();
 
-            if (IsColliding(newRoomScript, door) || (doors.Count < 1 && depth % GameSettings.Instance.GenerationLookahead != 0 && depth != 0))
+            if (IsColliding(newRoomScript, door) || (doors.Count < 1 && depth % GameSettings.Instance.GenerationLookahead == 0))
             {
                 //Destroy(newRoom);
                 doors = null;
