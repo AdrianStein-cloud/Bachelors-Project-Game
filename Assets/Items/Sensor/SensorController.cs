@@ -117,4 +117,11 @@ public class SensorController : Item
     }
 
     private void UpdateCounter() => sensorText.text = currentSensorCount + " / " + SensorCount;
+
+    public void UpgradeSensor(int count)
+    {
+        SensorCount += count;
+        currentSensorCount = SensorCount;
+        UpdateCounter();
+    }
 }

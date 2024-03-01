@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e6eb8c06cb5064ba77fcf813da9a03, type: 3}
-  m_Name: Sensor Upgrade
+  m_Script: {fileID: 11500000, guid: 3db3f781ada58eb4a9e17774c3409dd3, type: 3}
+  m_Name: Stamina Upgrade
   m_EditorClassIdentifier: 
-  Name: Sensor
-  description: Grants you 3 {0}s
-  NewlyAvailableUpgrades: []
-  item: {fileID: 8346296030083092963, guid: ed7193b98451e164ea6509762f9a57c9, type: 3}
+  Name: Endurance
+  description: Increases stamina by {0}%
+  NewlyAvailableUpgrades:
+  - {fileID: 11400000}
+  staminaPercentIncrease: 10
+  recoverySpeedPercentIncrease: 0

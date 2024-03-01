@@ -47,4 +47,11 @@ public class PlayerStamina : MonoBehaviour
         scale.x = currentStamina / stamina;
         fill.localScale = scale;
     }
+
+    public void UpgradeStamina(float staminaMultiplier, float recoverySpeedMultiplier)
+    {
+        stamina *= staminaMultiplier / 100 + 1;
+        recoverySpeed *= recoverySpeedMultiplier / 100 + 1;
+        currentStamina = stamina;
+    }
 }
