@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -15,10 +17,12 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] Button backSettingsButton;
     [SerializeField] GameObject pauseScreen;
     [SerializeField] GameObject settingsMenu;
+    [SerializeField] TMP_Dropdown graphicsDropdown;
     [SerializeField] Slider sensSlider;
     [SerializeField] TMP_InputField sensInputField;
     [SerializeField] Toggle crosshairToggle;
     [SerializeField] GameObject crosshair;
+    [SerializeField] List<UniversalRenderPipelineAsset> graphics;
 
 
     private bool gamePaused = true;
@@ -31,8 +35,10 @@ public class PauseMenu : MonoBehaviour
         resumeButton.onClick.AddListener(UnpauseGame);
         settingsButton.onClick.AddListener(OpenSettings);
         backSettingsButton.onClick.AddListener(CloseSettings);
+
         InputManager.Actions.Player.Pause.started += _ => PauseGame();
         InputManager.Actions.UI.Unpause.started += _ => UnpauseGame();
+
         settingsMenu.SetActive(false);
         player = GameObject.FindObjectOfType<CameraController>();
         var value = PlayerPrefs.GetFloat("Sensitivity");
@@ -44,13 +50,24 @@ public class PauseMenu : MonoBehaviour
         player.HorizontalSensitivity = value;
         player.VerticalSensitivity = value;
         sensSlider.value = value;
-        sensSlider.onValueChanged.AddListener(SetSensitivity);
         sensInputField.text = value.ToString();
+
+        graphicsDropdown.value = PlayerPrefs.GetInt("Graphics");
+        QualitySettings.renderPipeline = graphics[PlayerPrefs.GetInt("Graphics")];
+        graphicsDropdown.onValueChanged.AddListener(SetGraphics);
+
+        sensSlider.onValueChanged.AddListener(SetSensitivity);
         sensInputField.onValueChanged.AddListener(SetSensitivity);
         crosshair.SetActive(PlayerPrefs.GetInt("Crosshair") == 1);
         crosshairToggle.onValueChanged.AddListener(SetCrosshair);
         crosshairToggle.isOn = PlayerPrefs.GetInt("Crosshair") == 1;
         UnpauseGame();
+    }
+
+    private void SetGraphics(int value)
+    {
+        QualitySettings.renderPipeline = graphics[value];
+        PlayerPrefs.SetInt("Graphics", value);
     }
 
     private void SetCrosshair(bool arg0)
