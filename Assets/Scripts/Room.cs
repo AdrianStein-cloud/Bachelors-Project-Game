@@ -15,9 +15,9 @@ public class Room : MonoBehaviour
     [SerializeField] public float bounding_z = 50;
 
     [Header("Offset")]
-    [SerializeField] float offset_x = 0;
-    [SerializeField] float offset_y = 0;
-    [SerializeField] float offset_z = 0;
+    [SerializeField] public float offset_x = 0;
+    [SerializeField] public float offset_y = 0;
+    [SerializeField] public float offset_z = 0;
 
     public bool isColliding = false;
 
