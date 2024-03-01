@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d09f059c45a95548abe4389b00b191b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Defaultpreset: {fileID: 11400000, guid: 46413c2d5dbf5ef41b425dd9241f3952, type: 2}
+  Defaultpreset: {fileID: 11400000, guid: 116bb6ce0a46a004fad135c49b1c8539, type: 2}
 --- !u!1 &4605111188476682652
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   invulnerabilityTime: 1
-  cameraShakePreset: {fileID: 11400000, guid: 46413c2d5dbf5ef41b425dd9241f3952, type: 2}
+  cameraShakePreset: {fileID: 11400000, guid: 116bb6ce0a46a004fad135c49b1c8539, type: 2}
 --- !u!114 &7433321139317267936
 MonoBehaviour:
   m_ObjectHideFlags: 0

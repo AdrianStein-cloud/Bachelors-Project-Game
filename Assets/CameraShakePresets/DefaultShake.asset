@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: cf4b4bfcd529e6b4db58af2e9d0b8069, type: 3}
   m_Name: DefaultShake
-  m_EditorClassIdentifier: Assembly-CSharp::CameraShakePreset
+  m_EditorClassIdentifier: 
   rotationSteps: 6
   rotationShakeTime: 0.05
   rotationAmount: 6
