@@ -35,20 +35,28 @@ public class PauseMenu : MonoBehaviour
         InputManager.Actions.UI.Unpause.started += _ => UnpauseGame();
         settingsMenu.SetActive(false);
         player = GameObject.FindObjectOfType<CameraController>();
-        player.HorizontalSensitivity = 20f;
-        player.VerticalSensitivity = 20f;
-        sensSlider.value = 20f;
+        var value = PlayerPrefs.GetFloat("Sensitivity");
+        if (value == 0)
+        {
+            value = 20f;
+            PlayerPrefs.SetFloat("Sensitivity", value);
+        }
+        player.HorizontalSensitivity = value;
+        player.VerticalSensitivity = value;
+        sensSlider.value = value;
         sensSlider.onValueChanged.AddListener(SetSensitivity);
-        sensInputField.text = "20";
+        sensInputField.text = value.ToString();
         sensInputField.onValueChanged.AddListener(SetSensitivity);
-        crosshair.SetActive(false);
+        crosshair.SetActive(PlayerPrefs.GetInt("Crosshair") == 1);
         crosshairToggle.onValueChanged.AddListener(SetCrosshair);
+        crosshairToggle.isOn = PlayerPrefs.GetInt("Crosshair") == 1;
         UnpauseGame();
     }
 
     private void SetCrosshair(bool arg0)
     {
         crosshair.SetActive(arg0);
+        PlayerPrefs.SetInt("Crosshair", arg0 ? 1 : 0);
     }
 
     private void SetSensitivity(float input)
@@ -56,6 +64,7 @@ public class PauseMenu : MonoBehaviour
         sensInputField.text = input.ToString();
         player.HorizontalSensitivity = input;
         player.VerticalSensitivity = input;
+        PlayerPrefs.SetFloat("Sensitivity", input);
     }
 
     private void SetSensitivity(string input)
@@ -64,6 +73,7 @@ public class PauseMenu : MonoBehaviour
         sensSlider.value = value;
         player.HorizontalSensitivity = value;
         player.VerticalSensitivity = value;
+        PlayerPrefs.SetFloat("Sensitivity", value);
     }
 
     private void OpenSettings()
@@ -101,9 +111,9 @@ public class PauseMenu : MonoBehaviour
     {
         if (gamePaused) return;
         //Time.timeScale = 0f;
+        pauseScreen.SetActive(true);
         CloseSettings();
         gamePaused = true;
-        pauseScreen.SetActive(true);
         InputManager.Actions.Player.Disable();
         InputManager.Actions.UI.Enable();
         Cursor.lockState = CursorLockMode.None;
