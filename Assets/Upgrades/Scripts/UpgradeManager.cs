@@ -7,15 +7,18 @@ using System;
 
 public class UpgradeManager : MonoBehaviour
 {
-    public List<Upgrade> Upgrades;
+    [SerializeField] List<Upgrade> upgrades;
 
     UpgradeUIController upgradeUIController;
     GameObject player;
 
     Action upgradeChosen;
 
+    List<Upgrade> availableUpgrades;
+
     private void Start()
     {
+        availableUpgrades = new List<Upgrade>(upgrades);
         upgradeUIController = FindAnyObjectByType<UpgradeUIController>();
         upgradeUIController.SetOnUpgradeCallback(ChooseUpgrade);
     }
@@ -24,7 +27,7 @@ public class UpgradeManager : MonoBehaviour
     {
         this.player = player;
         this.upgradeChosen = upgradeChosen;
-        var upgradesCopy = new List<Upgrade>(Upgrades);
+        var upgradesCopy = new List<Upgrade>(availableUpgrades);
         var randomUpgrades = Enumerable.Range(0, Math.Min(amount, upgradesCopy.Count)).Select(_ => {
             var upgrade = upgradesCopy[UnityEngine.Random.Range(0, upgradesCopy.Count)];
             upgradesCopy.Remove(upgrade);
@@ -35,8 +38,8 @@ public class UpgradeManager : MonoBehaviour
 
     void ChooseUpgrade(Upgrade upgrade)
     {
-        Upgrades.Remove(upgrade);
-        Upgrades.AddRange(upgrade.NewlyAvailableUpgrades);
+        availableUpgrades.Remove(upgrade);
+        availableUpgrades.AddRange(upgrade.NewlyAvailableUpgrades);
         upgrade.Apply(player);
         upgradeChosen();
     }
