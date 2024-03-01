@@ -295,17 +295,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0cfba307549cf4d4ebe3ad270040881d,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.55
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0cfba307549cf4d4ebe3ad270040881d,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.55
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0cfba307549cf4d4ebe3ad270040881d,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.55
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0cfba307549cf4d4ebe3ad270040881d,
         type: 3}
@@ -783,13 +783,15 @@ MonoBehaviour:
   lastLocation: {x: 0, y: 0, z: 0}
   footstepSourceGO: {fileID: 8115306159407989784}
   attackSourceGO: {fileID: 1761033774670735690}
+  screamSounds: []
   footstepSounds:
-  - {fileID: 8300000, guid: 885db3db9979f1b42bdf70362550a7ba, type: 3}
   - {fileID: 8300000, guid: 43c7b0792354823408d03bd6f8885ae1, type: 3}
   - {fileID: 8300000, guid: 2196e6891b6c0f94780e3da973d4a840, type: 3}
   - {fileID: 8300000, guid: 8da1aec079cbcba43a854395a45b0bef, type: 3}
-  - {fileID: 8300000, guid: 4586971883f2f14459427b2c50d1d603, type: 3}
-  screamSounds: []
+  runningFootstepSounds:
+  - {fileID: 8300000, guid: cf09212a67da30e46ad8e10cda27331a, type: 3}
+  - {fileID: 8300000, guid: fef6acc98b41bb64ba5deae8bff8a0e1, type: 3}
+  - {fileID: 8300000, guid: 8e45bbbf84ddf924f914dbd42dab34cd, type: 3}
   lastAttackTime: 0
   attackDelay: 1.5
 --- !u!54 &4440772621059421347

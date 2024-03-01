@@ -79354,7 +79354,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.8
+  - time: 0.76666665
     functionName: PlayFootstepSound
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -79368,7 +79368,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.8
+  - time: 1.6666666
     functionName: PlayFootstepSound
     data: 
     objectReferenceParameter: {fileID: 0}

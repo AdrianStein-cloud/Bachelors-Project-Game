@@ -951,9 +951,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableStamina: 1
   stamina: 100
-  staminaDrainSpeed: 20
-  staminaRecoverySpeed: 40
-  staminaRecoveryDelay: 0.5
+  drainSpeed: 20
+  recoverySpeed: 40
+  recoveryDelay: 0.5
+  recoveryDelayAtZero: 1.25
 --- !u!1 &6995078530207280390
 GameObject:
   m_ObjectHideFlags: 0
