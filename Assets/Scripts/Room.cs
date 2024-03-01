@@ -98,9 +98,10 @@ public class Room : MonoBehaviour
 
         foreach (RandomObjects _randomObjects in randomObjects)
         {
-            for (int i = 0; i < _randomObjects.maxAmount; i++)
+            for (int i = 0; i < _randomObjects.randomObjects.Count; i++)
             {
-                if (random.Next(1, 101) <= _randomObjects.percentageChance)
+                _randomObjects.randomObjects[i].SetActive(false);
+                if (i < _randomObjects.maxAmount && random.Next(1, 101) <= _randomObjects.percentageChance)
                 {
                     _randomObjects.randomObjects[random.Next(0, _randomObjects.randomObjects.Count)].SetActive(true);
                 }
