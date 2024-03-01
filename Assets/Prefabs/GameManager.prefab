@@ -145,11 +145,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb62fde4a1d0214d8f2d3dc71de2f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Upgrades:
-  - {fileID: 11400000, guid: 461360812d865234f90ce650b2d55b68, type: 2}
+  upgrades:
+  - {fileID: 11400000, guid: 4488650ececd479479999511015f2e80, type: 2}
   - {fileID: 11400000, guid: 6b5f01de9b6d96048986483d6048440d, type: 2}
   - {fileID: 11400000, guid: cf664ef1d18627f40ae000fcdec25271, type: 2}
-  - {fileID: 11400000, guid: 4488650ececd479479999511015f2e80, type: 2}
   - {fileID: 11400000, guid: 7a84c61e510d826498137d69d8a324f4, type: 2}
-  - {fileID: 11400000, guid: 11cc532f40492cf4fa39a7eb6fcf4252, type: 2}
+  - {fileID: 11400000, guid: 461360812d865234f90ce650b2d55b68, type: 2}
   - {fileID: 11400000, guid: a87c4f156e9c9cc44b861a07e140de93, type: 2}
+  - {fileID: 11400000, guid: 11cc532f40492cf4fa39a7eb6fcf4252, type: 2}
