@@ -19,8 +19,6 @@ public class Room : MonoBehaviour
     [SerializeField] public float offset_y = 0;
     [SerializeField] public float offset_z = 0;
 
-    public bool isColliding = false;
-
     public GameObject centerObject;
 
     public bool isCorridor;
@@ -112,14 +110,6 @@ public class Room : MonoBehaviour
             .Where(t => t.name.Contains("ObjectiveSpawnPoint"))
             .Select(t => t.gameObject)
             .ToList();
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if(other.CompareTag("Room"))
-        {
-            isColliding = true;
-        }
     }
 
     [System.Serializable]
