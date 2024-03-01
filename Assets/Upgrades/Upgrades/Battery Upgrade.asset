@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d9bd90450e3bc48a69488a55348d90, type: 3}
   m_Name: Battery Upgrade
   m_EditorClassIdentifier: 
-  Name: Superchared Battery
+  Name: Supercharged Battery
   description: Makes your flashlight battery last {3}% longer
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
