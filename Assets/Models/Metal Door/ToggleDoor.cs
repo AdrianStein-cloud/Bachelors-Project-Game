@@ -52,7 +52,7 @@ public class ToggleDoor : Interactable
             canInteract = false;
             lastInteract = Time.time;
             anim.SetTrigger("Toggle");
-            navObstacle.enabled = true;
+            //navObstacle.enabled = true;
 
             if (user == player) audioSource.volume = 0.5f;
             else audioSource.volume = 1f;

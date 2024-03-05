@@ -110,7 +110,7 @@ MonoBehaviour:
     id=\"198\" />\r\n        </elem>\r\n        <elem>\r\n          <ActionNode id=\"185\"
     />\r\n        </elem>\r\n      </children>\r\n      <inputParams />\r\n     
     <outputParams />\r\n      <localParams />\r\n    </SequenceNode>\r\n    <ConditionEvalNode
-    id=\"312\" policy=\"WAIT_UNTIL_FALSE_AND_FAIL\" name=\"Perception/IsTargetCloseAndInSight\">\r\n     
+    id=\"312\" policy=\"WAIT_UNTIL_TRUE_AND_COMPLETE\" name=\"Perception/IsTargetCloseAndInSight\">\r\n     
     <inputParams>\r\n        <inputValues>\r\n          <entry name=\"target\" type=\"UnityEngine.GameObject\"
     isBlackboard=\"True\" blackboard=\"target\" />\r\n          <entry name=\"angle\"
     type=\"System.Single\" isBlackboard=\"False\" value=\"360\" />\r\n          <entry
@@ -142,7 +142,7 @@ MonoBehaviour:
     </elem>\r\n        <elem>\r\n          <ActionNode id=\"232\" />\r\n        </elem>\r\n       
     <elem>\r\n          <ActionNode id=\"226\" />\r\n        </elem>\r\n      </children>\r\n     
     <inputParams />\r\n      <outputParams />\r\n      <localParams />\r\n    </SequenceNode>\r\n   
-    <ConditionEvalNode id=\"154\" policy=\"WAIT_UNTIL_TRUE_AND_COMPLETE\" name=\"AlwaysTrue\">\r\n     
+    <ConditionEvalNode id=\"154\" policy=\"WAIT_UNTIL_FALSE_AND_FAIL\" name=\"AlwaysTrue\">\r\n     
     <inputParams />\r\n      <outputParams />\r\n      <localParams />\r\n    </ConditionEvalNode>\r\n   
     <SequenceNode id=\"86\">\r\n      <children>\r\n        <elem>\r\n          <ActionNode
     id=\"107\" />\r\n        </elem>\r\n        <elem>\r\n          <ActionNode id=\"162\"

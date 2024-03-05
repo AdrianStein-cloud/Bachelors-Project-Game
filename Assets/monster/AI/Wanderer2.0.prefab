@@ -832,13 +832,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  lastPlayerLocation: {x: 0, y: 0, z: 0}
   roamSpeed: 12
   chaseSpeed: 27
   point: {x: 0, y: 0, z: 0}
   wanderingToRoom: {fileID: 0}
   lookAroundTime: 3
-  doorFindDistance: 18
+  doorFindDistance: 25
   findDoorMask:
     serializedVersion: 2
     m_Bits: 2049
@@ -862,6 +861,9 @@ MonoBehaviour:
   attackRange: 24
   attackDamage: 1
   attackDamageDelay: 0.7
+  lastPlayerLocation: {x: 0, y: 0, z: 0}
+  justChased: 0
+  hasSeenPlayer: 0
   footstepSourceGO: {fileID: 8115306159407989784}
   attackSourceGO: {fileID: 1761033774670735690}
   screamSounds:

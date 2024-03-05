@@ -103,6 +103,7 @@ public class Wanderer : MonoBehaviour
 
         //If door in front & moving to other room
         var door = IsDoorInFront();
+        if (doorToOpen != null) return;
         if (door != null && doorToOpen == null && currentRoom != wanderingToRoom)
         {
             doorToOpen = door;
@@ -350,6 +351,9 @@ public class Wanderer : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(dirObject.transform.position, dirObject.transform.forward, out hit, doorFindDistance, findDoorMask))
         {
+            var dirobjectcenter = dirObject.GetComponent<SkinnedMeshRenderer>().bounds.center;
+            Debug.DrawLine(dirobjectcenter, hit.point, Color.red);
+
             if (hit.transform.CompareTag("Door"))
             {
                 var doorscript = hit.transform.GetComponent<ToggleDoor>();

@@ -391,6 +391,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 775176127590199493, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 4737690500217451602, guid: 75bf92f95aa61564c91d249d74e7807c,
+        type: 3}
     - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: seed
@@ -445,6 +451,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6251193281981130515, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: dungeonStartDepth
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
