@@ -11,7 +11,7 @@ public class WandererRoam : StateProcess<WandererState>
     Animator anim;
 
     List<GameObject> rooms = new List<GameObject>();
-    public Room room;
+    public Room destRoom;
 
     private void Awake()
     {
@@ -39,13 +39,13 @@ public class WandererRoam : StateProcess<WandererState>
     {
         anim.SetTrigger("Wander");
 
-        if(room == null)
+        if(destRoom == null)
         {
-            room = GetNextRoom().GetComponent<Room>();
+            destRoom = GetNextRoom().GetComponent<Room>();
         }
 
         Debug.Log("Wandering to room");
-        movement.MoveTo(room.centerObject.transform.position, roamSpeed, DestinationReached);
+        movement.MoveTo(destRoom.centerObject.transform.position, roamSpeed, DestinationReached);
     }
 
     void DestinationReached()
@@ -55,7 +55,7 @@ public class WandererRoam : StateProcess<WandererState>
         //Only transition if roaming didn't get interrupted (currently it cant get interrupted, but just in case)
         if (enabled)
         {
-            room = null;
+            destRoom = null;
             StateController.SwitchState(WandererState.SearchRoom);
         }
     }
