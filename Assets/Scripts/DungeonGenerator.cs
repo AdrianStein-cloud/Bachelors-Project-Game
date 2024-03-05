@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Unity.AI.Navigation;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = System.Random;
 
@@ -114,7 +115,7 @@ public class DungeonGenerator : MonoBehaviour
             newRoomScript.depth = depth;
             doors = newRoomScript.GetDoors();
 
-            if (IsColliding(newRoomScript, door) || (doors.Count < 1 && depth % GameSettings.Instance.GenerationLookahead != 0 && depth != 0))
+            if (IsColliding(newRoomScript, door) || (doors.Count < 1 && (depth + 1) % GameSettings.Instance.GenerationLookahead != 0))
             {
                 //Destroy(newRoom);
                 doors = null;
@@ -224,12 +225,13 @@ public class DungeonGenerator : MonoBehaviour
 
     bool IsColliding(Room newRoomScript, Door door)
     {
-        Vector3 roomSize = new Vector3(newRoomScript.bounding_x - 1, newRoomScript.bounding_y, newRoomScript.bounding_z - 1);
+        Vector3 roomSize = new Vector3(newRoomScript.bounding_x - 1f, newRoomScript.bounding_y, newRoomScript.bounding_z - 1f);
         Vector3 offset = new Vector3(newRoomScript.offset_x, newRoomScript.offset_y, newRoomScript.offset_z);
 
 
-        var roomCenter = door.transform.position + (door.transform.forward * newRoomScript.bounding_z / 2) + new Vector3(0, newRoomScript.bounding_y / 2, 0) + offset;
-        var colliders = Physics.OverlapBox(roomCenter, roomSize / 2, newRoomScript.transform.rotation, LayerMask.GetMask("ExcludeVision"));
+        var offsetCalculated = door.transform.forward * offset.z + door.transform.right * offset.x + door.transform.up * offset.y;
+        var roomCenter = door.transform.position + (door.transform.forward * newRoomScript.bounding_z / 2) + new Vector3(0, newRoomScript.bounding_y / 2, 0) + offsetCalculated;
+        var colliders = Physics.OverlapBox(roomCenter, roomSize / 2, door.transform.rotation, LayerMask.GetMask("ExcludeVision"));
         bool isColliding = false;
 
         /*
