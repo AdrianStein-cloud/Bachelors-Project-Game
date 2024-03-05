@@ -49,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (lastDamage + invulnerabilityTime <= Time.time)
         {
-            Debug.Log("take damage");
+            //Debug.Log("take damage");
             health -= damage;
             cameraShake.Shake(cameraShakePreset);
             if (health <= 0)
@@ -62,7 +62,6 @@ public class PlayerHealth : MonoBehaviour
 
             lastDamage = Time.time;
         }
-
     }
 
     public void Die()
