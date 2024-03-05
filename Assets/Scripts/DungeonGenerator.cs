@@ -108,6 +108,7 @@ public class DungeonGenerator : MonoBehaviour
             if (tempRandomRooms.Count > 1) randomRoom = tempRandomRooms.GetRollFromWeights(random);
             else randomRoom = tempRandomRooms[0];
 
+
             //newRoom = Instantiate(randomRoom.room, door.gameObject.transform.position, door.direction, dungeon);
             //newRoom = randomRoom.room.GetComponent<Room>;
             //Debug.Log("Trying to spawn: " + newRoom.gameObject.name);

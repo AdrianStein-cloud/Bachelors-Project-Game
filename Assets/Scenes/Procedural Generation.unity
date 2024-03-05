@@ -396,6 +396,11 @@ PrefabInstance:
       propertyPath: seed
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: randomRooms.Array.data[1].<Weight>k__BackingField
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 4117347281418660289, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -445,6 +450,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6251193281981130515, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: dungeonStartDepth
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
