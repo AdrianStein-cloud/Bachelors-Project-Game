@@ -37,7 +37,7 @@ public class WandererRoam : StateProcess<WandererState>
 
     void Roam()
     {
-        anim.SetTrigger("Wander");
+        anim.SetBool("Wander", true);
 
         if(room == null)
         {

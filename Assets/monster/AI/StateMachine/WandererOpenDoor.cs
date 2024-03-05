@@ -36,7 +36,7 @@ public class WandererOpenDoor : StateInterrupt
         agent.speed = 0;*/
 
         movement.Stop();
-        anim.SetTrigger("Search");
+        anim.SetBool("Search", true);
 
         yield return new WaitForSeconds(openDoorAnimationDelay);
 
@@ -49,6 +49,7 @@ public class WandererOpenDoor : StateInterrupt
 
             yield return new WaitForSeconds(openDoorDelay);
 
+            anim.SetBool("Search", false);
             //Coutnermeasure again
             if (!door.open)
             {
