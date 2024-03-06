@@ -1376,6 +1376,7 @@ GameObject:
   - component: {fileID: -3501709078333206731}
   - component: {fileID: 6850427650671537120}
   - component: {fileID: -5056355623399845551}
+  - component: {fileID: -3388323793867589819}
   m_Layer: 10
   m_Name: Wanderer_StateMachine 1
   m_TagString: Untagged
@@ -1638,6 +1639,8 @@ MonoBehaviour:
     Value: {fileID: 7233674478500768538}
   - Key: 3
     Value: {fileID: 6850427650671537120}
+  - Key: 7
+    Value: {fileID: -3388323793867589819}
   stateInterrupts:
   - Key: 5
     Value: {fileID: 517689836278078639}
@@ -1744,6 +1747,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25765044a0b88314b84d106a241cc407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterSource: {fileID: 670935429120817792}
+  screamSounds:
+  - {fileID: 8300000, guid: 003ed3c3816d9214b93abee528eaf076, type: 3}
+  - {fileID: 8300000, guid: fca2af9408bf60f4e9118843daae5f93, type: 3}
   footstepSource: {fileID: 8078353467643043598}
   footstepSounds:
   - {fileID: 8300000, guid: 43c7b0792354823408d03bd6f8885ae1, type: 3}
@@ -1753,3 +1760,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cf09212a67da30e46ad8e10cda27331a, type: 3}
   - {fileID: 8300000, guid: fef6acc98b41bb64ba5deae8bff8a0e1, type: 3}
   - {fileID: 8300000, guid: 8e45bbbf84ddf924f914dbd42dab34cd, type: 3}
+--- !u!114 &-3388323793867589819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978024783357441720}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c4ec6fa0a8cf594da0ec263fd922c4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

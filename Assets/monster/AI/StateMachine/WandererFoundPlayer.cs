@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WandererFoundPlayer : MonoBehaviour
+public class WandererFoundPlayer : StateProcess<WandererState>
 {
-    // Start is called before the first frame update
-    void Start()
+    WandererMovement movement;
+    WandererInfo info;
+    Animator anim;
+
+    private void Awake()
     {
-        
+        movement = GetComponent<WandererMovement>();
+        info = GetComponent<WandererInfo>();
+        anim = GetComponent<Animator>();
+        GetComponent<WandererSounds>().OnScreamEnd += StartChase;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        movement.Stop();
+        var dir = info.LastSeenPlayerLocation - transform.position;
+        transform.rotation = Quaternion.LookRotation(dir, transform.up);
+        anim.SetTrigger("Scream");
+    }
+
+    void StartChase()
+    {
+        StateController.SwitchState(WandererState.Chase);
     }
 }

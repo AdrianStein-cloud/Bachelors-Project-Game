@@ -1,16 +1,23 @@
-using System.Collections;
+using System;
+using Random = UnityEngine.Random;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WandererSounds : MonoBehaviour
 {
+    [Header("Scream")]
+    public AudioSource monsterSource;
+    public List<AudioClip> screamSounds;
 
+    [Header("Footsteps")]
     public AudioSource footstepSource;
     public List<AudioClip> footstepSounds;
     public List<AudioClip> runningFootstepSounds;
 
     private List<AudioClip> tempFootsteps = new List<AudioClip>();
     private List<AudioClip> tempRunningFootsteps = new List<AudioClip>();
+
+    public Action OnScreamEnd;
 
     public void PlayFootstepSound()
     {
@@ -32,5 +39,17 @@ public class WandererSounds : MonoBehaviour
         footstepSource.pitch = 1;
         footstepSource.PlayOneShot(clip);
         tempRunningFootsteps.Remove(clip);
+    }
+
+    public void PlayScreechSound()
+    {
+        var clip = screamSounds[Random.Range(0, screamSounds.Count)];
+        monsterSource.clip = clip;
+        monsterSource.Play();
+    }
+
+    public void ScreechEnded()
+    {
+        OnScreamEnd?.Invoke();
     }
 }

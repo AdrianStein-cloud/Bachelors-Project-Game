@@ -29,6 +29,11 @@ public class WandererRoam : StateProcess<WandererState>
         Roam();
     }
 
+    private void OnDisable()
+    {
+        anim.SetBool("Wander", false);
+    }
+
     private void Update()
     {
         if (sight.IsThereBlockingDoor)
@@ -39,7 +44,8 @@ public class WandererRoam : StateProcess<WandererState>
 
         if (sight.IsPlayerInSight)
         {
-            StateController.SwitchState(WandererState.Chase);
+            destRoom = null;
+            StateController.SwitchState(WandererState.FoundPlayer);
             return;
         }
 
