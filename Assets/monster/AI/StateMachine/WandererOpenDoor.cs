@@ -39,6 +39,7 @@ public class WandererOpenDoor : StateInterrupt
         anim.SetBool("Search", true);
 
         yield return new WaitForSeconds(openDoorAnimationDelay);
+        anim.SetBool("Search", false);
 
         var door = info.DoorToOpen.GetComponent<ToggleDoor>();
         //Coutnermeasure against the player opening the door during wait
@@ -49,13 +50,13 @@ public class WandererOpenDoor : StateInterrupt
 
             yield return new WaitForSeconds(openDoorDelay);
 
-            anim.SetBool("Search", false);
             //Coutnermeasure again
             if (!door.open)
             {
                 door.Interact(gameObject);
             }
         }
+        //anim.SetBool("Search", false);
 
         info.DoorToOpen = null;
         Done();
