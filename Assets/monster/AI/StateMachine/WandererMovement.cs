@@ -55,6 +55,12 @@ public class WandererMovement : MonoBehaviour
         info.DestinationRoom = null;
     }
 
+    public void LookAtTarget(Vector3 target)
+    {
+        var dir = target - transform.position;
+        transform.rotation = Quaternion.LookRotation(dir, transform.up);
+    }
+
     bool HasDestinationBeenReached()
     {
         return moving 

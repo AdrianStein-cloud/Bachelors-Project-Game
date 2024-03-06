@@ -36,7 +36,7 @@ public class WandererSight : MonoBehaviour
         {
             info.DoorToOpen = door;
         }
-        info.TargetPlayer = CheckForPlayerInSight();
+        info.TargetPlayer = CheckForPlayerInSight(angle, distance);
         if(info.TargetPlayer != null)
         {
             info.LastSeenPlayerLocation = info.TargetPlayer.transform.position;
@@ -44,7 +44,7 @@ public class WandererSight : MonoBehaviour
     }
 
 
-    public GameObject CheckForPlayerInSight()
+    public GameObject CheckForPlayerInSight(float angle, float distance)
     {
         //if (target == null) return false;
 

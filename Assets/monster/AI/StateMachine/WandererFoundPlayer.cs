@@ -19,8 +19,7 @@ public class WandererFoundPlayer : StateProcess<WandererState>
     private void OnEnable()
     {
         movement.Stop();
-        var dir = info.LastSeenPlayerLocation - transform.position;
-        transform.rotation = Quaternion.LookRotation(dir, transform.up);
+        movement.LookAtTarget(info.LastSeenPlayerLocation);
         anim.SetTrigger("Scream");
     }
 
