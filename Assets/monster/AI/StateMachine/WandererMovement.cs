@@ -5,11 +5,6 @@ using UnityEngine.AI;
 [RequireComponent(typeof(WandererInfo))]
 public class WandererMovement : MonoBehaviour
 {
-    [Header("Door")]
-    public float doorFindDistance;
-    public LayerMask findDoorMask;
-    public GameObject dirObject;
-
     [Header("Debug Fields")]
     [SerializeField] Vector3 targetPosition;
     [SerializeField] bool moving = false;
@@ -59,26 +54,6 @@ public class WandererMovement : MonoBehaviour
         info.DestinationRoom = null;
     }
 
-    public GameObject CheckForBlockingDoor()
-    {
-        var doorObj = IsDoorInFront();
-        if (doorObj != null)
-        {
-            var door = doorObj.GetComponent<ToggleDoor>();
-            bool doorIsInTheWay = info.CurrentRoom != info.DestinationRoom;
-            if (doorObj != null & doorIsInTheWay & !door.open) return doorObj;
-        }
-        return null;
-
-
-        /*if (door != null && doorToOpen == null && info.CurrentRoom != info.DestinationRoom)
-        {
-            doorToOpen = door;
-            OpenDoor(door);
-            return;
-        }*/
-    }
-
     public bool HasDestinationBeenReached()
     {
         return moving 
@@ -92,19 +67,6 @@ public class WandererMovement : MonoBehaviour
         foreach (var hit in hits)
         {
             if (hit.CompareTag("Room")) return hit.transform.gameObject;
-        }
-        return null;
-    }
-
-    GameObject IsDoorInFront()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(dirObject.transform.position, dirObject.transform.forward, out hit, doorFindDistance, findDoorMask))
-        {
-            if (hit.transform.CompareTag("Door"))
-            {
-                return hit.transform.gameObject;
-            }
         }
         return null;
     }

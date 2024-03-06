@@ -1373,6 +1373,7 @@ GameObject:
   - component: {fileID: -3531602013836704586}
   - component: {fileID: 7233674478500768538}
   - component: {fileID: 517689836278078639}
+  - component: {fileID: -3501709078333206731}
   m_Layer: 10
   m_Name: Wanderer_StateMachine 1
   m_TagString: Untagged
@@ -1668,6 +1669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roamSpeed: 12
+  destRoom: {fileID: 0}
 --- !u!114 &7233674478500768538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1694,3 +1696,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openDoorAnimationDelay: 2
   openDoorDelay: 1
+--- !u!114 &-3501709078333206731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978024783357441720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3ac26ad1a1300c4888113728e635a44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eyes: {fileID: 2088284898837779890}
+  findPlayerMask:
+    serializedVersion: 2
+    m_Bits: 577
+  angle: 360
+  distance: 10000
+  doorFindDistance: 18
+  findDoorMask:
+    serializedVersion: 2
+    m_Bits: 2049

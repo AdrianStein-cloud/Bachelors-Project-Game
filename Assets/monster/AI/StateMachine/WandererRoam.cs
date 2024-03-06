@@ -7,6 +7,7 @@ public class WandererRoam : StateProcess<WandererState>
     public float roamSpeed;
 
     WandererMovement movement;
+    WandererSight sight;
     WandererInfo info;
     Animator anim;
 
@@ -16,6 +17,7 @@ public class WandererRoam : StateProcess<WandererState>
     private void Awake()
     {
         movement = GetComponent<WandererMovement>();
+        sight = GetComponent<WandererSight>();
         anim = GetComponent<Animator>();
         info = GetComponent<WandererInfo>();
     }
@@ -27,7 +29,7 @@ public class WandererRoam : StateProcess<WandererState>
 
     private void Update()
     {
-        var door = movement.CheckForBlockingDoor();
+        var door = sight.CheckForBlockingDoor();
         if (door != null)
         {
             info.DoorToOpen = door;
