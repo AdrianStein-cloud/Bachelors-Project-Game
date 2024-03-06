@@ -37,6 +37,7 @@ public class WandererMovement : MonoBehaviour
     public void MoveTo(Vector3 target, float speed, Action onDestinationReached = null)
     {
         moving = true;
+        targetPosition = target;
         agent.SetDestination(target);
         agent.speed = speed;
         agent.isStopped = false;
@@ -54,7 +55,7 @@ public class WandererMovement : MonoBehaviour
         info.DestinationRoom = null;
     }
 
-    public bool HasDestinationBeenReached()
+    bool HasDestinationBeenReached()
     {
         return moving 
             && !agent.pathPending

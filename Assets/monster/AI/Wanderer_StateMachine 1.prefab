@@ -1374,6 +1374,8 @@ GameObject:
   - component: {fileID: 7233674478500768538}
   - component: {fileID: 517689836278078639}
   - component: {fileID: -3501709078333206731}
+  - component: {fileID: 6850427650671537120}
+  - component: {fileID: -5056355623399845551}
   m_Layer: 10
   m_Name: Wanderer_StateMachine 1
   m_TagString: Untagged
@@ -1615,6 +1617,8 @@ MonoBehaviour:
   DestinationRoom: {fileID: 0}
   CurrentRoom: {fileID: 0}
   DoorToOpen: {fileID: 0}
+  TargetPlayer: {fileID: 0}
+  LastSeenPlayerLocation: {x: 0, y: 0, z: 0}
 --- !u!114 &5701924974620700261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1632,6 +1636,8 @@ MonoBehaviour:
     Value: {fileID: -3531602013836704586}
   - Key: 1
     Value: {fileID: 7233674478500768538}
+  - Key: 3
+    Value: {fileID: 6850427650671537120}
   stateInterrupts:
   - Key: 5
     Value: {fileID: 517689836278078639}
@@ -1649,11 +1655,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f870543fc040234485f7cb352dd2445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorFindDistance: 18
-  findDoorMask:
-    serializedVersion: 2
-    m_Bits: 577
-  dirObject: {fileID: 2088284898837779890}
   targetPosition: {x: 0, y: 0, z: 0}
   moving: 0
 --- !u!114 &-3531602013836704586
@@ -1668,7 +1669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff58dd7ec089dc54f8a262d8376ac98b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roamSpeed: 12
+  speed: 17
   destRoom: {fileID: 0}
 --- !u!114 &7233674478500768538
 MonoBehaviour:
@@ -1718,3 +1719,37 @@ MonoBehaviour:
   findDoorMask:
     serializedVersion: 2
     m_Bits: 2049
+--- !u!114 &6850427650671537120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978024783357441720}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c30ab5d4f875a4a8ca409cf958d82f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 27
+--- !u!114 &-5056355623399845551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978024783357441720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25765044a0b88314b84d106a241cc407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepSource: {fileID: 8078353467643043598}
+  footstepSounds:
+  - {fileID: 8300000, guid: 43c7b0792354823408d03bd6f8885ae1, type: 3}
+  - {fileID: 8300000, guid: 2196e6891b6c0f94780e3da973d4a840, type: 3}
+  - {fileID: 8300000, guid: 8da1aec079cbcba43a854395a45b0bef, type: 3}
+  runningFootstepSounds:
+  - {fileID: 8300000, guid: cf09212a67da30e46ad8e10cda27331a, type: 3}
+  - {fileID: 8300000, guid: fef6acc98b41bb64ba5deae8bff8a0e1, type: 3}
+  - {fileID: 8300000, guid: 8e45bbbf84ddf924f914dbd42dab34cd, type: 3}

@@ -7,4 +7,6 @@ public class WandererInfo : MonoBehaviour
     public GameObject DestinationRoom;
     public GameObject CurrentRoom;
     public GameObject DoorToOpen;
+    public GameObject TargetPlayer;
+    public Vector3 LastSeenPlayerLocation;
 }

@@ -13,16 +13,34 @@ public class WandererSight : MonoBehaviour
     public float doorFindDistance;
     public LayerMask findDoorMask;
 
+    public bool IsPlayerInSight => info.TargetPlayer != null;
+    public bool IsThereBlockingDoor => door != null;
+
 
     WandererInfo info;
 
     GameObject target;
+    GameObject door;
 
     private void Awake()
     {
         info = GetComponent<WandererInfo>();
 
         target = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    private void FixedUpdate()
+    {
+        door = CheckForBlockingDoor();
+        if(door != null)
+        {
+            info.DoorToOpen = door;
+        }
+        info.TargetPlayer = CheckForPlayerInSight();
+        if(info.TargetPlayer != null)
+        {
+            info.LastSeenPlayerLocation = info.TargetPlayer.transform.position;
+        }
     }
 
 
@@ -57,9 +75,10 @@ public class WandererSight : MonoBehaviour
     public GameObject CheckForBlockingDoor()
     {
         var doorObj = IsDoorInFront();
-        if (doorObj != null)
+        if (doorObj != null & info.CurrentRoom != null & info.DestinationRoom != null)
         {
             var door = doorObj.GetComponent<ToggleDoor>();
+
             bool doorIsInTheWay = info.CurrentRoom != info.DestinationRoom;
             if (doorObj != null & doorIsInTheWay & !door.open) return doorObj;
         }

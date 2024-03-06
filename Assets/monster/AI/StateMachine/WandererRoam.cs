@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class WandererRoam : StateProcess<WandererState>
 {
-    public float roamSpeed;
+    public float speed;
 
     WandererMovement movement;
     WandererSight sight;
     WandererInfo info;
+
     Animator anim;
 
     List<GameObject> rooms = new List<GameObject>();
@@ -18,8 +19,9 @@ public class WandererRoam : StateProcess<WandererState>
     {
         movement = GetComponent<WandererMovement>();
         sight = GetComponent<WandererSight>();
-        anim = GetComponent<Animator>();
         info = GetComponent<WandererInfo>();
+
+        anim = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -29,12 +31,18 @@ public class WandererRoam : StateProcess<WandererState>
 
     private void Update()
     {
-        var door = sight.CheckForBlockingDoor();
-        if (door != null)
+        if (sight.IsThereBlockingDoor)
         {
-            info.DoorToOpen = door;
             StateController.InterruptWith(WandererState.OpenDoor);
+            return;
         }
+
+        if (sight.IsPlayerInSight)
+        {
+            StateController.SwitchState(WandererState.Chase);
+            return;
+        }
+
     }
 
     void Roam()
@@ -47,7 +55,7 @@ public class WandererRoam : StateProcess<WandererState>
         }
 
         Debug.Log("Wandering to room");
-        movement.MoveTo(destRoom.centerObject.transform.position, roamSpeed, DestinationReached);
+        movement.MoveTo(destRoom.centerObject.transform.position, speed, DestinationReached);
     }
 
     void DestinationReached()
