@@ -26,6 +26,7 @@ public class Room : MonoBehaviour
     public int depth = 0;
 
     public List<GameObject> objectiveSpawnPositions;
+    public List<GameObject> roamPositions;
 
     [Header("Random Objects")]
     [SerializeField] List<RandomObjects> randomObjects;
