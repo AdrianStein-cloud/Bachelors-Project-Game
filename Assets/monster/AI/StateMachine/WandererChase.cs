@@ -40,11 +40,6 @@ public class WandererChase : StateProcess<WandererState>
         anim.SetBool("Chase", true);
     }
 
-    private void OnDisable()
-    {
-        info.IsChasing = false;
-    }
-
     private void Update()
     {
         if (sight.IsThereBlockingDoor)
@@ -73,6 +68,7 @@ public class WandererChase : StateProcess<WandererState>
     void LookForPlayer()
     {
         anim.SetBool("Chase", false);
+        info.IsChasing = false;
         StateController.SwitchState(WandererState.LookingForPlayer);
     }
 

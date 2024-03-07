@@ -8,6 +8,7 @@ public class WandererSight : MonoBehaviour
     public LayerMask findPlayerMask;
     public float angle;
     public float distance;
+    public float omniDirectionalVisionDistance;
     public float persitanceDuration = 0.4f;
 
     [Header("Door Sight")]
@@ -38,7 +39,8 @@ public class WandererSight : MonoBehaviour
         {
             info.DoorToOpen = door;
         }
-        info.TargetPlayer = CheckForPlayerInSight(angle, distance);
+        info.TargetPlayer = CheckForPlayerInSight(360f, omniDirectionalVisionDistance);
+        info.TargetPlayer = info.TargetPlayer != null ? info.TargetPlayer : CheckForPlayerInSight(angle, distance);
         if(info.TargetPlayer != null)
         {
             info.LastSeenPlayerLocation = info.TargetPlayer.transform.position;
@@ -73,7 +75,8 @@ public class WandererSight : MonoBehaviour
         {
             Debug.DrawLine(eyesCenter, hit.point);
             //Debug.Log(hit.collider.gameObject.name);
-            if (hit.collider.gameObject == target && Vector3.Angle(dir, eyes.transform.forward) < angle * 0.5f)
+            var flatDir = flatPlayerPos - flatPos;
+            if (hit.collider.gameObject == target && Vector3.Angle(flatDir, transform.forward) < angle * 0.5f)
             {
                 return target;
             }

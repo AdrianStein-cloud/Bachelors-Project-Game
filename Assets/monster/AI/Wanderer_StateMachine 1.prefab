@@ -1720,8 +1720,9 @@ MonoBehaviour:
   findPlayerMask:
     serializedVersion: 2
     m_Bits: 577
-  angle: 360
+  angle: 180
   distance: 10000
+  omniDirectionalVisionDistance: 40
   persitanceDuration: 0.4
   doorFindDistance: 12
   findDoorMask:
