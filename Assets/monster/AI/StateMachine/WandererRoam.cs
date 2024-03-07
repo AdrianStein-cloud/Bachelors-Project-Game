@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 using UnityEngine;
 
 public class WandererRoam : StateProcess<WandererState>
@@ -15,6 +16,10 @@ public class WandererRoam : StateProcess<WandererState>
     List<GameObject> rooms = new List<GameObject>();
     public Room destRoom;
 
+    bool canGrowl = false;
+    WandererSounds wandererSounds;
+    public Vector2 growlMinMaxCooldown;
+
     private void Awake()
     {
         movement = GetComponent<WandererMovement>();
@@ -22,6 +27,9 @@ public class WandererRoam : StateProcess<WandererState>
         info = GetComponent<WandererInfo>();
 
         anim = GetComponent<Animator>();
+        wandererSounds = GetComponent<WandererSounds>();
+
+        StartCoroutine(DontGrowlOnStart());
     }
 
     private void OnEnable()
@@ -36,11 +44,8 @@ public class WandererRoam : StateProcess<WandererState>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StateController.SwitchState(WandererState.LookingForPlayer);
-            return;
-        }
+        if (canGrowl) StartCoroutine(DoGrowl());
+
         if (sight.IsThereBlockingDoor)
         {
             StateController.InterruptWith(WandererState.OpenDoor);
@@ -94,5 +99,22 @@ public class WandererRoam : StateProcess<WandererState>
         var room = rooms[0];
         rooms.Remove(room);
         return room;
+    }
+
+    IEnumerator DoGrowl()
+    {
+        canGrowl = false;
+        wandererSounds.PlayAmbiance();
+
+        yield return new WaitForSeconds(Random.Range(growlMinMaxCooldown.x, growlMinMaxCooldown.y));
+
+        canGrowl = true;
+    }
+
+    IEnumerator DontGrowlOnStart()
+    {
+        yield return new WaitForSeconds(10f);
+
+        canGrowl = true;
     }
 }

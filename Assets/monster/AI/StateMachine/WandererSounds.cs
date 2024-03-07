@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class WandererSounds : MonoBehaviour
 {
+    [Header("Misc")]
+    public AudioClip ambianceSound;
+
     [Header("Scream")]
     public AudioSource monsterSource;
     public List<AudioClip> screamSounds;
@@ -51,5 +54,11 @@ public class WandererSounds : MonoBehaviour
     public void ScreechEnded()
     {
         OnScreamEnd?.Invoke();
+    }
+
+    public void PlayAmbiance()
+    {
+        monsterSource.clip = ambianceSound;
+        monsterSource.Play();
     }
 }

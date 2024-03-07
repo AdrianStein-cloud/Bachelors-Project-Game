@@ -1678,6 +1678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 17
   destRoom: {fileID: 0}
+  growlMinMaxCooldown: {x: 20, y: 60}
 --- !u!114 &7233674478500768538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1758,10 +1759,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25765044a0b88314b84d106a241cc407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ambianceSound: {fileID: 8300000, guid: 2ed9d6db8d620244da55566b68ca1e84, type: 3}
   monsterSource: {fileID: 670935429120817792}
   screamSounds:
-  - {fileID: 8300000, guid: 003ed3c3816d9214b93abee528eaf076, type: 3}
   - {fileID: 8300000, guid: fca2af9408bf60f4e9118843daae5f93, type: 3}
+  - {fileID: 8300000, guid: 003ed3c3816d9214b93abee528eaf076, type: 3}
   footstepSource: {fileID: 8078353467643043598}
   footstepSounds:
   - {fileID: 8300000, guid: 43c7b0792354823408d03bd6f8885ae1, type: 3}
