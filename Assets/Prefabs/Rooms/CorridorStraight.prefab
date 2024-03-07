@@ -11697,8 +11697,8 @@ MonoBehaviour:
   offset_y: 0
   offset_z: 0
   centerObject: {fileID: 2133142756704125255}
-  isCorridor: 0
-  depth: 0
+  isCorridor: 1
+  depth: 2
   objectiveSpawnPositions:
   - {fileID: 8907935450465948773}
   - {fileID: 0}
