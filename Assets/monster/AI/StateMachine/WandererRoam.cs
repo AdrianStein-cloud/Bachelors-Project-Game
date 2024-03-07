@@ -20,6 +20,7 @@ public class WandererRoam : StateProcess<WandererState>
     bool canGrowl = false;
     WandererSounds wandererSounds;
     public Vector2 growlMinMaxCooldown;
+    public Vector2 growlStartMinMaxCooldown;
 
     private void Awake()
     {
@@ -124,7 +125,7 @@ public class WandererRoam : StateProcess<WandererState>
 
     IEnumerator DontGrowlOnStart()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(Random.Range(growlStartMinMaxCooldown.x, growlStartMinMaxCooldown.y));
 
         canGrowl = true;
     }

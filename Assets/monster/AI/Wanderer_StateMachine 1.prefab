@@ -1679,6 +1679,7 @@ MonoBehaviour:
   speed: 12
   destRoom: {fileID: 0}
   growlMinMaxCooldown: {x: 20, y: 60}
+  growlStartMinMaxCooldown: {x: 6, y: 15}
 --- !u!114 &7233674478500768538
 MonoBehaviour:
   m_ObjectHideFlags: 0
