@@ -36,6 +36,11 @@ public class WandererRoam : StateProcess<WandererState>
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            StateController.SwitchState(WandererState.LookingForPlayer);
+            return;
+        }
         if (sight.IsThereBlockingDoor)
         {
             StateController.InterruptWith(WandererState.OpenDoor);

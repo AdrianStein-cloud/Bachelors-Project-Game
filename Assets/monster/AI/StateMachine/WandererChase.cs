@@ -73,7 +73,7 @@ public class WandererChase : StateProcess<WandererState>
     void LookForPlayer()
     {
         anim.SetBool("Chase", false);
-        StateController.SwitchState(WandererState.Roam);
+        StateController.SwitchState(WandererState.LookingForPlayer);
     }
 
     void AttackPlayer(GameObject player)

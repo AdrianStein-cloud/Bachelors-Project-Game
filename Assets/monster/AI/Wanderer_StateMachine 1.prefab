@@ -1377,6 +1377,7 @@ GameObject:
   - component: {fileID: 6850427650671537120}
   - component: {fileID: -5056355623399845551}
   - component: {fileID: -3388323793867589819}
+  - component: {fileID: -3565055126115186243}
   m_Layer: 10
   m_Name: Wanderer_StateMachine 1
   m_TagString: Untagged
@@ -1642,6 +1643,8 @@ MonoBehaviour:
     Value: {fileID: 6850427650671537120}
   - Key: 7
     Value: {fileID: -3388323793867589819}
+  - Key: 6
+    Value: {fileID: -3565055126115186243}
   stateInterrupts:
   - Key: 5
     Value: {fileID: 517689836278078639}
@@ -1781,3 +1784,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 20
+--- !u!114 &-3565055126115186243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978024783357441720}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e8f94cebe2765e4c841cf8402e5ef0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

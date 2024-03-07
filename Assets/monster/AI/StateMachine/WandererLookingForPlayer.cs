@@ -1,18 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
 
-public class WandererLookingForPlayer : MonoBehaviour
+public class WandererLookingForPlayer : StateProcess<WandererState>
 {
-    // Start is called before the first frame update
-    void Start()
+    WandererMovement movement;
+    WandererSight sight;
+    WandererInfo info;
+    Animator anim;
+
+    private void Awake()
     {
-        
+        movement = GetComponent<WandererMovement>();
+        sight = GetComponent<WandererSight>();
+        info = GetComponent<WandererInfo>();
+        anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        StartCoroutine(SearchRoom());
+    }
+
+    private void Update()
+    {
+        if (sight.IsPlayerInSight)
+        {
+            anim.SetBool("Search", false);
+            anim.SetBool("Wander", false);
+            StateController.SwitchState(WandererState.Chase);
+        }
+    }
+
+    IEnumerator SearchRoom()
+    {
+        movement.Stop();
+        anim.SetBool("Search", true);
+        yield return new WaitForSeconds(2f);
+        anim.SetBool("Search", false);
+        if (enabled)
+        {
+            anim.SetBool("Wander", true);
+            var currentRoom = info.CurrentRoom.GetComponentInChildren<Room>();
+            var center = currentRoom.centerObject.transform.position;
+            float speed = GetComponent<WandererRoam>().speed;
+            movement.MoveTo(center, speed, DestinationReached);
+        }
+
+    }
+
+    void DestinationReached()
+    {
+        if(enabled)
+        {
+            StateController.SwitchState(WandererState.Roam);
+        }
     }
 }
