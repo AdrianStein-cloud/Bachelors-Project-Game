@@ -1420,7 +1420,7 @@ NavMeshAgent:
   m_Acceleration: 10000
   avoidancePriority: 50
   m_AngularSpeed: 3600
-  m_StoppingDistance: 10
+  m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -1676,7 +1676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff58dd7ec089dc54f8a262d8376ac98b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 17
+  speed: 12
   destRoom: {fileID: 0}
   growlMinMaxCooldown: {x: 20, y: 60}
 --- !u!114 &7233674478500768538
@@ -1691,6 +1691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861269b4adeaaaf45be4d62eca46ce47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 12
 --- !u!114 &517689836278078639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1722,7 +1723,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 577
   angle: 180
-  distance: 10000
+  distance: 400
   omniDirectionalVisionDistance: 40
   persitanceDuration: 0.4
   doorFindDistance: 12
