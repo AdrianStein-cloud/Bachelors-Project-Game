@@ -16,19 +16,13 @@ public class CameraShake : MonoBehaviour
         cam = Camera.main;
     }
 
-    void Update()
+    /*void Update()
     {
-        /*
-        if (Input.GetKeyDown(KeyCode.Alpha1)) rotationShake = !rotationShake;
-        if (Input.GetKeyDown(KeyCode.Alpha2)) scaleShake = !scaleShake;
-        if (Input.GetKeyDown(KeyCode.Alpha3)) movementShake = !movementShake;
-        */
-
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             Shake(Defaultpreset);
         }
-    }
+    }*/
 
     public void Shake(CameraShakePreset preset)
     {

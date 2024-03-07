@@ -518,6 +518,7 @@ MonoBehaviour:
   - {fileID: 1830996693117828739}
   - {fileID: 2200380280924500097}
   - {fileID: 6653012095534862131}
+  roamPositions: []
   randomObjects:
   - name: Pipes
     maxAmount: 2

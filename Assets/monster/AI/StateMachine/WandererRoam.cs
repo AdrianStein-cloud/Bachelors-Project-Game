@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
 using UnityEngine;
+using BBUnity.Actions;
 
 public class WandererRoam : StateProcess<WandererState>
 {
@@ -81,8 +82,18 @@ public class WandererRoam : StateProcess<WandererState>
         //Only transition if roaming didn't get interrupted (currently it cant get interrupted, but just in case)
         if (enabled)
         {
-            destRoom = null;
-            StateController.SwitchState(WandererState.SearchRoom);
+            var roomScript = destRoom.GetComponent<Room>();
+
+            if (!roomScript.isCorridor)
+            {
+                destRoom = null;
+                StateController.SwitchState(WandererState.SearchRoom);
+            }
+            else
+            {
+                destRoom = null;
+                Roam();
+            }
         }
     }
 
