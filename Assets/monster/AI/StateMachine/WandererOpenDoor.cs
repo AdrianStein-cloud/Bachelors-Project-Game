@@ -36,7 +36,7 @@ public class WandererOpenDoor : StateInterrupt
         agent.speed = 0;*/
 
         movement.Stop();
-        if (info.IsChasing)
+        if (!info.IsChasing)
         {
             anim.SetBool("Search", true);
 
