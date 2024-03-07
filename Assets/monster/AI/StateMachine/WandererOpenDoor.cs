@@ -8,20 +8,20 @@ public class WandererOpenDoor : StateInterrupt
     public float openDoorAnimationDelay;
     public float openDoorDelay;
 
-    WandererInfo info;
     WandererMovement movement;
+    WandererInfo info;
     Animator anim;
 
     private void Awake()
     {
+        movement = GetComponent<WandererMovement>();
         info = GetComponent<WandererInfo>();
         anim = GetComponent<Animator>();
-        movement = GetComponent<WandererMovement>();
     }
 
     private void OnEnable()
     {
-        Debug.Log("Opening door");
+        //Debug.Log("Opening door");
         StartCoroutine(OpenDoorWait());
     }
 
@@ -36,10 +36,14 @@ public class WandererOpenDoor : StateInterrupt
         agent.speed = 0;*/
 
         movement.Stop();
-        anim.SetBool("Search", true);
+        if (info.IsChasing)
+        {
+            anim.SetBool("Search", true);
 
-        yield return new WaitForSeconds(openDoorAnimationDelay);
-        anim.SetBool("Search", false);
+            yield return new WaitForSeconds(openDoorAnimationDelay);
+
+            anim.SetBool("Search", false);
+        }
 
         var door = info.DoorToOpen.GetComponent<ToggleDoor>();
         //Coutnermeasure against the player opening the door during wait

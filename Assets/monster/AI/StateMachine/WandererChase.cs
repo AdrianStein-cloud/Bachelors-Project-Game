@@ -14,7 +14,8 @@ public class WandererChase : StateProcess<WandererState>
     public float damageDelay;
     public float cooldown;
     public int angle;
-    public int distance;
+    public int attackStartRange;
+    public float attackHitRange;
 
     WandererMovement movement;
     WandererSight sight;
@@ -35,15 +36,16 @@ public class WandererChase : StateProcess<WandererState>
 
     private void OnEnable()
     {
+        info.IsChasing = true;
         anim.SetBool("Chase", true);
     }
 
     private void OnDisable()
     {
-        anim.SetBool("Chase", false);
+        info.IsChasing = false;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (sight.IsThereBlockingDoor)
         {
@@ -51,7 +53,7 @@ public class WandererChase : StateProcess<WandererState>
             return;
         }
 
-        var player = sight.CheckForPlayerInSight(angle, distance);
+        var player = sight.CheckForPlayerInSight(angle, attackStartRange);
         if(player != null)
         {
             AttackPlayer(player);
@@ -62,8 +64,6 @@ public class WandererChase : StateProcess<WandererState>
 
     void PlayerLocationReached()
     {
-        //Needs FIX
-        //Sometimes it loses sight of the player while the player is right beside or behind him
         if (!sight.IsPlayerInSight)
         {
             LookForPlayer();
@@ -72,6 +72,7 @@ public class WandererChase : StateProcess<WandererState>
 
     void LookForPlayer()
     {
+        anim.SetBool("Chase", false);
         StateController.SwitchState(WandererState.Roam);
     }
 
@@ -91,14 +92,13 @@ public class WandererChase : StateProcess<WandererState>
         anim.SetTrigger("Attack");
 
         yield return new WaitForSeconds(damageDelay);
-        player
-            .GetComponent<PlayerHealth>()
-            .TakeDamage(damage);
 
-        /*if (DistanceToTarget() <= attackRange)
+        if (sight.DistanceToTarget(player) <= attackHitRange)
         {
-            target.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
-        }*/
+            player
+                .GetComponent<PlayerHealth>()
+                .TakeDamage(damage);
+        }
     }
 
     IEnumerator AttackCooldown()

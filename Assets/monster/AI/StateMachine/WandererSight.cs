@@ -8,6 +8,7 @@ public class WandererSight : MonoBehaviour
     public LayerMask findPlayerMask;
     public float angle;
     public float distance;
+    public float persitanceDuration = 0.4f;
 
     [Header("Door Sight")]
     public float doorFindDistance;
@@ -21,6 +22,7 @@ public class WandererSight : MonoBehaviour
 
     GameObject target;
     GameObject door;
+    float lastSeenPlayerTime;
 
     private void Awake()
     {
@@ -29,7 +31,7 @@ public class WandererSight : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         door = CheckForBlockingDoor();
         if(door != null)
@@ -39,6 +41,12 @@ public class WandererSight : MonoBehaviour
         info.TargetPlayer = CheckForPlayerInSight(angle, distance);
         if(info.TargetPlayer != null)
         {
+            info.LastSeenPlayerLocation = info.TargetPlayer.transform.position;
+            lastSeenPlayerTime = Time.time;
+        }
+        else if(Time.time - lastSeenPlayerTime <= persitanceDuration)
+        {
+            info.TargetPlayer = target;
             info.LastSeenPlayerLocation = info.TargetPlayer.transform.position;
         }
     }
@@ -64,6 +72,7 @@ public class WandererSight : MonoBehaviour
         if (Physics.Raycast(eyesCenter, dir, out hit, Mathf.Infinity, findPlayerMask))
         {
             Debug.DrawLine(eyesCenter, hit.point);
+            //Debug.Log(hit.collider.gameObject.name);
             if (hit.collider.gameObject == target && Vector3.Angle(dir, eyes.transform.forward) < angle * 0.5f)
             {
                 return target;
@@ -91,6 +100,11 @@ public class WandererSight : MonoBehaviour
             OpenDoor(door);
             return;
         }*/
+    }
+
+    public float DistanceToTarget(GameObject target)
+    {
+        return Vector3.Distance(target.transform.position, transform.position);
     }
 
 

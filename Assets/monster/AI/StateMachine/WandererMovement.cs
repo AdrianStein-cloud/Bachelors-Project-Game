@@ -28,9 +28,9 @@ public class WandererMovement : MonoBehaviour
 
         if (destinationReached)
         {
-            moving = false;
-            agent.isStopped = true;
-            onDestinationReached?.Invoke();
+            var temp = onDestinationReached;
+            Stop();
+            temp?.Invoke();
         }
     }
 

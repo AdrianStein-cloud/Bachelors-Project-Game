@@ -60,13 +60,13 @@ public class WandererRoam : StateProcess<WandererState>
             destRoom = GetNextRoom().GetComponent<Room>();
         }
 
-        Debug.Log("Wandering to room");
+        //Debug.Log("Wandering to room");
         movement.MoveTo(destRoom.centerObject.transform.position, speed, DestinationReached);
     }
 
     void DestinationReached()
     {
-        Debug.Log("Destination Reached");
+        //Debug.Log("Destination Reached");
 
         //Only transition if roaming didn't get interrupted (currently it cant get interrupted, but just in case)
         if (enabled)
