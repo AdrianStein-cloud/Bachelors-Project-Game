@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Battery Upgrade
   m_EditorClassIdentifier: 
   Name: Supercharged Battery
-  description: Makes your flashlight battery last {3}% longer
+  description: '{3} longer flashlight battery'
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
   intensity: 0
