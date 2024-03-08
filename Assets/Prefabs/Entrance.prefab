@@ -223,6 +223,7 @@ MonoBehaviour:
   bounding_z: 2
   isEntrance: 0
   doorWallBlocker: {fileID: 3224121869272574819}
+  doorRemoveIfNoRoom: {fileID: 0}
 --- !u!1 &1161758235314694780
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,6 +648,7 @@ MonoBehaviour:
   bounding_z: 2
   isEntrance: 0
   doorWallBlocker: {fileID: 8597245564295955338}
+  doorRemoveIfNoRoom: {fileID: 0}
 --- !u!1 &1897958925157984235
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,6 +2332,7 @@ MonoBehaviour:
   bounding_z: 2
   isEntrance: 1
   doorWallBlocker: {fileID: 0}
+  doorRemoveIfNoRoom: {fileID: 0}
 --- !u!1 &7975477203998792017
 GameObject:
   m_ObjectHideFlags: 0
@@ -2848,6 +2851,7 @@ MonoBehaviour:
   bounding_z: 2
   isEntrance: 0
   doorWallBlocker: {fileID: 6037836416614906993}
+  doorRemoveIfNoRoom: {fileID: 0}
 --- !u!1001 &177192173553739202
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4118,8 +4122,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 15.5397415, y: 19.705719, z: 1}
-  m_Center: {x: 0.9128252, y: -0.3780325, z: 6.702165e-16}
+  m_Size: {x: 20.622892, y: 19.705719, z: 1}
+  m_Center: {x: 0.9787734, y: -0.3780325, z: -2.703631e-15}
 --- !u!1001 &6827385740576249945
 PrefabInstance:
   m_ObjectHideFlags: 0

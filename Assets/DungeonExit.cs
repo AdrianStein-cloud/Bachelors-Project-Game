@@ -43,7 +43,10 @@ public class DungeonExit : Interactable
     public override void EnableInteractability()
     {
         inFocus = true;
-        InteractionUIText.Instance.SetText("Press E to exit dungeon");
+        if (CanLeaveDungeon)
+        {
+            InteractionUIText.Instance.SetText("Press E to exit dungeon");
+        }
     }
 
     public override void DisableInteractability()
