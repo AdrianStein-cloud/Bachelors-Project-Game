@@ -51,15 +51,16 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    public IEnumerator GenerateDungeon(Transform dungeon, int depth)
+    public IEnumerator GenerateDungeon(GameObject dungeon, int depth)
     {
         this.depth = depth;
         SetSeed(seed);
+
         spawnedRooms = new List<GameObject>();
         spawnedRoomsDepth = new List<(GameObject, int)>();
 
         //instantiate first object in rooms
-        GameObject entrance = Instantiate(startRoom, new Vector3(0, 0, 0), transform.rotation, dungeon);
+        GameObject entrance = Instantiate(startRoom, new Vector3(0, 0, 0), transform.rotation, dungeon.transform);
         entrance.GetComponent<Room>().SpawnRandomObjects(random);
         playerSpawnPosition = entrance.transform.Find("PlayerSpawnPosition").gameObject;
         spawnedRooms.Add(entrance);
@@ -72,12 +73,21 @@ public class DungeonGenerator : MonoBehaviour
         while (doorQueue.Count > 0)
         {
             (Door, int) element = doorQueue.Dequeue();
-            yield return SpawnRoomAtDoor(element.Item1, element.Item2, dungeon);
+            yield return SpawnRoomAtDoor(element.Item1, element.Item2, dungeon.transform);
+        }
+
+        foreach(Door door in entrance.GetComponent<Room>().GetDoors())
+        {
+            if (!door.GetDoorConnected())
+            {
+                foreach (Transform child in dungeon.transform) Destroy(child.gameObject);
+                yield return GenerateDungeon(dungeon, depth);
+            }
         }
 
         //Done spawning dungeon
         yield return new WaitForSeconds(0.2f);
-        Instantiate(navmeshSurface, dungeon).BuildNavMesh();
+        Instantiate(navmeshSurface, dungeon.transform).BuildNavMesh();
 
         yield return new WaitForSeconds(0.2f);
         //GetComponent<SimpleEnemySpawner>().SpawnEnemies(spawnedRooms);

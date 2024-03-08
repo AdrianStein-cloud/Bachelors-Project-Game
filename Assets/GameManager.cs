@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         dungeonEntrance.DungeonIsAvailable = false;
         dungeon = new GameObject("Dungeon");
         dangerScaler.ScaleDanger();
-        yield return dungeonGenerator.GenerateDungeon(dungeon.transform, GameSettings.Instance.CurrentDepth);
+        yield return dungeonGenerator.GenerateDungeon(dungeon, GameSettings.Instance.CurrentDepth);
         dungeonEntrance.DungeonIsAvailable = true;
         OnDungeonGenerated?.Invoke(GameSettings.Instance.Wave);
     }
