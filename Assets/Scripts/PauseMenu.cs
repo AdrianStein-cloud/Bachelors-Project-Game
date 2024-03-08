@@ -52,8 +52,13 @@ public class PauseMenu : MonoBehaviour
         sensSlider.value = value;
         sensInputField.text = value.ToString();
 
-        graphicsDropdown.value = PlayerPrefs.GetInt("Graphics");
-        QualitySettings.renderPipeline = graphics[PlayerPrefs.GetInt("Graphics")];
+        if(PlayerPrefs.GetInt("Graphics") == 0)
+        {
+            PlayerPrefs.SetInt("Graphics", 2);
+        }
+
+        graphicsDropdown.value = PlayerPrefs.GetInt("Graphics") - 1;
+        QualitySettings.renderPipeline = graphics[PlayerPrefs.GetInt("Graphics") - 1];
         graphicsDropdown.onValueChanged.AddListener(SetGraphics);
 
         sensSlider.onValueChanged.AddListener(SetSensitivity);
@@ -67,7 +72,7 @@ public class PauseMenu : MonoBehaviour
     private void SetGraphics(int value)
     {
         QualitySettings.renderPipeline = graphics[value];
-        PlayerPrefs.SetInt("Graphics", value);
+        PlayerPrefs.SetInt("Graphics", value + 1);
     }
 
     private void SetCrosshair(bool arg0)

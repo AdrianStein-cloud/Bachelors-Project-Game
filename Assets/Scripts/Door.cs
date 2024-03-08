@@ -16,6 +16,7 @@ public class Door : MonoBehaviour
     [Header("Setup")]
     [SerializeField] public bool isEntrance = false;
     [SerializeField] GameObject doorWallBlocker;
+    [SerializeField] GameObject doorRemoveIfNoRoom;
 
     private void Awake()
     {
@@ -23,6 +24,10 @@ public class Door : MonoBehaviour
         if (doorWallBlocker != null)
         {
             doorWallBlocker.SetActive(true);
+            if(doorRemoveIfNoRoom != null)
+            {
+                doorRemoveIfNoRoom.SetActive(false);
+            }
         }
     }
 
@@ -32,6 +37,10 @@ public class Door : MonoBehaviour
         if(doorWallBlocker != null)
         {
             doorWallBlocker.SetActive(!connected);
+            if (doorRemoveIfNoRoom != null)
+            {
+                doorRemoveIfNoRoom.SetActive(connected);
+            }
         }
     }
 

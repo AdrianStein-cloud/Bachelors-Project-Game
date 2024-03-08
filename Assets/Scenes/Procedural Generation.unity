@@ -454,6 +454,11 @@ PrefabInstance:
     - target: {fileID: 6251193281981130515, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: dungeonStartDepth
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6251193281981130515, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: generationLookahead
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
