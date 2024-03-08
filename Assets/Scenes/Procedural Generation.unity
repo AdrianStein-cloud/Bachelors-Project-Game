@@ -29236,6 +29236,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 906898357575352449, guid: 2c821eba5bdd87e4585b4dbf47eceb78,
+        type: 3}
+      propertyPath: clickSource
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4348381465791168864, guid: 2c821eba5bdd87e4585b4dbf47eceb78,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -30181,6 +30186,7 @@ MonoBehaviour:
   ReadyLamp: {fileID: 629621982}
   NotReadyLamp: {fileID: 1845408577}
   minimumTime: 5
+  bellSound: {fileID: 1833988974168406462}
 --- !u!95 &1833988974168406461
 Animator:
   serializedVersion: 5

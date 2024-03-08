@@ -8,13 +8,13 @@ public class ElevatorEntrance : MonoBehaviour
     [SerializeField] GameObject ReadyLamp;
     [SerializeField] GameObject NotReadyLamp;
     [SerializeField] float minimumTime = 4f;
+    [SerializeField] AudioSource bellSound;
 
     private bool lightsOn = true;
     private float timer;
 
     DungeonEntrance entrance;
     Animator anim;
-    AudioSource bellSound;
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class ElevatorEntrance : MonoBehaviour
             anim.SetTrigger("Close");
             timer = Time.time;
         };
-        bellSound = GetComponent<AudioSource>();
+        //bellSound = GetComponent<AudioSource>();
         timer = Time.time;
     }
 
