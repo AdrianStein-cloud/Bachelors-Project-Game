@@ -2060,6 +2060,7 @@ MonoBehaviour:
   bounding_z: 2
   isEntrance: 0
   doorWallBlocker: {fileID: 7750278409493800475}
+  doorRemoveIfNoRoom: {fileID: 0}
 --- !u!1 &1602425710278814813
 GameObject:
   m_ObjectHideFlags: 0
@@ -9298,6 +9299,7 @@ MonoBehaviour:
   bounding_z: 2
   isEntrance: 1
   doorWallBlocker: {fileID: 3868035027777374087}
+  doorRemoveIfNoRoom: {fileID: 0}
 --- !u!1 &7475675673675995590
 GameObject:
   m_ObjectHideFlags: 0
@@ -11699,13 +11701,8 @@ MonoBehaviour:
   centerObject: {fileID: 2133142756704125255}
   isCorridor: 1
   depth: 2
-  objectiveSpawnPositions:
-  - {fileID: 8907935450465948773}
-  - {fileID: 0}
-  - {fileID: 552314237593605112}
-  - {fileID: 7127841665383798284}
-  - {fileID: 0}
-  - {fileID: 227465622277365685}
+  objectiveSpawnPositions: []
+  roamPositions: []
   randomObjects:
   - name: Pipes
     maxAmount: 2
@@ -14206,12 +14203,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5e0f95790dad054c8e7756f1cb54b71, type: 3}
---- !u!1 &227465622277365685 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8611790339727012870, guid: d5e0f95790dad054c8e7756f1cb54b71,
-    type: 3}
-  m_PrefabInstance: {fileID: 8406856461105572787}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6148916311796302455 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2449520206588701124, guid: d5e0f95790dad054c8e7756f1cb54b71,

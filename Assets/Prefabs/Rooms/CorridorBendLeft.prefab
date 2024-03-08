@@ -513,11 +513,7 @@ MonoBehaviour:
   centerObject: {fileID: 1515015960206436005}
   isCorridor: 1
   depth: 2
-  objectiveSpawnPositions:
-  - {fileID: 874873898206450141}
-  - {fileID: 1830996693117828739}
-  - {fileID: 2200380280924500097}
-  - {fileID: 6653012095534862131}
+  objectiveSpawnPositions: []
   roamPositions: []
   randomObjects:
   - name: Pipes
@@ -3395,6 +3391,7 @@ MonoBehaviour:
   bounding_z: 2
   isEntrance: 1
   doorWallBlocker: {fileID: 971236880453648138}
+  doorRemoveIfNoRoom: {fileID: 0}
 --- !u!1 &4001433601124038870
 GameObject:
   m_ObjectHideFlags: 0
@@ -4838,6 +4835,7 @@ MonoBehaviour:
   bounding_z: 2
   isEntrance: 0
   doorWallBlocker: {fileID: 3688590860056470317}
+  doorRemoveIfNoRoom: {fileID: 0}
 --- !u!1 &6257502845144143588
 GameObject:
   m_ObjectHideFlags: 0

@@ -1189,6 +1189,7 @@ MonoBehaviour:
   bounding_z: 2
   isEntrance: 1
   doorWallBlocker: {fileID: 2855189547100746278}
+  doorRemoveIfNoRoom: {fileID: 0}
 --- !u!1 &1599850469285543559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,6 +1413,7 @@ MonoBehaviour:
   bounding_z: 2
   isEntrance: 0
   doorWallBlocker: {fileID: 7505561130164371965}
+  doorRemoveIfNoRoom: {fileID: 0}
 --- !u!1 &1819422988898346618
 GameObject:
   m_ObjectHideFlags: 0
@@ -3638,14 +3640,9 @@ MonoBehaviour:
   offset_z: 0
   centerObject: {fileID: 4090797255568884715}
   isCorridor: 1
-  depth: 2
-  objectiveSpawnPositions:
-  - {fileID: 5716184765877912244}
-  - {fileID: 2352225010932177965}
-  - {fileID: 2278967236213454029}
-  - {fileID: 7481239667338216508}
-  - {fileID: 4844008939979172936}
-  - {fileID: 4277730459780547135}
+  depth: 3
+  objectiveSpawnPositions: []
+  roamPositions: []
   randomObjects:
   - name: Shelves
     maxAmount: 3
@@ -6215,6 +6212,7 @@ MonoBehaviour:
   bounding_z: 2
   isEntrance: 0
   doorWallBlocker: {fileID: 3519876258274003684}
+  doorRemoveIfNoRoom: {fileID: 0}
 --- !u!1 &8167272668013526486
 GameObject:
   m_ObjectHideFlags: 0

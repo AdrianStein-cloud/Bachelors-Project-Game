@@ -25,7 +25,7 @@ public class Room : MonoBehaviour
 
     public int depth = 0;
 
-    public List<GameObject> objectiveSpawnPositions;
+    public List<GameObject> ObjectiveSpawnPositions { get; private set; }
     public List<GameObject> roamPositions;
 
     [Header("Random Objects")]
@@ -93,8 +93,6 @@ public class Room : MonoBehaviour
 
     public void SpawnRandomObjects(System.Random random)
     {
-        if (randomObjects == null || randomObjects.Count < 1) return;
-
         foreach (RandomObjects _randomObjects in randomObjects)
         {
             for (int i = 0; i < _randomObjects.randomObjects.Count; i++)
@@ -107,7 +105,7 @@ public class Room : MonoBehaviour
             }
         }
 
-        objectiveSpawnPositions = GetComponentsInChildren<Transform>()
+        ObjectiveSpawnPositions = GetComponentsInChildren<Transform>()
             .Where(t => t.name.Contains("ObjectiveSpawnPoint"))
             .Select(t => t.gameObject)
             .ToList();

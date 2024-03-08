@@ -6305,6 +6305,7 @@ MonoBehaviour:
   bounding_z: 2
   isEntrance: 0
   doorWallBlocker: {fileID: 194707761513145771}
+  doorRemoveIfNoRoom: {fileID: 0}
 --- !u!1 &5343570244882939065
 GameObject:
   m_ObjectHideFlags: 0
@@ -6727,6 +6728,7 @@ MonoBehaviour:
   bounding_z: 2
   isEntrance: 1
   doorWallBlocker: {fileID: 8038424249010999531}
+  doorRemoveIfNoRoom: {fileID: 0}
 --- !u!1 &6031491411139394483
 GameObject:
   m_ObjectHideFlags: 0
@@ -8523,6 +8525,7 @@ MonoBehaviour:
   bounding_z: 2
   isEntrance: 0
   doorWallBlocker: {fileID: 8964184241387953300}
+  doorRemoveIfNoRoom: {fileID: 0}
 --- !u!1 &7021100395673916452
 GameObject:
   m_ObjectHideFlags: 0
@@ -9020,13 +9023,8 @@ MonoBehaviour:
   offset_z: 0
   centerObject: {fileID: 7365978824102437016}
   isCorridor: 0
-  depth: 0
-  objectiveSpawnPositions:
-  - {fileID: 7529092023095272922}
-  - {fileID: 5343570244882939065}
-  - {fileID: 1567961416482692972}
-  - {fileID: 1124815230527690910}
-  - {fileID: 997425018183442504}
+  depth: 3
+  objectiveSpawnPositions: []
   roamPositions:
   - {fileID: 248352618615637665}
   - {fileID: 8367933470541046884}

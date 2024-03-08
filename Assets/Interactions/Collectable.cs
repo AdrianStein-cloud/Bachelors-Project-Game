@@ -38,6 +38,7 @@ public class Collectable : Interactable
 
     public override void DisableInteractability()
     {
+        inFocus = false;
         InteractionUIText.Instance.SetText("");
     }
 
