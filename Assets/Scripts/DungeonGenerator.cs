@@ -29,29 +29,22 @@ public class DungeonGenerator : MonoBehaviour
 
     void Awake()
     {
-        SetSeed(seed);
         LoadRooms();
-        //StartCoroutine(GenerateDungeon());
-        //RegenerateDungeon();
     }
     public void SetSeed(int seed)
     {
+        var newSeed = seed;
         if (seed == -1)
         {
-            seed = new Random().Next(1000, 10000000);
+            newSeed = new Random().Next(1000, 10000000);
         }
-        LogSeed(seed);
-        random = new Random(seed);
-        GameSettings.Instance.SetSeed(seed);
-        //Debug.Log("Seed: " + seed);
+        LogSeed(newSeed);
+        random = new Random(newSeed);
+        GameSettings.Instance.SetSeed(newSeed);
     }
 
     private void LoadRooms()
     {
-        //Debug.Log("There are " + rooms.Count + " different rooms...");
-
-        //sourceRooms.SetActive(false);
-
         foreach (WeightedRoom room in randomRooms)
         {
             room.room.transform.position = Vector3.zero;
@@ -61,6 +54,7 @@ public class DungeonGenerator : MonoBehaviour
     public IEnumerator GenerateDungeon(Transform dungeon, int depth)
     {
         this.depth = depth;
+        SetSeed(seed);
         spawnedRooms = new List<GameObject>();
         spawnedRoomsDepth = new List<(GameObject, int)>();
 
@@ -108,7 +102,6 @@ public class DungeonGenerator : MonoBehaviour
             if (tempRandomRooms.Count > 1) randomRoom = tempRandomRooms.GetRollFromWeights(random);
             else randomRoom = tempRandomRooms[0];
 
-
             //newRoom = Instantiate(randomRoom.room, door.gameObject.transform.position, door.direction, dungeon);
             //newRoom = randomRoom.room.GetComponent<Room>;
             //Debug.Log("Trying to spawn: " + newRoom.gameObject.name);
@@ -118,13 +111,11 @@ public class DungeonGenerator : MonoBehaviour
 
             if (IsColliding(newRoomScript, door) || (doors.Count < 1 && (depth + 1) % GameSettings.Instance.GenerationLookahead != 0))
             {
-                //Destroy(newRoom);
                 doors = null;
                 tempRandomRooms.Remove(randomRoom);
             }
             else
             {
-                
                 var newRoom = Instantiate(randomRoom.room, door.gameObject.transform.position, door.direction, dungeon);
                 newRoomScript = newRoom.GetComponent<Room>();
                 doors = newRoomScript.GetDoors();
@@ -219,7 +210,7 @@ public class DungeonGenerator : MonoBehaviour
 
         using (StreamWriter writer = new StreamWriter(path, true))
         {
-            writer.WriteLine(DateTime.Now.ToString("yyyy-MM-dd\tHH:mm:ss") + "\t" + seed);
+            writer.WriteLine(DateTime.Now.ToString("yyyy-MM-dd\tHH:mm:ss") + "\t" + seed + "\t" + depth);
             writer.Flush();
         }
     }
