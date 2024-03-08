@@ -882,7 +882,7 @@ MonoBehaviour:
   crouchSpeed: 15
   toggleCrouch: 1
   crouchHeight: 0.9
-  cameraCrouchOffset: -0.5
+  cameraCrouchOffset: -0.35
   smoothCrouchTime: 1
   smoothCrouchSpeed: 6
   ceilingCheckDistance: 12.8

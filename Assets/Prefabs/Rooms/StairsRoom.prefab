@@ -7619,16 +7619,8 @@ MonoBehaviour:
   offset_z: 0
   centerObject: {fileID: 7603371573093296000}
   isCorridor: 0
-  depth: 0
-  objectiveSpawnPositions:
-  - {fileID: 3619551012879198818}
-  - {fileID: 7893008493686631502}
-  - {fileID: 4840981158709951936}
-  - {fileID: 8577032479937721157}
-  - {fileID: 6433326555755651804}
-  - {fileID: 4384142440501657302}
-  - {fileID: 7638737011748834127}
-  - {fileID: 3665963734044297975}
+  depth: 2
+  objectiveSpawnPositions: []
   roamPositions:
   - {fileID: 1965901921210155115}
   - {fileID: 5029138361594116571}

@@ -35,7 +35,7 @@ public class ObjectiveSpawner : MonoBehaviour
         {
             var randomRoom = rooms[UnityEngine.Random.Range(0, rooms.Count)];
             rooms.Remove(randomRoom);
-            var spawnPostions = randomRoom.objectiveSpawnPositions;
+            var spawnPostions = randomRoom.ObjectiveSpawnPositions;
             var spawnPositionObj = spawnPostions[UnityEngine.Random.Range(0, spawnPostions.Count)];
             spawnPostions.Remove(spawnPositionObj);
             var spawnPoint = spawnPositionObj.transform.position;
