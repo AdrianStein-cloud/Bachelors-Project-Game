@@ -30,10 +30,13 @@ public class Room : MonoBehaviour
 
     [Header("Random Objects")]
     [SerializeField] List<RandomObjects> randomObjects;
+    [Header("Random Materials")]
+    [SerializeField] List<GameObject> walls;
+    [SerializeField] List<GameObject> floors;
+    [SerializeField] List<GameObject> ceilings;
 
     private void Awake()
     {
-
         BoxCollider boxCollider = GetComponent<BoxCollider>();
 
         if (boxCollider == null)
@@ -91,7 +94,29 @@ public class Room : MonoBehaviour
         return doorScripts;
     }
 
-    public void SpawnRandomObjects(System.Random random)
+    public void InitRoom(System.Random random, Material wallMaterial, Material floorMaterial, Material ceilingMaterial)
+    {
+        SpawnRandomObjects(random);
+        ApplyMaterials(wallMaterial, floorMaterial, ceilingMaterial);
+    }
+
+    private void ApplyMaterials(Material wallMaterial, Material floorMaterial, Material ceilingMaterial)
+    {
+        foreach (GameObject wall in walls)
+        {
+            wall.GetComponent<MeshRenderer>().material = wallMaterial;
+        }
+        foreach (GameObject floor in floors)
+        {
+            floor.GetComponent<MeshRenderer>().material = floorMaterial;
+        }
+        foreach (GameObject ceiling in ceilings)
+        {
+            ceiling.GetComponent<MeshRenderer>().material = ceilingMaterial;
+        }
+    }
+
+    private void SpawnRandomObjects(System.Random random)
     {
         foreach (RandomObjects _randomObjects in randomObjects)
         {

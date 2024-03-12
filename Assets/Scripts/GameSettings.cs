@@ -8,6 +8,7 @@ public class GameSettings : Singleton<GameSettings>
     private int seed;
     [SerializeField] private int dungeonStartDepth;
     [SerializeField] private int generationLookahead;
+
     public int DungeonStartDepth
     {
         get => dungeonStartDepth;

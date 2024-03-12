@@ -27,6 +27,9 @@ public class DungeonGenerator : MonoBehaviour
     public List<(GameObject, int)> spawnedRoomsDepth = new List<(GameObject, int)>();
     private Queue<(Door, int)> doorQueue = new Queue<(Door, int)>();
 
+    [SerializeField] private List<MaterialPackage> materialPackages;
+    private Materials materials;
+
     void Awake()
     {
         LoadRooms();
@@ -55,13 +58,14 @@ public class DungeonGenerator : MonoBehaviour
     {
         this.depth = depth;
         SetSeed(seed);
+        RandomMaterialPackage(random);
 
         spawnedRooms = new List<GameObject>();
         spawnedRoomsDepth = new List<(GameObject, int)>();
 
         //instantiate first object in rooms
         GameObject entrance = Instantiate(startRoom, new Vector3(0, 0, 0), transform.rotation, dungeon.transform);
-        entrance.GetComponent<Room>().SpawnRandomObjects(random);
+        entrance.GetComponent<Room>().InitRoom(random, materials.wall, materials.floor, materials.ceiling);
         playerSpawnPosition = entrance.transform.Find("PlayerSpawnPosition").gameObject;
         spawnedRooms.Add(entrance);
 
@@ -131,7 +135,7 @@ public class DungeonGenerator : MonoBehaviour
                 doors = newRoomScript.GetDoors();
                 door.SetDoorConnected(true);
                 newRoomScript.GetEntrance().GetComponent<Door>().SetDoorConnected(true);
-                newRoomScript.SpawnRandomObjects(random);
+                newRoomScript.InitRoom(random, materials.wall, materials.floor, materials.ceiling);
                 spawnedRooms.Add(newRoom);
                 spawnedRoomsDepth.Add((newRoom, depth));
                 roomFound = true;
@@ -187,7 +191,7 @@ public class DungeonGenerator : MonoBehaviour
                 doors = newRoomScript.GetDoors();
                 door.SetDoorConnected(true);
                 newRoomScript.GetEntrance().GetComponent<Door>().SetDoorConnected(true);
-                newRoomScript.SpawnRandomObjects(random);
+                newRoomScript.InitRoom(random, materials.wall, materials.floor, materials.ceiling);
 
                 spawnedRooms.Add(newRoom);
                 spawnedRoomsDepth.Add((newRoom, depth));
@@ -253,6 +257,26 @@ public class DungeonGenerator : MonoBehaviour
 
         return isColliding;
     }
+
+    private void RandomMaterialPackage(System.Random random)
+    {
+        if(materialPackages.Count > 0)
+        {
+            MaterialPackage _materialPackage = materialPackages[random.Next(materialPackages.Count)];
+            Material floor = _materialPackage.floorMaterials[random.Next(_materialPackage.floorMaterials.Count)];
+            Material wall = _materialPackage.wallMaterials[random.Next(_materialPackage.wallMaterials.Count)];
+            Material ceiling;
+            if (_materialPackage.wallForCeiling)
+            {
+                ceiling = wall;
+            }
+            else
+            {
+                ceiling = _materialPackage.ceilingMaterials[random.Next(_materialPackage.ceilingMaterials.Count)];
+            }
+            materials = new Materials(floor, wall, ceiling);
+        }
+    }
 }
 
 [System.Serializable]
@@ -267,4 +291,29 @@ public class MinMaxRoom
 {
     public GameObject room;
     public Vector2 minmax;
+}
+
+[System.Serializable]
+public class MaterialPackage
+{
+    public string name;
+    public bool wallForCeiling;
+    public List<Material> floorMaterials;
+    public List<Material> wallMaterials;
+    public List<Material> ceilingMaterials;
+}
+
+[System.Serializable]
+public class Materials
+{
+    public Materials(Material floor, Material wall, Material ceiling)
+    {
+        this.floor = floor;
+        this.wall = wall;
+        this.ceiling = ceiling;
+    }
+
+    public Material floor;
+    public Material wall;
+    public Material ceiling;
 }

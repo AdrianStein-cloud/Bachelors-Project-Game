@@ -3641,7 +3641,6 @@ MonoBehaviour:
   centerObject: {fileID: 4090797255568884715}
   isCorridor: 1
   depth: 3
-  objectiveSpawnPositions: []
   roamPositions: []
   randomObjects:
   - name: Shelves
@@ -3692,6 +3691,21 @@ MonoBehaviour:
     - {fileID: 1737189237856209164}
     - {fileID: 642352048305280809}
     - {fileID: 2821573357994313653}
+  walls:
+  - {fileID: 2855189547100746278}
+  - {fileID: 3519876258274003684}
+  - {fileID: 7505561130164371965}
+  - {fileID: 858891045767975294}
+  - {fileID: 6609111590513965675}
+  - {fileID: 7141183530512097277}
+  - {fileID: 668999602827436222}
+  - {fileID: 6332203735878873584}
+  floors:
+  - {fileID: 831680005526342134}
+  - {fileID: 2540251146994036715}
+  ceilings:
+  - {fileID: 9137875404595752253}
+  - {fileID: 3415744030528644739}
 --- !u!1 &5076284795939802881
 GameObject:
   m_ObjectHideFlags: 0

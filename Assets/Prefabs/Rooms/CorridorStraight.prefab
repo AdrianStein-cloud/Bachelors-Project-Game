@@ -11701,7 +11701,6 @@ MonoBehaviour:
   centerObject: {fileID: 2133142756704125255}
   isCorridor: 1
   depth: 2
-  objectiveSpawnPositions: []
   roamPositions: []
   randomObjects:
   - name: Pipes
@@ -11761,6 +11760,15 @@ MonoBehaviour:
     - {fileID: 8929941617563968667}
     - {fileID: 7699113931284960205}
     - {fileID: 117251210115557049}
+  walls:
+  - {fileID: 3868035027777374087}
+  - {fileID: 7750278409493800475}
+  - {fileID: 2532955529332637186}
+  - {fileID: 3154848321643155321}
+  floors:
+  - {fileID: 7704093021995887281}
+  ceilings:
+  - {fileID: 1185440094589798596}
 --- !u!1001 &292886550362401464
 PrefabInstance:
   m_ObjectHideFlags: 0
