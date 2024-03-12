@@ -30,9 +30,12 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private List<MaterialPackage> materialPackages;
     private Materials materials;
 
+    private EventManager eventManager;
+
     void Awake()
     {
         LoadRooms();
+        eventManager = new EventManager();
     }
     public void SetSeed(int seed)
     {
@@ -59,6 +62,7 @@ public class DungeonGenerator : MonoBehaviour
         this.depth = depth;
         SetSeed(seed);
         RandomMaterialPackage(random);
+        eventManager.SpawnRandomEvent(random);
 
         spawnedRooms = new List<GameObject>();
         spawnedRoomsDepth = new List<(GameObject, int)>();
