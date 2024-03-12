@@ -50,7 +50,7 @@ public class ObjectiveTracker : MonoBehaviour
     {
         if (collectedObjectives >= leaveThreshold)
         {
-            int upgradesAmount = 2 * (collectedObjectives - leaveThreshold) / (maxObjectives - leaveThreshold) + 1;
+            int upgradesAmount = 2 * (Mathf.Min(collectedObjectives, maxObjectives) - leaveThreshold) / (maxObjectives - leaveThreshold) + 1;
             leave(upgradesAmount);
             return true;
         }
