@@ -78,14 +78,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (run && dir.y > 0 && isGrounded && stamina.SufficientStamina)
+        if (run && dir.y > 0 && stamina.SufficientStamina)
         {
             StopCrouch();
             IsRunning = true;
         }
         else IsRunning = false;
-
-        
 
         if (dir.y <= 0 && toggleRun || !stamina.SufficientStamina) run = false;
 
