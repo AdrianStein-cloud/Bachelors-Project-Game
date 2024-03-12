@@ -584,7 +584,7 @@ PrefabInstance:
     - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: materialPackages.Array.data[2].ceilingMaterials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
@@ -655,7 +655,7 @@ PrefabInstance:
         type: 3}
       propertyPath: materialPackages.Array.data[2].ceilingMaterials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 11f55949e31e7f8498b33d080d1a4728, type: 2}
+      objectReference: {fileID: 2100000, guid: c4ad2d20653508c4bafcd3ac72456eb7, type: 2}
     - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: materialPackages.Array.data[2].ceilingMaterials.Array.data[1]
