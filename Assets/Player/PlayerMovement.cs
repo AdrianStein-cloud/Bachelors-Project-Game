@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float gravity;
     [SerializeField] float airGravity;
 
+    PostProcessingHandler pp;
     CharacterController controller;
     PlayerStamina stamina;
     new Audio audio;
@@ -69,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        pp = PostProcessingHandler.Instance;
         var input = InputManager.Player;
         input.Move.OnAnyEvent(Move);
         input.Jump.OnAnyEvent(Jump);
@@ -143,6 +145,7 @@ public class PlayerMovement : MonoBehaviour
         IsCrouching = isGrounded && (toggleCrouch ? !IsCrouching : context.performed);
         IsRunning = false;
         run = false;
+        pp.SetVignette(pp.VignetteValue * (IsCrouching ? 2.5f : 1f), 0.25f);
         StartCoroutine(SmoothCrouch());
     }
 
@@ -173,6 +176,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsCrouching && !canStand) return;
         IsCrouching = false;
+        pp.ResetVignette(0.25f);
         StartCoroutine(SmoothCrouch());
     }
 
