@@ -5,9 +5,11 @@ using UnityEngine.InputSystem;
 
 public class ToggleLocker : Interactable
 {
+    [SerializeField] AudioClip openSound, closeSound;
     [SerializeField] float delay;
 
     Animator anim;
+    AudioSource source;
     float lastInteract;
     bool inFocus;
     bool open;
@@ -15,6 +17,7 @@ public class ToggleLocker : Interactable
     private void Start()
     {
         anim = GetComponentInParent<Animator>();
+        source = GetComponentInParent<AudioSource>();
         InputManager.Player.Interact.performed += Interact;
         lastInteract = Time.time;
     }
@@ -31,8 +34,8 @@ public class ToggleLocker : Interactable
         lastInteract = Time.time;
         open = !open;
 
-        if (open) anim.SetTrigger("On");
-        else anim.SetTrigger("Off");
+        anim.SetTrigger(open ? "On" : "Off");
+        source.PlayOneShot(open ? openSound : closeSound);
     }
 
     public override void DisableInteractability()
