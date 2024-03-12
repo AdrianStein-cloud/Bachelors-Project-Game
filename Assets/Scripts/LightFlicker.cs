@@ -20,7 +20,8 @@ public class LightFlicker : MonoBehaviour
 
     private void Start()
     {
-        glowMaterial = bulb.GetComponent<Renderer>().material;
+        if(bulb != null)
+            glowMaterial = bulb.GetComponent<Renderer>().material;
 
         childObjects = transform.Cast<Transform>().Select(t => t.gameObject).ToArray();
 
@@ -53,7 +54,8 @@ public class LightFlicker : MonoBehaviour
         for (int i = 0; i < childObjects.Length; i++)
         {
             childObjects[i].GetComponent<Light>().intensity = 0;
-            glowMaterial.DisableKeyword("_EMISSION");
+            if(glowMaterial != null)
+                glowMaterial.DisableKeyword("_EMISSION");
         }
     }
 
@@ -65,13 +67,15 @@ public class LightFlicker : MonoBehaviour
             for(int i = 0; i < childObjects.Length; i++)
             {
                 FlickerOff(childObjects[i].GetComponent<Light>(), lightIntensities[i]);
-                glowMaterial.DisableKeyword("_EMISSION");
+                if (glowMaterial != null)
+                    glowMaterial.DisableKeyword("_EMISSION");
             }
             yield return new WaitForSeconds(Random.Range(offFlickerSpeedMin, offFlickerSpeedMax));
             for (int i = 0; i < childObjects.Length; i++)
             {
                 FlickerOn(childObjects[i].GetComponent<Light>(), lightIntensities[i]);
-                glowMaterial.EnableKeyword("_EMISSION");
+                if (glowMaterial != null)
+                    glowMaterial.EnableKeyword("_EMISSION");
             }
             yield return new WaitForSeconds(Random.Range(onFlickerSpeedMin, onFlickerSpeedMax));
         }
