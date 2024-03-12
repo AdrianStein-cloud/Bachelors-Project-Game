@@ -289,37 +289,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &552314237593605112
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2584955808481667775}
-  m_Layer: 8
-  m_Name: ObjectiveSpawnPoints (18)
-  m_TagString: Untagged
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2584955808481667775
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 552314237593605112}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.599998, y: 0, z: 63.699997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4004234854232285527}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &593949544153827532
 GameObject:
   m_ObjectHideFlags: 0
@@ -7383,6 +7352,7 @@ Transform:
   - {fileID: 6563935661352471705}
   - {fileID: 5342097598650923983}
   - {fileID: 2403446075733200571}
+  - {fileID: 2094138662213813570}
   m_Father: {fileID: 4004234854232285527}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5947697277039285364
@@ -11663,7 +11633,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2333844702604441968}
-  - {fileID: 2584955808481667775}
   - {fileID: 1131094990651233213}
   - {fileID: 6148916311796302455}
   - {fileID: 12321648810989297}
@@ -11704,8 +11673,8 @@ MonoBehaviour:
   roamPositions: []
   randomObjects:
   - name: Pipes
-    maxAmount: 2
-    percentageChance: 80
+    maxAmount: 3
+    percentageChance: 60
     randomObjects:
     - {fileID: 4966938425749191629}
     - {fileID: 9064777309712044888}
@@ -11724,7 +11693,7 @@ MonoBehaviour:
     - {fileID: 5197450764679844790}
   - name: Drums
     maxAmount: 1
-    percentageChance: 30
+    percentageChance: 40
     randomObjects:
     - {fileID: 8805925974529386056}
     - {fileID: 8223604376695022204}
@@ -11760,6 +11729,11 @@ MonoBehaviour:
     - {fileID: 8929941617563968667}
     - {fileID: 7699113931284960205}
     - {fileID: 117251210115557049}
+  - name: Lockers
+    maxAmount: 1
+    percentageChance: 80
+    randomObjects:
+    - {fileID: 1604460865449025528}
   walls:
   - {fileID: 3868035027777374087}
   - {fileID: 7750278409493800475}
@@ -13180,6 +13154,86 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2976464093923361649, guid: 94596ef2809fa38498334e37438f89c5,
     type: 3}
   m_PrefabInstance: {fileID: 5276810503722569248}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5550591101430573348
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1765931045459648961}
+    m_Modifications:
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 40.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6576268771003758300, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_Name
+      value: Locker Animated
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 855b976bb3ae2c940ad80913d588c12a, type: 3}
+--- !u!1 &1604460865449025528 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6576268771003758300, guid: 855b976bb3ae2c940ad80913d588c12a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5550591101430573348}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2094138662213813570 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5550591101430573348}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5704277571195894523
 PrefabInstance:
