@@ -6,21 +6,13 @@ using TMPro;
 public class NotePoster : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI notes;
-    private string currentEvent;
 
     private void Start()
     {
-        GameSettings.Instance.onEventChanged += () =>
+        GameSettings.Instance.OnEventChanged += (value) =>
         {
-            currentEvent = GameSettings.Instance.Event;
-            if (currentEvent == null)
-            {
-                notes.text = string.Empty;
-            }
-            else
-            {
-                notes.text = currentEvent;
-            }
+            Debug.Log("Event: " + value);
+            notes.text = value;
         };
     }
 }

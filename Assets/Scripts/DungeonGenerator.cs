@@ -21,6 +21,7 @@ public class DungeonGenerator : MonoBehaviour
     public WeightedRoom[] randomRooms;
     [field: SerializeField] public MinMaxRoom[] minimumRooms;
     public GameObject startRoom;
+    public GameObject flood;
     private List<GameObject> rooms = new List<GameObject>();
 
     public List<GameObject> spawnedRooms { get; private set; } = new List<GameObject>();
@@ -35,7 +36,7 @@ public class DungeonGenerator : MonoBehaviour
     void Awake()
     {
         LoadRooms();
-        eventManager = new EventManager();
+        eventManager = new EventManager(flood);
     }
     public void SetSeed(int seed)
     {
@@ -95,7 +96,11 @@ public class DungeonGenerator : MonoBehaviour
 
         //Done spawning dungeon
         yield return new WaitForSeconds(0.2f);
-        Instantiate(navmeshSurface, dungeon.transform).BuildNavMesh();
+        var navMesh = Instantiate(navmeshSurface, dungeon.transform);
+        navMesh.BuildNavMesh();
+        eventManager.SetSizeOfDungeon(navMesh.navMeshData.sourceBounds.size);
+        eventManager.SetCenterOfDungeon(navMesh.navMeshData.sourceBounds.center);
+
 
         yield return new WaitForSeconds(0.2f);
         //GetComponent<SimpleEnemySpawner>().SpawnEnemies(spawnedRooms);

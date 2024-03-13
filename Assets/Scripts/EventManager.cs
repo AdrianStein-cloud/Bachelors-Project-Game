@@ -6,13 +6,17 @@ using UnityEngine;
 public class EventManager
 {
     List<Action> events;
+    GameObject flood;
 
-    public EventManager()
+    public EventManager(GameObject flood)
     {
+        this.flood = flood;
+        flood.gameObject.SetActive(false);
+
         events = new List<Action>
         {
-            PowerOutage,
             Flooded,
+            PowerOutage,
             Foggy,
             NoEvent
         };
@@ -20,6 +24,7 @@ public class EventManager
 
     public void SpawnRandomEvent(System.Random random)
     {
+        flood.gameObject.SetActive(false);
         events[random.Next(events.Count)].Invoke();
     }
 
@@ -38,8 +43,15 @@ public class EventManager
 
     private void Flooded()
     {
-        //Not Implemented
-        NoEvent();
+        if (GameSettings.Instance.Wave > 0)
+        {
+            flood.gameObject.SetActive(true);
+            GameSettings.Instance.Event = "Flooded!";
+        }
+        else
+        {
+            NoEvent();
+        }
     }
 
     private void Foggy()
@@ -51,5 +63,21 @@ public class EventManager
     private void NoEvent()
     {
         GameSettings.Instance.Event = null;
+    }
+
+    public void SetSizeOfDungeon(Vector3 size)
+    {
+        if (flood.gameObject.activeInHierarchy)
+        {
+            flood.transform.localScale = new Vector3(size.x/10, 1, size.z/10);
+        }
+    }
+
+    public void SetCenterOfDungeon(Vector3 center)
+    {
+        if (flood.gameObject.activeInHierarchy)
+        {
+            flood.transform.position = new Vector3(center.x, 3, center.z);
+        }
     }
 }

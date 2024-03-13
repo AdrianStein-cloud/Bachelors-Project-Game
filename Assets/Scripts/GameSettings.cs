@@ -11,7 +11,7 @@ public class GameSettings : Singleton<GameSettings>
     [SerializeField] private int generationLookahead;
     private string eventValue;
 
-    public Action onEventChanged;
+    public Action<string> OnEventChanged { get; set; }
     public GameObject canvas;
 
     public int DungeonStartDepth
@@ -43,7 +43,7 @@ public class GameSettings : Singleton<GameSettings>
         set
         {
             eventValue = value;
-            onEventChanged?.Invoke();
+            OnEventChanged?.Invoke(value);
         }
     }
 
