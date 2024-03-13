@@ -58,17 +58,12 @@ public class SensorController : Item
             ghostSensor.SetActive(true);
             ghostSensor.transform.position = hit.point;
             ghostSensor.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            /*var rotation = ghostSensor.transform.rotation;
+            rotation.x = ghostSensor.transform.rotation.z;
+            ghostSensor.transform.rotation = rotation;*/
 
-            if (Physics.Raycast(hit.point, hit.normal, laserDistance, placeLayer))
-            {
-                sensorRenderer.material = validMaterial;
-                canPlace = true;
-            }
-            else
-            {
-                sensorRenderer.material = invalidMaterial;
-                canPlace = false;
-            }
+            canPlace = Physics.Raycast(hit.point, hit.normal, laserDistance, placeLayer);
+            sensorRenderer.material = canPlace ? validMaterial : invalidMaterial;
         }
         else
         {
@@ -98,7 +93,6 @@ public class SensorController : Item
         if (!canPlace || maximumPlaced) return;
 
         var instance = Instantiate(sensorPrefab, hit.point, Quaternion.identity);
-        instance.transform.SetParent(hit.transform);
         instance.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
 
         var sensor = instance.GetComponent<Sensor>();
