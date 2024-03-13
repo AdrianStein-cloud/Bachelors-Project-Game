@@ -32,7 +32,7 @@ public class FlashlightController : Item
                 UpdateBar();
             };
         }
-        flashlightBar = GameObject.Find("Canvas").transform.Find("FlashlightBar").gameObject;
+        flashlightBar = GameSettings.Instance.canvas.transform.Find("FlashlightBar").gameObject;
         flashlightFill = flashlightBar.transform.Find("Fill").GetComponent<Image>();
     }
 
