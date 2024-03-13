@@ -12,6 +12,7 @@ public class GameSettings : Singleton<GameSettings>
     private string eventValue;
 
     public Action onEventChanged;
+    public GameObject canvas;
 
     public int DungeonStartDepth
     {

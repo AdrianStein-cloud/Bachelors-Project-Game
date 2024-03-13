@@ -13,7 +13,7 @@ public class DistanceController : Item
 
     private void Awake()
     {
-        distanceCounter = GameObject.Find("Canvas").transform.Find("Distance Counter").gameObject;
+        distanceCounter = GameSettings.Instance.canvas.transform.Find("Distance Counter").gameObject;
         distanceText = distanceCounter.GetComponent<TextMeshProUGUI>();
     }
 

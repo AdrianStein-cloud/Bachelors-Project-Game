@@ -145,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
         IsCrouching = isGrounded && (toggleCrouch ? !IsCrouching : context.performed);
         IsRunning = false;
         run = false;
-        pp.SetVignette(pp.VignetteValue * (IsCrouching ? 2.5f : 1f), 0.25f);
+        pp.SetVignette(pp.VignetteValue + (IsCrouching ? 0.1f : 0f), 0.25f);
         StartCoroutine(SmoothCrouch());
     }
 
