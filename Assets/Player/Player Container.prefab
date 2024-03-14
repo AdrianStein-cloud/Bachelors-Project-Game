@@ -881,11 +881,11 @@ MonoBehaviour:
   runSpeed: 40
   crouchSpeed: 15
   toggleCrouch: 1
-  crouchHeight: 0.9
-  cameraCrouchOffset: -0.35
+  crouchHeight: 9
+  cameraCrouchOffset: -4.5
   smoothCrouchTime: 1
   smoothCrouchSpeed: 6
-  ceilingCheckDistance: 1.3
+  ceilingCheckDistance: 0
   enableJump: 1
   jumpHeight: 12
   groundCheckRadius: 2
