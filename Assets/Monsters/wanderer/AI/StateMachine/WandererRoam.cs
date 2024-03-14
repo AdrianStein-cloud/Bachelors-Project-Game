@@ -73,8 +73,8 @@ public class WandererRoam : StateProcess<WandererState>
         }
 
         //Debug.Log("Wandering to room");
-        //movement.MoveTo(destRoom.centerObject.transform.position, speed, DestinationReached);
-        movement.MoveTo(GameObject.FindGameObjectWithTag("Player").transform.position, speed, () => StateController.SwitchState(WandererState.Roam));
+        movement.MoveTo(destRoom.centerObject.transform.position, speed, DestinationReached);
+        //movement.MoveTo(GameObject.FindGameObjectWithTag("Player").transform.position, speed, () => StateController.SwitchState(WandererState.Roam));
     }
 
     void DestinationReached()
