@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed = IsRunning ? runSpeed : (IsCrouching ? crouchSpeed : walkSpeed);
         IsWalking = dir.magnitude > 0f && !IsRunning && isGrounded;
 
-        canStand = !Physics.Raycast(transform.position, Vector3.up, ceilingCheckDistance) && IsCrouching;
+        canStand = !Physics.Raycast(groundCheck.localPosition, Vector3.up, ceilingCheckDistance, groundMask) && IsCrouching;
 
         var move = transform.right * dir.x + transform.forward * dir.y;
         controller.Move(Time.deltaTime * ((isGrounded ? currentSpeed : airSpeed) * move + velocity));
