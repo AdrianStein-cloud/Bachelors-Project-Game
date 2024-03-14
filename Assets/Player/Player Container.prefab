@@ -524,7 +524,7 @@ MonoBehaviour:
   <HorizontalSensitivity>k__BackingField: 20
   <VerticalSensitivity>k__BackingField: 20
   rotationAngle: 90
-  followSmoothTime: 5
+  followSmoothTime: 2
   runFOVChangeAmount: 1.1
   runFOVChangeSpeed: 5
   cameraPosition: {fileID: 5697493602818644934}
