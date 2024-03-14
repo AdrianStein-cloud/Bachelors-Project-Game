@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchItemNumKeys",
+                    "type": "Button",
+                    "id": "90ce9e39-0533-48c2-abf1-1079088df352",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -391,6 +400,61 @@
                     "processors": "",
                     "groups": "Mouse and Keyboard",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "84462356-9c31-48ce-9518-48616cd9851f",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "Scale",
+                    "groups": "Mouse and Keyboard",
+                    "action": "SwitchItemNumKeys",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c011263e-a283-491e-ab47-ca28471483df",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "Scale(factor=2)",
+                    "groups": "Mouse and Keyboard",
+                    "action": "SwitchItemNumKeys",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ede5cc1-952c-4e57-8d02-3ae2b142f097",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "Scale(factor=3)",
+                    "groups": "Mouse and Keyboard",
+                    "action": "SwitchItemNumKeys",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "62324c9c-7b1a-43f0-9abb-6231198a2eda",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "Scale(factor=4)",
+                    "groups": "Mouse and Keyboard",
+                    "action": "SwitchItemNumKeys",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f64a5499-409a-4d23-abfb-4d995f96b80d",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "Scale(factor=5)",
+                    "groups": "Mouse and Keyboard",
+                    "action": "SwitchItemNumKeys",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

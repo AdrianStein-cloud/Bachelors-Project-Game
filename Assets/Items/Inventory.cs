@@ -18,6 +18,8 @@ public class Inventory : MonoBehaviour
         }
 
         items[itemIndex]?.Select();
+
+        InputManager.Player.SwitchItemNumKeys.performed += ctx => SetItemIndex((int)ctx.ReadValue<float>() - 1);
     }
 
     private void Update()
