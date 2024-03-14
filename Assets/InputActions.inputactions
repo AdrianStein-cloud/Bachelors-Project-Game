@@ -97,7 +97,7 @@
                 },
                 {
                     "name": "SwitchItemNumKeys",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "90ce9e39-0533-48c2-abf1-1079088df352",
                     "expectedControlType": "Button",
                     "processors": "",
