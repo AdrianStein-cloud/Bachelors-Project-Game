@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Room
   - Door
+  - Tablet
+  - MapCamera
   layers:
   - Default
   - TransparentFX
@@ -29,7 +31,6 @@ TagManager:
   - 
   - 
   - Main Camera Only
-  - 
   - 
   - 
   - 
