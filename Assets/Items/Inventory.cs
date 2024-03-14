@@ -10,6 +10,8 @@ public class Inventory : MonoBehaviour
 
     public int itemIndex = 0;
 
+    int lastIndex = 0;
+
     private void Start()
     {
         for (int i = 0; i < items.Count; i++)
@@ -19,7 +21,7 @@ public class Inventory : MonoBehaviour
 
         items[itemIndex]?.Select();
 
-        InputManager.Player.SwitchItemNumKeys.performed += ctx => SetItemIndex((int)ctx.ReadValue<float>() - 1);
+        InputManager.Player.SwitchItemNumKeys.performed += SwitchItem;
     }
 
     private void Update()
@@ -61,6 +63,13 @@ public class Inventory : MonoBehaviour
     {
         //Debug.Log("Next item");
         SetItemIndex((itemIndex + 1) % size);
+    }
+
+    void SwitchItem(InputAction.CallbackContext ctx)
+    {
+        var index = (int)ctx.ReadValue<float>() - 1;
+        SetItemIndex(index == -1 ? lastIndex : index);
+        lastIndex = index == -1 ? lastIndex : index;
     }
 
     void SetItemIndex(int value)
