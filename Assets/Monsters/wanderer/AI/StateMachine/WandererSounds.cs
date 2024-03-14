@@ -24,6 +24,7 @@ public class WandererSounds : MonoBehaviour
 
     public void PlayFootstepSound()
     {
+        if (footstepSounds.Count == 0) return;
         if (tempFootsteps.Count <= 0) tempFootsteps = new List<AudioClip>(footstepSounds);
 
         var clip = tempFootsteps[Random.Range(0, tempFootsteps.Count)];
@@ -35,6 +36,7 @@ public class WandererSounds : MonoBehaviour
 
     public void PlayRunningFootstepSound()
     {
+        if (runningFootstepSounds.Count == 0) return;
         if (tempRunningFootsteps.Count <= 0) tempRunningFootsteps = new List<AudioClip>(runningFootstepSounds);
 
         var clip = tempRunningFootsteps[Random.Range(0, tempRunningFootsteps.Count)];
@@ -46,6 +48,7 @@ public class WandererSounds : MonoBehaviour
 
     public void PlayScreechSound()
     {
+        if (screamSounds.Count == 0) return;
         var clip = screamSounds[Random.Range(0, screamSounds.Count)];
         monsterSource.clip = clip;
         monsterSource.Play();

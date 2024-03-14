@@ -11,7 +11,12 @@ public class ItemUpgrade : Upgrade
 
     public override void Apply(GameObject player)
     {
+        ApplyItem(player);
+    }
+
+    protected Item ApplyItem(GameObject player)
+    {
         var inventory = player.transform.parent.GetComponentInChildren<Inventory>();
-        inventory.Add(item);
+        return inventory.Add(item);
     }
 }
