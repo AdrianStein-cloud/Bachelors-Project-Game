@@ -43,7 +43,7 @@ public class EventManager
 
     private void Flooded()
     {
-        if (GameSettings.Instance.Wave > 0)
+        if (GameSettings.Instance.Wave > 3)
         {
             flood.SetActive(true);
             GameSettings.Instance.Event = "Flooded!";
