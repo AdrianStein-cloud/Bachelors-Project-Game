@@ -34,10 +34,11 @@ public class MapGadgetController : Item
         camera.targetTexture = enable ? tabletTexture : null;
     }
 
+    public override void Primary() => Secondary();
+
     public override void Secondary()
     {
         tablet.Toggle();
         tablet.textureRenderer.SetActive(tablet.tabletEquipped);
     }
-
 }
