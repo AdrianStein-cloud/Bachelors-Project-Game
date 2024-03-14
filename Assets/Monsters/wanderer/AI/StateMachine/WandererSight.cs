@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -30,7 +31,7 @@ public class WandererSight : MonoBehaviour
     GameObject target;
     GameObject door;
     float lastSeenPlayerTime;
-    bool buildingUpVision;
+    bool buildingUpVision = false;
 
     private void Awake()
     {
@@ -46,15 +47,17 @@ public class WandererSight : MonoBehaviour
         {
             info.DoorToOpen = door;
         }
+
         info.TargetPlayer = CheckForPlayerInSight(360f, omniDirectionalVisionDistance);
-        info.TargetPlayer = info.TargetPlayer != null ? info.TargetPlayer : CheckForPlayerInSight(angle, distance);
+        var normalVision = CheckForPlayerInSight(angle, distance);
+        Debug.Log(normalVision);
+        info.TargetPlayer = info.TargetPlayer != null ? info.TargetPlayer : normalVision;
         if (info.TargetPlayer != null)
         {
             if ((buildingUpVision && Time.time >= firstTimeSeenPlayer + detectionTime) || Time.time - lastSeenPlayerTime <= persitanceDuration)
             {
                 info.LastSeenPlayerLocation = info.TargetPlayer.transform.position;
                 lastSeenPlayerTime = Time.time;
-                buildingUpVision = false;
             }
             else if (!buildingUpVision)
             {
@@ -72,7 +75,7 @@ public class WandererSight : MonoBehaviour
             info.TargetPlayer = target;
             info.LastSeenPlayerLocation = info.TargetPlayer.transform.position;
         }
-        else if (Time.time > firstTimeSeenPlayer + 3f)
+        else if (Time.time > lastSeenPlayerTime + 3f)
         {
             buildingUpVision = false;
         }
@@ -83,15 +86,16 @@ public class WandererSight : MonoBehaviour
     {
         //if (target == null) return false;
 
+        var eyeOffset = new Vector3(0, 2f, 0);
+
         var pos = gameObject.transform.position;
-        var playerPos = Camera.main.transform.position;
+        var playerPos = Camera.main.transform.position - eyeOffset;
 
         var flatPos = new Vector3(pos.x, 0, pos.z);
         var flatPlayerPos = new Vector3(playerPos.x, 0, playerPos.z);
 
         if (Vector3.Distance(flatPos, flatPlayerPos) > distance) return null;
 
-        var eyeOffset = new Vector3(0, 2f, 0);
         var eyesCenter = eyes.GetComponent<SkinnedMeshRenderer>().bounds.center - eyeOffset;
         Vector3 dir = (playerPos - eyesCenter);
 
