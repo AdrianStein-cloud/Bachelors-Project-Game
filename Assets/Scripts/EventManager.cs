@@ -16,9 +16,9 @@ public class EventManager
         events = new List<Action>
         {
             Flooded,
-            /*PowerOutage,
+            PowerOutage,
             Foggy,
-            NoEvent*/
+            NoEvent
         };
     }
 
