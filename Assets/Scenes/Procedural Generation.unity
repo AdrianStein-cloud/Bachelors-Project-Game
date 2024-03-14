@@ -152,6 +152,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Light bulb High Poly (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8596402645481335191, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8937215363600675629, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6935,6 +6940,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Light bulb High Poly (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8596402645481335191, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8937215363600675629, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9509,6 +9519,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!20 &589814979 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1735351857300563437, guid: 190f930b5f042b247adeab89b9c2a294,
+    type: 3}
+  m_PrefabInstance: {fileID: 827604321}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &597484229
 Mesh:
   m_ObjectHideFlags: 0
@@ -11485,12 +11501,37 @@ PrefabInstance:
     - target: {fileID: 1138077963468153909, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 5495
+      value: 1054071
+      objectReference: {fileID: 0}
+    - target: {fileID: 2066174218350383123, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2994622128118365023, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
       propertyPath: m_Name
       value: Player Container
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151830412639473089, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_Cameras.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151830412639473089, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_Cameras.Array.data[0]
+      value: 
+      objectReference: {fileID: 589814979}
+    - target: {fileID: 5789267958331835481, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219333887229627620, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 1048576
       objectReference: {fileID: 0}
     - target: {fileID: 6219333887229627620, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
@@ -13038,6 +13079,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Light bulb High Poly
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596402645481335191, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8937215363600675629, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
         type: 3}
@@ -22677,6 +22723,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Light bulb High Poly (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596402645481335191, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8937215363600675629, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
         type: 3}

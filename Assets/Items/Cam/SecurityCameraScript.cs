@@ -18,13 +18,13 @@ public class SecurityCameraScript : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        colliding = true;
+        if (!other.CompareTag("Room")) colliding = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        colliding = false;
+        if (!other.CompareTag("Room")) colliding = false;
     }
 }
