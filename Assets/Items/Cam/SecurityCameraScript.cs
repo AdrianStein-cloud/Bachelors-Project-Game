@@ -6,25 +6,13 @@ public class SecurityCameraScript : MonoBehaviour
 {
     public bool colliding;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerStay(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        colliding = true;
+        if (!other.CompareTag("Room")) colliding = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        colliding = false;
+        if (!other.CompareTag("Room")) colliding = false;
     }
 }
