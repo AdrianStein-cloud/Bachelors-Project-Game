@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1760754151388274732}
   - component: {fileID: 5910852614230937168}
   - component: {fileID: 6144238084066797311}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: CameraRender
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2648569277839921639}
   - component: {fileID: 9098534470009602343}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Tablet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4981080144745615173}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: ParentObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 2477242994151171234}
   - component: {fileID: 611340818033017170}
   - component: {fileID: 193919957259834476}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
