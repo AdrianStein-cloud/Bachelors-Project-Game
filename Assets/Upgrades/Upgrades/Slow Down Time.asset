@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e6eb8c06cb5064ba77fcf813da9a03, type: 3}
+  m_Name: Slow Down Time
+  m_EditorClassIdentifier: 
+  Name: Slow Down Time
+  description: Slow Down Time By 80%
+  NewlyAvailableUpgrades: []
+  item: {fileID: 9045619139030450987, guid: d749f8432ce086348822bf3a87c6072e, type: 3}
