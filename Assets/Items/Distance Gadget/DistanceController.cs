@@ -8,6 +8,8 @@ public class DistanceController : Item
     [SerializeField] Transform target;
     [SerializeField] float multiplier;
 
+    bool isSelected = false;
+
     GameObject distanceCounter;
     TextMeshProUGUI distanceText;
 
@@ -32,7 +34,7 @@ public class DistanceController : Item
 
     private void Update()
     {
-        if (!distanceCounter.activeSelf || target == null) return;
+        if (!isSelected || target == null) return;
 
         var distance = Vector3.Distance(transform.position, target.position) * multiplier;
         distanceText.text = distance.ToString("F0") + " m";
@@ -43,10 +45,13 @@ public class DistanceController : Item
         var exit = FindObjectOfType<DungeonExit>();
         if (exit != null) target = exit.transform;
         distanceCounter.SetActive(true);
+        distanceText.text = string.Empty;
+        isSelected = true;
     }
 
     public override void Deselect()
     {
         distanceCounter.SetActive(false);
+        isSelected = false;
     }
 }

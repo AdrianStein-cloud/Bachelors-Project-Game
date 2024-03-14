@@ -33,10 +33,17 @@ public class CameraController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
         startingFOV = Camera.main.fieldOfView;
+
         InputManager.Player.Look.OnAnyEvent(Look);
 
         horiRotHelper.localRotation = transform.localRotation;
+    }
+
+    public void SetFov(float fov)
+    {
+        startingFOV = fov;
     }
 
     private void Look(InputAction.CallbackContext context)
