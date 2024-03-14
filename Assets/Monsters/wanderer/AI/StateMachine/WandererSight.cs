@@ -50,7 +50,6 @@ public class WandererSight : MonoBehaviour
 
         info.TargetPlayer = CheckForPlayerInSight(360f, omniDirectionalVisionDistance);
         var normalVision = CheckForPlayerInSight(angle, distance);
-        Debug.Log(normalVision);
         info.TargetPlayer = info.TargetPlayer != null ? info.TargetPlayer : normalVision;
         if (info.TargetPlayer != null)
         {
