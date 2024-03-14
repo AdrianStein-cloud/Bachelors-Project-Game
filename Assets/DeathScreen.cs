@@ -10,6 +10,8 @@ public class DeathScreen : MonoBehaviour
     public float delay;
     [SerializeField] private Button restartButton;
     private TextMeshProUGUI restartText;
+    [SerializeField] private TextMeshProUGUI roundText;
+    [SerializeField] private TextMeshProUGUI highscoreText;
     [SerializeField] private TextMeshProUGUI youDiedText;
 
     private void Start()
@@ -20,6 +22,9 @@ public class DeathScreen : MonoBehaviour
         restartButton.onClick.AddListener(RestartGame);
         restartText = restartButton.GetComponentInChildren<TextMeshProUGUI>();
         restartButton.gameObject.SetActive(false);
+        roundText.text = "Round " + PlayerPrefs.GetInt("player_score");
+        roundText.gameObject.SetActive(false);
+        highscoreText.gameObject.SetActive(false);
         StartCoroutine(Restart());
     }
 
@@ -45,7 +50,19 @@ public class DeathScreen : MonoBehaviour
     {
         StartCoroutine(FadeIn(youDiedText));
         yield return new WaitForSeconds(delay);
+
+        int score = PlayerPrefs.GetInt("player_score");
+
+        if (score > PlayerPrefs.GetInt("high_score"))
+        {
+            PlayerPrefs.SetInt("high_score", score);
+            highscoreText.gameObject.SetActive(true);
+            StartCoroutine(FadeIn(highscoreText));
+        }
+
+        roundText.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
+        StartCoroutine(FadeIn(roundText));
         StartCoroutine(FadeIn(restartText));
     }
 }

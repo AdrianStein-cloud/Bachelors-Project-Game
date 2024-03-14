@@ -56,7 +56,7 @@ MonoBehaviour:
   - room: {fileID: 8620508088445856826, guid: dbd82918bb4dfb14993836d7172605f4, type: 3}
     <Weight>k__BackingField: 100
   - room: {fileID: 7680414859084646631, guid: cf5d85f43e413e64aa01bdd92dbaed45, type: 3}
-    <Weight>k__BackingField: 200
+    <Weight>k__BackingField: 300
   - room: {fileID: 7813503066319441342, guid: cf2c72df1e5e3b041907ae370b7991fd, type: 3}
     <Weight>k__BackingField: 150
   - room: {fileID: 9211154258126945448, guid: 9647206acc7f92a4bbae8f922afa8764, type: 3}
@@ -74,6 +74,52 @@ MonoBehaviour:
     minmax: {x: 0, y: 2}
   startRoom: {fileID: 3502592813776399691, guid: 71fc35092c2e358448a1f1ecca347030,
     type: 3}
+  flood: {fileID: 0}
+  materialPackages:
+  - name: Office
+    wallForCeiling: 0
+    floorMaterials:
+    - {fileID: 2100000, guid: f2db051cc4199874b9f4ea1b212c75d0, type: 2}
+    - {fileID: 2100000, guid: c4ad2d20653508c4bafcd3ac72456eb7, type: 2}
+    wallMaterials:
+    - {fileID: 2100000, guid: 9d23151d540168d4e9179d795744eac9, type: 2}
+    ceilingMaterials:
+    - {fileID: 2100000, guid: 7487e47441b3ca54a8304ca1740e81f0, type: 2}
+  - name: Bunker
+    wallForCeiling: 1
+    floorMaterials:
+    - {fileID: 2100000, guid: 49d8c8d485cc9334688152d6c1887f8a, type: 2}
+    - {fileID: 2100000, guid: 9cce99adc5cc5d84cb56d3c633219ace, type: 2}
+    - {fileID: 2100000, guid: c4ad2d20653508c4bafcd3ac72456eb7, type: 2}
+    wallMaterials:
+    - {fileID: 2100000, guid: d0246b8a29ab6c4499461900a57d8047, type: 2}
+    - {fileID: 2100000, guid: 9cce99adc5cc5d84cb56d3c633219ace, type: 2}
+    ceilingMaterials: []
+  - name: Factory
+    wallForCeiling: 0
+    floorMaterials:
+    - {fileID: 2100000, guid: c4ad2d20653508c4bafcd3ac72456eb7, type: 2}
+    wallMaterials:
+    - {fileID: 2100000, guid: 11f55949e31e7f8498b33d080d1a4728, type: 2}
+    ceilingMaterials:
+    - {fileID: 2100000, guid: c4ad2d20653508c4bafcd3ac72456eb7, type: 2}
+  - name: Metro
+    wallForCeiling: 0
+    floorMaterials:
+    - {fileID: 2100000, guid: 50adc0d68c6d6db45b4171e29bea6c94, type: 2}
+    - {fileID: 2100000, guid: 0470147a56a065e49b83951808d3dd4c, type: 2}
+    wallMaterials:
+    - {fileID: 2100000, guid: ec20abfaa5e13134cabe59ac03cbe0b6, type: 2}
+    ceilingMaterials:
+    - {fileID: 2100000, guid: 9cce99adc5cc5d84cb56d3c633219ace, type: 2}
+    - {fileID: 2100000, guid: ec20abfaa5e13134cabe59ac03cbe0b6, type: 2}
+  - name: Dungeon
+    wallForCeiling: 1
+    floorMaterials:
+    - {fileID: 2100000, guid: ae6ea6d129bea8544bd705e13b543a00, type: 2}
+    wallMaterials:
+    - {fileID: 2100000, guid: 761b6d64372243842af03b076a4c458f, type: 2}
+    ceilingMaterials: []
 --- !u!114 &6251193281981130515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,8 +132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30cceb777f7791488021e715464cd34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dungeonStartDepth: 3
-  generationLookahead: 2
+  dungeonStartDepth: 4
+  generationLookahead: 3
+  canvas: {fileID: 0}
 --- !u!114 &775176127590199493
 MonoBehaviour:
   m_ObjectHideFlags: 0
