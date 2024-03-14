@@ -2601,6 +2601,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3030005051212135390, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4855921842794447810, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
@@ -2695,6 +2700,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StepOffset
       value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6883631393848278165, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 7019691980609454551, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}

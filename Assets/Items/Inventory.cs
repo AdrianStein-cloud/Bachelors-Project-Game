@@ -32,19 +32,20 @@ public class Inventory : MonoBehaviour
         else if(InputManager.Player.ItemSecondary.triggered) items[itemIndex]?.Secondary();
     }
 
-    public void Add(Item item)
+    public Item Add(Item item)
     {
         int index = items.IndexOf(null);
         if (index == -1)
         {
             Debug.LogWarning("No space in inventory, ignoring item.");
-            return;
+            return null;
         }
         var itemObject = Instantiate(item.gameObject, transform);
         item = itemObject.GetComponent<Item>();
         items[index] = item;
         InventoryUI.Instance.SetIcon(index, item.icon);
         items[itemIndex]?.Select();
+        return item;
     }
 
     void PreviousItem()

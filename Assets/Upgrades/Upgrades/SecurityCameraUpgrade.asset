@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e6eb8c06cb5064ba77fcf813da9a03, type: 3}
+  m_Name: SecurityCameraUpgrade
+  m_EditorClassIdentifier: 
+  Name: Cameras
+  description: Placeable cameras
+  NewlyAvailableUpgrades: []
+  item: {fileID: 9206712718450700171, guid: a436390c37cf39a4f961f3f20fb3f669, type: 3}
