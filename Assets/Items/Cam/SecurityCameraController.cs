@@ -120,6 +120,7 @@ public class SecurityCameraController : Item
             lastTimeUsed = Time.time;
             tabletEquipped = !tabletEquipped;
             tabletAnim.SetTrigger("Toggle");
+            PostProcessingHandler.Instance.SetDOF(tabletEquipped);
         }
     }
 
