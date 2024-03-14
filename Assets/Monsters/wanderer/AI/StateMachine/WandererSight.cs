@@ -53,7 +53,7 @@ public class WandererSight : MonoBehaviour
         info.TargetPlayer = info.TargetPlayer != null ? info.TargetPlayer : normalVision;
         if (info.TargetPlayer != null)
         {
-            if ((buildingUpVision && Time.time >= firstTimeSeenPlayer + detectionTime) || Time.time - lastSeenPlayerTime <= persitanceDuration)
+            if ((buildingUpVision && Time.time >= firstTimeSeenPlayer + detectionTime))
             {
                 info.LastSeenPlayerLocation = info.TargetPlayer.transform.position;
                 lastSeenPlayerTime = Time.time;

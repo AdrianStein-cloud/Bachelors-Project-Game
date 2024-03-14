@@ -1727,7 +1727,7 @@ MonoBehaviour:
   angle: 180
   distance: 250
   omniDirectionalVisionDistance: 40
-  persitanceDuration: 1
+  persitanceDuration: 0.3
   doorFindDistance: 12
   findDoorMask:
     serializedVersion: 2
@@ -1748,8 +1748,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c30ab5d4f875a4a8ca409cf958d82f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 27
-  damage: 50
+  speed: 40
+  damage: 100
   damageDelay: 0.7
   cooldown: 1.4
   angle: 360
