@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: SpiderSense
   m_EditorClassIdentifier: 
   Name: Spider Sense
-  description: A sound will play when an enemy is close. This can happen once every
-    10 seconds
+  description: Sometimes you notice nearby enemies
   NewlyAvailableUpgrades: []
   passive: {fileID: 2345860101698375756, guid: 47f9e43e7bbe9564ba1456e71fbed9e9, type: 3}
