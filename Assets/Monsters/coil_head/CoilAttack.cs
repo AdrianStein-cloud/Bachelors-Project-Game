@@ -10,8 +10,11 @@ public class CoilAttack : StateProcess<CoilState>
 
     public LayerMask blocking;
     public GameObject[] visiblePoints;
+    public AnimationClip[] poses;
 
     public float speed;
+
+    Animation anim;
 
     Vector3 targetPos => info.Target.transform.position;
 
@@ -21,6 +24,7 @@ public class CoilAttack : StateProcess<CoilState>
         info = GetComponent<CoilInfo>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
+        anim = GetComponentInChildren<Animation>();
     }
 
     private void OnEnable()
@@ -44,6 +48,7 @@ public class CoilAttack : StateProcess<CoilState>
 
             }
         }
+        if (agent.isStopped) DoRandomPose();
         transform.rotation = Quaternion.LookRotation(targetPos - transform.position, Vector3.up);
         agent.SetDestination(targetPos);
         agent.isStopped = false;
@@ -57,5 +62,12 @@ public class CoilAttack : StateProcess<CoilState>
         Physics.Raycast(pos, dir, out RaycastHit hit, Mathf.Infinity, blocking);
         Debug.DrawLine(pos, pos + dir.normalized * hit.distance);
         return hit.collider.CompareTag("Player");
+    }
+
+    void DoRandomPose()
+    {
+        var clip = poses[Random.Range(0, poses.Length)];
+        anim.Play(clip.name);
+        Debug.Log("Playing anim: " + clip.name);
     }
 }
