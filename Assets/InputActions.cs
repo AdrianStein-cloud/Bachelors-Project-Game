@@ -116,6 +116,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchItemNumKeys"",
+                    ""type"": ""Button"",
+                    ""id"": ""90ce9e39-0533-48c2-abf1-1079088df352"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -413,6 +422,61 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84462356-9c31-48ce-9518-48616cd9851f"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale"",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""SwitchItemNumKeys"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c011263e-a283-491e-ab47-ca28471483df"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""SwitchItemNumKeys"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ede5cc1-952c-4e57-8d02-3ae2b142f097"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""SwitchItemNumKeys"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62324c9c-7b1a-43f0-9abb-6231198a2eda"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=4)"",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""SwitchItemNumKeys"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f64a5499-409a-4d23-abfb-4d995f96b80d"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=5)"",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""SwitchItemNumKeys"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -942,6 +1006,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_ItemSecondary = m_Player.FindAction("ItemSecondary", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_SwitchItemNumKeys = m_Player.FindAction("SwitchItemNumKeys", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1026,6 +1091,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ItemSecondary;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_SwitchItemNumKeys;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -1040,6 +1106,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @ItemSecondary => m_Wrapper.m_Player_ItemSecondary;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @SwitchItemNumKeys => m_Wrapper.m_Player_SwitchItemNumKeys;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1079,6 +1146,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @SwitchItemNumKeys.started += instance.OnSwitchItemNumKeys;
+            @SwitchItemNumKeys.performed += instance.OnSwitchItemNumKeys;
+            @SwitchItemNumKeys.canceled += instance.OnSwitchItemNumKeys;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1113,6 +1183,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @SwitchItemNumKeys.started -= instance.OnSwitchItemNumKeys;
+            @SwitchItemNumKeys.performed -= instance.OnSwitchItemNumKeys;
+            @SwitchItemNumKeys.canceled -= instance.OnSwitchItemNumKeys;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1286,6 +1359,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnItemSecondary(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnSwitchItemNumKeys(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
