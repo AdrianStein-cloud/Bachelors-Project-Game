@@ -1773,10 +1773,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fca2af9408bf60f4e9118843daae5f93, type: 3}
   - {fileID: 8300000, guid: 003ed3c3816d9214b93abee528eaf076, type: 3}
   footstepSource: {fileID: 8078353467643043598}
-  footstepSounds:
-  - {fileID: 8300000, guid: 43c7b0792354823408d03bd6f8885ae1, type: 3}
-  - {fileID: 8300000, guid: 2196e6891b6c0f94780e3da973d4a840, type: 3}
-  - {fileID: 8300000, guid: 8da1aec079cbcba43a854395a45b0bef, type: 3}
+  footstepSounds: []
   runningFootstepSounds:
   - {fileID: 8300000, guid: cf09212a67da30e46ad8e10cda27331a, type: 3}
   - {fileID: 8300000, guid: fef6acc98b41bb64ba5deae8bff8a0e1, type: 3}
