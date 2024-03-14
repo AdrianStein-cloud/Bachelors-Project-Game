@@ -21,13 +21,14 @@ TagManager:
   - Door
   - TransparentObstacle
   - ReduceEnemyVision
+  - Map
   - NoLight
+  - Overlay
   - 
   - 
   - 
   - 
-  - 
-  - 
+  - Main Camera Only
   - 
   - 
   - 
