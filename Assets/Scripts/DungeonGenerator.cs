@@ -5,6 +5,7 @@ using System.IO;
 using Unity.AI.Navigation;
 using Unity.Mathematics;
 using UnityEngine;
+using System.Linq;
 using Random = System.Random;
 
 public class DungeonGenerator : MonoBehaviour
@@ -19,7 +20,7 @@ public class DungeonGenerator : MonoBehaviour
     Random random;
 
     public WeightedRoom[] randomRooms;
-    [field: SerializeField] public MinMaxRoom[] minimumRooms;
+    [field: SerializeField] public WeightedEndRoom[] endRooms;
     public GameObject startRoom;
     public GameObject flood;
     private List<GameObject> rooms = new List<GameObject>();
@@ -111,6 +112,7 @@ public class DungeonGenerator : MonoBehaviour
     IEnumerator SpawnRoomAtDoor(Door door, int depth, Transform dungeon)
     {
         bool roomFound = false;
+        bool isCorridor = false;
         //GameObject newRoom = null;
         door.debugHighlight = true;
         List<Door> doors = null;
@@ -149,6 +151,7 @@ public class DungeonGenerator : MonoBehaviour
                 spawnedRooms.Add(newRoom);
                 spawnedRoomsDepth.Add((newRoom, depth));
                 roomFound = true;
+                if(newRoomScript.isCorridor) isCorridor = true;
                 break;
             }
         }
@@ -160,54 +163,58 @@ public class DungeonGenerator : MonoBehaviour
             foreach (Door doorTemp in doors)
             {
                 if (depth + 1 < this.depth) doorQueue.Enqueue((doorTemp, depth + 1));
-                else yield return SpawnMinMaxRoomAtDoor(doorTemp, dungeon);
+                else yield return SpawnEndRoomAtDoor(doorTemp, dungeon, isCorridor);
             }
         }
 
         yield return null;
     }
 
-    IEnumerator SpawnMinMaxRoomAtDoor(Door door, Transform dungeon)
+    IEnumerator SpawnEndRoomAtDoor(Door door, Transform dungeon, bool isCorridor)
     {
         bool roomFound = false;
-        //GameObject newRoom = null;
         door.debugHighlight = true;
-        List<Door> doors = null;
 
-        foreach (MinMaxRoom room in minimumRooms)
+        List<WeightedEndRoom> tempRandomRooms = new(endRooms);
+
+        if (!isCorridor)
         {
-            if (room.minmax.y < 1)
+            int chance = 40;
+            if(random.Next(101) > chance)
             {
-                continue;
+                yield break;
             }
 
-            //newRoom = Instantiate(room.room, door.gameObject.transform.position, door.direction, dungeon);
-            //newRoom = room.room;
-            Room newRoomScript = room.room.GetComponent<Room>();
-            doors = newRoomScript.GetDoors();
+            tempRandomRooms = tempRandomRooms.Where(room => !room.corridorOnly).ToList();
+        }
+
+
+        while(tempRandomRooms.Count > 0)
+        {
+            WeightedEndRoom randomRoom;
+
+            if (tempRandomRooms.Count < 1) break;
+
+            if (tempRandomRooms.Count > 1) randomRoom = tempRandomRooms.GetRollFromWeights(random);
+            else randomRoom = tempRandomRooms[0];
+
+            Room newRoomScript = randomRoom.room.GetComponent<Room>();
 
 
             if (IsColliding(newRoomScript, door))
             {
-                //Destroy(newRoom);
-                //newRoom = null;
-                newRoomScript = null;
-                doors = null;
+                tempRandomRooms.Remove(randomRoom);
             }
             else
             {
-                var newRoom = Instantiate(room.room, door.gameObject.transform.position, door.direction, dungeon);
+                var newRoom = Instantiate(randomRoom.room, door.gameObject.transform.position, door.direction, dungeon);
                 newRoomScript = newRoom.GetComponent<Room>();
-                doors = newRoomScript.GetDoors();
                 door.SetDoorConnected(true);
                 newRoomScript.GetEntrance().GetComponent<Door>().SetDoorConnected(true);
                 newRoomScript.InitRoom(random, materials.wall, materials.floor, materials.ceiling);
 
                 spawnedRooms.Add(newRoom);
                 spawnedRoomsDepth.Add((newRoom, depth));
-
-                if (random.Next(0, 2) == 1) room.minmax -= new Vector2(1, 1);
-                else room.minmax -= new Vector2(1, 2);
 
                 roomFound = true;
                 break;
@@ -297,10 +304,11 @@ public class WeightedRoom : IWeighted
 }
 
 [System.Serializable]
-public class MinMaxRoom
+public class WeightedEndRoom : IWeighted
 {
+    public bool corridorOnly = true;
     public GameObject room;
-    public Vector2 minmax;
+    [field: SerializeField] public int Weight { get; set; }
 }
 
 [System.Serializable]
