@@ -85,26 +85,27 @@ public class DungeonGenerator : MonoBehaviour
             yield return SpawnRoomAtDoor(element.Item1, element.Item2, dungeon.transform);
         }
 
+        bool dungeonFailed = false;
+
         foreach(Door door in entrance.GetComponent<Room>().GetDoors())
         {
             if (!door.GetDoorConnected())
             {
                 foreach (Transform child in dungeon.transform) Destroy(child.gameObject);
+                dungeonFailed = true;
                 yield return GenerateDungeon(dungeon, depth);
             }
         }
 
-        //Done spawning dungeon
-        yield return new WaitForSeconds(0.2f);
-        var navMesh = Instantiate(navmeshSurface, dungeon.transform);
-        navMesh.BuildNavMesh();
-        eventManager.SetSizeOfDungeon(navMesh.navMeshData.sourceBounds.size);
-        eventManager.SetCenterOfDungeon(navMesh.navMeshData.sourceBounds.center);
-
-
-        yield return new WaitForSeconds(0.2f);
-        //GetComponent<SimpleEnemySpawner>().SpawnEnemies(spawnedRooms);
-        //GetComponent<ObjectiveSpawner>().SpawnObjectives(spawnedRoomsDepth);
+        if (!dungeonFailed)
+        {
+            //Done spawning dungeon
+            yield return new WaitForSeconds(0.2f);
+            var navMesh = Instantiate(navmeshSurface, dungeon.transform);
+            navMesh.BuildNavMesh();
+            eventManager.SetSizeOfDungeon(navMesh.navMeshData.sourceBounds.size);
+            eventManager.SetCenterOfDungeon(navMesh.navMeshData.sourceBounds.center);
+        }
     }
 
     IEnumerator SpawnRoomAtDoor(Door door, int depth, Transform dungeon)

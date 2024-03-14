@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext context)
     {
-        if (!enableJump || jumping || !isGrounded || !context.performed) return;
+        if (!enableJump || jumping || !isGrounded || !canStand || !context.performed) return;
         StopCrouch();
         jumping = true;
         velocity.y = Mathf.Sqrt(jumpHeight * 2f * airGravity);

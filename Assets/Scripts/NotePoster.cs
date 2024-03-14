@@ -7,7 +7,7 @@ public class NotePoster : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI notes;
 
-    private void Start()
+    private void Awake()
     {
         GameSettings.Instance.OnEventChanged += (value) =>
         {

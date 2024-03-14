@@ -64,8 +64,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void Die()
     {
+        PlayerPrefs.SetInt("player_score", GameSettings.Instance.Wave);
+
         SceneManager.LoadScene("DeathScene");
-        Debug.Log("He do be dead");
     }
 
     void UpdateHealthBar()
