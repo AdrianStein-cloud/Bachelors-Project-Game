@@ -99,8 +99,8 @@ public class SensorController : Item
         if (!canPlace || maximumPlaced) return;
 
         var instance = Instantiate(sensorPrefab, hit.point, Quaternion.identity);
-        //instance.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
         Rotate(instance.transform);
+        instance.transform.SetParent(hit.transform);
 
         var sensor = instance.GetComponent<Sensor>();
         sensor.Init();

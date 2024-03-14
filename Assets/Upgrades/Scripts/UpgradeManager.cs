@@ -7,6 +7,7 @@ using System;
 
 public class UpgradeManager : MonoBehaviour
 {
+    [SerializeField] List<Upgrade> startUpgrades;
     [SerializeField] List<Upgrade> upgrades;
 
     UpgradeUIController upgradeUIController;
@@ -21,6 +22,13 @@ public class UpgradeManager : MonoBehaviour
         availableUpgrades = new List<Upgrade>(upgrades);
         upgradeUIController = FindAnyObjectByType<UpgradeUIController>();
         upgradeUIController.SetOnUpgradeCallback(ChooseUpgrade);
+
+        player = GameObject.FindWithTag("Player");
+
+        foreach (var upgrade in startUpgrades)
+        {
+            upgrade.Apply(player);
+        }
     }
 
     public void DisplayUpgrades(int amount, GameObject player, Action upgradeChosen)

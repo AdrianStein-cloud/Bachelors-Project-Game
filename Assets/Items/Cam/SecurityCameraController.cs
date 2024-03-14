@@ -151,6 +151,7 @@ public class SecurityCameraController : Item
         var instance = Instantiate(cameraPrefab, hit.point, Quaternion.identity);
 
         Rotate(instance.transform);
+        instance.transform.SetParent(hit.transform);
 
         cameras.Add(instance);
         currentCamCount--;
