@@ -59,22 +59,23 @@ public class SensorController : Item
             ghostSensor.transform.position = hit.point;
             ghostSensor.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
 
-            if (Physics.Raycast(hit.point, hit.normal, laserDistance, placeLayer))
-            {
-                sensorRenderer.material = validMaterial;
-                canPlace = true;
-            }
-            else
-            {
-                sensorRenderer.material = invalidMaterial;
-                canPlace = false;
-            }
+            Rotate(ghostSensor.transform);
+
+            canPlace = Physics.Raycast(hit.point, hit.normal, laserDistance, placeLayer);
+            sensorRenderer.material = canPlace ? validMaterial : invalidMaterial;
         }
         else
         {
             canPlace = false;
             ghostSensor.SetActive(false);
         }
+    }
+
+    void Rotate(Transform sensor)
+    {
+        bool areParallel = Mathf.Approximately(Mathf.Abs(Vector3.Dot(Vector3.up, hit.normal)), 1f);
+        Vector3 newForward = areParallel ? Vector3.right : Vector3.ProjectOnPlane(Vector3.up, hit.normal).normalized;
+        sensor.rotation = Quaternion.LookRotation(newForward, hit.normal);
     }
 
     public override void Primary() => TryPlace();
@@ -98,8 +99,8 @@ public class SensorController : Item
         if (!canPlace || maximumPlaced) return;
 
         var instance = Instantiate(sensorPrefab, hit.point, Quaternion.identity);
-        instance.transform.SetParent(hit.transform);
-        instance.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+        //instance.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+        Rotate(instance.transform);
 
         var sensor = instance.GetComponent<Sensor>();
         sensor.Init();

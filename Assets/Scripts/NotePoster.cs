@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class NotePoster : MonoBehaviour
 {
@@ -11,7 +11,6 @@ public class NotePoster : MonoBehaviour
     {
         GameSettings.Instance.OnEventChanged += (value) =>
         {
-            Debug.Log("Event: " + value);
             notes.text = value;
         };
     }

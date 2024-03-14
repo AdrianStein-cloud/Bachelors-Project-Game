@@ -11,7 +11,7 @@ public class EventManager
     public EventManager(GameObject flood)
     {
         this.flood = flood;
-        flood.gameObject.SetActive(false);
+        flood.SetActive(false);
 
         events = new List<Action>
         {
@@ -45,7 +45,7 @@ public class EventManager
     {
         if (GameSettings.Instance.Wave > 0)
         {
-            flood.gameObject.SetActive(true);
+            flood.SetActive(true);
             GameSettings.Instance.Event = "Flooded!";
         }
         else
@@ -67,7 +67,7 @@ public class EventManager
 
     public void SetSizeOfDungeon(Vector3 size)
     {
-        if (flood.gameObject.activeInHierarchy)
+        if (flood.activeInHierarchy)
         {
             flood.transform.localScale = new Vector3(size.x/10, 1, size.z/10);
         }
@@ -75,7 +75,7 @@ public class EventManager
 
     public void SetCenterOfDungeon(Vector3 center)
     {
-        if (flood.gameObject.activeInHierarchy)
+        if (flood.activeInHierarchy)
         {
             flood.transform.position = new Vector3(center.x, 3, center.z);
         }

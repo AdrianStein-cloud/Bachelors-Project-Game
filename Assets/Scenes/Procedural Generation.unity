@@ -30846,7 +30846,7 @@ GameObject:
   - component: {fileID: 1248025113318361795}
   - component: {fileID: 2809748841003517286}
   - component: {fileID: 79601234902020524}
-  - component: {fileID: 2809748841003517287}
+  - component: {fileID: 2809748841003517288}
   m_Layer: 0
   m_Name: Note Poster
   m_TagString: Untagged
@@ -31020,7 +31020,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880869219288731769}
   m_Mesh: {fileID: 649334472747351569, guid: c9047541a1a7dd54abaa12ef873349bf, type: 3}
---- !u!114 &2809748841003517287
+--- !u!114 &2809748841003517288
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31029,7 +31029,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1880869219288731769}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80d805930d5f93242be55ad04cc3a953, type: 3}
+  m_Script: {fileID: 11500000, guid: 40ce83d30735d9145ba1f1c4ff20571c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   notes: {fileID: 1770567704}
