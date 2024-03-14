@@ -12,10 +12,8 @@ public class SecurityCameraController : Item
     [SerializeField] Material invalidMaterial;
     [SerializeField] LayerMask placeLayer;
     [SerializeField] float placeDistance;
-    [SerializeField] float itemToggleDelay;
     [SerializeField] RenderTexture tabletTexture;
-    public GameObject tabletPrefab;
-    public GameObject tablet;
+    public TabletGadget tablet;
 
     [field: SerializeField] public int MaxCamCount { get; private set; }
 
@@ -30,15 +28,11 @@ public class SecurityCameraController : Item
     bool canPlace;
     int currentCamCount;
 
-    bool tabletEquipped;
-    Animator tabletAnim;
-    float lastTimeUsed;
-
     List<MeshRenderer> renderers;
 
     private void Awake()
     {
-        tablet = Instantiate(tabletPrefab, Camera.main.transform);
+        tablet = GameObject.FindGameObjectWithTag("Tablet").GetComponent<TabletGadget>();
 
         ghostCamera = Instantiate(cameraPrefab);
         ghostCamera.SetActive(false);
@@ -49,14 +43,13 @@ public class SecurityCameraController : Item
             renderers.Add(renderer);
         }
         currentCamCount = MaxCamCount;
-        tabletAnim = tablet.GetComponent<Animator>();
     }
 
     private void Update()
     {
         if (!isSelected) return;
 
-        if ((!tabletEquipped) && !maximumPlaced && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, placeDistance, placeLayer))
+        if ((!tablet.tabletEquipped) && !maximumPlaced && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, placeDistance, placeLayer))
         {
             ghostCamera.SetActive(true);
             ghostCamera.transform.position = hit.point;
@@ -93,7 +86,7 @@ public class SecurityCameraController : Item
 
     public override void Primary()
     {
-        if (!tabletEquipped) TryPlace();
+        if (!tablet.tabletEquipped) TryPlace();
         else
         {
             //switch cameras
@@ -109,33 +102,46 @@ public class SecurityCameraController : Item
 
     void ToggleCamera(GameObject cam, bool enable)
     {
+        tablet.textureRenderer.SetActive(true);
         var camera = cam.GetComponentInChildren<Camera>();
         camera.targetTexture = enable ? tabletTexture : null;
     }
 
     public override void Secondary()
     {
-        if (lastTimeUsed + itemToggleDelay <= Time.time)
+        tablet.Toggle();
+        if (tablet.tabletEquipped)
         {
-            lastTimeUsed = Time.time;
-            tabletEquipped = !tabletEquipped;
-            tabletAnim.SetTrigger("Toggle");
-            PostProcessingHandler.Instance.SetDOF(tabletEquipped);
+            if (cameras.Count > 0)
+            {
+                tablet.textureRenderer.SetActive(true);
+                ToggleCamera(cameras[currentCameraIndex], true);
+            }
+            else tablet.textureRenderer.SetActive(false);
         }
     }
 
     public override void Select()
     {
+        tablet.holdingTabletGadget = true;
         isSelected = true;
-        tablet.SetActive(true);
+        if (cameras.Count > 0)
+        {
+            tablet.textureRenderer.SetActive(true);
+            ToggleCamera(cameras[currentCameraIndex], true);
+        }
+        else tablet.textureRenderer.SetActive(false);
     }
 
     public override void Deselect()
     {
+        tablet.holdingTabletGadget = false;
         isSelected = false;
         canPlace = false;
         ghostCamera.SetActive(false);
-        tablet.SetActive(false);
+        if (cameras.Count > 0) ToggleCamera(cameras[currentCameraIndex], false);
+        tablet.textureRenderer.SetActive(false);
+        StartCoroutine(tablet.SwitchGadget());
     }
 
     private void TryPlace()
