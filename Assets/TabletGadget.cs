@@ -36,7 +36,7 @@ public class TabletGadget : MonoBehaviour
             lastTimeUsed = Time.time;
             tabletEquipped = !tabletEquipped;
             anim.SetTrigger("Toggle");
-            PostProcessingHandler.Instance.SetDOF(tabletEquipped);
+            //PostProcessingHandler.Instance.SetDOF(tabletEquipped);
         }
     }
 }
