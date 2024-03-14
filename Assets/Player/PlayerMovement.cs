@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         canStand = !Physics.Raycast(groundCheck.localPosition, Vector3.up, ceilingCheckDistance, groundMask) && IsCrouching;
 
         var move = transform.right * dir.x + transform.forward * dir.y;
-        controller.Move(Time.deltaTime * ((isGrounded ? currentSpeed : airSpeed) * move + velocity));
+        controller.Move(Time.unscaledDeltaTime * ((isGrounded ? currentSpeed : airSpeed) * move + velocity));
 
         Gravity();
 
@@ -164,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
 
         while (time < smoothCrouchTime)
         {
-            time += Time.deltaTime * smoothCrouchSpeed;
+            time += Time.unscaledDeltaTime * smoothCrouchSpeed;
             cam.localPosition = Vector3.Lerp(cameraStart, cameraEnd, time);
             groundCheck.localPosition = Vector3.Lerp(groundStart, groundEnd, time);
             controller.height = Mathf.Lerp(heightStart, heightEnd, time);
@@ -189,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
             ungrounded = !isGrounded;
         }
 
-        velocity.y -= (isGrounded && !jumping ? gravity : airGravity) * Time.deltaTime;
+        velocity.y -= (isGrounded && !jumping ? gravity : airGravity) * Time.unscaledDeltaTime;
     }
 
     private void OnDrawGizmosSelected()

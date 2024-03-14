@@ -531,6 +531,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4648741839162076814, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: upgrades.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4648741839162076814, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: upgrades.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c3f77865f28a5d47a84678f343cccc6,
+        type: 2}
     - target: {fileID: 6251193281981130515, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: canvas
@@ -11829,6 +11840,16 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 591579701}
+    - target: {fileID: 6219333887229627620, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219333887229627620, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 2097152
+      objectReference: {fileID: 0}
     - target: {fileID: 6325529118254348765, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
       propertyPath: m_Mesh

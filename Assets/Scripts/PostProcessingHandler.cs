@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PostProcessingHandler : MonoBehaviour
 {
@@ -16,11 +17,15 @@ public class PostProcessingHandler : MonoBehaviour
     LensDistortion lensDistortion;
     ChromaticAberration chromaticAberration;
     WhiteBalance whiteBalance;
+    Bloom bloom;
+    MotionBlur motionBlur;
 
     Color defaultColorFilter;
     float defaultExposure;
+    float defaultSaturation;
 
     float defaultVignette;
+    float defaultBloom;
     public float VignetteValue { get; set; }
     public Color ColorFilter { get; set; }
 
@@ -34,10 +39,24 @@ public class PostProcessingHandler : MonoBehaviour
         volume.profile.TryGet(out lensDistortion);
         volume.profile.TryGet(out chromaticAberration);
         volume.profile.TryGet(out whiteBalance);
+        volume.profile.TryGet(out bloom);
+        volume.profile.TryGet(out motionBlur);
 
         defaultColorFilter = ColorFilter = colorAdjustments.colorFilter.value;
         defaultExposure = colorAdjustments.postExposure.value;
         defaultVignette = VignetteValue = vignette.intensity.value;
+        defaultBloom = bloom.intensity.value;
+        defaultSaturation = colorAdjustments.saturation.value;
+    }
+
+    public void SetBloom(float smoothTime, float value = 0)
+    {
+        Value(bloom.intensity, smoothTime, value);
+    }
+
+    public void ResetBloom(float smoothTime)
+    {
+        Value(bloom.intensity, smoothTime, defaultBloom);
     }
 
     void Value(FloatParameter parameter, float smoothTime, float value)
@@ -91,6 +110,11 @@ public class PostProcessingHandler : MonoBehaviour
     {
         Value(chromaticAberration.intensity, smoothTime, value);
     }
+    public void SetMotionBlur(float smoothTime, float value = 0)
+    {
+        Value(motionBlur.intensity, smoothTime, value);
+    }
+
     public void ResetColorFilter()
     {
         ColorFilter = defaultColorFilter;
@@ -99,6 +123,16 @@ public class PostProcessingHandler : MonoBehaviour
     public void SetColorFilter(Color colorFilter = default)
     {
         colorAdjustments.colorFilter.value = colorFilter == default ? ColorFilter : colorFilter;
+    }
+
+    public void ResetSaturation(float smoothTime)
+    {
+        Value(colorAdjustments.saturation, smoothTime, defaultSaturation);
+    }
+
+    public void SetSaturation(float smoothTime, float value)
+    {
+        Value(colorAdjustments.saturation, smoothTime, value);
     }
 
     public void SetPostExposure(float smoothTime, float value = 0)
