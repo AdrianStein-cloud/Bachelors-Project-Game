@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsWalking { get; private set; }
     public bool IsRunning { get; private set; }
     public bool IsCrouching { get; private set; }
+    public float SpeedMultiplier { get; set; } = 1f;
 
     private void Awake()
     {
@@ -89,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (dir.y <= 0 && toggleRun || !stamina.SufficientStamina) run = false;
 
-        currentSpeed = IsRunning ? runSpeed : (IsCrouching ? crouchSpeed : walkSpeed);
+        currentSpeed = (IsRunning ? runSpeed : (IsCrouching ? crouchSpeed : walkSpeed)) * SpeedMultiplier;
         IsWalking = dir.magnitude > 0f && !IsRunning && isGrounded;
 
         canStand = !Physics.Raycast(groundCheck.localPosition, Vector3.up, ceilingCheckDistance, groundMask) && IsCrouching;

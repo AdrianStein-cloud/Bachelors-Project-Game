@@ -36,10 +36,10 @@ public class ThrowableItem : Item
         angle = Mathf.Clamp(angle + offsetAngle, -minAngle, maxAngle);
         var direction = Quaternion.AngleAxis(angle, Camera.main.transform.right) * player.forward;
 
-        rb.AddForce(direction * throwForce, ForceMode.VelocityChange);
+        rb.AddForce(direction * throwForce, ForceMode.Impulse);
         var x = (Random.Range(0, 2) == 0 ? 1f : -1f) * Random.Range(minTorque, maxTorque);
         var z = (Random.Range(0, 2) == 0 ? 1f : -1f) * Random.Range(minTorque, maxTorque);
-        rb.AddTorque(x, 0f, z, ForceMode.VelocityChange);
+        rb.AddTorque(x, 0f, z, ForceMode.Impulse);
     }
 
     public override void Primary()

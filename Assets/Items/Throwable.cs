@@ -20,6 +20,8 @@ public abstract class Throwable : MonoBehaviour
         }
     }
 
+    protected virtual void Start() { }
+
     private IEnumerator DetonateAfterTime()
     {
         yield return new WaitForSeconds(detonationTime);
