@@ -135,8 +135,10 @@ MonoBehaviour:
   itemName: Flashlight
   icon: {fileID: 21300000, guid: 0f70243ee31774b46b2ab84d9691f8ca, type: 3}
   intensity: 100
-  batteryLife: 100
-  batteryDrain: 1
+  batteryPrefab: {fileID: 5951866457771750284, guid: c0cd3cb78b9e7d249b8337fcd7131294,
+    type: 3}
+  battery: {fileID: 0}
+  batteryDrain: 15
 --- !u!82 &8677481591294598909
 AudioSource:
   m_ObjectHideFlags: 0

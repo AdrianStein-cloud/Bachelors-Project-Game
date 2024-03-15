@@ -25,7 +25,7 @@ public class Collectable : Interactable
             onCollect();
             source.pitch = UnityEngine.Random.Range(pitchRange.x, pitchRange.y);
             source.Play();
-            Destroy(gameObject.transform.parent.gameObject);
+            Destroy(gameObject.transform.parent.gameObject, source.clip.length);
         }
     }
 

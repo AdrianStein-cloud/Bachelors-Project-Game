@@ -54,10 +54,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   placeDistance: 30
-  itemToggleDelay: 0.8
   tabletTexture: {fileID: 8400000, guid: ec3b70d1ecdfdaa4d813efe07f551e4f, type: 2}
-  tabletPrefab: {fileID: 5386538304499864088, guid: dcfcec49426de534d8bfd29407cf6473,
-    type: 3}
   tablet: {fileID: 0}
+  batteryDrain: 2
   <MaxCamCount>k__BackingField: 2
   cameras: []

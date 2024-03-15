@@ -8,6 +8,8 @@ public class MapGadgetController : Item
     public RenderTexture tabletTexture;
     Camera camera;
 
+    public float batteryDrain;
+
     private void Awake()
     {
         tablet = GameObject.FindGameObjectWithTag("Tablet").GetComponent<TabletGadget>();
@@ -17,8 +19,11 @@ public class MapGadgetController : Item
     public override void Select()
     {
         tablet.holdingTabletGadget = true;
-        tablet.textureRenderer.SetActive(true);
+        if (!tablet.battery.Dead) tablet.textureRenderer.SetActive(true);
         ToggleCamera(true);
+        tablet.battery.Select();
+        tablet.battery.batteryDrain = this.batteryDrain;
+        if (!tablet.battery.on && tablet.tabletEquipped) tablet.battery.ToggleBattery();
     }
 
     public override void Deselect()
@@ -26,6 +31,7 @@ public class MapGadgetController : Item
         tablet.holdingTabletGadget = false;
         tablet.textureRenderer.SetActive(false);
         ToggleCamera(false);
+        tablet.battery.Deselect();
         StartCoroutine(tablet.SwitchGadget());
     }
 
@@ -39,6 +45,7 @@ public class MapGadgetController : Item
     public override void Secondary()
     {
         tablet.Toggle();
-        tablet.textureRenderer.SetActive(tablet.tabletEquipped);
+        tablet.battery.ToggleBattery();
+        if (!tablet.battery.Dead) tablet.textureRenderer.SetActive(tablet.tabletEquipped);
     }
 }

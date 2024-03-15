@@ -153,6 +153,9 @@ MonoBehaviour:
   itemToggleDelay: 0.3
   tabletEquipped: 0
   textureRenderer: {fileID: 5314027963297978920}
+  batteryPrefab: {fileID: 8585908893610147954, guid: c6aab059c48e26e44bb402fc5b3f12d1,
+    type: 3}
+  battery: {fileID: 0}
   holdingTabletGadget: 0
 --- !u!1 &6321466594360258633
 GameObject:

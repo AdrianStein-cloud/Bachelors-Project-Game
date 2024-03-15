@@ -6,85 +6,45 @@ using UnityEngine.UI;
 public class FlashlightController : Item
 {
     [SerializeField] float intensity;
-    [SerializeField] float batteryLife;
-    [SerializeField] float batteryDrain;
 
     Light flashlight;
-    float currentBatteryLife;
-    GameObject flashlightBar;
-    Image flashlightFill;
-    bool on = false;
-    bool dead;
     new AudioSource audio;
+
+    public BatteryItem batteryPrefab;
+    public BatteryItem battery;
+    public float batteryDrain;
 
     private void Awake()
     {
+        battery = Instantiate(batteryPrefab, this.transform);
+        battery.OnDead += () => flashlight.intensity = 0;
+
         flashlight = GetComponent<Light>();
         audio = GetComponent<AudioSource>();
-        currentBatteryLife = batteryLife;
-        var gameManager = FindObjectOfType<GameManager>();
-        if (gameManager != null)
-        {
-            gameManager.OnWaveOver += () =>
-            {
-                currentBatteryLife = batteryLife;
-                dead = false;
-                UpdateBar();
-            };
-        }
-        flashlightBar = GameSettings.Instance.canvas.transform.Find("FlashlightBar").gameObject;
-        flashlightFill = flashlightBar.transform.Find("Fill").GetComponent<Image>();
-    }
-
-    private void Update()
-    {
-        if (dead) return;
-        if (on)
-        {
-            currentBatteryLife -= batteryDrain * Time.deltaTime;
-            if (currentBatteryLife <= 0)
-            {
-                dead = true;
-                on = false;
-                flashlight.intensity = 0;
-                currentBatteryLife = 0;
-            }
-
-            UpdateBar();
-        }
     }
 
     public override void Primary() => ToggleFlashlight();
 
     public override void Select()
     {
-        flashlightBar.SetActive(true);
-        UpdateBar();
+        battery.batteryDrain = this.batteryDrain;
+        battery.Select();
     }
 
     public override void Deselect()
     {
-        flashlightBar.SetActive(false);
+        if (battery.on) ToggleFlashlight();
+        battery.Deselect();
     }
 
     public void ToggleFlashlight()
     {
         audio.Play();
-        if (dead) return;
 
-        if (on)
-        {
-            on = false;
-            flashlight.intensity = 0;
-        }
-        else
-        {
-            on = true;
-            flashlight.intensity = intensity;
-        }
+        battery.ToggleBattery();
+
+        flashlight.intensity = battery.on ? intensity : 0;
     }
-
-    private void UpdateBar() => flashlightFill.fillAmount = currentBatteryLife / batteryLife;
 
     public void Upgrade(int intensity, int range, int angle, int batteryLife)
     {
@@ -93,11 +53,8 @@ public class FlashlightController : Item
         flashlight.spotAngle += angle;
 
         this.intensity += intensity;
-        if(on) flashlight.intensity = this.intensity;
+        if (battery.on) flashlight.intensity = this.intensity;
 
-
-        this.batteryLife += batteryLife;
-        currentBatteryLife = this.batteryLife;
-        UpdateBar();
+        battery.UpgradeBattery(batteryLife);
     }
 }

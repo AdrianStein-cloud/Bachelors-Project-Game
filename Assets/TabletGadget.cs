@@ -9,6 +9,9 @@ public class TabletGadget : MonoBehaviour
     public bool tabletEquipped;
     public GameObject textureRenderer;
 
+    public BatteryItem batteryPrefab;
+    public BatteryItem battery;
+
     Animator anim;
     float lastTimeUsed;
 
@@ -17,6 +20,9 @@ public class TabletGadget : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        battery = Instantiate(batteryPrefab, this.transform);
+        battery.OnDead += () => textureRenderer.SetActive(false);
+
         anim = GetComponent<Animator>();
     }
 
@@ -26,6 +32,7 @@ public class TabletGadget : MonoBehaviour
         if (!holdingTabletGadget && tabletEquipped)
         {
             Toggle();
+            battery.on = false;
         }
     }
 

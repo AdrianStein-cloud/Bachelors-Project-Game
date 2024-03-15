@@ -14,6 +14,7 @@ public class SecurityCameraController : Item
     [SerializeField] float placeDistance;
     [SerializeField] RenderTexture tabletTexture;
     public TabletGadget tablet;
+    public float batteryDrain;
 
     [field: SerializeField] public int MaxCamCount { get; private set; }
 
@@ -102,7 +103,7 @@ public class SecurityCameraController : Item
 
     void ToggleCamera(GameObject cam, bool enable)
     {
-        tablet.textureRenderer.SetActive(true);
+        if (!tablet.battery.Dead) tablet.textureRenderer.SetActive(true);
         var camera = cam.GetComponentInChildren<Camera>();
         camera.targetTexture = enable ? tabletTexture : null;
     }
@@ -112,25 +113,33 @@ public class SecurityCameraController : Item
         tablet.Toggle();
         if (tablet.tabletEquipped)
         {
-            if (cameras.Count > 0)
-            {
-                tablet.textureRenderer.SetActive(true);
-                ToggleCamera(cameras[currentCameraIndex], true);
-            }
-            else tablet.textureRenderer.SetActive(false);
+            DefaultScreen();
         }
+        else if (tablet.battery.on) tablet.battery.ToggleBattery();
     }
 
     public override void Select()
     {
         tablet.holdingTabletGadget = true;
         isSelected = true;
+        if (tablet.tabletEquipped) DefaultScreen();
+        tablet.battery.Select();
+        tablet.battery.batteryDrain = this.batteryDrain;
+    }
+
+    void DefaultScreen()
+    {
         if (cameras.Count > 0)
         {
-            tablet.textureRenderer.SetActive(true);
+            tablet.battery.ToggleBattery();
+            if (!tablet.battery.Dead) tablet.textureRenderer.SetActive(true);
             ToggleCamera(cameras[currentCameraIndex], true);
         }
-        else tablet.textureRenderer.SetActive(false);
+        else
+        {
+            tablet.battery.on = false;
+            tablet.textureRenderer.SetActive(false);
+        }
     }
 
     public override void Deselect()
@@ -141,6 +150,7 @@ public class SecurityCameraController : Item
         ghostCamera.SetActive(false);
         if (cameras.Count > 0) ToggleCamera(cameras[currentCameraIndex], false);
         tablet.textureRenderer.SetActive(false);
+        tablet.battery.Deselect();
         StartCoroutine(tablet.SwitchGadget());
     }
 
