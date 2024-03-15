@@ -110,12 +110,14 @@ public class SecurityCameraController : Item
 
     public override void Secondary()
     {
-        tablet.Toggle();
-        if (tablet.tabletEquipped)
+        if (tablet.Toggle())
         {
-            DefaultScreen();
+            if (tablet.tabletEquipped)
+            {
+                DefaultScreen();
+            }
+            else if (tablet.battery.on) tablet.battery.ToggleBattery();
         }
-        else if (tablet.battery.on) tablet.battery.ToggleBattery();
     }
 
     public override void Select()
@@ -151,7 +153,7 @@ public class SecurityCameraController : Item
         if (cameras.Count > 0) ToggleCamera(cameras[currentCameraIndex], false);
         tablet.textureRenderer.SetActive(false);
         tablet.battery.Deselect();
-        StartCoroutine(tablet.SwitchGadget());
+        tablet.SwitchGadget();
     }
 
     private void TryPlace()

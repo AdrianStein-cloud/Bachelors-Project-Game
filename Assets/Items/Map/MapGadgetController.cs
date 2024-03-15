@@ -32,7 +32,7 @@ public class MapGadgetController : Item
         tablet.textureRenderer.SetActive(false);
         ToggleCamera(false);
         tablet.battery.Deselect();
-        StartCoroutine(tablet.SwitchGadget());
+        tablet.SwitchGadget();
     }
 
     void ToggleCamera(bool enable)
@@ -44,8 +44,7 @@ public class MapGadgetController : Item
 
     public override void Secondary()
     {
-        tablet.Toggle();
-        tablet.battery.ToggleBattery();
+        if (tablet.Toggle()) tablet.battery.ToggleBattery();
         if (!tablet.battery.Dead) tablet.textureRenderer.SetActive(tablet.tabletEquipped);
     }
 }

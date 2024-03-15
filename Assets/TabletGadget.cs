@@ -26,7 +26,12 @@ public class TabletGadget : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public IEnumerator SwitchGadget()
+    public void SwitchGadget()
+    {
+        StopAllCoroutines();
+        StartCoroutine(switchGadget());
+    }
+    IEnumerator switchGadget()
     {
         yield return new WaitForSeconds(0.1f);
         if (!holdingTabletGadget && tabletEquipped)
@@ -36,7 +41,7 @@ public class TabletGadget : MonoBehaviour
         }
     }
 
-    public void Toggle()
+    public bool Toggle()
     {
         if (lastTimeUsed + itemToggleDelay <= Time.time)
         {
@@ -44,6 +49,8 @@ public class TabletGadget : MonoBehaviour
             tabletEquipped = !tabletEquipped;
             anim.SetTrigger("Toggle");
             //PostProcessingHandler.Instance.SetDOF(tabletEquipped);
+            return true;
         }
+        return false;
     }
 }
