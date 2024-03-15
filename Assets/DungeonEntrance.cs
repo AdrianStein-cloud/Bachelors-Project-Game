@@ -15,6 +15,7 @@ public class DungeonEntrance : Interactable
         {
             if (DungeonIsAvailable)
             {
+                GameSettings.Instance.PlayerInDungeon = true;
                 EnterDungeon();
             }
             else

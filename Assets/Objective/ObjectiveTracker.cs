@@ -52,6 +52,7 @@ public class ObjectiveTracker : MonoBehaviour
         {
             int upgradesAmount = 2 * (Mathf.Min(collectedObjectives, maxObjectives) - leaveThreshold) / (maxObjectives - leaveThreshold) + 1;
             leave(upgradesAmount);
+            GameSettings.Instance.PlayerInDungeon = false;
             return true;
         }
         return false;
