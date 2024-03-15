@@ -4,12 +4,16 @@ using UnityEngine;
 
 public abstract class Throwable : MonoBehaviour
 {
+    [SerializeField] AudioSource throwSource;
+    [SerializeField] AudioSource detonateSource;
     [SerializeField] float detonationTime;
 
     bool canDetonate = true;
 
     private void Awake()
     {
+        throwSource.Play();
+
         if (detonationTime > 0)
         {
             StartCoroutine(DetonateAfterTime());
@@ -20,18 +24,23 @@ public abstract class Throwable : MonoBehaviour
     {
         yield return new WaitForSeconds(detonationTime);
         Detonate();
+    }
+
+    void Detonate()
+    {
+        canDetonate = false;
+        detonateSource.Play();
+        OnDetonate();
         //Destroy(gameObject);
     }
 
-    protected abstract void Detonate();
+    protected abstract void OnDetonate();
 
     private void OnCollisionEnter(Collision other)
     {
         if (canDetonate && detonationTime <= 0 && !other.gameObject.CompareTag("Player"))
         {
-            canDetonate = false;
             Detonate();
-            //Destroy(gameObject);
         }
     }
 }
