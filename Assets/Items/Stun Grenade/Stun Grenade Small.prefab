@@ -843,7 +843,7 @@ GameObject:
   - component: {fileID: 5376472164103484842}
   - component: {fileID: 160823741368180240}
   m_Layer: 0
-  m_Name: Stun Grenade
+  m_Name: Stun Grenade Small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -859,7 +859,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7686819051503257955}
@@ -936,7 +936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 246fad651c90ad4439b3b2c50afe67e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detonationTime: 0
+  detonationTime: 2
   explosionRadius: 3
   particles:
   - {fileID: 1998830269065593975, guid: b70fbea4bc8994749ba52e4f560f9f28, type: 3}

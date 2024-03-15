@@ -2640,8 +2640,8 @@ MonoBehaviour:
     - {fileID: 6523889864682435482}
     - {fileID: 1414715655587490613}
   - name: Lockers
-    maxAmount: 2
-    percentageChance: 80
+    maxAmount: 1
+    percentageChance: 100
     randomObjects:
     - {fileID: 6838219167262337449}
     - {fileID: 7629041324041239726}
