@@ -133,7 +133,7 @@ public class SecurityCameraController : Item
     {
         if (cameras.Count > 0)
         {
-            tablet.battery.ToggleBattery();
+            if (!tablet.battery.on) tablet.battery.ToggleBattery();
             if (!tablet.battery.Dead) tablet.textureRenderer.SetActive(true);
             ToggleCamera(cameras[currentCameraIndex], true);
         }
