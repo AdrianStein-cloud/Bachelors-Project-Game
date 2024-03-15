@@ -561,6 +561,80 @@ Transform:
   - {fileID: 1194520287}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &285601302
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1140269263}
+    m_Modifications:
+    - target: {fileID: 1399268758923029935, guid: 3f7af72d757ba5946b866cbed5ff2673,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399268758923029935, guid: 3f7af72d757ba5946b866cbed5ff2673,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399268758923029935, guid: 3f7af72d757ba5946b866cbed5ff2673,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399268758923029935, guid: 3f7af72d757ba5946b866cbed5ff2673,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399268758923029935, guid: 3f7af72d757ba5946b866cbed5ff2673,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399268758923029935, guid: 3f7af72d757ba5946b866cbed5ff2673,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399268758923029935, guid: 3f7af72d757ba5946b866cbed5ff2673,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399268758923029935, guid: 3f7af72d757ba5946b866cbed5ff2673,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399268758923029935, guid: 3f7af72d757ba5946b866cbed5ff2673,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1399268758923029935, guid: 3f7af72d757ba5946b866cbed5ff2673,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151589542044210974, guid: 3f7af72d757ba5946b866cbed5ff2673,
+        type: 3}
+      propertyPath: m_Name
+      value: Stun Grenade Gadget
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f7af72d757ba5946b866cbed5ff2673, type: 3}
+--- !u!4 &285601303 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1399268758923029935, guid: 3f7af72d757ba5946b866cbed5ff2673,
+    type: 3}
+  m_PrefabInstance: {fileID: 285601302}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &299284446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1355,6 +1429,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5811743874523032197}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1170984453 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3253710843451783394, guid: 3f7af72d757ba5946b866cbed5ff2673,
+    type: 3}
+  m_PrefabInstance: {fileID: 285601302}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400b5decdea48fc4fa0d7e005b5ec531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1194520287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
@@ -1825,7 +1911,7 @@ Transform:
   m_GameObject: {fileID: 1646600006}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2533,12 +2619,12 @@ PrefabInstance:
         type: 3}
       propertyPath: items.Array.data[0]
       value: 
-      objectReference: {fileID: 299284448}
+      objectReference: {fileID: 1170984453}
     - target: {fileID: 371485468407912402, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
       propertyPath: items.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 299284448}
     - target: {fileID: 371485468407912402, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
       propertyPath: items.Array.data[2]
@@ -2553,6 +2639,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 3447
+      objectReference: {fileID: 0}
+    - target: {fileID: 2044878300730262244, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2069725099065601414, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
@@ -2631,6 +2722,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5852719042983267109, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
+      propertyPath: crouchHeight
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5852719042983267109, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
       propertyPath: groundGravity
       value: 32
       objectReference: {fileID: 0}
@@ -2638,6 +2734,11 @@ PrefabInstance:
         type: 3}
       propertyPath: groundCheckRadius
       value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5852719042983267109, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: cameraCrouchOffset
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5852719042983267109, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
@@ -2796,6 +2897,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 299284447}
+    - targetCorrespondingSourceObject: {fileID: 3848953131990381864, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 285601303}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 190f930b5f042b247adeab89b9c2a294, type: 3}
 --- !u!1001 &8426252283987149788
