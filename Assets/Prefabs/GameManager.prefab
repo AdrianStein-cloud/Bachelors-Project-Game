@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7560089572570469592}
   - component: {fileID: 5089863009002353977}
   - component: {fileID: 4648741839162076814}
+  - component: {fileID: 6193125661974434217}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -203,4 +204,37 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 15594c024c21cdd4fb03aba42abdc511, type: 2}
   - {fileID: 11400000, guid: 4c3f77865f28a5d47a84678f343cccc6, type: 2}
   - {fileID: 11400000, guid: ecaed49935297084ca4de995fd4753a3, type: 2}
-  - {fileID: 11400000, guid: bbf34684017db6f4898185ff6ee34456, type: 2}
+--- !u!114 &6193125661974434217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538041618272719592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61f23b97768361c4ab620e7fac858e9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localSounds:
+  - {fileID: 8300000, guid: 93f68ec3b7fa705479d83431e14684f4, type: 3}
+  - {fileID: 8300000, guid: 7eff499e73d43b54eb42324408e62024, type: 3}
+  - {fileID: 8300000, guid: f9d498ff5bdce07439f223fd8d246c0a, type: 3}
+  - {fileID: 8300000, guid: c3387f50b580bb843a5d402ef54cea68, type: 3}
+  - {fileID: 8300000, guid: a600d1a9f558e7e41abb226e36510301, type: 3}
+  - {fileID: 8300000, guid: b05a3f0193c4d6443b82ab18473276d5, type: 3}
+  - {fileID: 8300000, guid: 5808d146a84520f4386937f586fefd4e, type: 3}
+  globalSounds:
+  - {fileID: 8300000, guid: 99c59cbc77eb0224eb7da32538d3c1fa, type: 3}
+  - {fileID: 8300000, guid: 4606e1dc6aaeed648bc5b2cbc61ebc9d, type: 3}
+  - {fileID: 8300000, guid: 21615a380bd72db48bbe9a7903411227, type: 3}
+  - {fileID: 8300000, guid: 5a3361e38fc8dd54cb6ce4e16b03b6f6, type: 3}
+  - {fileID: 8300000, guid: 04a210aaa73d57340909a3560a966488, type: 3}
+  - {fileID: 8300000, guid: 4c76cc9df565e194ab27668d88b5ef8e, type: 3}
+  - {fileID: 8300000, guid: a2903fd1a4483f74f8ac51b969ade4d9, type: 3}
+  - {fileID: 8300000, guid: 48c983af01285c34c9c29620fdb64edb, type: 3}
+  - {fileID: 8300000, guid: c7c55d21ece4c114b9cadc80ccf2497b, type: 3}
+  - {fileID: 8300000, guid: 0053efa23e7c77c4788949f4a3774552, type: 3}
+  soundInterval: 30
+  localSoundMinimumDistance: 200
+  localSoundMaximumDistance: 500
