@@ -1458,6 +1458,7 @@ GameObject:
   - component: {fileID: 5744492474670784729}
   - component: {fileID: -5973098871365891471}
   - component: {fileID: 2116237405653279951}
+  - component: {fileID: 3472712362066552602}
   m_Layer: 10
   m_Name: Coil
   m_TagString: Untagged
@@ -1507,7 +1508,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 12
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 7
   m_ObstacleAvoidanceType: 4
 --- !u!54 &2389882361144950432
 Rigidbody:
@@ -1630,6 +1631,18 @@ MonoBehaviour:
   - {fileID: 7400000, guid: f2c218d11f1507e4b86b6d2ef171d9d4, type: 2}
   - {fileID: 7400000, guid: 560c4297722dc984abcee322891889dd, type: 2}
   speed: 100
+--- !u!114 &3472712362066552602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978024783357441720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2472d87fd90b1154780a6077b975d7cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &227254927815958481
 PrefabInstance:
   m_ObjectHideFlags: 0
