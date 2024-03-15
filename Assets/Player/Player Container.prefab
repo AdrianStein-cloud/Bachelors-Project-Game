@@ -675,11 +675,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idleBobbingSpeed: 2
-  idleBobbingAmount: 0.002
+  idleBobbingAmount: 0.02
   walkingBobbingSpeed: 10
-  walkingBobbingAmount: 0.005
+  walkingBobbingAmount: 0.05
   runningBobbingSpeed: 13
-  runningBobbingAmount: 0.0075
+  runningBobbingAmount: 0.075
   player: {fileID: 5852719042983267109}
 --- !u!114 &6034051921019033551
 MonoBehaviour:
