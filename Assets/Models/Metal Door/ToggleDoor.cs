@@ -33,8 +33,8 @@ public class ToggleDoor : Interactable
         anim = transform.parent.GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         cam = Camera.main.gameObject;
-        navObstacle = GetComponentInChildren<NavMeshObstacle>();
-        if (!isLocked) navObstacle.enabled = false;
+        //navObstacle = GetComponentInChildren<NavMeshObstacle>();
+        //if (!isLocked) navObstacle.enabled = false;
     }
 
     private void Update()
