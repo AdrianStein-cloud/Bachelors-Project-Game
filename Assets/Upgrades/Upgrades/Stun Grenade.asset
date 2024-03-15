@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Stun Grenade
   m_EditorClassIdentifier: 
   Name: Stun Grenade
-  description: Grants you a {0]
+  description: Grants you a {0}
   NewlyAvailableUpgrades: []
   item: {fileID: 3253710843451783394, guid: 3f7af72d757ba5946b866cbed5ff2673, type: 3}
