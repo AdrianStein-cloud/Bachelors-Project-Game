@@ -24,6 +24,8 @@ public class MapGadgetController : Item
         tablet.battery.Select();
         tablet.battery.batteryDrain = this.batteryDrain;
         if (!tablet.battery.on && tablet.tabletEquipped) tablet.battery.ToggleBattery();
+
+        if (!tablet.tabletEquipped) tablet.Toggle();
     }
 
     public override void Deselect()

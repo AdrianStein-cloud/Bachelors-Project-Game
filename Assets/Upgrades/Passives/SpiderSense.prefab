@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8da56e3423787d0448db973fe7a98a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  senseRange: 500
+  senseRange: 80
   cooldown: 10
   sound: {fileID: 8300000, guid: 1c5aa86c81a82624fbd8607c2910da03, type: 3}
   enemyLayer:
