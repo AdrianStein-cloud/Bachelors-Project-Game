@@ -225,6 +225,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b05a3f0193c4d6443b82ab18473276d5, type: 3}
   - {fileID: 8300000, guid: 5808d146a84520f4386937f586fefd4e, type: 3}
   - {fileID: 8300000, guid: ad4f464d26d792d43b9580b7a2e21f64, type: 3}
+  - {fileID: 8300000, guid: 5f4cefe33142c6a4c8180abbf9ef41f5, type: 3}
   globalSounds:
   - {fileID: 8300000, guid: 99c59cbc77eb0224eb7da32538d3c1fa, type: 3}
   - {fileID: 8300000, guid: 4606e1dc6aaeed648bc5b2cbc61ebc9d, type: 3}
@@ -236,6 +237,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 48c983af01285c34c9c29620fdb64edb, type: 3}
   - {fileID: 8300000, guid: c7c55d21ece4c114b9cadc80ccf2497b, type: 3}
   - {fileID: 8300000, guid: 0053efa23e7c77c4788949f4a3774552, type: 3}
-  soundInterval: 30
+  soundIntervalMin: 20
+  soundIntervalMax: 40
   localSoundMinimumDistance: 200
   localSoundMaximumDistance: 500

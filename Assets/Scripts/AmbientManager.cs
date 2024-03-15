@@ -10,7 +10,8 @@ public class AmbientManager : MonoBehaviour
     private List<AudioSource> localNoiseMakers;
     private AudioSource playerAudioSource;
 
-    public float soundInterval;
+    public int soundIntervalMin;
+    public int soundIntervalMax;
     private float timer;
     private System.Random random;
     public float localSoundMinimumDistance;
@@ -21,7 +22,7 @@ public class AmbientManager : MonoBehaviour
     {
         player = FindObjectOfType<PlayerMovement>().gameObject;
         playerAudioSource = player.GetComponent<AudioSource>();
-        timer = soundInterval;
+        timer = soundIntervalMax;
     }
 
     private void Update()
@@ -34,8 +35,8 @@ public class AmbientManager : MonoBehaviour
             }
             else
             {
-                timer = soundInterval;
                 PlayCreepySound();
+                timer = random.Next(soundIntervalMin, soundIntervalMax);
             }
         }
     }
@@ -66,7 +67,10 @@ public class AmbientManager : MonoBehaviour
 
     private void PlayGlobalNoise()
     {
-        playerAudioSource.clip = globalSounds[random.Next(globalSounds.Count)];
-        playerAudioSource.Play();
+        if (!playerAudioSource.isPlaying)
+        {
+            playerAudioSource.clip = globalSounds[random.Next(globalSounds.Count)];
+            playerAudioSource.Play();
+        }
     }
 }
