@@ -48,11 +48,11 @@ MonoBehaviour:
   icon: {fileID: 0}
   throwablePrefab: {fileID: 8677083464190677367, guid: 3c25b2cb34c098a44a6b8d4042c77d55,
     type: 3}
-  throwForce: 400
+  throwForce: 10
   offsetAngle: -30
   minAngle: 80
   maxAngle: 40
-  minTorque: 1
-  maxTorque: 3
+  minTorque: 5
+  maxTorque: 10
   offsetPosition: {x: 0, y: 0, z: 0.25}
   maxAmount: 1000

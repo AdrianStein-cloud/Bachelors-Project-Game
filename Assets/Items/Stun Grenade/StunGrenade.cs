@@ -7,7 +7,7 @@ public class StunGrenade : Throwable
     [SerializeField] float explosionRadius;
     [SerializeField] List<ParticleSystem> particles;
 
-    protected override void Detonate()
+    protected override void OnDetonate()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (var collider in colliders)

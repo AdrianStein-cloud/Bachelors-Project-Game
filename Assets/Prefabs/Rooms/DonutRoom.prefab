@@ -9193,7 +9193,7 @@ MonoBehaviour:
     - {fileID: 8038965361870126266}
     - {fileID: 8146235404337306043}
   - name: Lockers
-    maxAmount: 4
+    maxAmount: 3
     percentageChance: 50
     randomObjects:
     - {fileID: 6581516689227029099}

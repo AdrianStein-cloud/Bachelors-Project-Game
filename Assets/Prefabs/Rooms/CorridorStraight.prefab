@@ -7353,6 +7353,7 @@ Transform:
   - {fileID: 5342097598650923983}
   - {fileID: 2403446075733200571}
   - {fileID: 2094138662213813570}
+  - {fileID: 4541248827022457585}
   m_Father: {fileID: 4004234854232285527}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5947697277039285364
@@ -11731,9 +11732,10 @@ MonoBehaviour:
     - {fileID: 117251210115557049}
   - name: Lockers
     maxAmount: 1
-    percentageChance: 80
+    percentageChance: 65
     randomObjects:
     - {fileID: 1604460865449025528}
+    - {fileID: 3768968715650293835}
   walls:
   - {fileID: 3868035027777374087}
   - {fileID: 7750278409493800475}
@@ -12526,7 +12528,7 @@ PrefabInstance:
     - target: {fileID: 6213519169007637583, guid: 7a78eefb17f920d4bbc29a69b3ed7f2e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.85
+      value: -18.32
       objectReference: {fileID: 0}
     - target: {fileID: 6213519169007637583, guid: 7a78eefb17f920d4bbc29a69b3ed7f2e,
         type: 3}
@@ -12626,12 +12628,12 @@ PrefabInstance:
     - target: {fileID: 6213519169007637583, guid: 7a78eefb17f920d4bbc29a69b3ed7f2e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.75
+      value: 13.64
       objectReference: {fileID: 0}
     - target: {fileID: 6213519169007637583, guid: 7a78eefb17f920d4bbc29a69b3ed7f2e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 31.37
+      value: 23.8
       objectReference: {fileID: 0}
     - target: {fileID: 6213519169007637583, guid: 7a78eefb17f920d4bbc29a69b3ed7f2e,
         type: 3}
@@ -14101,6 +14103,86 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2449520206588701124, guid: d5e0f95790dad054c8e7756f1cb54b71,
     type: 3}
   m_PrefabInstance: {fileID: 7779136701231981574}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8002202235751175831
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1765931045459648961}
+    m_Modifications:
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000029504295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6576268771003758300, guid: 855b976bb3ae2c940ad80913d588c12a,
+        type: 3}
+      propertyPath: m_Name
+      value: Locker Animated (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 855b976bb3ae2c940ad80913d588c12a, type: 3}
+--- !u!1 &3768968715650293835 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6576268771003758300, guid: 855b976bb3ae2c940ad80913d588c12a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8002202235751175831}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4541248827022457585 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5766939820494171238, guid: 855b976bb3ae2c940ad80913d588c12a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8002202235751175831}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8025294582398527336
 PrefabInstance:
