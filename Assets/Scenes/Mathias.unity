@@ -342,7 +342,7 @@ TerrainCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125779197}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5b05e7e0469fa1a49949d4ae2337a772, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -623,7 +623,7 @@ PrefabInstance:
         type: 3}
       propertyPath: throwablePrefab
       value: 
-      objectReference: {fileID: 8677083464190677367, guid: 990990cb7f15a014383b905898f58db0,
+      objectReference: {fileID: 3878125150532927947, guid: 7cbd016d1975a9e4e8e02dd2f8108953,
         type: 3}
     - target: {fileID: 7151589542044210974, guid: 3f7af72d757ba5946b866cbed5ff2673,
         type: 3}

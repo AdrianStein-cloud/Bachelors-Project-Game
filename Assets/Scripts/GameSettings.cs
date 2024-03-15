@@ -37,6 +37,7 @@ public class GameSettings : Singleton<GameSettings>
     public int CurrentDepth { get; set; }
     public int LightFailPercentage { get; set; }
     public int EnemyAmount { get; set; }
+    public bool PlayerInDungeon { get; set; }
     public string Event
     {
         get => eventValue;

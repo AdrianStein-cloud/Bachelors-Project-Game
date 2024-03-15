@@ -135,6 +135,11 @@ public class PostProcessingHandler : MonoBehaviour
         Value(colorAdjustments.saturation, smoothTime, value);
     }
 
+    public void ResetPostExposure(float smoothTime)
+    {
+        Value(colorAdjustments.postExposure, smoothTime, defaultExposure);
+    }
+
     public void SetPostExposure(float smoothTime, float value = 0)
     {
         Value(colorAdjustments.postExposure, smoothTime, value);

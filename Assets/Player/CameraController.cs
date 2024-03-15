@@ -9,6 +9,8 @@ public class CameraController : MonoBehaviour
     [field: SerializeField] public float HorizontalSensitivity { get; set; }
     [field: SerializeField] public float VerticalSensitivity { get; set; }
 
+    public float SensitivityMultiplier { get; set; } = 1f;
+
     [SerializeField, Range(50, 90)] int rotationAngle;
     [SerializeField] float followSmoothTime;
     [SerializeField] float runFOVChangeAmount;
@@ -57,8 +59,7 @@ public class CameraController : MonoBehaviour
 
         transform.position = Vector3.SmoothDamp(transform.position, cameraPosition.position, ref velocity, followSmoothTime * Time.deltaTime);
 
-
-        var mouseDir = new Vector2(dir.x * HorizontalSensitivity, dir.y * VerticalSensitivity) / 100;
+        var mouseDir = new Vector2(dir.x * HorizontalSensitivity, dir.y * VerticalSensitivity) * SensitivityMultiplier / 100;
 
         xOld = xRotation;
         xRotation -= mouseDir.y;
