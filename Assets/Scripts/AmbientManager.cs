@@ -43,8 +43,8 @@ public class AmbientManager : MonoBehaviour
     private void PlayCreepySound()
     {
         if (random == null) random = new System.Random(GameSettings.Instance.GetSeed());
-        if (localNoiseMakers == null) localNoiseMakers = GameObject.FindGameObjectsWithTag("NoiseMaker").Select(a => a.GetComponent<AudioSource>()).ToList();
-        if (random.Next(0) == 0)
+        if (localNoiseMakers == null || localNoiseMakers.Count <= 0) localNoiseMakers = GameObject.FindGameObjectsWithTag("NoiseMaker").Select(a => a.GetComponent<AudioSource>()).ToList();
+        if (random.Next(2) == 0)
         {
             PlayLocalNoise();
         }
@@ -59,14 +59,14 @@ public class AmbientManager : MonoBehaviour
         var tempLocalNoiseMakers = localNoiseMakers.Where(a => Vector3.Distance(player.transform.position, a.gameObject.transform.position) >= localSoundMinimumDistance && Vector3.Distance(player.transform.position, a.gameObject.transform.position) <= localSoundMaximumDistance).ToList();
         if (tempLocalNoiseMakers.Count <= 0) return;
         
-        AudioSource randomAudioSource = tempLocalNoiseMakers[random.Next(tempLocalNoiseMakers.Count - 1)];
-        randomAudioSource.clip = localSounds[random.Next(localSounds.Count - 1)];
+        AudioSource randomAudioSource = tempLocalNoiseMakers[random.Next(tempLocalNoiseMakers.Count)];
+        randomAudioSource.clip = localSounds[random.Next(localSounds.Count)];
         randomAudioSource.Play();
     }
 
     private void PlayGlobalNoise()
     {
-        playerAudioSource.clip = globalSounds[random.Next(globalSounds.Count - 1)];
+        playerAudioSource.clip = globalSounds[random.Next(globalSounds.Count)];
         playerAudioSource.Play();
     }
 }

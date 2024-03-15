@@ -542,6 +542,31 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ecaed49935297084ca4de995fd4753a3,
         type: 2}
+    - target: {fileID: 6193125661974434217, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: localSounds.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6193125661974434217, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: localSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: a600d1a9f558e7e41abb226e36510301, type: 3}
+    - target: {fileID: 6193125661974434217, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: localSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: b05a3f0193c4d6443b82ab18473276d5, type: 3}
+    - target: {fileID: 6193125661974434217, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: localSounds.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5808d146a84520f4386937f586fefd4e, type: 3}
+    - target: {fileID: 6193125661974434217, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: localSounds.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0d157928800907e4082e6cab2e929171, type: 3}
     - target: {fileID: 6251193281981130515, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: canvas
@@ -29126,7 +29151,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
