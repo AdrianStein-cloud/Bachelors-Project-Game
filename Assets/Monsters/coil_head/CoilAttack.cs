@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,7 +14,14 @@ public class CoilAttack : StateProcess<CoilState>
     public GameObject[] visiblePoints;
     public AnimationClip[] poses;
 
+    public AudioSource footstepSource;
+    public List<AudioClip> footstepSounds;
+    public float footstepSoundDelay;
+    private float lastStepTime;
+
     public float speed;
+
+    public int damage;
 
     Animation anim;
 
@@ -49,10 +58,23 @@ public class CoilAttack : StateProcess<CoilState>
             }
         }
         if (agent.isStopped) DoRandomPose();
-        transform.rotation = Quaternion.LookRotation(targetPos - transform.position, Vector3.up);
-        agent.SetDestination(targetPos);
-        agent.isStopped = false;
+        if (agent.path.status == NavMeshPathStatus.PathComplete)
+        {
+            transform.rotation = Quaternion.LookRotation(targetPos - transform.position, Vector3.up);
+            DoRandomStepSound();
+            agent.SetDestination(targetPos);
+            agent.isStopped = false;
+        }
         //Debug.Log("The collider is not visible by the camera");
+    }
+
+    void DoRandomStepSound()
+    {
+        if (lastStepTime + footstepSoundDelay > Time.time) return;
+
+        lastStepTime = Time.time;
+        footstepSource.clip = footstepSounds[Random.Range(0, footstepSounds.Count)];
+        footstepSource.PlayOneShot(footstepSource.clip);
     }
 
     bool CanPlayerSeeGameobject(GameObject obj)
@@ -69,5 +91,14 @@ public class CoilAttack : StateProcess<CoilState>
         var clip = poses[Random.Range(0, poses.Length)];
         anim.Play(clip.name);
         Debug.Log("Playing anim: " + clip.name);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            var health = other.GetComponent<PlayerHealth>();
+            health.TakeDamage(damage);
+        }
     }
 }
