@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SimpleEnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public List<GameObject> enemyPrefabs;
 
     public void SpawnEnemies(List<GameObject> rooms, Transform dungeon, int depth)
     {
@@ -18,6 +18,8 @@ public class SimpleEnemySpawner : MonoBehaviour
             {
                 room = rooms[UnityEngine.Random.Range(0, rooms.Count)];
             }
+
+            var enemyPrefab = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)];
 
             Instantiate(enemyPrefab, room.transform.localPosition, Quaternion.identity, dungeon);
 
