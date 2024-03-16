@@ -39,5 +39,29 @@ public static class Extensions
         inputAction.performed += action;
         inputAction.canceled += action;
     }
+
+    #region VectorExtensions
+
+    public static Vector3 WithX(this Vector3 v, float x) => new(x, v.y, v.z);
+
+    public static Vector3 WithY(this Vector3 v, float y) => new(v.x, y, v.z);
+
+    public static Vector3 WithZ(this Vector3 v, float z) => new(v.x, v.y, z);
+
+    public static Vector3 AddX(this Vector3 v, float x) => new(v.x + x, v.y, v.z);
+
+    public static Vector3 AddY(this Vector3 v, float y) => new(v.x, v.y + y, v.z);
+
+    public static Vector3 AddZ(this Vector3 v, float z) => new(v.x, v.y, v.z + z);
+
+    public static Vector2 WithX(this Vector2 v, float x) => new(x, v.y);
+
+    public static Vector2 WithY(this Vector2 v, float y) => new(v.x, y);
+
+    public static Vector2 AddX(this Vector2 v, float y) => new(v.x, v.y + y);
+
+    public static Vector2 AddY(this Vector2 v, float x) => new(v.x + x, v.y);
+
+    #endregion
 }
 
