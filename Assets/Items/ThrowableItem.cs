@@ -14,13 +14,31 @@ public class ThrowableItem : Item
     [SerializeField] Vector3 offsetPosition;
     [SerializeField] int maxAmount;
 
+    GameObject throwables;
     Transform player;
     int currentAmount;
+
+    static bool initialized;
 
     private void Awake()
     {
         player = GameObject.FindWithTag("Player").transform;
         currentAmount = maxAmount;
+
+        if (initialized) return;
+        initialized = true;
+
+        throwables = new("Throwables Container");
+
+        var gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+            gameManager.OnWaveOver += () =>
+            {
+                foreach (Transform throwable in throwables.transform)
+                {
+                    Destroy(throwable.gameObject);
+                }
+            };
     }
 
     void Throw()
@@ -29,7 +47,7 @@ public class ThrowableItem : Item
         currentAmount--;
 
         var offset = new Vector3(0f, offsetPosition.y) + player.forward * offsetPosition.z + player.right * offsetPosition.x;
-        var instance = Instantiate(throwablePrefab, player.position + offset, Quaternion.identity);
+        var instance = Instantiate(throwablePrefab, player.position + offset, Quaternion.identity, throwables.transform);
         var rb = instance.GetComponent<Rigidbody>();
 
         var angle = Vector3.Angle(player.up, Camera.main.transform.forward) - 90;
