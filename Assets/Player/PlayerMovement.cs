@@ -32,6 +32,11 @@ public class PlayerMovement : MonoBehaviour, IStunnable
     [SerializeField] float gravity;
     [SerializeField] float airGravity;
 
+    [Header("Stun Properties")]
+    [SerializeField] float stunSpeedMultiplier;
+    [SerializeField] float stunExposureAmount;
+
+
     PostProcessingHandler pp;
     CharacterController controller;
     PlayerStamina stamina;
@@ -203,9 +208,9 @@ public class PlayerMovement : MonoBehaviour, IStunnable
 
     public MonoBehaviour StartStun()
     {
-        speedMultiplier = 0.5f;
+        speedMultiplier = stunSpeedMultiplier;
         pp.SetChromaticAberration(0.1f, 1f);
-        pp.SetPostExposure(0.1f, 3f);
+        pp.SetPostExposure(0.1f, stunExposureAmount);
         cameraController.StartStun();
         return this;
     }

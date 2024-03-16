@@ -654,6 +654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <HorizontalSensitivity>k__BackingField: 20
   <VerticalSensitivity>k__BackingField: 20
+  sensitivityMultiplier: 1
   rotationAngle: 90
   followSmoothTime: 2
   runFOVChangeAmount: 1.1
@@ -662,6 +663,7 @@ MonoBehaviour:
   player: {fileID: 5852719042983267109}
   smoothTime: 0
   horiRotHelper: {fileID: 8539900549924396746}
+  stunSensitivityMultiplier: 0.25
 --- !u!114 &8881323201046055355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,6 +1026,8 @@ MonoBehaviour:
   groundCheckRadius: 2
   gravity: 10000
   airGravity: 320
+  stunSpeedMultiplier: 0.5
+  stunExposureAmount: 7
 --- !u!114 &3983175553815203831
 MonoBehaviour:
   m_ObjectHideFlags: 0
