@@ -943,10 +943,7 @@ MonoBehaviour:
   detonateSource: {fileID: -2727665318585686433}
   detonationTime: 2
   explosionRadius: 30
-  speedMultiplier: 0.5
-  sensitivityMultiplier: 0.25
-  effectTime: 4
-  exposureAmount: 8
+  effectDuration: 4
   particles:
   - {fileID: 1998830269065593975, guid: b70fbea4bc8994749ba52e4f560f9f28, type: 3}
   - {fileID: 9111320563476075608, guid: c6fb71e58ec36784687d958bc39de3f2, type: 3}

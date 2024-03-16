@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 //https://github.com/deadlykam/TutorialFPSRotation/blob/20c94069f25b51205404a644a49f7b378506668e/TutorialFPSRotation/Assets/TutorialFPSRotation/Scripts/PlayerRotateSmooth.cs
-public class CameraController : MonoBehaviour
+public class CameraController : MonoBehaviour, IStunnable
 {
     [field: SerializeField] public float HorizontalSensitivity { get; set; }
     [field: SerializeField] public float VerticalSensitivity { get; set; }
 
-    public float SensitivityMultiplier { get; set; } = 1f;
+    float sensitivityMultiplier = 1f;
 
     [SerializeField, Range(50, 90)] int rotationAngle;
     [SerializeField] float followSmoothTime;
@@ -59,7 +59,7 @@ public class CameraController : MonoBehaviour
 
         transform.position = Vector3.SmoothDamp(transform.position, cameraPosition.position, ref velocity, followSmoothTime * Time.deltaTime);
 
-        var mouseDir = new Vector2(dir.x * HorizontalSensitivity, dir.y * VerticalSensitivity) * SensitivityMultiplier / 100;
+        var mouseDir = new Vector2(dir.x * HorizontalSensitivity, dir.y * VerticalSensitivity) * sensitivityMultiplier / 100;
 
         xOld = xRotation;
         xRotation -= mouseDir.y;
@@ -71,5 +71,17 @@ public class CameraController : MonoBehaviour
         horiRotHelper.Rotate(Vector3.up * mouseDir.x, Space.Self);
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
         player.transform.Rotate(Vector3.up * mouseDir.x);
+    }
+
+    public MonoBehaviour StartStun()
+    {
+        CameraShake.Instance.Shake(CameraShake.Instance.Defaultpreset);
+        sensitivityMultiplier = 0.25f;
+        return this;
+    }
+
+    public void EndStun()
+    {
+        sensitivityMultiplier = 1f;
     }
 }

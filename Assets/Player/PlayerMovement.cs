@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IStunnable
 {
     [Header("Assignables")]
     [SerializeField] Transform cam;
@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     PostProcessingHandler pp;
     CharacterController controller;
     PlayerStamina stamina;
+    CameraController cameraController;
     new Audio audio;
 
     Vector3 velocity;
@@ -46,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     float airSpeed;
     float controllerHeight;
     float lastRecoveryTime;
+    float speedMultiplier = 1f;
 
     bool isGrounded;
     bool canStand;
@@ -56,13 +58,13 @@ public class PlayerMovement : MonoBehaviour
     public bool IsWalking { get; private set; }
     public bool IsRunning { get; private set; }
     public bool IsCrouching { get; private set; }
-    public float SpeedMultiplier { get; set; } = 1f;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         stamina = GetComponent<PlayerStamina>();
         audio = GetComponent<Audio>();
+        cameraController = FindObjectOfType<CameraController>();
         airSpeed = currentSpeed = walkSpeed;
         cameraPosition = cam.localPosition;
         controllerHeight = controller.height;
@@ -90,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (dir.y <= 0 && toggleRun || !stamina.SufficientStamina) run = false;
 
-        currentSpeed = (IsRunning ? runSpeed : (IsCrouching ? crouchSpeed : walkSpeed)) * SpeedMultiplier;
+        currentSpeed = (IsRunning ? runSpeed : (IsCrouching ? crouchSpeed : walkSpeed)) * speedMultiplier;
         IsWalking = dir.magnitude > 0f && !IsRunning && isGrounded;
 
         canStand = !Physics.Raycast(groundCheck.localPosition, Vector3.up, ceilingCheckDistance, groundMask) && IsCrouching;
@@ -197,5 +199,22 @@ public class PlayerMovement : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+    }
+
+    public MonoBehaviour StartStun()
+    {
+        speedMultiplier = 0.5f;
+        pp.SetChromaticAberration(0.1f, 1f);
+        pp.SetPostExposure(0.1f, 3f);
+        cameraController.StartStun();
+        return this;
+    }
+
+    public void EndStun()
+    {
+        speedMultiplier = 1f;
+        pp.SetChromaticAberration(1f);
+        pp.ResetPostExposure(1f);
+        cameraController.EndStun();
     }
 }
