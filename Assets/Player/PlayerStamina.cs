@@ -7,6 +7,7 @@ public class PlayerStamina : MonoBehaviour
     [SerializeField] bool enableStamina = true;
     [SerializeField] float stamina;
     [SerializeField] float drainSpeed;
+    [SerializeField] float jumpStaminaUse;
     [SerializeField] float recoverySpeed;
     [SerializeField] float recoveryDelay;
     [SerializeField] float recoveryDelayAtZero;
@@ -25,6 +26,12 @@ public class PlayerStamina : MonoBehaviour
         fill = GameObject.Find("Canvas").transform.Find("StaminaBar").GetChild(0);
         fill.gameObject.SetActive(false);
         currentStamina = stamina;
+
+        player.OnJump += () =>
+        {
+            currentStamina -= jumpStaminaUse;
+            lastRecoveryTime = Time.time;
+        };
     }
 
     private void Update()

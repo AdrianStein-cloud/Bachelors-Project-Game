@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour, IStunnable
     public bool IsWalking { get; private set; }
     public bool IsRunning { get; private set; }
     public bool IsCrouching { get; private set; }
+    public Action OnJump { get; set; }
 
     private void Awake()
     {
@@ -137,11 +138,12 @@ public class PlayerMovement : MonoBehaviour, IStunnable
 
     private void Jump(InputAction.CallbackContext context)
     {
-        if (!enableJump || jumping || !isGrounded || (!canStand && IsCrouching) || !context.performed) return;
+        if (!enableJump || jumping || !isGrounded || (!canStand && IsCrouching) || !context.performed || !stamina.SufficientStamina) return;
         StopCrouch();
         jumping = true;
         velocity.y = Mathf.Sqrt(jumpHeight * 2f * airGravity);
         airSpeed = currentSpeed;
+        OnJump?.Invoke();
         Invoke(nameof(ResetJump), 0.2f);
     }
 
