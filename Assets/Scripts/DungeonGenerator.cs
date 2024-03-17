@@ -315,11 +315,10 @@ public class DungeonGenerator : MonoBehaviour
         var colliders = Physics.OverlapBox(center, halfExtents, from.direction, LayerMask.GetMask("ExcludeVision"));
         bool connectable = colliders.FirstOrDefault(c => c.CompareTag("Room") & c.gameObject != from.transform.parent.gameObject & c.gameObject != to.transform.parent.gameObject) == null;
 
-        if (!connectable) return;
+        if (!connectable || Vector3.Project(dir, from.transform.forward).magnitude < 10f) return;
 
         from.SetDoorConnected(true);
         to.SetDoorConnected(true);
-        Debug.DrawLine(from.transform.position, from.transform.position, Color.yellow);
 
         var floor = Instantiate(floorPrefab, from.transform.position, from.direction, dungeon);
         var scaler = floor.GetComponent<ConnectionRoom>();
