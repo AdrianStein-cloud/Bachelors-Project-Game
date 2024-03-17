@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public static class Extensions
 {
@@ -38,6 +39,11 @@ public static class Extensions
         inputAction.started += action;
         inputAction.performed += action;
         inputAction.canceled += action;
+    }
+
+    public static bool Parallel(this Vector3 a, Vector3 b)
+    {
+        return Mathf.Approximately(Mathf.Abs(Vector3.Dot(a, b)), 1);
     }
 }
 

@@ -53,6 +53,8 @@ MonoBehaviour:
   seed: -1
   navmeshSurface: {fileID: 4778269442337614499, guid: 00d018a5272c64d42bdb93a0b14882d1,
     type: 3}
+  floorPrefab: {fileID: 7148966152087260568, guid: c7aee4d231163f844bbc7be507ee8a40,
+    type: 3}
   randomRooms:
   - room: {fileID: 8620508088445856826, guid: dbd82918bb4dfb14993836d7172605f4, type: 3}
     <Weight>k__BackingField: 100

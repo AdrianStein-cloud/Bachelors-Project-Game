@@ -7,6 +7,8 @@ using Unity.Mathematics;
 using UnityEngine;
 using System.Linq;
 using Random = System.Random;
+using Unity.VisualScripting;
+using UnityEngine.ProBuilder.Shapes;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -19,6 +21,8 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] NavMeshSurface navmeshSurface;
     Random random;
 
+    public GameObject floorPrefab;
+
     public WeightedRoom[] randomRooms;
     [field: SerializeField] public WeightedEndRoom[] endRooms;
     public GameObject startRoom;
@@ -28,6 +32,8 @@ public class DungeonGenerator : MonoBehaviour
     public List<GameObject> spawnedRooms { get; private set; } = new List<GameObject>();
     public List<(GameObject, int)> spawnedRoomsDepth = new List<(GameObject, int)>();
     private Queue<(Door, int)> doorQueue = new Queue<(Door, int)>();
+
+    List<(Door, Door)> potentialConnections = new List<(Door, Door)>();
 
     [SerializeField] private List<MaterialPackage> materialPackages;
     private Materials materials;
@@ -68,6 +74,7 @@ public class DungeonGenerator : MonoBehaviour
 
         spawnedRooms = new List<GameObject>();
         spawnedRoomsDepth = new List<(GameObject, int)>();
+        potentialConnections = new List<(Door, Door)>();
 
         //instantiate first object in rooms
         GameObject entrance = Instantiate(startRoom, new Vector3(0, 0, 0), transform.rotation, dungeon.transform);
@@ -85,6 +92,21 @@ public class DungeonGenerator : MonoBehaviour
             (Door, int) element = doorQueue.Dequeue();
             yield return SpawnRoomAtDoor(element.Item1, element.Item2, dungeon.transform);
         }
+
+        potentialConnections
+            .Where(p => p.Item1 != null & p.Item2 != null)
+            .Where(p => !p.Item1.GetDoorConnected() & !p.Item2.GetDoorConnected())
+            .Where(p => p.Item1.transform.position.y == p.Item2.transform.position.y)
+            .Where(p => Mathf.Approximately(Quaternion.Angle(p.Item1.direction, p.Item2.direction), 180))
+            .OrderBy(p => Vector3.Distance(p.Item1.transform.position, p.Item2.transform.position))
+            .ToList()
+            .ForEach(p =>
+            {
+                if (!p.Item1.GetDoorConnected() & !p.Item2.GetDoorConnected())
+                    SpawnLoopConnection(p.Item1, p.Item2, dungeon.transform);
+            });
+
+
 
         bool dungeonFailed = false;
 
@@ -119,11 +141,9 @@ public class DungeonGenerator : MonoBehaviour
 
         List<WeightedRoom> tempRandomRooms = new(randomRooms);
 
-        while (!roomFound || tempRandomRooms.Count > 0)
+        while (tempRandomRooms.Count > 0)
         {
             WeightedRoom randomRoom;
-
-            if (tempRandomRooms.Count < 1) break;
 
             if (tempRandomRooms.Count > 1) randomRoom = tempRandomRooms.GetRollFromWeights(random);
             else randomRoom = tempRandomRooms[0];
@@ -135,8 +155,9 @@ public class DungeonGenerator : MonoBehaviour
             newRoomScript.depth = depth;
             doors = newRoomScript.GetDoors();
 
-            if (IsColliding(newRoomScript, door) || (doors.Count < 1 && (depth + 1) % GameSettings.Instance.GenerationLookahead != 0))
+            if (IsColliding(newRoomScript, door, out Door potentialConnection) || (doors.Count == 0 && (depth + 1) % GameSettings.Instance.GenerationLookahead != 0))
             {
+                potentialConnections.Add((door, potentialConnection));
                 doors = null;
                 tempRandomRooms.Remove(randomRoom);
             }
@@ -188,7 +209,6 @@ public class DungeonGenerator : MonoBehaviour
             tempRandomRooms = tempRandomRooms.Where(room => !room.corridorOnly).ToList();
         }
 
-
         while(tempRandomRooms.Count > 0)
         {
             WeightedEndRoom randomRoom;
@@ -201,8 +221,9 @@ public class DungeonGenerator : MonoBehaviour
             Room newRoomScript = randomRoom.room.GetComponent<Room>();
 
 
-            if (IsColliding(newRoomScript, door))
+            if (IsColliding(newRoomScript, door, out Door potentialConnection))
             {
+                potentialConnections.Add((door, potentialConnection));
                 tempRandomRooms.Remove(randomRoom);
             }
             else
@@ -246,7 +267,7 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    bool IsColliding(Room newRoomScript, Door door)
+    bool IsColliding(Room newRoomScript, Door door, out Door potentialLoop)
     {
         Vector3 roomSize = new Vector3(newRoomScript.bounding_x - 1f, newRoomScript.bounding_y, newRoomScript.bounding_z - 1f);
         Vector3 offset = new Vector3(newRoomScript.offset_x, newRoomScript.offset_y, newRoomScript.offset_z);
@@ -263,16 +284,61 @@ public class DungeonGenerator : MonoBehaviour
         Debug.Log("roomCenter: " + roomCenter);
         */
 
+        potentialLoop = null;
+
         foreach (var collider in colliders)
         {
             if (collider.CompareTag("Room") && collider.gameObject != door.transform.parent.gameObject && collider.gameObject != newRoomScript.gameObject)
             {
+                var collidingRoomScript = collider.GetComponent<Room>();
+                var collidingRoomDoors = collidingRoomScript.GetDoors();
+                var closetDoor = collidingRoomDoors
+                    .Where(d => !d.GetDoorConnected())
+                    .OrderBy(d => Vector3.Distance(door.transform.position, d.transform.position))
+                    .FirstOrDefault();
+                potentialLoop = closetDoor;
+
                 //Debug.Log("Cant spawn. This: " + newRoomScript.name + "\nCollided with: " + collider.gameObject.name);
                 isColliding = true;
             }
         }
 
         return isColliding;
+    }
+
+    void SpawnLoopConnection(Door from, Door to, Transform dungeon)
+    {
+        var dir = to.transform.position - from.transform.position;
+        var center = (to.transform.position + from.transform.position) / 2;
+        var halfExtents = new Vector3(Mathf.Abs(dir.x)/2, 23, Mathf.Abs(dir.z)/2);
+
+        var colliders = Physics.OverlapBox(center, halfExtents, from.direction, LayerMask.GetMask("ExcludeVision"));
+        bool connectable = colliders.FirstOrDefault(c => c.CompareTag("Room") & c.gameObject != from.transform.parent.gameObject & c.gameObject != to.transform.parent.gameObject) == null;
+
+        if (!connectable) return;
+
+        from.SetDoorConnected(true);
+        to.SetDoorConnected(true);
+        Debug.DrawLine(from.transform.position, from.transform.position, Color.yellow);
+
+        var floor = Instantiate(floorPrefab, from.transform.position, from.direction, dungeon);
+        var scaler = floor.GetComponent<ConnectionRoom>();
+        scaler.ApplyMaterials(materials.wall, materials.floor, materials.ceiling);
+
+        var z = Vector3.Project(dir, floor.transform.forward);
+        var x = Vector3.Project(dir, floor.transform.right);
+        float dot = Vector3.Dot(x.normalized, floor.transform.right);
+        bool sign = Mathf.Approximately(dot, -1);
+        /*Debug.Log("x: " + x);
+        Debug.Log("r: " + floor.transform.right);
+        Debug.Log("s: " + sign);
+        Debug.Log("dot: " + dot);*/
+        Vector2 diff = new Vector2((sign ? -1 : 1) * x.magnitude, z.magnitude);
+        Vector2 scale = new Vector2(Mathf.Abs(diff.x), diff.y);
+        floor.transform.position += floor.transform.right * diff.x / 2;
+        scale.x += 12;
+        scaler.Scale(scale, diff);
+        //new GameObject($"({diff.x}, {diff.y})");
     }
 
     private void RandomMaterialPackage(System.Random random)
