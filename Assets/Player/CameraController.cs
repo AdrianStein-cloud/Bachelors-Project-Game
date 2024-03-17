@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] float followSmoothTime;
     [SerializeField] float runFOVChangeAmount;
     [SerializeField] float runFOVChangeSpeed;
-    [SerializeField] Transform cameraPosition;
+    [SerializeField] public Transform cameraTransform;
     [SerializeField] PlayerMovement player;
 
     [Header("Smoothing Properties")]
@@ -62,7 +62,7 @@ public class CameraController : MonoBehaviour
     {
         Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, startingFOV * (player.IsRunning ? runFOVChangeAmount : 1f), runFOVChangeSpeed * Time.deltaTime);
 
-        transform.position = Vector3.SmoothDamp(transform.position, cameraPosition.position, ref velocity, followSmoothTime * Time.deltaTime);
+        transform.position = Vector3.SmoothDamp(transform.position, cameraTransform.position, ref velocity, followSmoothTime * Time.deltaTime);
 
         var mouseDir = new Vector2(dir.x * HorizontalSensitivity, dir.y * VerticalSensitivity) * sensitivityMultiplier / 100;
 
@@ -74,8 +74,8 @@ public class CameraController : MonoBehaviour
         //var yRotation = transform.localRotation.eulerAngles.y + mouseDir.x;
 
         horiRotHelper.Rotate(Vector3.up * mouseDir.x, Space.Self);
-        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
-        player.transform.Rotate(Vector3.up * mouseDir.x);
+        //transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        //player.transform.Rotate(Vector3.up * mouseDir.x);
     }
 
     public void StartStun()

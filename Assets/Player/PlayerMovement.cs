@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour, IStunnable
+public class PlayerMovement : PortalableObject, IStunnable
 {
     [Header("Assignables")]
     [SerializeField] Transform cam;
@@ -38,11 +38,12 @@ public class PlayerMovement : MonoBehaviour, IStunnable
 
 
     PostProcessingHandler pp;
-    CharacterController controller;
+    //CharacterController controller;
     PlayerStamina stamina;
     CameraController cameraController;
     new Audio audio;
 
+    Vector3 gravityVelocity;
     Vector3 velocity;
     Vector2 dir;
     Vector3 cameraPosition;
@@ -65,9 +66,10 @@ public class PlayerMovement : MonoBehaviour, IStunnable
     public bool IsCrouching { get; private set; }
     public Action OnJump { get; set; }
 
-    private void Awake()
+    protected override void Awake()
     {
-        controller = GetComponent<CharacterController>();
+        base.Awake();
+        //controller = GetComponent<CharacterController>();
         stamina = GetComponent<PlayerStamina>();
         audio = GetComponent<Audio>();
         cameraController = FindObjectOfType<CameraController>();
@@ -104,7 +106,8 @@ public class PlayerMovement : MonoBehaviour, IStunnable
         canStand = !Physics.Raycast(groundCheck.localPosition, Vector3.up, ceilingCheckDistance, groundMask) && IsCrouching;
 
         var move = transform.right * dir.x + transform.forward * dir.y;
-        controller.Move(Time.unscaledDeltaTime * ((isGrounded ? currentSpeed : airSpeed) * move + velocity));
+        velocity = (isGrounded ? currentSpeed : airSpeed) * move + gravityVelocity;
+        controller.Move(Time.unscaledDeltaTime * velocity);
 
         Gravity();
 
@@ -141,7 +144,7 @@ public class PlayerMovement : MonoBehaviour, IStunnable
         if (!enableJump || jumping || !isGrounded || (!canStand && IsCrouching) || !context.performed || !stamina.SufficientStamina) return;
         StopCrouch();
         jumping = true;
-        velocity.y = Mathf.Sqrt(jumpHeight * 2f * airGravity);
+        gravityVelocity.y = Mathf.Sqrt(jumpHeight * 2f * airGravity);
         airSpeed = currentSpeed;
         OnJump?.Invoke();
         Invoke(nameof(ResetJump), 0.2f);
@@ -193,13 +196,13 @@ public class PlayerMovement : MonoBehaviour, IStunnable
     private void Gravity()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundMask);
-        if ((isGrounded || !isGrounded && !ungrounded) && velocity.y < 0)
+        if ((isGrounded || !isGrounded && !ungrounded) && gravityVelocity.y < 0)
         {
-            velocity.y = -2f;
+            gravityVelocity.y = -2f;
             ungrounded = !isGrounded;
         }
 
-        velocity.y -= (isGrounded && !jumping ? gravity : airGravity) * Time.unscaledDeltaTime;
+        gravityVelocity.y -= (isGrounded && !jumping ? gravity : airGravity) * Time.unscaledDeltaTime;
     }
 
     private void OnDrawGizmosSelected()
@@ -223,5 +226,27 @@ public class PlayerMovement : MonoBehaviour, IStunnable
         pp.SetChromaticAberration(1f);
         pp.ResetPostExposure(1f);
         cameraController.EndStun();
+    }
+
+    public override void Warp()
+    {
+        var inTransform = inPortal.transform;
+        var outTransform = outPortal.transform;
+
+        Quaternion halfTurn = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+
+        Vector3 relativePos = inTransform.InverseTransformPoint(transform.position);
+        relativePos = halfTurn * relativePos;
+        transform.position = outTransform.TransformPoint(relativePos);
+        cameraController.transform.position = cameraController.cameraTransform.position;
+
+        Quaternion relativeRot = Quaternion.Inverse(inTransform.rotation) * transform.rotation;
+        relativeRot = halfTurn * relativeRot;
+        transform.rotation = outTransform.rotation * relativeRot;
+        cameraController.transform.rotation = outTransform.rotation * relativeRot;
+
+        velocity = outTransform.TransformVector(inTransform.InverseTransformVector(velocity));
+
+        (outPortal, inPortal) = (inPortal, outPortal);
     }
 }
