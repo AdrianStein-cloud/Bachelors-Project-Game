@@ -316,6 +316,8 @@ public class DungeonGenerator : MonoBehaviour
         bool connectable = colliders.FirstOrDefault(c => c.CompareTag("Room") & c.gameObject != from.transform.parent.gameObject & c.gameObject != to.transform.parent.gameObject) == null;
 
         if (!connectable || Vector3.Project(dir, from.transform.forward).magnitude < 10f) return;
+        EnableCorridorOpeningIfCorridor(from);
+        EnableCorridorOpeningIfCorridor(to);
 
         from.SetDoorConnected(true);
         to.SetDoorConnected(true);
@@ -328,16 +330,31 @@ public class DungeonGenerator : MonoBehaviour
         var x = Vector3.Project(dir, floor.transform.right);
         float dot = Vector3.Dot(x.normalized, floor.transform.right);
         bool sign = Mathf.Approximately(dot, -1);
-        /*Debug.Log("x: " + x);
-        Debug.Log("r: " + floor.transform.right);
-        Debug.Log("s: " + sign);
-        Debug.Log("dot: " + dot);*/
         Vector2 diff = new Vector2((sign ? -1 : 1) * x.magnitude, z.magnitude);
         Vector2 scale = new Vector2(Mathf.Abs(diff.x), diff.y);
         floor.transform.position += floor.transform.right * diff.x / 2;
         scale.x += 12;
         scaler.Scale(scale, diff);
         //new GameObject($"({diff.x}, {diff.y})");
+    }
+
+    void EnableCorridorOpeningIfCorridor(Door door)
+    {
+        var room = door.transform.parent.GetComponent<Room>();
+        if (!room.isCorridor || room.name.Contains("Entrance")) return;
+
+        room.transform
+            .Cast<Transform>()
+            .ToList().ForEach(t => Debug.Log(t.name));
+
+
+        var corridorOpening = room.transform
+            .Cast<Transform>()
+            .Where(t => t.name.Contains("CorridorWallOpening"))
+            .OrderBy(t => Vector3.Distance(door.transform.position, t.position))
+            .First();
+
+        corridorOpening.gameObject.SetActive(true);
     }
 
     private void RandomMaterialPackage(System.Random random)
