@@ -1089,6 +1089,7 @@ MonoBehaviour:
   enableStamina: 1
   stamina: 100
   drainSpeed: 20
+  jumpStaminaUse: 20
   recoverySpeed: 20
   recoveryDelay: 0.5
   recoveryDelayAtZero: 1.25
