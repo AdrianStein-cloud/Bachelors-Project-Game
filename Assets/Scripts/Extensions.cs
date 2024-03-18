@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public static class Extensions
 {
@@ -40,7 +41,10 @@ public static class Extensions
         inputAction.canceled += action;
     }
 
-    #region VectorExtensions
+    public static bool Parallel(this Vector3 a, Vector3 b)
+    {
+        return Mathf.Approximately(Mathf.Abs(Vector3.Dot(a, b)), 1);
+    }
 
     public static Vector3 WithX(this Vector3 v, float x) => new(x, v.y, v.z);
 
@@ -62,6 +66,5 @@ public static class Extensions
 
     public static Vector2 AddY(this Vector2 v, float x) => new(v.x + x, v.y);
 
-    #endregion
 }
 
