@@ -18,6 +18,7 @@ public class InventoryUI : MonoBehaviour
     public void SetCurrentSlot(int index)
     {
         currentSlot.transform.position = inventorySlotBorders[index].transform.position;
+        currentSlot.GetComponent<Image>().sprite = inventorySlotBorders[index].GetComponent<Image>().sprite;
     }
 
     public void SetIcon(int index, Sprite icon)
