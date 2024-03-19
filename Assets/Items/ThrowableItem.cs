@@ -34,6 +34,7 @@ public class ThrowableItem : Item
         if (gameManager != null)
             gameManager.OnWaveOver += () =>
             {
+                currentAmount = maxAmount;
                 foreach (Transform throwable in throwables.transform)
                 {
                     Destroy(throwable.gameObject);
