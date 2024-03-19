@@ -91,6 +91,7 @@ MonoBehaviour:
   startRoom: {fileID: 3502592813776399691, guid: 71fc35092c2e358448a1f1ecca347030,
     type: 3}
   flood: {fileID: 0}
+  volumetricConfig: {fileID: 11400000, guid: 1c694892fdf9b3247807391d8483a064, type: 2}
   materialPackages:
   - name: Office
     wallForCeiling: 0
@@ -186,6 +187,7 @@ MonoBehaviour:
     type: 3}
   objectiveTracker: {fileID: 3537125783118854772, guid: 95e9da84e43557e4f8ef1fcdf0554c86,
     type: 3}
+  multiplicationFrequancy: 5
 --- !u!114 &5089863009002353977
 MonoBehaviour:
   m_ObjectHideFlags: 0

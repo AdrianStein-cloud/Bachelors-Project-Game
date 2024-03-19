@@ -16,7 +16,7 @@ public class DustTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && GameSettings.Instance.Event != "Foggy!")
         {
             if (_random.Next(0, 100) < triggerChance)
             {
