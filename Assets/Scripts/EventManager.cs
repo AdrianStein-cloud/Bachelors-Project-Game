@@ -2,30 +2,39 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniversalForwardPlusVolumetric;
 
 public class EventManager
 {
-    List<Action> events;
-    GameObject flood;
+    private List<WeightedEvent> events;
+    private GameObject flood;
+    private VolumetricConfig volumetricConfig;
+    private float defaultFogAttenuationDistance;
+    private float defaultLocalScatteringIntensity;
 
-    public EventManager(GameObject flood)
+    public EventManager(GameObject flood, VolumetricConfig volumetricConfig)
     {
         this.flood = flood;
+        this.volumetricConfig = volumetricConfig;
         flood.SetActive(false);
 
-        events = new List<Action>
+        defaultFogAttenuationDistance = volumetricConfig.fogAttenuationDistance;
+        defaultLocalScatteringIntensity = volumetricConfig.localScatteringIntensity;
+
+        events = new List<WeightedEvent>
         {
-            Flooded,
-            PowerOutage,
-            Foggy,
-            NoEvent
+            new WeightedEvent(Flooded, 100),
+            new WeightedEvent(PowerOutage, 100),
+            new WeightedEvent(Foggy, 100),
+            new WeightedEvent(NoEvent, 200)
         };
     }
 
     public void SpawnRandomEvent(System.Random random)
     {
         flood.gameObject.SetActive(false);
-        events[random.Next(events.Count)].Invoke();
+        ResetFog();
+        events.GetRollFromWeights(random)._event.Invoke();
     }
 
     private void PowerOutage()
@@ -56,13 +65,34 @@ public class EventManager
 
     private void Foggy()
     {
-        //Not Implemented
-        NoEvent();
+        if (GameSettings.Instance.Wave > 2)
+        {
+            GameSettings.Instance.Event = "Foggy!";
+            SetFoggy();
+        }
+        else
+        {
+            NoEvent();
+        }
     }
 
     private void NoEvent()
     {
         GameSettings.Instance.Event = null;
+    }
+
+    private void SetFoggy()
+    {
+        volumetricConfig.fogAttenuationDistance = 160;
+        volumetricConfig.localScatteringIntensity = 40;
+    }
+
+    private void ResetFog()
+    {
+        Debug.Log("defaultFogAttenuationDistance: " + defaultFogAttenuationDistance);
+        Debug.Log("defaultLocalScatteringIntensity: " + defaultLocalScatteringIntensity);
+        volumetricConfig.fogAttenuationDistance = defaultFogAttenuationDistance;
+        volumetricConfig.localScatteringIntensity = defaultLocalScatteringIntensity;
     }
 
     public void SetSizeOfDungeon(Vector3 size)
@@ -80,4 +110,16 @@ public class EventManager
             flood.transform.position = new Vector3(center.x, 3, center.z);
         }
     }
+}
+
+public class WeightedEvent : IWeighted
+{
+    public WeightedEvent(Action _event, int Weight)
+    {
+        this.Weight = Weight;
+        this._event = _event;
+    }
+
+    public Action _event;
+    [field: SerializeField] public int Weight { get; set; }
 }
