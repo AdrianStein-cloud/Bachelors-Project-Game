@@ -5,13 +5,13 @@ using UnityEngine;
 public class VentTrigger : MonoBehaviour
 {
     [SerializeField] int triggerChance;
-    private System.Random random;
+    private static System.Random random;
     private Rigidbody rb;
     private AudioSource source;
 
     private void Start()
     {
-        random = new System.Random(GameSettings.Instance.GetSeed());
+        if (random == null) random = new System.Random(GameSettings.Instance.GetSeed());
         rb = GetComponent<Rigidbody>();
         source = GetComponent<AudioSource>();
     }
