@@ -28,4 +28,21 @@ public class SimpleEnemySpawner : MonoBehaviour
             rooms.Remove(room);
         }
     }
+
+    public void SpawnSingleEnemy(List<GameObject> rooms, Transform dungeon, int depth)
+    {
+        rooms = new List<GameObject>(rooms);
+        GameObject room = rooms[UnityEngine.Random.Range(0, rooms.Count)];
+
+        while (room.GetComponent<Room>().depth != depth)
+        {
+            room = rooms[UnityEngine.Random.Range(0, rooms.Count)];
+        }
+
+        var enemyPrefab = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)];
+
+        Instantiate(enemyPrefab, room.transform.localPosition, Quaternion.identity, dungeon);
+
+        rooms.Remove(room);
+    }
 }
