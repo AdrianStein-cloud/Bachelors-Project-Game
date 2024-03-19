@@ -5,23 +5,33 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-public class UpgradeManager : MonoBehaviour
+public class UpgradeManager : MonoBehaviour, IUpgradeManager
 {
+    public int rerollPrice = 20;
+
     [SerializeField] List<Upgrade> startUpgrades;
     [SerializeField] List<Upgrade> upgrades;
 
     UpgradeUIController upgradeUIController;
     GameObject player;
+    int selectionAmount;
 
-    Action upgradeChosen;
+    Action DoneChoosingUpgrades;
 
     List<Upgrade> availableUpgrades;
 
+    CurrencyManager currencyManager;
+
+    readonly System.Random random = new System.Random();
+
+
     private void Start()
     {
+        currencyManager = GetComponent<CurrencyManager>();
         availableUpgrades = new List<Upgrade>(upgrades);
         upgradeUIController = FindAnyObjectByType<UpgradeUIController>();
-        upgradeUIController.SetOnUpgradeCallback(ChooseUpgrade);
+        upgradeUIController.Init(this);
+        upgradeUIController.SetRerollPrice(rerollPrice);
 
         player = GameObject.FindWithTag("Player");
 
@@ -34,21 +44,51 @@ public class UpgradeManager : MonoBehaviour
     public void DisplayUpgrades(int amount, GameObject player, Action upgradeChosen)
     {
         this.player = player;
-        this.upgradeChosen = upgradeChosen;
+        this.DoneChoosingUpgrades = upgradeChosen;
+        selectionAmount = amount;
+        DisplayRandomUpgrades();
+    }
+
+    void DisplayRandomUpgrades()
+    {
         var upgradesCopy = new List<Upgrade>(availableUpgrades);
-        var randomUpgrades = Enumerable.Range(0, Math.Min(amount, upgradesCopy.Count)).Select(_ => {
-            var upgrade = upgradesCopy.GetRollFromWeights(new System.Random(GameSettings.Instance.GetSeed()));
+        var randomUpgrades = Enumerable.Range(0, Math.Min(selectionAmount, upgradesCopy.Count)).Select(_ => {
+            var upgrade = upgradesCopy.GetRollFromWeights(random);
             upgradesCopy.Remove(upgrade);
             return upgrade;
         });
         upgradeUIController.EnableCards(randomUpgrades);
     }
 
-    void ChooseUpgrade(Upgrade upgrade)
+    public void ChooseUpgrade(Upgrade upgrade)
     {
-        availableUpgrades.Remove(upgrade);
-        availableUpgrades.AddRange(upgrade.NewlyAvailableUpgrades);
-        upgrade.Apply(player);
-        upgradeChosen();
+        if (currencyManager.Spend(10))
+        {
+            upgradeUIController.RemoveUpgrade(upgrade);
+            availableUpgrades.Remove(upgrade);
+            availableUpgrades.AddRange(upgrade.NewlyAvailableUpgrades);
+            upgrade.Apply(player);
+        }
     }
+
+    public void Reroll()
+    {
+        if (currencyManager.Spend(rerollPrice))
+        {
+            upgradeUIController.SetRerollPrice(rerollPrice);
+            DisplayRandomUpgrades();
+        }
+    }
+
+    public void CloseUpgrades()
+    {
+        DoneChoosingUpgrades();
+    }
+}
+
+public interface IUpgradeManager
+{
+    void Reroll();
+    void ChooseUpgrade(Upgrade upgrade);
+    void CloseUpgrades();
 }

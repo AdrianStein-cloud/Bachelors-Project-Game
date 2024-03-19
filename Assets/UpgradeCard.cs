@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UpgradeCard : MonoBehaviour, IPointerClickHandler
+public class UpgradeCard : Clickable
 {
     TextMeshProUGUI title;
     TextMeshProUGUI description;
@@ -45,20 +45,13 @@ public class UpgradeCard : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    Upgrade upgrade;
-    public Action<Upgrade> OnChooseUpgrade { get; set; }
+    public Upgrade Upgrade { get; private set; }
 
     public void SetUpgrade(Upgrade value)
     {
-        upgrade = value;
+        Upgrade = value;
         Title.text = value.Name;
         Description.text = value.Description;
         Price.text = "Price: " + value.Rarity.GetPrice().ToString();
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("Card clicked");
-        OnChooseUpgrade(upgrade);
     }
 }

@@ -13,26 +13,53 @@ public class UpgradeUIController : MonoBehaviour
         {
             if(cards == null)
             {
-                cards = transform.Cast<Transform>().Select(x => x.GetComponent<UpgradeCard>()).ToList();
+                cards = GetComponentsInChildren<UpgradeCard>(true).ToList();
             }
             return cards;
         } 
     }
 
-    public void SetOnUpgradeCallback(Action<Upgrade> onChooseUpgrade)
+
+    RerollController rerollController;
+    RerollController RerollController
     {
-        foreach (var card in Cards)
+        get
         {
-            card.OnChooseUpgrade = (upgrade) =>
+            if (rerollController == null)
             {
-                DisableCards();
-                onChooseUpgrade(upgrade);
-            };
+                rerollController = GetComponentInChildren<RerollController>(true);
+            }
+            return rerollController;
         }
+    }
+
+    CloseUpgrades closeButton;
+    CloseUpgrades CloseButton
+    {
+        get
+        {
+            if (closeButton == null)
+            {
+                closeButton = GetComponentInChildren<CloseUpgrades>(true);
+            }
+            return closeButton;
+        }
+    }
+
+    public void Init(IUpgradeManager upgradeManager)
+    {
+
+        Cards.ForEach(card => card.OnClick = () => upgradeManager.ChooseUpgrade(card.Upgrade));
+        RerollController.OnClick = upgradeManager.Reroll;
+        CloseButton.OnClick += CloseUpgrades;
+        CloseButton.OnClick += upgradeManager.CloseUpgrades;
     }
 
     public void EnableCards(IEnumerable<Upgrade> upgrades)
     {
+        Cards.ForEach(c => c.gameObject.SetActive(false));
+        RerollController.gameObject.SetActive(true);
+        CloseButton.gameObject.SetActive(true);
         int i = 0;
         foreach (var upgrade in upgrades)
         {
@@ -43,8 +70,20 @@ public class UpgradeUIController : MonoBehaviour
         }
     }
 
-    public void DisableCards()
+    public void SetRerollPrice(int price)
     {
-        cards.ForEach(c => c.gameObject.SetActive(false));
+        RerollController.SetRerollPrice(price);
+    }
+
+    public void RemoveUpgrade(Upgrade upgrade)
+    {
+        Cards.Where(c => c.Upgrade == upgrade).First().gameObject.SetActive(false);
+    }
+
+    public void CloseUpgrades()
+    {
+        Cards.ForEach(c => c.gameObject.SetActive(false));
+        RerollController.gameObject.SetActive(false);
+        CloseButton.gameObject.SetActive(false);
     }
 }
