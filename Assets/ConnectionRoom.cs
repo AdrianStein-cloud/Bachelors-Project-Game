@@ -11,7 +11,7 @@ public class ConnectionRoom : MonoBehaviour
 
     const int doorHeight = 23;
     const int roomHeight = 30;
-    const int doorWidth = doorWidth;
+    const int doorWidth = 12;
 
 
     public void Scale(Vector2 scale, Vector2 diff)
