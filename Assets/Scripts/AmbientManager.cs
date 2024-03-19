@@ -43,6 +43,7 @@ public class AmbientManager : MonoBehaviour
 
     private void PlayCreepySound()
     {
+        localNoiseMakers = localNoiseMakers?.Where(a => a != null).ToList(); //Remove destroyed noise makers
         if (random == null) random = new System.Random(GameSettings.Instance.GetSeed());
         if (localNoiseMakers == null || localNoiseMakers.Count <= 0) localNoiseMakers = GameObject.FindGameObjectsWithTag("NoiseMaker").Select(a => a.GetComponent<AudioSource>()).ToList();
         if (random.Next(2) == 0)
