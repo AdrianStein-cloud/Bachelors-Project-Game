@@ -45,12 +45,12 @@ public class DramaMaker : Interactable
 
     private void TurnOffLights()
     {
-        StartCoroutine(SlowWrite(computer, "Power Off.\nGood Luck..."));
+        StartCoroutine(SlowWrite(computer, "Power Off.\n\nGood Luck..."));
         GameSettings.Instance.PowerOutage = true;
     }
     private void ReleaseMonster()
     {
-        StartCoroutine(SlowWrite(computer, "Monster Released.\nGood Luck..."));
+        StartCoroutine(SlowWrite(computer, "Monster Released.\n\nGood Luck..."));
         gameManager.SpawnSingleEnemy();
     }
 
