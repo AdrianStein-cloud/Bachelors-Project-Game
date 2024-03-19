@@ -51,11 +51,14 @@ public class LightFlicker : MonoBehaviour
 
     private void TurnOff()
     {
-        for (int i = 0; i < childObjects.Length; i++)
+        if (!alwaysOn)
         {
-            childObjects[i].GetComponent<Light>().intensity = 0;
-            if(glowMaterial != null)
-                glowMaterial.DisableKeyword("_EMISSION");
+            for (int i = 0; i < childObjects.Length; i++)
+            {
+                childObjects[i].GetComponent<Light>().intensity = 0;
+                if (glowMaterial != null)
+                    glowMaterial.DisableKeyword("_EMISSION");
+            }
         }
     }
 
