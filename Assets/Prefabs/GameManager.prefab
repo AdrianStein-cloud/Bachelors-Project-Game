@@ -92,6 +92,7 @@ MonoBehaviour:
   startRoom: {fileID: 3502592813776399691, guid: 71fc35092c2e358448a1f1ecca347030,
     type: 3}
   flood: {fileID: 0}
+  volumetricConfig: {fileID: 11400000, guid: 1c694892fdf9b3247807391d8483a064, type: 2}
   materialPackages:
   - name: Office
     wallForCeiling: 0

@@ -9,6 +9,7 @@ using System.Linq;
 using Random = System.Random;
 using Unity.VisualScripting;
 using UnityEngine.ProBuilder.Shapes;
+using UniversalForwardPlusVolumetric;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class DungeonGenerator : MonoBehaviour
     [field: SerializeField] public WeightedEndRoom[] endRooms;
     public GameObject startRoom;
     public GameObject flood;
+    public VolumetricConfig volumetricConfig;
     private List<GameObject> rooms = new List<GameObject>();
 
     public List<GameObject> spawnedRooms { get; private set; } = new List<GameObject>();
@@ -43,7 +45,7 @@ public class DungeonGenerator : MonoBehaviour
     void Awake()
     {
         LoadRooms();
-        eventManager = new EventManager(flood);
+        eventManager = new EventManager(flood, volumetricConfig);
     }
     public void SetSeed(int seed)
     {
