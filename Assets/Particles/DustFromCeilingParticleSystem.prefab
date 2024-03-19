@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: -2431999679335635089, guid: d8315282dacf5f4489a5a31a509b6491,
     type: 3}
-  triggerChance: 10
+  triggerChance: 7
 --- !u!65 &7684648597271438501
 BoxCollider:
   m_ObjectHideFlags: 0
