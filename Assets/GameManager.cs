@@ -48,9 +48,9 @@ public class GameManager : MonoBehaviour
     {
         enemySpawner.SpawnEnemies(dungeonGenerator.spawnedRooms, dungeon.transform, GameSettings.Instance.CurrentDepth - 1);
         objectiveSpawner.SpawnObjectives(dungeonGenerator.spawnedRoomsDepth, dungeon.transform, SwitchToUpgrades);
-        //player.SetActive(false);
+        player.SetActive(false);
         player.transform.position = dungeonGenerator.playerSpawnPosition.transform.position;
-        //player.SetActive(true);
+        player.SetActive(true);
     }
 
     public void SwitchToUpgrades(int upgrades)
