@@ -130,6 +130,15 @@ public class Room : MonoBehaviour
                     _randomObjects.randomObjects[i].SetActive(true);
                 }
             }
+
+            //destroy all the objects that are not active
+            for(int i = 0; i < _randomObjects.randomObjects.Count; i++)
+            {
+                if (!_randomObjects.randomObjects[i].activeSelf)
+                {
+                    Destroy(_randomObjects.randomObjects[i]);
+                }
+            }
         }
 
         ObjectiveSpawnPositions = GetComponentsInChildren<Transform>()
