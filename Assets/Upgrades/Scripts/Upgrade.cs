@@ -7,13 +7,13 @@ public abstract class Upgrade : ScriptableObject, IWeighted
     public string Name;
     [TextArea]
     [SerializeField] protected string description;
-    [SerializeField] Rarity rarity;
+    public Rarity Rarity;
     public List<Upgrade> NewlyAvailableUpgrades;
     public string Description => string.Format(description, Args);
 
     protected virtual object[] Args => new object[0];
 
-    public int Weight => rarity.GetChance();
+    public int Weight => Rarity.GetChance();
 
     public abstract void Apply(GameObject player);
 }

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Map
   description: Minimap App
+  rarity: 3
   NewlyAvailableUpgrades: []
   item: {fileID: 1980060430063386299, guid: 299b45930ebc340448bd4be5943c3076, type: 3}

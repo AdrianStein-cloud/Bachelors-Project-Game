@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: -559790689429721939}
   - component: {fileID: 406529367329091896}
   m_Layer: 0
-  m_Name: Vent
+  m_Name: VentTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d5a06d4339d034d969b3534455b62e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerChance: 50
+  triggerChance: 10
 --- !u!65 &406529367329091896
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class UpgradeCard : MonoBehaviour, IPointerClickHandler
 {
     TextMeshProUGUI title;
     TextMeshProUGUI description;
+    TextMeshProUGUI price;
 
     TextMeshProUGUI Title
     {
@@ -32,6 +33,17 @@ public class UpgradeCard : MonoBehaviour, IPointerClickHandler
             return description;
         }
     }
+    TextMeshProUGUI Price
+    {
+        get
+        {
+            if (price == null)
+            {
+                price = transform.Find("Price").GetComponent<TextMeshProUGUI>();
+            }
+            return price;
+        }
+    }
 
     Upgrade upgrade;
     public Action<Upgrade> OnChooseUpgrade { get; set; }
@@ -41,6 +53,7 @@ public class UpgradeCard : MonoBehaviour, IPointerClickHandler
         upgrade = value;
         Title.text = value.Name;
         Description.text = value.Description;
+        Price.text = "Price: " + value.Rarity.GetPrice().ToString();
     }
 
     public void OnPointerClick(PointerEventData eventData)

@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Lumination Maximizer
   description: Increases the strength of your flashlight by {0}
+  rarity: 0
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
   intensity: 100
   range: 0
+  angle: 0
+  batteryLife: 0

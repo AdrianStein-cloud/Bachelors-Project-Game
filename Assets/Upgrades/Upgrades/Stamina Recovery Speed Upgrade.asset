@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Recovery
   description: Increases stamina recovery speed by {1}%
+  rarity: 0
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
   staminaPercentIncrease: 0

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Cameras
   description: Placeable cameras
+  rarity: 2
   NewlyAvailableUpgrades: []
   item: {fileID: 9206712718450700171, guid: a436390c37cf39a4f961f3f20fb3f669, type: 3}

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Spider Sense
   description: Sometimes you notice nearby enemies
+  rarity: 1
   NewlyAvailableUpgrades: []
   passive: {fileID: 2345860101698375756, guid: 47f9e43e7bbe9564ba1456e71fbed9e9, type: 3}
