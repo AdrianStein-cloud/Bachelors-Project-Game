@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,10 +19,12 @@ public class ObjectiveSpawner : MonoBehaviour
 
 
     Image objectiveFill;
+    
 
     private void Awake()
     {
         objectiveFill = GameObject.Find("ObjectiveBar").transform.Find("Fill").GetComponent<Image>();
+
     }
 
     public void SpawnObjectives(List<(GameObject room, int depth)> roomsDepth, Transform dungeon, Action<int> leave)
@@ -31,7 +34,8 @@ public class ObjectiveSpawner : MonoBehaviour
         int maxObtainableObjectives = (int)(this.maxObtainableObjectives * (1 + GameSettings.Instance.Wave / (float)multiplicationFrequancy));
 
         var tracker = Instantiate(objectiveTracker, dungeon).GetComponent<ObjectiveTracker>();
-        tracker.Init(maxObtainableObjectives, leaveThreshold, objectiveFill, leave);
+        Action giveCurrencyOnCollect = GetComponent<CurrencyManager>().OnObjectiveCollected;
+        tracker.Init(maxObtainableObjectives, leaveThreshold, objectiveFill, giveCurrencyOnCollect, leave);
         
 
         var rooms = roomsDepth
@@ -57,6 +61,11 @@ public class ObjectiveSpawner : MonoBehaviour
             var objectiveCollectable = Instantiate(collectablePrefab, spawnPoint, RandomRotation(), dungeon);
             objectiveCollectable.GetComponentInChildren<Collectable>().onCollect = tracker.ObjetiveCollected;
         }
+    }
+
+    void OnObjectiveCollected()
+    {
+
     }
 
     Quaternion RandomRotation()
