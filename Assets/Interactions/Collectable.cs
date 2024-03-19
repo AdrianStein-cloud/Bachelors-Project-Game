@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Collectable : Interactable
@@ -26,6 +23,7 @@ public class Collectable : Interactable
             source.pitch = UnityEngine.Random.Range(pitchRange.x, pitchRange.y);
             source.Play();
             Destroy(gameObject.transform.parent.gameObject, source.clip.length);
+            gameObject.SetActive(false);
         }
     }
 
