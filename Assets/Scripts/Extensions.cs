@@ -46,14 +46,28 @@ public static class Extensions
         return Mathf.Approximately(Mathf.Abs(Vector3.Dot(a, b)), 1);
     }
 
-    public static int Chance(this Rarity rarity)
+    public static int GetChance(this Rarity rarity)
     {
         return rarity switch
         {
             Rarity.Common => 100,
+            Rarity.Uncommon => 75,
             Rarity.Rare => 50,
             Rarity.Epic => 20,
             Rarity.Legendary => 5,
+            _ => throw new Exception($"Rarity chacne for {rarity} isn't defined"),
+        };
+    }
+
+    public static int GetPrice(this Rarity rarity)
+    {
+        return rarity switch
+        {
+            Rarity.Common => 40,
+            Rarity.Uncommon => 60,
+            Rarity.Rare => 90,
+            Rarity.Epic => 140,
+            Rarity.Legendary => 200,
             _ => throw new Exception($"Rarity chacne for {rarity} isn't defined"),
         };
     }

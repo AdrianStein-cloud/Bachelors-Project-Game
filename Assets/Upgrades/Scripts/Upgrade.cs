@@ -13,7 +13,7 @@ public abstract class Upgrade : ScriptableObject, IWeighted
 
     protected virtual object[] Args => new object[0];
 
-    public int Weight => rarity.Chance();
+    public int Weight => rarity.GetChance();
 
     public abstract void Apply(GameObject player);
 }
@@ -21,6 +21,7 @@ public abstract class Upgrade : ScriptableObject, IWeighted
 public enum Rarity
 {
     Common,
+    Uncommon,
     Rare,
     Epic,
     Legendary,
