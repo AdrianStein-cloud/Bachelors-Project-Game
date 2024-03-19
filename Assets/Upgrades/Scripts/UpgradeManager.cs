@@ -62,7 +62,7 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
 
     public void ChooseUpgrade(Upgrade upgrade)
     {
-        if (currencyManager.Spend(10))
+        if (currencyManager.Spend(upgrade.Rarity.GetPrice()))
         {
             upgradeUIController.RemoveUpgrade(upgrade);
             availableUpgrades.Remove(upgrade);
