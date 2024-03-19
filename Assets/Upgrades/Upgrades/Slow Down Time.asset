@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Slow Down Time
   description: Slow Down Time By 80%
-  rarity: 4
+  Rarity: 4
   NewlyAvailableUpgrades: []
   item: {fileID: 9045619139030450987, guid: d749f8432ce086348822bf3a87c6072e, type: 3}

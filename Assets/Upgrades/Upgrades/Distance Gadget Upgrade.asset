@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Distance Gadget
   description: Grants you a {0}
-  rarity: 1
+  Rarity: 1
   NewlyAvailableUpgrades: []
   item: {fileID: 8158143748628859777, guid: 0c7a5abfc9ba865478bdbc4b0791b759, type: 3}
