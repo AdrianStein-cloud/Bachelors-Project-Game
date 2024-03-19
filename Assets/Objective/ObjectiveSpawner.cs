@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ public class ObjectiveSpawner : MonoBehaviour
     public GameObject collectablePrefab;
     public GameObject objectiveTracker;
 
+    public int multiplicationFrequancy = 5;
+
 
     Image objectiveFill;
 
@@ -23,9 +26,9 @@ public class ObjectiveSpawner : MonoBehaviour
 
     public void SpawnObjectives(List<(GameObject room, int depth)> roomsDepth, Transform dungeon, Action<int> leave)
     {
-        int objectiveAmount = (int)(this.objectiveAmount * (1 + GameSettings.Instance.Wave / 3f));
-        int leaveThreshold = (int)(this.leaveThreshold * (1 + GameSettings.Instance.Wave / 3f));
-        int maxObtainableObjectives = (int)(this.maxObtainableObjectives * (1 + GameSettings.Instance.Wave / 3f));
+        int objectiveAmount = (int)(this.objectiveAmount * (1 + GameSettings.Instance.Wave / (float)multiplicationFrequancy));
+        int leaveThreshold = (int)(this.leaveThreshold * (1 + GameSettings.Instance.Wave / (float)multiplicationFrequancy));
+        int maxObtainableObjectives = (int)(this.maxObtainableObjectives * (1 + GameSettings.Instance.Wave / (float)multiplicationFrequancy));
 
         var tracker = Instantiate(objectiveTracker, dungeon).GetComponent<ObjectiveTracker>();
         tracker.Init(maxObtainableObjectives, leaveThreshold, objectiveFill, leave);
@@ -35,6 +38,8 @@ public class ObjectiveSpawner : MonoBehaviour
             .Select(t => new { room = t.room.GetComponent<Room>(), depth = t.depth })
             .SelectMany(t => Enumerable.Range(0, t.depth).Select(_ => t.room)) //Weights
             .ToList();
+
+        //Debug.LogError("Dont TP me");
 
         for (int i = objectiveAmount; i > 0 && rooms.Count > 0; i--)
         {
