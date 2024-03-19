@@ -55,4 +55,4 @@ MonoBehaviour:
   minTorque: 2
   maxTorque: 4
   offsetPosition: {x: 0, y: 0, z: 2.5}
-  maxAmount: 1000
+  maxAmount: 3

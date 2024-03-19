@@ -316,8 +316,9 @@ public class DungeonGenerator : MonoBehaviour
 
         var colliders = Physics.OverlapBox(center, halfExtents, from.direction, LayerMask.GetMask("ExcludeVision"));
         bool connectable = colliders.FirstOrDefault(c => c.CompareTag("Room") & c.gameObject != from.transform.parent.gameObject & c.gameObject != to.transform.parent.gameObject) == null;
+        bool codirectional = Mathf.Approximately(Vector3.Dot(Vector3.Project(dir, from.transform.forward), from.transform.forward), 1);
 
-        if (!connectable || Vector3.Project(dir, from.transform.forward).magnitude < 10f) return;
+        if (!connectable || codirectional || Vector3.Project(dir, from.transform.forward).magnitude < 10f) return;
         EnableCorridorOpeningIfCorridor(from);
         EnableCorridorOpeningIfCorridor(to);
 
