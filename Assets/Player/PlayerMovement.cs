@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour, IStunnable
+public class PlayerMovement : MonoBehaviour, IStunnable, ISlowable
 {
     [Header("Assignables")]
     [SerializeField] Transform cam;
@@ -210,7 +210,7 @@ public class PlayerMovement : MonoBehaviour, IStunnable
 
     public MonoBehaviour StartStun()
     {
-        speedMultiplier = stunSpeedMultiplier;
+        speedMultiplier *= stunSpeedMultiplier;
         pp.SetChromaticAberration(0.1f, 1f);
         pp.SetPostExposure(0.1f, stunExposureAmount);
         cameraController.StartStun();
@@ -219,9 +219,21 @@ public class PlayerMovement : MonoBehaviour, IStunnable
 
     public void EndStun()
     {
-        speedMultiplier = 1f;
+        speedMultiplier /= stunSpeedMultiplier;
         pp.SetChromaticAberration(1f);
         pp.ResetPostExposure(1f);
         cameraController.EndStun();
+    }
+
+    public void SlowDown(float slowFactor)
+    {
+        speedMultiplier *= slowFactor;
+        this.slowFactor = slowFactor;
+    }
+
+    float slowFactor;
+    public void ResetSpeed()
+    {
+        speedMultiplier /= slowFactor;
     }
 }
