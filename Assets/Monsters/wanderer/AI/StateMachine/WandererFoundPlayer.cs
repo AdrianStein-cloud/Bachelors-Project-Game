@@ -34,6 +34,11 @@ public class WandererFoundPlayer : StateProcess<WandererState>
         }
     }
 
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
     void StartChase()
     {
         StateController.SwitchState(WandererState.Chase);

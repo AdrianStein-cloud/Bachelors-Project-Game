@@ -7,6 +7,7 @@ public class WandererSearchRoom : StateProcess<WandererState>
 {
     WandererInfo info;
     WandererMovement movement;
+    Animator anim;
 
     public float speed;
 
@@ -14,15 +15,22 @@ public class WandererSearchRoom : StateProcess<WandererState>
     {
         movement = GetComponent<WandererMovement>();
         info = GetComponent<WandererInfo>();
+        anim = GetComponent<Animator>();
     }
 
     private void OnEnable()
     {
-        Debug.Log("Serach Room");
+        anim.SetBool("Wander", true);
 
         var roomScript = info.CurrentRoom.GetComponent<Room>();
         var roamPoint = roomScript.roamPositions[Random.Range(0, roomScript.roamPositions.Count)];
         movement.MoveTo(roamPoint.transform.position, speed, DestinationReached);
+    }
+
+    private void OnDisable()
+    {
+        movement.Stop();
+        anim.SetBool("Wander", false);
     }
 
     void DestinationReached()

@@ -21,6 +21,13 @@ public class WandererLookingForPlayer : StateProcess<WandererState>
         StartCoroutine(SearchRoom());
     }
 
+    private void OnDisable()
+    {
+        anim.SetBool("Search", false);
+        anim.SetBool("Wander", false);
+        StopAllCoroutines();
+    }
+
     private void Update()
     {
         if (sight.IsPlayerInSight)
