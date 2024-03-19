@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Endurance
   description: Increases stamina by {0}%
+  rarity: 0
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
   staminaPercentIncrease: 10

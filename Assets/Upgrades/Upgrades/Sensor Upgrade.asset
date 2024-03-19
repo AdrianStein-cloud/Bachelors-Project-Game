@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Sensor
   description: Grants you 3 {0}s
+  rarity: 2
   NewlyAvailableUpgrades: []
   item: {fileID: 8346296030083092963, guid: ed7193b98451e164ea6509762f9a57c9, type: 3}

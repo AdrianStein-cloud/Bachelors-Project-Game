@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Speed
   description: Makes you {0}% faster
+  rarity: 1
   NewlyAvailableUpgrades: []
   speedPercentIncrease: 10
