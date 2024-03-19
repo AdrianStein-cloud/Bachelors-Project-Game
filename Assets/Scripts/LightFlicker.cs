@@ -69,7 +69,11 @@ public class LightFlicker : MonoBehaviour
                 TurnOff();
                 break;
             }
-            for(int i = 0; i < childObjects.Length; i++)
+            if (offFlickerSpeedMin == 0 && offFlickerSpeedMax == 0)
+            {
+                break;
+            }
+            for (int i = 0; i < childObjects.Length; i++)
             {
                 FlickerOff(childObjects[i].GetComponent<Light>(), lightIntensities[i]);
                 if (glowMaterial != null)
