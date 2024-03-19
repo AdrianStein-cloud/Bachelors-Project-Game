@@ -16,16 +16,19 @@ public class DramaMaker : Interactable
     [SerializeField] private AudioSource typeSound;
 
     private static System.Random random;
+    private GameManager gameManager;
 
     private void Start()
     {
         if (random == null) random = new System.Random(GameSettings.Instance.GetSeed());
 
+        gameManager = FindObjectOfType<GameManager>();
+
         dramaList = new List<WeightedDrama>
         {
-            new WeightedDrama(TurnOffLights, 100, "Warning!\nAre you sure you want to turn off the power?\n(bonus +20$)"),
-            new WeightedDrama(ReleaseMonster, 100, "Warning!\nAre you sure you want to release another monter?\n(bonus +50$)"),
-            new WeightedDrama(Nothing, 100, "Warning!\nYou're dead..."),
+            new WeightedDrama(TurnOffLights, 100, 20, "Warning!\nAre you sure you want to turn off the power?\n(bonus +20$)"),
+            new WeightedDrama(ReleaseMonster, 100, 50, "Warning!\nAre you sure you want to release another monter?\n(bonus +50$)"),
+            new WeightedDrama(Nothing, 100, 0, "Warning!\nYou're dead..."),
         };
 
         drama = dramaList.GetRollFromWeights(random);
@@ -33,6 +36,7 @@ public class DramaMaker : Interactable
         computer.text = drama.ToString();
 
         buttonSound = GetComponent<AudioSource>();
+
     }
 
     private void TurnOffLights()
@@ -43,7 +47,7 @@ public class DramaMaker : Interactable
     private void ReleaseMonster()
     {
         StartCoroutine(SlowWrite(computer, "Monster Released.\nGood Luck..."));
-        FindObjectOfType<GameManager>().SpawnSingleEnemy();
+        gameManager.SpawnSingleEnemy();
     }
 
     private void Nothing()
@@ -54,6 +58,7 @@ public class DramaMaker : Interactable
     private void PressButton()
     {
         buttonSound.Play();
+        gameManager.GetComponent<CurrencyManager>().AddCurrency(drama.bonus);
         transform.position -= new Vector3(0, 0.09f, 0);
         pressed = true;
         drama.drama.Invoke();
@@ -94,15 +99,17 @@ public class DramaMaker : Interactable
 
 public class WeightedDrama : IWeighted
 {
-    public WeightedDrama(Action drama, int Weight, string description)
+    public WeightedDrama(Action drama, int Weight, int bonus, string description)
     {
         this.Weight = Weight;
         this.drama = drama;
         this.description = description;
+        this.bonus = bonus;
     }
 
     public string description;
     public Action drama;
+    public int bonus;
     [field: SerializeField] public int Weight { get; set; }
 
     public override string ToString()

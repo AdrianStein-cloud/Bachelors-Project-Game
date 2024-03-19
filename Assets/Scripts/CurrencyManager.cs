@@ -44,4 +44,9 @@ public class CurrencyManager : MonoBehaviour
         }
         else return false;
     }
+
+    public void AddCurrency(int amount)
+    {
+        Currency += amount;
+    }
 }
