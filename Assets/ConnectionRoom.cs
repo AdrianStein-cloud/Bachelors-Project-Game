@@ -11,6 +11,7 @@ public class ConnectionRoom : MonoBehaviour
 
     const int doorHeight = 23;
     const int roomHeight = 30;
+    const int doorWidth = doorWidth;
 
 
     public void Scale(Vector2 scale, Vector2 diff)
@@ -46,17 +47,23 @@ public class ConnectionRoom : MonoBehaviour
 
         if (leftToRight)
         {
-            var doorWitdthVector = new Vector3(0, 0, -12);
-            back.transform.localPosition += new Vector3(12, 0, 0);
+            var doorWitdthVector = new Vector3(0, 0, -doorWidth);
+            back.transform.localPosition += new Vector3(doorWidth, 0, 0);
             back.transform.localScale += doorWitdthVector;
             front.transform.localScale += doorWitdthVector;
         }
         else
         {
-            var doorWitdthVector = new Vector3(0, 0, -12);
-            front.transform.localPosition += new Vector3(12, 0, 0);
+            var doorWitdthVector = new Vector3(0, 0, -doorWidth);
+            front.transform.localPosition += new Vector3(doorWidth, 0, 0);
             front.transform.localScale += doorWitdthVector;
             back.transform.localScale += doorWitdthVector;
+        }
+
+        if(Mathf.Approximately(scale.x, doorWidth))
+        {
+            front.SetActive(false);
+            back.SetActive(false);
         }
     }
 
