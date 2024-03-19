@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wider Flashlight
   description: Makes your flashlight {2} degrees wider
-  rarity: 0
+  Rarity: 1
   NewlyAvailableUpgrades:
   - {fileID: 11400000, guid: 166ea217112217e40a1e19c5f0e43b0f, type: 2}
   intensity: 0
