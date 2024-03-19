@@ -16,7 +16,6 @@ MonoBehaviour:
   description: Grants you a {0}
   Rarity: 2
   NewlyAvailableUpgrades:
-  - {fileID: 11400000, guid: 17b87e48be194ac4b8da2cc358533aea, type: 2}
   - {fileID: 11400000, guid: 2d71bb33b85c47d41b38d333e5b64c5d, type: 2}
   - {fileID: 11400000, guid: a477aa8f3e14a2441b3d1c391594dd73, type: 2}
   - {fileID: 11400000, guid: 8d3e8a405818aae43808c7a952de8345, type: 2}
