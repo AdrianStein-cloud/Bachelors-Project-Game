@@ -168,6 +168,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 8978024783357441720, guid: 4dbec6c72cfa7da4e8a290c0d81fedd0, type: 3}
   - {fileID: 8978024783357441720, guid: 767e425ea2925be4d8dac8cba5ea560a, type: 3}
+  - {fileID: 8978024783357441720, guid: b2f69f53191684f438498148e6df7f2b, type: 3}
   extraEnemies: 0
 --- !u!114 &7560089572570469592
 MonoBehaviour:
@@ -213,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb62fde4a1d0214d8f2d3dc71de2f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rerollPrice: 20
   startUpgrades: []
   upgrades:
   - {fileID: 11400000, guid: 4488650ececd479479999511015f2e80, type: 2}
@@ -275,3 +277,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currencyPerObjective: 10
+  currentCurrency: 0
