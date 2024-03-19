@@ -23,8 +23,13 @@ public class ObjectiveSpawner : MonoBehaviour
 
     public void SpawnObjectives(List<(GameObject room, int depth)> roomsDepth, Transform dungeon, Action<int> leave)
     {
+        int objectiveAmount = (int)(this.objectiveAmount * (1 + GameSettings.Instance.Wave / 3f));
+        int leaveThreshold = (int)(this.leaveThreshold * (1 + GameSettings.Instance.Wave / 3f));
+        int maxObtainableObjectives = (int)(this.maxObtainableObjectives * (1 + GameSettings.Instance.Wave / 3f));
+
         var tracker = Instantiate(objectiveTracker, dungeon).GetComponent<ObjectiveTracker>();
         tracker.Init(maxObtainableObjectives, leaveThreshold, objectiveFill, leave);
+        
 
         var rooms = roomsDepth
             .Select(t => new { room = t.room.GetComponent<Room>(), depth = t.depth })
@@ -36,6 +41,11 @@ public class ObjectiveSpawner : MonoBehaviour
             var randomRoom = rooms[UnityEngine.Random.Range(0, rooms.Count)];
             rooms.Remove(randomRoom);
             var spawnPostions = randomRoom.ObjectiveSpawnPositions;
+            if (spawnPostions.Count == 0) {
+                Debug.LogWarning("Room has no spawnpositions: " + randomRoom.name);
+                i++;
+                continue;
+            }
             var spawnPositionObj = spawnPostions[UnityEngine.Random.Range(0, spawnPostions.Count)];
             spawnPostions.Remove(spawnPositionObj);
             var spawnPoint = spawnPositionObj.transform.position;
