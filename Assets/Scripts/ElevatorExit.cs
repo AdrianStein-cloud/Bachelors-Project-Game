@@ -1,33 +1,25 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DungeonExit : Interactable
+public class ElevatorExit : MonoBehaviour
 {
-    public Func<bool> LeaveDungeon { get; set; }
-    public bool CanLeaveDungeon { get; set; } = false;
-    bool inFocus = false;
-
     [SerializeField] GameObject ReadyLamp;
     [SerializeField] GameObject NotReadyLamp;
 
+    public bool CanLeaveDungeon { get; set; } = false;
+
     private bool lightsOn = true;
+    private bool doorOpen = false;
+    private Animator anim;
 
     private void Start()
     {
-        GetComponent<Animator>().SetTrigger("Open");
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if (inFocus && InputManager.Player.Interact.triggered)
-        {
-            if (!LeaveDungeon())
-            {
-                Debug.LogWarning("Display can't leave dungeon yet");
-            }
-        }
         if (CanLeaveDungeon && !lightsOn)
         {
             ReadyLamp.GetComponentInChildren<Light>().intensity = 20f;
@@ -35,6 +27,7 @@ public class DungeonExit : Interactable
             NotReadyLamp.GetComponentInChildren<Light>().intensity = 0f;
             NotReadyLamp.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
             lightsOn = true;
+            FindObjectOfType<ElevatorRoom>().ToggleExitElevator(true);
         }
         else if (!CanLeaveDungeon && lightsOn)
         {
@@ -45,19 +38,19 @@ public class DungeonExit : Interactable
             lightsOn = false;
         }
     }
-    public override void EnableInteractability()
+
+    public void ToggleElevator(bool open)
     {
-        inFocus = true;
-        if (CanLeaveDungeon)
+        anim.SetTrigger(open ? "Open" : "Close");
+        doorOpen = open;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && doorOpen && !CanLeaveDungeon && GameSettings.Instance.PlayerInDungeon)
         {
-            InteractionUIText.Instance.SetText("Press E to exit dungeon");
+            doorOpen = false;
+            FindObjectOfType<ElevatorRoom>().ToggleExitElevator(false);
         }
     }
-
-    public override void DisableInteractability()
-    {
-        inFocus = false;
-        InteractionUIText.Instance.SetText("");
-    }
-
 }

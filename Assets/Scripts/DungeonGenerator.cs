@@ -293,6 +293,7 @@ public class DungeonGenerator : MonoBehaviour
             if (collider.CompareTag("Room") && collider.gameObject != door.transform.parent.gameObject && collider.gameObject != newRoomScript.gameObject)
             {
                 var collidingRoomScript = collider.GetComponent<Room>();
+                if (collidingRoomScript == null) continue;
                 var collidingRoomDoors = collidingRoomScript.GetDoors();
                 var closetDoor = collidingRoomDoors
                     .Where(d => !d.GetDoorConnected())

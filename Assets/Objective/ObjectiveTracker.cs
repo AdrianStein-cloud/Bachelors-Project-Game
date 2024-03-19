@@ -13,12 +13,14 @@ public class ObjectiveTracker : MonoBehaviour
     Action heartCollected;
 
     int collectedObjectives = 0;
-    DungeonExit exit;
+    ElevatorExit exit;
+    ElevatorButton elevator;
 
     private void Awake()
     {
-        exit = FindObjectOfType<DungeonExit>();
-        exit.LeaveDungeon = AttemptLeave;
+        elevator = FindObjectOfType<ElevatorButton>();
+        elevator.LeaveDungeon = Leave;
+        exit = FindObjectOfType<ElevatorExit>();
     }
 
     private void Update()
@@ -49,16 +51,10 @@ public class ObjectiveTracker : MonoBehaviour
         }
     }
 
-    public bool AttemptLeave()
+    public void Leave()
     {
-        if (collectedObjectives >= leaveThreshold)
-        {
-            int upgradesAmount = 2 * (Mathf.Min(collectedObjectives, maxObjectives) - leaveThreshold) / (maxObjectives - leaveThreshold) + 1;
-            leave(3);
-            GameSettings.Instance.PlayerInDungeon = false;
-            return true;
-        }
-        return false;
+        int upgradesAmount = 2 * (Mathf.Min(collectedObjectives, maxObjectives) - leaveThreshold) / (maxObjectives - leaveThreshold) + 1;
+        leave(3);
     }
 
     private void OnDestroy()

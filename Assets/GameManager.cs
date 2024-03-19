@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     SimpleEnemySpawner enemySpawner;
     UpgradeManager upgradeManager;
     GameObject waitingRoomSpawnPoint;
-    DungeonEntrance dungeonEntrance;
+    ElevatorButton elevator;
     DangerScaler dangerScaler;
 
     public Action<int> OnDungeonGenerated;
@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour
         objectiveSpawner = GetComponent<ObjectiveSpawner>();
         enemySpawner = GetComponent<SimpleEnemySpawner>();
         upgradeManager = GetComponent<UpgradeManager>();
-        dungeonEntrance = FindAnyObjectByType<DungeonEntrance>();
-        dungeonEntrance.EnterDungeon = StartLevel;
+        elevator = FindAnyObjectByType<ElevatorButton>();
+        elevator.EnterDungeon = StartLevel;
         player.transform.position = waitingRoomSpawnPoint.transform.position;
         dangerScaler = new DangerScaler();
         StartCoroutine(SpawnDungeon());
@@ -36,11 +36,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnDungeon()
     {
-        dungeonEntrance.DungeonIsAvailable = false;
+        elevator.DungeonIsAvailable = false;
         dungeon = new GameObject("Dungeon");
         dangerScaler.ScaleDanger();
         yield return dungeonGenerator.GenerateDungeon(dungeon, GameSettings.Instance.CurrentDepth);
-        dungeonEntrance.DungeonIsAvailable = true;
+        elevator.DungeonIsAvailable = true;
         OnDungeonGenerated?.Invoke(GameSettings.Instance.Wave);
     }
 
@@ -48,9 +48,9 @@ public class GameManager : MonoBehaviour
     {
         enemySpawner.SpawnEnemies(dungeonGenerator.spawnedRooms, dungeon.transform, GameSettings.Instance.CurrentDepth - 1);
         objectiveSpawner.SpawnObjectives(dungeonGenerator.spawnedRoomsDepth, dungeon.transform, SwitchToUpgrades);
-        player.SetActive(false);
-        player.transform.position = dungeonGenerator.playerSpawnPosition.transform.position;
-        player.SetActive(true);
+        //player.SetActive(false);
+        //player.transform.position = dungeonGenerator.playerSpawnPosition.transform.position;
+        //player.SetActive(true);
     }
 
     public void SpawnSingleEnemy()
@@ -61,9 +61,9 @@ public class GameManager : MonoBehaviour
     public void SwitchToUpgrades(int upgrades)
     {
         InputManager.Player.Disable();
-        player.SetActive(false);
-        player.transform.position = waitingRoomSpawnPoint.transform.position;
-        player.SetActive(true);
+        //player.SetActive(false);
+        //player.transform.position = waitingRoomSpawnPoint.transform.position;
+        //player.SetActive(true);
         Destroy(dungeon);
         OnWaveOver?.Invoke();
         StartCoroutine(SpawnDungeon());

@@ -13,16 +13,17 @@ public class ElevatorEntrance : MonoBehaviour
     private bool lightsOn = true;
     private float timer;
 
-    DungeonEntrance entrance;
+    ElevatorButton elevatorButton;
+    ElevatorRoom elevatorRoom;
     Animator anim;
 
     private void Start()
     {
-        entrance = FindObjectOfType<DungeonEntrance>();
+        elevatorButton = FindObjectOfType<ElevatorButton>();
+        elevatorRoom = FindObjectOfType<ElevatorRoom>();
         anim = GetComponent<Animator>();
         FindObjectOfType<GameManager>().OnWaveOver += () =>
         {
-            anim.SetTrigger("Close");
             timer = Time.time;
         };
         //bellSound = GetComponent<AudioSource>();
@@ -31,7 +32,7 @@ public class ElevatorEntrance : MonoBehaviour
 
     private void Update()
     {
-        if (entrance.DungeonIsAvailable && !lightsOn && timer + minimumTime < Time.time)
+        if (elevatorButton.DungeonIsAvailable && !lightsOn && timer + minimumTime < Time.time)
         {
             ReadyLamp.GetComponentInChildren<Light>().intensity = 20f;
             ReadyLamp.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
@@ -40,8 +41,9 @@ public class ElevatorEntrance : MonoBehaviour
             lightsOn = true;
             bellSound.Play();
             anim.SetTrigger("Open");
+            elevatorRoom.ToggleEntranceElevator(true);
         }
-        else if (!entrance.DungeonIsAvailable && lightsOn)
+        else if (!elevatorButton.DungeonIsAvailable && lightsOn)
         {
             ReadyLamp.GetComponentInChildren<Light>().intensity = 0f;
             ReadyLamp.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
@@ -49,5 +51,10 @@ public class ElevatorEntrance : MonoBehaviour
             NotReadyLamp.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
             lightsOn = false;
         }
+    }
+
+    public void ToggleElevator(bool open)
+    {
+        anim.SetTrigger(open ? "Open" : "Close");
     }
 }

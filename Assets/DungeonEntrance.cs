@@ -8,6 +8,12 @@ public class DungeonEntrance : Interactable
     public bool DungeonIsAvailable { get; set; } = false;
     public Action EnterDungeon { get; set; }
     bool inFocus = false;
+    ElevatorRoom elevator;
+
+    private void Start()
+    {
+        elevator = FindObjectOfType<ElevatorRoom>();
+    }
 
     private void Update()
     {
@@ -15,7 +21,7 @@ public class DungeonEntrance : Interactable
         {
             if (DungeonIsAvailable)
             {
-                GameSettings.Instance.PlayerInDungeon = true;
+                StartCoroutine(Enter());
                 EnterDungeon();
             }
             else
@@ -23,6 +29,13 @@ public class DungeonEntrance : Interactable
                 Debug.LogWarning("Display dungeon not yet available");
             }
         }
+    }
+
+    IEnumerator Enter()
+    {
+        elevator.ToggleEntranceElevator(false);
+        yield return new WaitForSeconds(1f);
+        elevator.Enter();
     }
 
     public override void EnableInteractability()
