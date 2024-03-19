@@ -37,7 +37,7 @@ public class UpgradeManager : MonoBehaviour
         this.upgradeChosen = upgradeChosen;
         var upgradesCopy = new List<Upgrade>(availableUpgrades);
         var randomUpgrades = Enumerable.Range(0, Math.Min(amount, upgradesCopy.Count)).Select(_ => {
-            var upgrade = upgradesCopy[UnityEngine.Random.Range(0, upgradesCopy.Count)];
+            var upgrade = upgradesCopy.GetRollFromWeights(new System.Random(GameSettings.Instance.GetSeed()));
             upgradesCopy.Remove(upgrade);
             return upgrade;
         });
