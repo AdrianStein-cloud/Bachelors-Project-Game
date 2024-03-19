@@ -40,6 +40,13 @@ public class WandererChase : StateProcess<WandererState>
         anim.SetBool("Chase", true);
     }
 
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        anim.SetBool("Chase", false);
+        movement.Stop();
+    }
+
     private void Update()
     {
         if (sight.IsThereBlockingDoor)
@@ -59,7 +66,7 @@ public class WandererChase : StateProcess<WandererState>
 
     void PlayerLocationReached()
     {
-        if (!sight.IsPlayerInSight)
+        if (!sight.IsPlayerInSight && enabled)
         {
             LookForPlayer();
         }

@@ -27,6 +27,7 @@ public class WandererOpenDoor : StateInterrupt
 
     private void OnDisable()
     {
+        anim.SetBool("Search", false);
         StopAllCoroutines();
     }
 

@@ -41,6 +41,7 @@ public class WandererRoam : StateProcess<WandererState>
 
     private void OnDisable()
     {
+        movement.Stop();
         anim.SetBool("Wander", false);
     }
 
