@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 
@@ -27,16 +28,17 @@ public class StunGrenade : Throwable
                     component.StopCoroutine(routine);
                 }
 
-                var coroutine = component.StartCoroutine(Wait(stun));
-                if (!coroutines.ContainsKey(component)) coroutines.Add(component, coroutine);
+                var coroutine = component.StartCoroutine(Wait(stun, component));
+                coroutines[component] = coroutine;
             }
         }
     }
 
-    IEnumerator Wait(IStunnable stun)
+    IEnumerator Wait(IStunnable stun, MonoBehaviour component)
     {
         yield return new WaitForSeconds(effectDuration);
         stun.EndStun();
+        coroutines.Remove(component);
     }
 
     private void OnDrawGizmosSelected()
