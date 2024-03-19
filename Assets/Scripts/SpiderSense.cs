@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpiderSense : MonoBehaviour
 {
@@ -15,28 +16,44 @@ public class SpiderSense : MonoBehaviour
     bool onCooldown = false;
 
     readonly Collider[] colliders = new Collider[50];
-    AudioSource source;
+
+    private Image spiderSenseEffect;
 
     private void Start()
     {
-        source = GetComponent<AudioSource>();
+        spiderSenseEffect = GameSettings.Instance.canvas.transform.Find("SpiderSense").GetComponent<Image>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!onCooldown)
         {
-           Physics.OverlapSphereNonAlloc(transform.position, senseRange, colliders, enemyLayer);
+            Physics.OverlapSphereNonAlloc(transform.position, senseRange, colliders, enemyLayer);
+            Debug.Log("transform.position: " + transform.position);
+            float minDistance = senseRange;
+
             foreach(Collider c in colliders)
             {
                 if (c!= null && IsOnSameFloor(c))
                 {
-                    onCooldown = true;
-                    StartCoroutine(Cooldown());
-                    TingleSpiderSense();
+                    float newDistance = Vector3.Distance(transform.position, c.transform.position);
+
+                    if(newDistance < minDistance)
+                    {
+                        minDistance = newDistance;
+                    }
                 }
             }
+
+            onCooldown = true;
+            StartCoroutine(Cooldown());
+            TingleSpiderSense(minDistance);
         }
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(Cooldown());
     }
 
     bool IsOnSameFloor(Collider col)
@@ -46,15 +63,18 @@ public class SpiderSense : MonoBehaviour
         return verticalDiff <= verticalSenseRange;
     }
 
-    void TingleSpiderSense()
+    void TingleSpiderSense(float distance)
     {
-        source.PlayOneShot(sound);
+        Debug.Log("Distance: " + distance);
+        Color color = new Color(1, 1, 1, 1 - distance/senseRange);
+        spiderSenseEffect.color = color;
     }
 
     IEnumerator Cooldown()
     {
         yield return new WaitForSeconds(cooldown);
         onCooldown = false;
+        yield break;
     }
 
 }
