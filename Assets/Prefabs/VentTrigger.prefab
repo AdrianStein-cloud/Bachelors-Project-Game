@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d5a06d4339d034d969b3534455b62e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerChance: 10
+  triggerChance: 7
 --- !u!65 &406529367329091896
 BoxCollider:
   m_ObjectHideFlags: 0
