@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5089863009002353977}
   - component: {fileID: 4648741839162076814}
   - component: {fileID: 6193125661974434217}
+  - component: {fileID: 6552894007565172604}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -186,6 +187,7 @@ MonoBehaviour:
     type: 3}
   objectiveTracker: {fileID: 3537125783118854772, guid: 95e9da84e43557e4f8ef1fcdf0554c86,
     type: 3}
+  multiplicationFrequancy: 5
 --- !u!114 &5089863009002353977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,3 +261,16 @@ MonoBehaviour:
   soundIntervalMax: 40
   localSoundMinimumDistance: 200
   localSoundMaximumDistance: 500
+--- !u!114 &6552894007565172604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538041618272719592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1bbc67b2c2c90d4d9b69ac9fff4d2bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currencyPerObjective: 10

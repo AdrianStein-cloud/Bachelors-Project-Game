@@ -29,7 +29,6 @@ public class SpiderSense : MonoBehaviour
         if (!onCooldown)
         {
             Physics.OverlapSphereNonAlloc(transform.position, senseRange, colliders, enemyLayer);
-            Debug.Log("transform.position: " + transform.position);
             float minDistance = senseRange;
 
             foreach(Collider c in colliders)
@@ -65,7 +64,6 @@ public class SpiderSense : MonoBehaviour
 
     void TingleSpiderSense(float distance)
     {
-        Debug.Log("Distance: " + distance);
         Color color = new Color(1, 1, 1, 1 - distance/senseRange);
         spiderSenseEffect.color = color;
     }
