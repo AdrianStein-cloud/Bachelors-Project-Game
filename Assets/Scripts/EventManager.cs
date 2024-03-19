@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UniversalForwardPlusVolumetric;
 
@@ -33,6 +34,7 @@ public class EventManager
     public void SpawnRandomEvent(System.Random random)
     {
         flood.gameObject.SetActive(false);
+        GameSettings.Instance.PowerOutage = false;
         ResetFog();
         events.GetRollFromWeights(random)._event.Invoke();
     }
@@ -42,6 +44,7 @@ public class EventManager
         if(GameSettings.Instance.Wave > 2)
         {
             GameSettings.Instance.Event = "Power Outage!";
+            GameSettings.Instance.PowerOutage = true;
             GameSettings.Instance.LightFailPercentage = 100;
         }
         else
@@ -87,7 +90,7 @@ public class EventManager
         volumetricConfig.localScatteringIntensity = 40;
     }
 
-    private void ResetFog()
+    public void ResetFog()
     {
         Debug.Log("defaultFogAttenuationDistance: " + defaultFogAttenuationDistance);
         Debug.Log("defaultLocalScatteringIntensity: " + defaultLocalScatteringIntensity);

@@ -379,6 +379,11 @@ public class DungeonGenerator : MonoBehaviour
             materials = new Materials(floor, wall, ceiling);
         }
     }
+
+    private void OnDestroy()
+    {
+        eventManager.ResetFog();
+    }
 }
 
 [System.Serializable]

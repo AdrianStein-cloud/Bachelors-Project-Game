@@ -53,6 +53,11 @@ public class GameManager : MonoBehaviour
         player.SetActive(true);
     }
 
+    public void SpawnSingleEnemy()
+    {
+        enemySpawner.SpawnSingleEnemy(dungeonGenerator.spawnedRooms, dungeon.transform, GameSettings.Instance.CurrentDepth - 1);
+    }
+
     public void SwitchToUpgrades(int upgrades)
     {
         InputManager.Player.Disable();

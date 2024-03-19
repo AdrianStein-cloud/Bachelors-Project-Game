@@ -39,7 +39,7 @@ public class LightFlicker : MonoBehaviour
             failed = Random.Range(0, 100) < GameSettings.Instance.LightFailPercentage;
         }
 
-        if (!failed)
+        if (!failed || GameSettings.Instance.PowerOutage)
         {
             StartCoroutine(Flicker());
         }
@@ -64,6 +64,11 @@ public class LightFlicker : MonoBehaviour
         yield return new WaitForSeconds(2);
         while (true)
         {
+            if(GameSettings.Instance.PowerOutage)
+            {
+                TurnOff();
+                break;
+            }
             for(int i = 0; i < childObjects.Length; i++)
             {
                 FlickerOff(childObjects[i].GetComponent<Light>(), lightIntensities[i]);
