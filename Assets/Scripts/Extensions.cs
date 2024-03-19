@@ -48,28 +48,29 @@ public static class Extensions
 
     public static int GetChance(this Rarity rarity)
     {
-        return rarity switch
-        {
-            Rarity.Common => 100,
-            Rarity.Uncommon => 75,
-            Rarity.Rare => 50,
-            Rarity.Epic => 20,
-            Rarity.Legendary => 5,
-            _ => throw new Exception($"Rarity chacne for {rarity} isn't defined"),
-        };
+        return UpgradeConstants.Instance.chance
+            .Select(t => new { rarity = t.Key, chacne = t.Value })
+            .Where(t => t.rarity == rarity)
+            .First()
+            .chacne;
     }
 
     public static int GetPrice(this Rarity rarity)
     {
-        return rarity switch
-        {
-            Rarity.Common => 40,
-            Rarity.Uncommon => 60,
-            Rarity.Rare => 90,
-            Rarity.Epic => 140,
-            Rarity.Legendary => 200,
-            _ => throw new Exception($"Rarity chacne for {rarity} isn't defined"),
-        };
+        return UpgradeConstants.Instance.price
+            .Select(t => new { rarity = t.Key, price = t.Value })
+            .Where(t => t.rarity == rarity)
+            .First()
+            .price;
+    }
+
+    public static Color GetColor(this Rarity rarity)
+    {
+        return UpgradeConstants.Instance.colors
+            .Select(t => new { rarity = t.Key, color = t.Value })
+            .Where(t => t.rarity == rarity)
+            .First()
+            .color;
     }
 
     public static Vector3 WithX(this Vector3 v, float x) => new(x, v.y, v.z);

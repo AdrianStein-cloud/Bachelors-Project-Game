@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UpgradeCard : Clickable
 {
@@ -53,5 +49,6 @@ public class UpgradeCard : Clickable
         Title.text = value.Name;
         Description.text = value.Description;
         Price.text = "Price: " + value.Rarity.GetPrice().ToString();
+        GetComponentInChildren<Image>().color = value.Rarity.GetColor();
     }
 }
