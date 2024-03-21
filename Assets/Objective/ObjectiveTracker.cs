@@ -23,15 +23,17 @@ public class ObjectiveTracker : MonoBehaviour
         exit = FindObjectOfType<ElevatorExit>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
+    #if UNITY_EDITOR
+        private void Update()
         {
-            ObjetiveCollected();
-            ObjetiveCollected();
-            ObjetiveCollected();
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                ObjetiveCollected();
+                ObjetiveCollected();
+                ObjetiveCollected();
+            }
         }
-    }
+    #endif
 
     public void Init(int maxObjectives, int leaveThreshold, Image objectiveFill, Action heartCollected, Action<int> leave)
     {
