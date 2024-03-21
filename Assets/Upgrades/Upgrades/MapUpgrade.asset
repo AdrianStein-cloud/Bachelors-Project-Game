@@ -15,5 +15,6 @@ MonoBehaviour:
   Name: Map
   description: Minimap App
   Rarity: 3
+  Tags: 12
   NewlyAvailableUpgrades: []
   item: {fileID: 1980060430063386299, guid: 299b45930ebc340448bd4be5943c3076, type: 3}
