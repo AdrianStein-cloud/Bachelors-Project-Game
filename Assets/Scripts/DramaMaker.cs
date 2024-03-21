@@ -40,6 +40,7 @@ public class DramaMaker : Interactable
         if (!GameSettings.Instance.PowerOutage)
         {
             dramaList.Add(new WeightedDrama(TurnOffLights, 100, 20, "Warning!\nAre you sure you want to turn off the power?\n(bonus +20$)"));
+            dramaList.Add(new WeightedDrama(TurnOnLights, 100, 20, "Warning!\nAre you sure you want to turn on the power?\n(penalty -50$)"));
         }
 
         drama = dramaList.GetRollFromWeights(random);
@@ -52,6 +53,13 @@ public class DramaMaker : Interactable
         StartCoroutine(SlowWrite(computer, "Power Off.\n\nGood Luck..."));
         GameSettings.Instance.PowerOutage = true;
     }
+
+    private void TurnOnLights()
+    {
+        StartCoroutine(SlowWrite(computer, "Power On."));
+        GameSettings.Instance.PowerOnMode = true;
+    }
+
     private void ReleaseMonster()
     {
         StartCoroutine(SlowWrite(computer, "Monster Released.\n\nGood Luck..."));
