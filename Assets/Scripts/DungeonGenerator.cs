@@ -394,7 +394,6 @@ public class DungeonGenerator : MonoBehaviour
         var chest = SpawnChest();
         if (chest != null)
         {
-            Debug.Log("Chest Spawned");
             if (!SpawnKey())
             {
                 Destroy(chest);
