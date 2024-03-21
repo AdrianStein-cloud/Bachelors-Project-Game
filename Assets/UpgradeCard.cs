@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class UpgradeCard : Clickable
 {
     TextMeshProUGUI title;
+    TextMeshProUGUI tags;
     TextMeshProUGUI description;
     TextMeshProUGUI price;
 
@@ -16,6 +17,17 @@ public class UpgradeCard : Clickable
                 title = transform.Find("Name").GetComponent<TextMeshProUGUI>();
             }
             return title;
+        }
+    }
+    TextMeshProUGUI Tags
+    {
+        get
+        {
+            if (tags == null)
+            {
+                tags = transform.Find("Tags").GetComponent<TextMeshProUGUI>();
+            }
+            return tags;
         }
     }
     TextMeshProUGUI Description
@@ -48,6 +60,7 @@ public class UpgradeCard : Clickable
         Upgrade = value;
         Title.text = value.Name;
         Title.color = value.Rarity.GetColor();
+        Tags.text = string.Join(", ", value.Tags.GetFlags());
         Description.text = value.Description;
         Price.text = "Price: " + value.Rarity.GetPrice().ToString();
         //GetComponentInChildren<Image>().color = value.Rarity.GetColor();

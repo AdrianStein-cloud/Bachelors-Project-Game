@@ -73,6 +73,14 @@ public static class Extensions
             .color;
     }
 
+    public static List<Enum> GetFlags(this Enum e)
+    {
+        return Enum.GetValues(e.GetType())
+            .Cast<Enum>()
+            .Where(e.HasFlag)
+            .ToList();
+    }
+
     public static Vector3 WithX(this Vector3 v, float x) => new(x, v.y, v.z);
 
     public static Vector3 WithY(this Vector3 v, float y) => new(v.x, y, v.z);
