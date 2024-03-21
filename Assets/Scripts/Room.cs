@@ -100,16 +100,8 @@ public class Room : MonoBehaviour
     {
         SpawnRandomObjects(random);
         ApplyMaterials(wallMaterial, floorMaterial, ceilingMaterial);
-
-        var combinedMesh = transform.Find("CombinedMesh");
-        if (combinedMesh != null)
-        {
-            var meshCombiner = combinedMesh.AddComponent<MeshCombiner>();
-            meshCombiner.CreateMultiMaterialMesh = true;
-            meshCombiner.DeactivateCombinedChildren = true;
-            meshCombiner.CombineMeshes(false);
-            combinedMesh.AddComponent<MeshCollider>();
-        }
+        CombineMeshes();
+        SetSpawnPositions();
     }
 
     private void ApplyMaterials(Material wallMaterial, Material floorMaterial, Material ceilingMaterial)
@@ -153,17 +145,6 @@ public class Room : MonoBehaviour
             }
         }
 
-        ObjectiveSpawnPositions = GetComponentsInChildren<Transform>()
-            .Where(t => t.name.Contains("ObjectiveSpawnPoint"))
-            .Select(t => t.gameObject)
-            .ToList();
-
-        transform.Cast<Transform>().Where(t => 
-            t.name.Contains("shelf") || 
-            t.name.Contains("Bido") ||
-            t.name.Contains("Girder") ||
-            t.name.Contains("Girder")
-        );
         KeySpawnPositions = GetComponentsInChildren<Transform>()
             .Where(t => t.name.Contains("KeySpawnPoint"))
             .Select(t => t.gameObject)
@@ -173,6 +154,43 @@ public class Room : MonoBehaviour
             .Where(t => t.name.Contains("ChestSpawnPoint"))
             .Select(t => t.gameObject)
             .ToList();
+    }
+
+    void SetSpawnPositions()
+    {
+        ObjectiveSpawnPositions = GetComponentsInChildren<Transform>()
+            .Where(t => t.name.Contains("ObjectiveSpawnPoint"))
+            .Select(t => t.gameObject)
+            .ToList();
+    }
+
+    void CombineMeshes()
+    {
+        var staticRoomObjects = GetComponentsInChildren<MeshRenderer>().Where(t =>
+            t.name.ToLower().Contains("wall") && !t.name.ToLower().Contains("wallwithdoor") ||
+            t.name.ToLower().Contains("ceiling") ||
+            t.name.ToLower().Contains("floor") ||
+            t.name.ToLower().Contains("shelf") /*||
+            t.name.ToLower().Contains("bido") ||
+            t.name.ToLower().Contains("girder") ||
+            t.name.ToLower().Contains("radiator") ||
+            t.name.ToLower().Contains("trashcan") ||
+            t.name.ToLower().Contains("mop")*/
+        );
+
+        var combinedMeshes = new GameObject("CombinedMeshes");
+        combinedMeshes.transform.SetParent(transform);
+        foreach (var obj in staticRoomObjects)
+        {
+            obj.transform.SetParent(combinedMeshes.transform);
+        }
+
+        var meshCombiner = combinedMeshes.AddComponent<MeshCombiner>();
+        meshCombiner.CreateMultiMaterialMesh = true;
+        meshCombiner.DeactivateCombinedChildren = false;
+        meshCombiner.DestroyCombinedChildren = true;
+        meshCombiner.CombineMeshes(false);
+        combinedMeshes.AddComponent<MeshCollider>();
     }
 
     [System.Serializable]
