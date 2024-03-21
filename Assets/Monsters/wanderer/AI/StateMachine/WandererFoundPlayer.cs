@@ -41,7 +41,10 @@ public class WandererFoundPlayer : StateProcess<WandererState>
 
     void StartChase()
     {
-        StateController.SwitchState(WandererState.Chase);
+        if (enabled) 
+        { 
+            StateController.SwitchState(WandererState.Chase);
+        }
     }
 
     IEnumerator ScreamCooldown()
