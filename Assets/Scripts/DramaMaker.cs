@@ -65,6 +65,7 @@ public class DramaMaker : Interactable
 
     private void PressButton()
     {
+        InteractionUIText.Instance.SetText("");
         buttonSound.Play();
         gameManager.GetComponent<CurrencyManager>().AddCurrency(drama.bonus);
         transform.position -= new Vector3(0, 0.09f, 0);
@@ -101,11 +102,16 @@ public class DramaMaker : Interactable
     public override void DisableInteractability()
     {
         inFocus = false;
+        InteractionUIText.Instance.SetText("");
     }
 
     public override void EnableInteractability()
     {
         inFocus = true;
+        if (!pressed)
+        {
+            InteractionUIText.Instance.SetText("Press button");
+        }
     }
 }
 
