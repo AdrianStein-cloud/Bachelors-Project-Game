@@ -36,7 +36,7 @@ public class Door : MonoBehaviour
         doorConnected = connected;
         if(doorWallBlocker != null)
         {
-            doorWallBlocker.SetActive(!connected);
+            if (connected) Destroy(doorWallBlocker);
             if (doorRemoveIfNoRoom != null)
             {
                 doorRemoveIfNoRoom.SetActive(connected);
