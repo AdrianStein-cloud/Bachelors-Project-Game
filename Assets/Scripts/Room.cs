@@ -98,6 +98,16 @@ public class Room : MonoBehaviour
     {
         SpawnRandomObjects(random);
         ApplyMaterials(wallMaterial, floorMaterial, ceilingMaterial);
+
+        var combinedMesh = transform.Find("CombinedMesh");
+        if (combinedMesh != null)
+        {
+            var meshCombiner = combinedMesh.AddComponent<MeshCombiner>();
+            meshCombiner.CreateMultiMaterialMesh = true;
+            meshCombiner.DeactivateCombinedChildren = true;
+            meshCombiner.CombineMeshes(false);
+            combinedMesh.AddComponent<MeshCollider>();
+        }
     }
 
     private void ApplyMaterials(Material wallMaterial, Material floorMaterial, Material ceilingMaterial)
@@ -145,6 +155,13 @@ public class Room : MonoBehaviour
             .Where(t => t.name.Contains("ObjectiveSpawnPoint"))
             .Select(t => t.gameObject)
             .ToList();
+
+        transform.Cast<Transform>().Where(t => 
+            t.name.Contains("shelf") || 
+            t.name.Contains("Bido") ||
+            t.name.Contains("Girder") ||
+            t.name.Contains("Girder")
+        );
     }
 
     [System.Serializable]
