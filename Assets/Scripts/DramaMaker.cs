@@ -24,6 +24,13 @@ public class DramaMaker : Interactable
 
         gameManager = FindObjectOfType<GameManager>();
 
+        SetRandomDrama();
+
+        buttonSound = GetComponent<AudioSource>();
+    }
+
+    private void SetRandomDrama()
+    {
         dramaList = new List<WeightedDrama>
         {
             new WeightedDrama(ReleaseMonster, 100, 50, "Warning!\nAre you sure you want to release another monter?\n(bonus +50$)"),
@@ -38,9 +45,6 @@ public class DramaMaker : Interactable
         drama = dramaList.GetRollFromWeights(random);
 
         computer.text = drama.ToString();
-
-        buttonSound = GetComponent<AudioSource>();
-
     }
 
     private void TurnOffLights()
@@ -87,6 +91,10 @@ public class DramaMaker : Interactable
         if (InputManager.Player.Interact.triggered && inFocus && !pressed)
         {
             PressButton();
+        }
+        if (drama.drama == TurnOffLights && GameSettings.Instance.PowerOutage)
+        {
+            SetRandomDrama();
         }
     }
 
