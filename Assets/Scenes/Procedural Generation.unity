@@ -235,27 +235,32 @@ PrefabInstance:
         type: 3}
       propertyPath: endRooms.Array.data[0].room
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6404158268688364315, guid: 1986930d39facb443a5b4da6f1f53157,
+        type: 3}
     - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: endRooms.Array.data[1].room
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7813503066319441342, guid: cf2c72df1e5e3b041907ae370b7991fd,
+        type: 3}
     - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: endRooms.Array.data[2].room
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8620508088445856826, guid: dbd82918bb4dfb14993836d7172605f4,
+        type: 3}
     - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: endRooms.Array.data[3].room
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7680414859084646631, guid: cf5d85f43e413e64aa01bdd92dbaed45,
+        type: 3}
     - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: endRooms.Array.data[4].room
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1421951242794949396, guid: 955bdf06bec7c4a46a9cfda80bc0744e,
+        type: 3}
     - target: {fileID: 4117347281418660289, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: m_LocalPosition.x
