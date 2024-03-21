@@ -415,8 +415,9 @@ public class DungeonGenerator : MonoBehaviour
         {
             var randomRoom = roomsWithKeySpawnPoints[random.Next(roomsWithKeySpawnPoints.Count)];
             var keySpawnPositions = randomRoom.GetComponent<Room>().KeySpawnPositions;
+            var keySpawnPoint = keySpawnPositions[random.Next(keySpawnPositions.Count)];
 
-            Instantiate(keyPrefab, keySpawnPositions[random.Next(keySpawnPositions.Count)].transform.position, Quaternion.identity);
+            Instantiate(keyPrefab, keySpawnPoint.transform.position, keySpawnPoint.transform.rotation, randomRoom.transform);
 
             return true;
         }
@@ -433,11 +434,14 @@ public class DungeonGenerator : MonoBehaviour
             var chestSpawnPositions = randomRoom.GetComponent<Room>().ChestSpawnPositions;
             var chestSpawnPoint = chestSpawnPositions[random.Next(chestSpawnPositions.Count)];
 
-            var chest = Instantiate(chestPrefab, chestSpawnPoint.transform.position, chestSpawnPoint.transform.rotation, randomRoom.transform);
+            if(chestSpawnPoint != null)
+            {
+                var chest = Instantiate(chestPrefab, chestSpawnPoint.transform.position, chestSpawnPoint.transform.rotation, randomRoom.transform);
 
-            chestSpawnPositions.Remove(chestSpawnPoint);
+                chestSpawnPositions.Remove(chestSpawnPoint);
 
-            return chest;
+                return chest;
+            }
         }
         return null;
     }
