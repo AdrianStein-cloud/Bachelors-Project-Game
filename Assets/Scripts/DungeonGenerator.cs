@@ -128,6 +128,9 @@ public class DungeonGenerator : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             var navMesh = Instantiate(navmeshSurface, dungeon.transform);
             navMesh.BuildNavMesh();
+
+            UnityEditor.StaticOcclusionCulling.Compute();
+
             eventManager.SetSizeOfDungeon(navMesh.navMeshData.sourceBounds.size);
             eventManager.SetCenterOfDungeon(navMesh.navMeshData.sourceBounds.center);
         }
