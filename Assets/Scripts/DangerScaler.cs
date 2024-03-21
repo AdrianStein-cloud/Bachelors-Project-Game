@@ -14,8 +14,7 @@ public class DangerScaler
     {
         GameSettings.Instance.Wave++;
         GameSettings.Instance.CurrentDepth = (int) Mathf.Floor(GameSettings.Instance.DungeonStartDepth + GameSettings.Instance.Wave / 2.5f);
-        //GameSettings.Instance.LightFailPercentage = (int) (77.2f / (1f + Mathf.Exp(-1f * (GameSettings.Instance.Wave - 4.3f))) + 12.8f);
-        GameSettings.Instance.LightFailPercentage = 80;
+        GameSettings.Instance.LightFailPercentage = (int) (77.2f / (1f + Mathf.Exp(-1f * (GameSettings.Instance.Wave - 4.3f))) + 12.8f);
         GameSettings.Instance.EnemyAmount = (int) MathF.Ceiling((GameSettings.Instance.Wave - 1) / 3f);
     }
 

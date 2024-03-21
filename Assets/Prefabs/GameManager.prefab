@@ -138,6 +138,10 @@ MonoBehaviour:
     wallMaterials:
     - {fileID: 2100000, guid: 761b6d64372243842af03b076a4c458f, type: 2}
     ceilingMaterials: []
+  keyPrefab: {fileID: 7317984641055461236, guid: c54296a4b282f7f4c8ef862c6733997b,
+    type: 3}
+  chestPrefab: {fileID: 4893553322903066687, guid: d087763685f83d543abcda1841475bef,
+    type: 3}
 --- !u!114 &6251193281981130515
 MonoBehaviour:
   m_ObjectHideFlags: 0
