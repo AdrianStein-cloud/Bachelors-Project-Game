@@ -16,6 +16,12 @@ public class VentTrigger : MonoBehaviour
         source = GetComponent<AudioSource>();
     }
 
+    private void FixedUpdate()
+    {
+        if (rb.isKinematic) return;
+        rb.AddForce(Physics.gravity * rb.mass, ForceMode.Acceleration);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         source.Play();
