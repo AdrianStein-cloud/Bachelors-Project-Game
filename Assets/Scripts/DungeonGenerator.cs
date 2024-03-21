@@ -42,6 +42,9 @@ public class DungeonGenerator : MonoBehaviour
 
     private EventManager eventManager;
 
+    [SerializeField] private GameObject keyPrefab;
+    [SerializeField] private GameObject chestPrefab;
+
     void Awake()
     {
         LoadRooms();
@@ -124,6 +127,9 @@ public class DungeonGenerator : MonoBehaviour
 
         if (!dungeonFailed)
         {
+            Stats.Instance.player.keysHeld = 0;
+            SpawnChestWithKeys();
+
             //Done spawning dungeon
             yield return new WaitForSeconds(0.2f);
             var navMesh = Instantiate(navmeshSurface, dungeon.transform);
@@ -384,6 +390,57 @@ public class DungeonGenerator : MonoBehaviour
     private void OnDestroy()
     {
         eventManager.ResetFog();
+    }
+
+    private void SpawnChestWithKeys()
+    {
+        var chest = SpawnChest();
+        if (chest != null)
+        {
+            Debug.Log("Chest Spawned");
+            if (!SpawnKey())
+            {
+                Destroy(chest);
+                Debug.Log("Chest Destroyed");
+            }
+            else
+            {
+                Debug.Log("Key Spawned");
+            }
+        }
+    }
+
+    private bool SpawnKey()
+    {
+        var roomsWithKeySpawnPoints = spawnedRooms.Where(x => x.GetComponent<Room>().KeySpawnPositions.Count > 0).ToList();
+
+        if(roomsWithKeySpawnPoints != null && roomsWithKeySpawnPoints.Count > 0)
+        {
+            var randomRoom = roomsWithKeySpawnPoints[random.Next(roomsWithKeySpawnPoints.Count)];
+            var keySpawnPositions = randomRoom.GetComponent<Room>().KeySpawnPositions;
+
+            Instantiate(keyPrefab, keySpawnPositions[random.Next(keySpawnPositions.Count)].transform.position, Quaternion.identity);
+
+            return true;
+        }
+        return false;
+    }
+
+    private GameObject SpawnChest()
+    {
+        var roomsWithChestSpawnPoints = spawnedRooms.Where(x => x.GetComponent<Room>().ChestSpawnPositions.Count > 0).ToList();
+
+        if (roomsWithChestSpawnPoints != null && roomsWithChestSpawnPoints.Count > 0)
+        {
+            var randomRoom = roomsWithChestSpawnPoints[random.Next(roomsWithChestSpawnPoints.Count)];
+            var chestSpawnPositions = randomRoom.GetComponent<Room>().ChestSpawnPositions;
+            var chestSpawnPoint = chestSpawnPositions[random.Next(chestSpawnPositions.Count)];
+
+            var chest = Instantiate(chestPrefab, chestSpawnPoint.transform.position, chestSpawnPoint.transform.rotation, randomRoom.transform);
+
+            return chest;
+        }
+        return null;
     }
 }
 

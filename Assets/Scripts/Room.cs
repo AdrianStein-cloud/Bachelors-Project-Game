@@ -26,6 +26,8 @@ public class Room : MonoBehaviour
     public int depth = 0;
 
     public List<GameObject> ObjectiveSpawnPositions { get; private set; }
+    public List<GameObject> KeySpawnPositions { get; private set; }
+    public List<GameObject> ChestSpawnPositions { get; private set; }
     public List<GameObject> roamPositions;
 
     [Header("Random Objects")]
@@ -143,6 +145,16 @@ public class Room : MonoBehaviour
 
         ObjectiveSpawnPositions = GetComponentsInChildren<Transform>()
             .Where(t => t.name.Contains("ObjectiveSpawnPoint"))
+            .Select(t => t.gameObject)
+            .ToList();
+
+        KeySpawnPositions = GetComponentsInChildren<Transform>()
+            .Where(t => t.name.Contains("KeySpawnPoint"))
+            .Select(t => t.gameObject)
+            .ToList();
+
+        ChestSpawnPositions = GetComponentsInChildren<Transform>()
+            .Where(t => t.name.Contains("ChestSpawnPoint"))
             .Select(t => t.gameObject)
             .ToList();
     }
