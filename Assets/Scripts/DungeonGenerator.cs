@@ -391,18 +391,24 @@ public class DungeonGenerator : MonoBehaviour
 
     private void SpawnChestWithKeys()
     {
-        var chest = SpawnChest();
-        if (chest != null)
+        var chests = new List<GameObject>();
+        chests.Add(SpawnChest());
+        if (chests != null && chests[0] != null)
         {
             if (!SpawnKey())
             {
-                Destroy(chest);
-                Debug.Log("Chest Destroyed");
+                Destroy(chests[0]);
             }
             else
             {
-                Debug.Log("Key Spawned");
-                SpawnChest();
+                for (int i = 0; i < Mathf.Floor(GameSettings.Instance.Wave / 3); i++)
+                {
+                    chests.Add(SpawnChest());
+                }
+                for (int i = 0; i < Mathf.Floor((chests.Count - 1) / 2); i++)
+                {
+                    SpawnKey();
+                }
             }
         }
     }
@@ -418,6 +424,8 @@ public class DungeonGenerator : MonoBehaviour
             var keySpawnPoint = keySpawnPositions[random.Next(keySpawnPositions.Count)];
 
             Instantiate(keyPrefab, keySpawnPoint.transform.position, keySpawnPoint.transform.rotation, randomRoom.transform);
+
+            keySpawnPositions.Remove(keySpawnPoint);
 
             return true;
         }
