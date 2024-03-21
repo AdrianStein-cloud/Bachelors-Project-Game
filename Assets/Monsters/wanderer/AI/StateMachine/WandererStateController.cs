@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class WandererStateController : StateController<WandererState>, IStunnable
 {
+    bool stunned = false;
+
     public MonoBehaviour StartStun()
     {
-        InterruptWith(WandererState.Stunned);
+        if (!stunned)
+        {
+            stunned = true;
+            InterruptWith(WandererState.Stunned);
+        }
         return this;
     }
     public void EndStun()
     {
         if (currentState != WandererState.Stunned) Debug.LogError($"Expected state was Stunned, found {currentState}");
         stateInterruptsMap[WandererState.Stunned].Done();
+        stunned = false;
     }
 
 }

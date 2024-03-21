@@ -45,6 +45,7 @@ public class WandererChase : StateProcess<WandererState>
         StopAllCoroutines();
         anim.SetBool("Chase", false);
         movement.Stop();
+        canAttack = true;
     }
 
     private void Update()

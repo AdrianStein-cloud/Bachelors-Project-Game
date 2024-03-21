@@ -6411,7 +6411,7 @@ MonoBehaviour:
   offFlickerSpeedMax: 0
   onFlickerSpeedMin: 0
   onFlickerSpeedMax: 0
-  alwaysOn: 1
+  alwaysOn: 0
 --- !u!1001 &3062626871379649217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7075,7 +7075,7 @@ MonoBehaviour:
   offFlickerSpeedMax: 0
   onFlickerSpeedMin: 0
   onFlickerSpeedMax: 0
-  alwaysOn: 1
+  alwaysOn: 0
 --- !u!4 &5473039424222175483 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c256337abb724bd478c57bffbfd457ef,

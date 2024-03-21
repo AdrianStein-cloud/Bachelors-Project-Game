@@ -24,29 +24,37 @@ public class DramaMaker : Interactable
 
         gameManager = FindObjectOfType<GameManager>();
 
+        SetRandomDrama();
+
+        buttonSound = GetComponent<AudioSource>();
+    }
+
+    private void SetRandomDrama()
+    {
         dramaList = new List<WeightedDrama>
         {
-            new WeightedDrama(TurnOffLights, 100, 20, "Warning!\nAre you sure you want to turn off the power?\n(bonus +20$)"),
             new WeightedDrama(ReleaseMonster, 100, 50, "Warning!\nAre you sure you want to release another monter?\n(bonus +50$)"),
             new WeightedDrama(Nothing, 100, 0, "Warning!\nYou're dead..."),
         };
 
+        if (!GameSettings.Instance.PowerOutage)
+        {
+            dramaList.Add(new WeightedDrama(TurnOffLights, 100, 20, "Warning!\nAre you sure you want to turn off the power?\n(bonus +20$)"));
+        }
+
         drama = dramaList.GetRollFromWeights(random);
 
         computer.text = drama.ToString();
-
-        buttonSound = GetComponent<AudioSource>();
-
     }
 
     private void TurnOffLights()
     {
-        StartCoroutine(SlowWrite(computer, "Power Off.\nGood Luck..."));
+        StartCoroutine(SlowWrite(computer, "Power Off.\n\nGood Luck..."));
         GameSettings.Instance.PowerOutage = true;
     }
     private void ReleaseMonster()
     {
-        StartCoroutine(SlowWrite(computer, "Monster Released.\nGood Luck..."));
+        StartCoroutine(SlowWrite(computer, "Monster Released.\n\nGood Luck..."));
         gameManager.SpawnSingleEnemy();
     }
 
@@ -57,6 +65,7 @@ public class DramaMaker : Interactable
 
     private void PressButton()
     {
+        InteractionUIText.Instance.SetText("");
         buttonSound.Play();
         gameManager.GetComponent<CurrencyManager>().AddCurrency(drama.bonus);
         transform.position -= new Vector3(0, 0.09f, 0);
@@ -84,16 +93,25 @@ public class DramaMaker : Interactable
         {
             PressButton();
         }
+        if (drama.drama == TurnOffLights && GameSettings.Instance.PowerOutage)
+        {
+            SetRandomDrama();
+        }
     }
 
     public override void DisableInteractability()
     {
         inFocus = false;
+        InteractionUIText.Instance.SetText("");
     }
 
     public override void EnableInteractability()
     {
         inFocus = true;
+        if (!pressed)
+        {
+            InteractionUIText.Instance.SetText("Press button");
+        }
     }
 }
 
