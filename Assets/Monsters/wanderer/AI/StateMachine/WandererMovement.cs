@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(WandererInfo))]
-public class WandererMovement : MonoBehaviour
+public class WandererMovement : MonoBehaviour, ISlowable
 {
     [Header("Debug Fields")]
     [SerializeField] Vector3 targetPosition;
@@ -14,6 +14,9 @@ public class WandererMovement : MonoBehaviour
     WandererInfo info;
 
     Action onDestinationReached;
+
+    bool slowed;
+    float slowFactor;
 
 
     private void Awake()
@@ -39,7 +42,7 @@ public class WandererMovement : MonoBehaviour
         moving = true;
         targetPosition = target;
         agent.SetDestination(target);
-        agent.speed = speed;
+        agent.speed = speed * slowFactor;
         agent.isStopped = false;
 
         info.DestinationRoom = GetRoomAtLocation(target);
@@ -84,5 +87,18 @@ public class WandererMovement : MonoBehaviour
         {
             info.CurrentRoom = other.gameObject;
         }
+    }
+
+    public void SlowDown(float slowFactor)
+    {
+        slowed = true;
+        this.slowFactor = slowFactor;
+    }
+
+    public void ResetSpeed()
+    {
+        slowed = false;
+        agent.speed /= slowFactor;
+        slowFactor = 1;
     }
 }
