@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Presets;
 using UnityEngine;
 
 public class Chest : Interactable
@@ -9,6 +8,7 @@ public class Chest : Interactable
     private bool isOpen = false;
     private Animator animator;
     private bool inFocus = false;
+    private ObjectiveTracker objectiveTracker;
 
     private void Start()
     {
@@ -26,10 +26,19 @@ public class Chest : Interactable
 
     private void OpenChest()
     {
+        objectiveTracker = FindObjectOfType<ObjectiveTracker>();
+        valuables.ForEach(x => x.GetComponentInChildren<Collectable>().onCollect = objectiveTracker.ObjetiveCollected);
+
         Destroy(GetComponent<BoxCollider>());
         Stats.Instance.player.keysHeld--;
         animator.SetTrigger("Open");
         isOpen = true;
+        StartCoroutine(EnableHearts());
+    }
+
+    IEnumerator EnableHearts()
+    {
+        yield return new WaitForSeconds(1f);
         valuables.ForEach(x => x.SetActive(isOpen));
     }
 
