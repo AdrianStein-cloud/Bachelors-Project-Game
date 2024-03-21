@@ -12,10 +12,12 @@ public class ElevatorExit : MonoBehaviour
     private bool lightsOn = true;
     private bool doorOpen = false;
     private Animator anim;
+    AudioSource openCloseSound;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
+        openCloseSound = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -42,6 +44,7 @@ public class ElevatorExit : MonoBehaviour
     public void ToggleElevator(bool open)
     {
         anim.SetTrigger(open ? "Open" : "Close");
+        openCloseSound.Play();
         doorOpen = open;
     }
 

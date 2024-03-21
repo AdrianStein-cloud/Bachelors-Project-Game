@@ -9,6 +9,7 @@ public class ElevatorEntrance : MonoBehaviour
     [SerializeField] GameObject NotReadyLamp;
     [SerializeField] float minimumTime = 4f;
     [SerializeField] AudioSource bellSound;
+    [SerializeField] AudioSource openCloseSound;
 
     private bool lightsOn = true;
     private float timer;
@@ -56,5 +57,6 @@ public class ElevatorEntrance : MonoBehaviour
     public void ToggleElevator(bool open)
     {
         anim.SetTrigger(open ? "Open" : "Close");
+        openCloseSound.Play();
     }
 }
