@@ -25,7 +25,12 @@ public class ObjectiveTracker : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L)) { leave(5); }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            ObjetiveCollected();
+            ObjetiveCollected();
+            ObjetiveCollected();
+        }
     }
 
     public void Init(int maxObjectives, int leaveThreshold, Image objectiveFill, Action heartCollected, Action<int> leave)

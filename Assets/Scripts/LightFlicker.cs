@@ -51,7 +51,7 @@ public class LightFlicker : MonoBehaviour
         }
     }
 
-    private void TurnOff()
+    void TurnOff()
     {
         if (!alwaysOn)
         {
@@ -65,6 +65,20 @@ public class LightFlicker : MonoBehaviour
         if (hasSound)
         {
             GetComponent<AudioSource>().Stop();
+        }
+        StartCoroutine(CheckState());
+    }
+
+    IEnumerator CheckState()
+    {
+        while (!GameSettings.Instance.PowerOutage)
+        {
+            yield return new WaitForSeconds(5);
+            if (GameSettings.Instance.PowerOnMode)
+            {
+                StartCoroutine(Flicker());
+                yield break;
+            }
         }
     }
 

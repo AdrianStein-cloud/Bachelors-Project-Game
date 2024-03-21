@@ -70,7 +70,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.06
+    - _OutlineWidth: 0.12
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.9
@@ -168,9 +168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: UpgradeTitle
   m_EditorClassIdentifier: 
-  hashCode: 281839974
+  hashCode: -1447871568
   material: {fileID: -7236107498272433305}
-  materialHashCode: 1453373190
+  materialHashCode: 961213328
   m_Version: 1.1.0
   m_SourceFontFileGUID: b25b2a799f6dbf04c867d148fb94c855
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: b25b2a799f6dbf04c867d148fb94c855,
