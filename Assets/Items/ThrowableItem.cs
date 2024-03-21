@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ThrowableItem : Item
@@ -14,14 +15,18 @@ public class ThrowableItem : Item
     [SerializeField] Vector3 offsetPosition;
     [SerializeField] int maxAmount;
 
+    GameObject counter;
     GameObject throwables;
     Transform player;
+    TextMeshProUGUI counterText;
     int currentAmount;
 
     static bool initialized;
 
     private void Awake()
     {
+        counter = GameSettings.Instance.canvas.transform.Find("GadgetText").gameObject;
+        counterText = counter.GetComponent<TextMeshProUGUI>();
         player = GameObject.FindWithTag("Player").transform;
         currentAmount = maxAmount;
 
@@ -59,10 +64,25 @@ public class ThrowableItem : Item
         var x = (Random.Range(0, 2) == 0 ? 1f : -1f) * Random.Range(minTorque, maxTorque);
         var z = (Random.Range(0, 2) == 0 ? 1f : -1f) * Random.Range(minTorque, maxTorque);
         rb.AddTorque(x, 0f, z, ForceMode.Impulse);
+
+        UpdateCounter();
     }
 
     public override void Primary()
     {
         Throw();
     }
+
+    public override void Select()
+    {
+        counter.SetActive(true);
+        UpdateCounter();
+    }
+
+    public override void Deselect()
+    {
+        counter.SetActive(false);
+    }
+
+    private void UpdateCounter() => counterText.text = currentAmount + " / " + maxAmount;
 }

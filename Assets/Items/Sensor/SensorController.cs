@@ -33,7 +33,7 @@ public class SensorController : Item
         ghostSensor.SetActive(false);
         sensorRenderer = ghostSensor.GetComponentInChildren<MeshRenderer>();
 
-        sensorCounter = GameSettings.Instance.canvas.transform.Find("Sensor Counter").gameObject;
+        sensorCounter = GameSettings.Instance.canvas.transform.Find("GadgetText").gameObject;
         sensorText = sensorCounter.GetComponent<TextMeshProUGUI>();
 
         currentSensorCount = SensorCount;
@@ -84,6 +84,7 @@ public class SensorController : Item
     {
         isSelected = true;
         sensorCounter.SetActive(true);
+        UpdateCounter();
     }
 
     public override void Deselect()

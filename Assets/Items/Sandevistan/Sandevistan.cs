@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Data.Common;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Sandevistan : Item
 {
@@ -18,7 +17,7 @@ public class Sandevistan : Item
 
     private void Awake()
     {
-        distanceCounter = GameSettings.Instance.canvas.transform.Find("Distance Counter").gameObject;
+        distanceCounter = GameSettings.Instance.canvas.transform.Find("GadgetText").gameObject;
         timerText = distanceCounter.GetComponent<TextMeshProUGUI>();
     }
 
