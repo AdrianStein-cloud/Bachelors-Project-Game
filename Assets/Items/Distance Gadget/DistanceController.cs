@@ -21,14 +21,14 @@ public class DistanceController : Item
 
     private void Start()
     {
-        var entrance = FindObjectOfType<DungeonEntrance>();
-        if (entrance != null) 
-            entrance.EnterDungeon += () =>
+        var elevator = FindObjectOfType<ElevatorButton>();
+        if (elevator != null) 
+            elevator.EnterDungeon += () =>
             {
-                var exit = FindObjectOfType<DungeonExit>();
+                var exit = FindObjectOfType<ElevatorExit>();
                 if (exit != null) target = exit.transform;
             };
-        var exit = FindObjectOfType<DungeonExit>();
+        var exit = FindObjectOfType<ElevatorExit>();
         if (target == null && exit != null) target = exit.transform;
     }
 
@@ -42,7 +42,7 @@ public class DistanceController : Item
 
     public override void Select()
     {
-        var exit = FindObjectOfType<DungeonExit>();
+        var exit = FindObjectOfType<ElevatorExit>();
         if (exit != null) target = exit.transform;
         distanceCounter.SetActive(true);
         distanceText.text = string.Empty;

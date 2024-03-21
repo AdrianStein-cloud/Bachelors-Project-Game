@@ -14,6 +14,11 @@ public class DungeonExit : Interactable
 
     private bool lightsOn = true;
 
+    private void Start()
+    {
+        GetComponent<Animator>().SetTrigger("Open");
+    }
+
     private void Update()
     {
         if (inFocus && InputManager.Player.Interact.triggered)

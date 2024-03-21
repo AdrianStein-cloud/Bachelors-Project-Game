@@ -285,7 +285,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -392,7 +392,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1416,6 +1416,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5514820508430868689}
+  - component: {fileID: -2476860142709848412}
   m_Layer: 0
   m_Name: ElevatorRoom
   m_TagString: Untagged
@@ -1448,6 +1449,21 @@ Transform:
   - {fileID: 7521073977836391852}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &-2476860142709848412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4104805829890701833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703811451da32ed4b8a7ecc8250eb3ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entranceAnim: {fileID: 7418055394199077630}
+  exitAnim: {fileID: 3249660379403721916}
+  elevatorTime: 5
 --- !u!1 &6975487332383949096
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,7 +1749,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1802,7 +1818,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -15, y: 15, z: -0.65}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5514820508430868689}
@@ -1840,7 +1856,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2777,7 +2793,7 @@ Transform:
   m_GameObject: {fileID: 8486522960247730239}
   serializedVersion: 2
   m_LocalRotation: {x: 1, y: -0, z: -0, w: 0}
-  m_LocalPosition: {x: 0.05000305, y: 30, z: -0.15000153}
+  m_LocalPosition: {x: 0, y: 30, z: 0}
   m_LocalScale: {x: 3, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2925,11 +2941,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7181173718785975715, guid: 343994b7bee5c07428f12362d258b15a,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 72420646014172555}
+      addedObject: {fileID: 4288170527072315341}
     - targetCorrespondingSourceObject: {fileID: 7181173718785975715, guid: 343994b7bee5c07428f12362d258b15a,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4288170527072315341}
+      addedObject: {fileID: 5422185872997835690}
   m_SourcePrefab: {fileID: 100100000, guid: 343994b7bee5c07428f12362d258b15a, type: 3}
 --- !u!4 &7521073977836391852 stripped
 Transform:
@@ -2943,18 +2959,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1299200205403919253}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &72420646014172555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191775898768045622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2624b206ff3673498757f1fcda9f0b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &4288170527072315341
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2976,6 +2980,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5.0822754, z: 2.1143646}
   m_Center: {x: 0, y: -0.41381836, z: 0.04443252}
+--- !u!114 &5422185872997835690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8191775898768045622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae0146f7b1f8f54cbee9b2764e2a37f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3344265696458462265
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,49 +1,35 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElevatorEntrance : MonoBehaviour
+public class ElevatorExit : MonoBehaviour
 {
     [SerializeField] GameObject ReadyLamp;
     [SerializeField] GameObject NotReadyLamp;
-    [SerializeField] float minimumTime = 4f;
-    [SerializeField] AudioSource bellSound;
+
+    public bool CanLeaveDungeon { get; set; } = false;
 
     private bool lightsOn = true;
-    private float timer;
-
-    ElevatorButton elevatorButton;
-    ElevatorRoom elevatorRoom;
-    Animator anim;
+    private bool doorOpen = false;
+    private Animator anim;
 
     private void Start()
     {
-        elevatorButton = FindObjectOfType<ElevatorButton>();
-        elevatorRoom = FindObjectOfType<ElevatorRoom>();
         anim = GetComponent<Animator>();
-        FindObjectOfType<GameManager>().OnWaveOver += () =>
-        {
-            timer = Time.time;
-        };
-        //bellSound = GetComponent<AudioSource>();
-        timer = Time.time;
     }
 
     private void Update()
     {
-        if (elevatorButton.DungeonIsAvailable && !lightsOn && timer + minimumTime < Time.time)
+        if (CanLeaveDungeon && !lightsOn)
         {
             ReadyLamp.GetComponentInChildren<Light>().intensity = 20f;
             ReadyLamp.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
             NotReadyLamp.GetComponentInChildren<Light>().intensity = 0f;
             NotReadyLamp.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
             lightsOn = true;
-            bellSound.Play();
-            anim.SetTrigger("Open");
-            elevatorRoom.ToggleEntranceElevator(true);
+            FindObjectOfType<ElevatorRoom>().ToggleExitElevator(true);
         }
-        else if (!elevatorButton.DungeonIsAvailable && lightsOn)
+        else if (!CanLeaveDungeon && lightsOn)
         {
             ReadyLamp.GetComponentInChildren<Light>().intensity = 0f;
             ReadyLamp.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
@@ -56,5 +42,15 @@ public class ElevatorEntrance : MonoBehaviour
     public void ToggleElevator(bool open)
     {
         anim.SetTrigger(open ? "Open" : "Close");
+        doorOpen = open;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && doorOpen && !CanLeaveDungeon && GameSettings.Instance.PlayerInDungeon)
+        {
+            doorOpen = false;
+            FindObjectOfType<ElevatorRoom>().ToggleExitElevator(false);
+        }
     }
 }
