@@ -308,6 +308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4648741839162076814, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
+      propertyPath: selectionAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4648741839162076814, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
       propertyPath: startUpgrades.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -1401,6 +1406,39 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &79374237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 79374238}
+  m_Layer: 0
+  m_Name: UpgradeStation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &79374238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79374237}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 20.9, y: -71.585045, z: -52.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 219403260}
+  - {fileID: 1944065661}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!43 &85001935
 Mesh:
   m_ObjectHideFlags: 0
@@ -4105,7 +4143,7 @@ Transform:
   m_GameObject: {fileID: 219403259}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -2.32, y: -63.967964, z: -98.99}
+  m_LocalPosition: {x: -9.039021, y: 7.6170807, z: -24.219116}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4113,7 +4151,7 @@ Transform:
   - {fileID: 1648524072}
   - {fileID: 116000810}
   - {fileID: 325163750}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 79374238}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &232390539
 GameObject:
@@ -23822,6 +23860,8 @@ GameObject:
   - component: {fileID: 1648524072}
   - component: {fileID: 1648524074}
   - component: {fileID: 1648524073}
+  - component: {fileID: 1648524075}
+  - component: {fileID: 1648524076}
   m_Layer: 0
   m_Name: FrontPanel
   m_TagString: Untagged
@@ -23894,6 +23934,40 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648524071}
   m_Mesh: {fileID: -3886965021206526862, guid: ea054b09962dfeb4eb1e87b1390985de, type: 3}
+--- !u!64 &1648524075
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648524071}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3886965021206526862, guid: ea054b09962dfeb4eb1e87b1390985de, type: 3}
+--- !u!114 &1648524076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648524071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e3a70dc014ed348b5985a27e8ec1cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1653645873
 Mesh:
   m_ObjectHideFlags: 0
@@ -26881,22 +26955,22 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 79374238}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 47cf91eb8eecb0a4dad1c27849debb2c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.29
+      value: -7.0090218
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 47cf91eb8eecb0a4dad1c27849debb2c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -64.3
+      value: 7.285042
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 47cf91eb8eecb0a4dad1c27849debb2c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -98.9
+      value: -24.12912
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 47cf91eb8eecb0a4dad1c27849debb2c,
         type: 3}
@@ -32085,6 +32159,7 @@ GameObject:
   - component: {fileID: 2112578361}
   - component: {fileID: 2112578363}
   - component: {fileID: 2112578362}
+  - component: {fileID: 2112578364}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -32156,6 +32231,28 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2112578360}
+  m_Mesh: {fileID: -3262789968867269347, guid: ea054b09962dfeb4eb1e87b1390985de, type: 3}
+--- !u!64 &2112578364
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112578360}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
   m_Mesh: {fileID: -3262789968867269347, guid: ea054b09962dfeb4eb1e87b1390985de, type: 3}
 --- !u!43 &2122344705
 Mesh:
@@ -32379,11 +32476,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Warning!
-
-    Press button
-
-    for drama'
+  m_text: Order new gadgets
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 012301e4fe15ae04abaf10560abd79f3, type: 2}
   m_sharedMaterial: {fileID: 4392665341178935407, guid: 012301e4fe15ae04abaf10560abd79f3,
@@ -36200,5 +36293,4 @@ SceneRoots:
   - {fileID: 1414814841}
   - {fileID: 253121580}
   - {fileID: 1544787728}
-  - {fileID: 219403260}
-  - {fileID: 1944065659}
+  - {fileID: 79374238}

@@ -14,11 +14,13 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
 
     UpgradeUIController upgradeUIController;
     GameObject player;
-    int selectionAmount;
+    [SerializeField] int selectionAmount;
 
     Action DoneChoosingUpgrades;
 
     List<Upgrade> availableUpgrades;
+
+    List<Upgrade> currentUpgrades;
 
     CurrencyManager currencyManager;
 
@@ -35,21 +37,24 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
 
         player = GameObject.FindWithTag("Player");
 
+        RefreshUpgrades();
+
         foreach (var upgrade in startUpgrades)
         {
             upgrade.Apply(player);
         }
     }
 
-    public void DisplayUpgrades(int amount, GameObject player, Action upgradeChosen)
+    public void DisplayUpgrades(Action upgradeChosen = null)
     {
-        this.player = player;
+        InputManager.Player.Disable();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         this.DoneChoosingUpgrades = upgradeChosen;
-        selectionAmount = amount;
-        DisplayRandomUpgrades();
+        upgradeUIController.EnableCards(currentUpgrades);
     }
 
-    void DisplayRandomUpgrades()
+    public void RefreshUpgrades()
     {
         var upgradesCopy = new List<Upgrade>(availableUpgrades);
         var randomUpgrades = Enumerable.Range(0, Math.Min(selectionAmount, upgradesCopy.Count)).Select(_ => {
@@ -57,7 +62,7 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
             upgradesCopy.Remove(upgrade);
             return upgrade;
         });
-        upgradeUIController.EnableCards(randomUpgrades);
+        currentUpgrades = randomUpgrades.ToList();
     }
 
     public void ChooseUpgrade(Upgrade upgrade)
@@ -66,6 +71,7 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
         {
             upgradeUIController.RemoveUpgrade(upgrade);
             availableUpgrades.Remove(upgrade);
+            currentUpgrades.Remove(upgrade);
             availableUpgrades.AddRange(upgrade.NewlyAvailableUpgrades);
             upgrade.Apply(player);
         }
@@ -75,14 +81,18 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
     {
         if (currencyManager.Spend(rerollPrice))
         {
+            RefreshUpgrades();
+            upgradeUIController.EnableCards(currentUpgrades);
             upgradeUIController.SetRerollPrice(rerollPrice);
-            DisplayRandomUpgrades();
         }
     }
 
     public void CloseUpgrades()
     {
-        DoneChoosingUpgrades();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        InputManager.Player.Enable();
+        DoneChoosingUpgrades?.Invoke();
     }
 }
 

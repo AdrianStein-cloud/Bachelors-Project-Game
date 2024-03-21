@@ -60,21 +60,12 @@ public class GameManager : MonoBehaviour
 
     public void SwitchToUpgrades(int upgrades)
     {
-        InputManager.Player.Disable();
         //player.SetActive(false);
         //player.transform.position = waitingRoomSpawnPoint.transform.position;
         //player.SetActive(true);
         Destroy(dungeon);
         OnWaveOver?.Invoke();
         StartCoroutine(SpawnDungeon());
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        upgradeManager.DisplayUpgrades(upgrades, player, ExitUpgrades);
-    }
-    void ExitUpgrades()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        InputManager.Player.Enable();
+        upgradeManager.RefreshUpgrades();
     }
 }
