@@ -306,6 +306,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6193125661974434217, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: localSounds.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6193125661974434217, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: localSounds.Array.data[10]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f949aae86f44ca468758da84e06c0e6, type: 3}
+    - target: {fileID: 6193125661974434217, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: localSounds.Array.data[11]
+      value: 
+      objectReference: {fileID: 8300000, guid: 38b28997f14551241bd42c588548fce6, type: 3}
+    - target: {fileID: 6193125661974434217, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: localSounds.Array.data[12]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7bf16df2e4da76c4c94579a4569e8867, type: 3}
     - target: {fileID: 6251193281981130515, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: canvas
