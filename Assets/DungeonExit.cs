@@ -23,7 +23,7 @@ public class DungeonExit : Interactable
                 Debug.LogWarning("Display can't leave dungeon yet");
             }
         }
-        if (CanLeaveDungeon && !lightsOn)
+        if (CanLeaveDungeon && !lightsOn && !GameSettings.Instance.PowerOutage)
         {
             ReadyLamp.GetComponentInChildren<Light>().intensity = 20f;
             ReadyLamp.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
@@ -31,13 +31,20 @@ public class DungeonExit : Interactable
             NotReadyLamp.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
             lightsOn = true;
         }
-        else if (!CanLeaveDungeon && lightsOn)
+        else if (!CanLeaveDungeon && lightsOn && !GameSettings.Instance.PowerOutage)
         {
             ReadyLamp.GetComponentInChildren<Light>().intensity = 0f;
             ReadyLamp.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
             NotReadyLamp.GetComponentInChildren<Light>().intensity = 20f;
             NotReadyLamp.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
             lightsOn = false;
+        }
+        else if(GameSettings.Instance.PowerOutage && (ReadyLamp.GetComponentInChildren<Light>().intensity > 0 || NotReadyLamp.GetComponentInChildren<Light>().intensity > 0))
+        {
+            ReadyLamp.GetComponentInChildren<Light>().intensity = 0f;
+            ReadyLamp.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
+            NotReadyLamp.GetComponentInChildren<Light>().intensity = 0f;
+            NotReadyLamp.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
         }
     }
     public override void EnableInteractability()
