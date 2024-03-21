@@ -1239,7 +1239,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &807835870959933087
 Transform:
@@ -1429,7 +1429,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &1244678875751121163
 Transform:
@@ -5094,7 +5094,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &2972873972434217887
 Transform:
@@ -5520,7 +5520,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &7901212930023845058
 Transform:
@@ -5658,7 +5658,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &3464677405622696811
 Transform:
@@ -6412,6 +6412,8 @@ MonoBehaviour:
   onFlickerSpeedMin: 0
   onFlickerSpeedMax: 0
   alwaysOn: 0
+  hasSound: 0
+  cantFail: 0
 --- !u!1001 &3062626871379649217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7076,6 +7078,8 @@ MonoBehaviour:
   onFlickerSpeedMin: 0
   onFlickerSpeedMax: 0
   alwaysOn: 0
+  hasSound: 0
+  cantFail: 0
 --- !u!4 &5473039424222175483 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c256337abb724bd478c57bffbfd457ef,
@@ -7263,6 +7267,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6794041434668867710, guid: 2c821eba5bdd87e4585b4dbf47eceb78,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7163530871465091789, guid: 2c821eba5bdd87e4585b4dbf47eceb78,
         type: 3}
