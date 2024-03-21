@@ -92,8 +92,8 @@ public class EventManager
 
     public void ResetFog()
     {
-        Debug.Log("defaultFogAttenuationDistance: " + defaultFogAttenuationDistance);
-        Debug.Log("defaultLocalScatteringIntensity: " + defaultLocalScatteringIntensity);
+        /*Debug.Log("defaultFogAttenuationDistance: " + defaultFogAttenuationDistance);
+        Debug.Log("defaultLocalScatteringIntensity: " + defaultLocalScatteringIntensity);*/
         volumetricConfig.fogAttenuationDistance = defaultFogAttenuationDistance;
         volumetricConfig.localScatteringIntensity = defaultLocalScatteringIntensity;
     }

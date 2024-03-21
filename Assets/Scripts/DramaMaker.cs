@@ -24,29 +24,37 @@ public class DramaMaker : Interactable
 
         gameManager = FindObjectOfType<GameManager>();
 
+        SetRandomDrama();
+
+        buttonSound = GetComponent<AudioSource>();
+    }
+
+    private void SetRandomDrama()
+    {
         dramaList = new List<WeightedDrama>
         {
-            new WeightedDrama(TurnOffLights, 100, 20, "Warning!\nAre you sure you want to turn off the power?\n(bonus +20$)"),
             new WeightedDrama(ReleaseMonster, 100, 50, "Warning!\nAre you sure you want to release another monter?\n(bonus +50$)"),
             new WeightedDrama(Nothing, 100, 0, "Warning!\nYou're dead..."),
         };
 
+        if (!GameSettings.Instance.PowerOutage)
+        {
+            dramaList.Add(new WeightedDrama(TurnOffLights, 100, 20, "Warning!\nAre you sure you want to turn off the power?\n(bonus +20$)"));
+        }
+
         drama = dramaList.GetRollFromWeights(random);
 
         computer.text = drama.ToString();
-
-        buttonSound = GetComponent<AudioSource>();
-
     }
 
     private void TurnOffLights()
     {
-        StartCoroutine(SlowWrite(computer, "Power Off.\nGood Luck..."));
+        StartCoroutine(SlowWrite(computer, "Power Off.\n\nGood Luck..."));
         GameSettings.Instance.PowerOutage = true;
     }
     private void ReleaseMonster()
     {
-        StartCoroutine(SlowWrite(computer, "Monster Released.\nGood Luck..."));
+        StartCoroutine(SlowWrite(computer, "Monster Released.\n\nGood Luck..."));
         gameManager.SpawnSingleEnemy();
     }
 
@@ -83,6 +91,10 @@ public class DramaMaker : Interactable
         if (InputManager.Player.Interact.triggered && inFocus && !pressed)
         {
             PressButton();
+        }
+        if (drama.drama == TurnOffLights && GameSettings.Instance.PowerOutage)
+        {
+            SetRandomDrama();
         }
     }
 

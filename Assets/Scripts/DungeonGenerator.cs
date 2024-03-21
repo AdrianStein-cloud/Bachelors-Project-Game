@@ -347,9 +347,9 @@ public class DungeonGenerator : MonoBehaviour
         var room = door.transform.parent.GetComponent<Room>();
         if (!room.isCorridor || room.name.Contains("Entrance")) return;
 
-        room.transform
+        /*room.transform
             .Cast<Transform>()
-            .ToList().ForEach(t => Debug.Log(t.name));
+            .ToList().ForEach(t => Debug.Log(t.name));*/
 
 
         var corridorOpening = room.transform
