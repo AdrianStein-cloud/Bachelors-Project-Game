@@ -15,5 +15,6 @@ MonoBehaviour:
   Name: Stun Grenade
   description: Grants you a {0}
   Rarity: 2
+  Tags: 2
   NewlyAvailableUpgrades: []
   item: {fileID: 3253710843451783394, guid: 3f7af72d757ba5946b866cbed5ff2673, type: 3}
