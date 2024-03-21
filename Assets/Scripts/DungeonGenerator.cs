@@ -3,12 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Unity.AI.Navigation;
-using Unity.Mathematics;
 using UnityEngine;
 using System.Linq;
 using Random = System.Random;
-using Unity.VisualScripting;
-using UnityEngine.ProBuilder.Shapes;
 using UniversalForwardPlusVolumetric;
 
 public class DungeonGenerator : MonoBehaviour
@@ -406,6 +403,7 @@ public class DungeonGenerator : MonoBehaviour
             else
             {
                 Debug.Log("Key Spawned");
+                SpawnChest();
             }
         }
     }
@@ -437,6 +435,8 @@ public class DungeonGenerator : MonoBehaviour
             var chestSpawnPoint = chestSpawnPositions[random.Next(chestSpawnPositions.Count)];
 
             var chest = Instantiate(chestPrefab, chestSpawnPoint.transform.position, chestSpawnPoint.transform.rotation, randomRoom.transform);
+
+            chestSpawnPositions.Remove(chestSpawnPoint);
 
             return chest;
         }
