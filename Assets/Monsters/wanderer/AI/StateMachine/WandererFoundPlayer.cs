@@ -36,7 +36,7 @@ public class WandererFoundPlayer : StateProcess<WandererState>
 
     private void OnDisable()
     {
-        StopAllCoroutines();
+        //StopAllCoroutines();
     }
 
     void StartChase()
