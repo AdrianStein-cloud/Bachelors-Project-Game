@@ -51,11 +51,15 @@ public class WandererMovement : MonoBehaviour, ISlowable
 
     public void Stop()
     {
-        moving = false;
-        onDestinationReached = null;
-        agent.speed = 0;
-        agent.isStopped = true;
-        info.DestinationRoom = null;
+        if(agent.isOnNavMesh)
+        {
+            moving = false;
+            onDestinationReached = null;
+            agent.speed = 0;
+            agent.isStopped = true;
+            info.DestinationRoom = null;
+
+        }
     }
 
     public void LookAtTarget(Vector3 target)
