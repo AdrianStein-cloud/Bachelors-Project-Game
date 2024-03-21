@@ -17,6 +17,8 @@ public class LightFlicker : MonoBehaviour
     [SerializeField] float onFlickerSpeedMin = 0.05f;
     [SerializeField] float onFlickerSpeedMax = 2f;
     [SerializeField] bool alwaysOn;
+    [SerializeField] bool hasSound;
+    [SerializeField] bool cantFail;
 
     private void Start()
     {
@@ -34,7 +36,7 @@ public class LightFlicker : MonoBehaviour
 
         bool failed = false;
 
-        if (!alwaysOn)
+        if (!alwaysOn || !cantFail)
         {
             failed = Random.Range(0, 100) < GameSettings.Instance.LightFailPercentage;
         }
@@ -59,6 +61,10 @@ public class LightFlicker : MonoBehaviour
                 if (glowMaterial != null)
                     glowMaterial.DisableKeyword("_EMISSION");
             }
+        }
+        if (hasSound)
+        {
+            GetComponent<AudioSource>().Stop();
         }
     }
 
