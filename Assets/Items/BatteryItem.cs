@@ -7,9 +7,9 @@ using UnityEngine.UI;
 [Serializable]
 public class BatteryItem : Item
 {
-    public float batteryDrain;
+    float batteryDrain;
     public float batteryLife;
-    public bool on = false;
+    public bool On { get; private set; }
     public Action OnDead;
 
     public bool Dead => currentBatteryLife <= 0;
@@ -37,12 +37,12 @@ public class BatteryItem : Item
 
     private void Update()
     {
-        if (on)
+        if (On)
         {
             currentBatteryLife -= batteryDrain * Time.deltaTime;
             if (currentBatteryLife <= 0)
             {
-                on = false;
+                On = false;
                 currentBatteryLife = 0;
                 OnDead?.Invoke();
             }
@@ -51,11 +51,13 @@ public class BatteryItem : Item
         if (selected) UpdateBar();
     }
 
-    public void ToggleBattery()
+    public void ToggleBattery(float drain)
     {
         if (Dead) return;
 
-        on = !on;
+        batteryDrain = drain;
+
+        On = !On;
     }
 
     public override void Select()

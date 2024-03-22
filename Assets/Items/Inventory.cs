@@ -74,6 +74,7 @@ public class Inventory : MonoBehaviour
 
     void SetItemIndex(int value)
     {
+        if (itemIndex == value) return;
         items[itemIndex]?.Deselect();
         itemIndex = value;
         InventoryUI.Instance.SetCurrentSlot(value);

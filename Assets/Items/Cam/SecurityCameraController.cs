@@ -39,7 +39,7 @@ public class SecurityCameraController : Item
         ghostCamera.SetActive(false);
         //cameraRenderer = ghostCamera.GetComponentInChildren<MeshRenderer>();
         renderers = new List<MeshRenderer>();
-        foreach(var renderer in ghostCamera.GetComponentsInChildren<MeshRenderer>())
+        foreach (var renderer in ghostCamera.GetComponentsInChildren<MeshRenderer>())
         {
             renderers.Add(renderer);
         }
@@ -50,7 +50,7 @@ public class SecurityCameraController : Item
     {
         if (!isSelected) return;
 
-        if ((!tablet.tabletEquipped) && !maximumPlaced && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, placeDistance, placeLayer))
+        if ((!tablet.equipped) && !maximumPlaced && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, placeDistance, placeLayer))
         {
             ghostCamera.SetActive(true);
             ghostCamera.transform.position = hit.point;
@@ -79,7 +79,7 @@ public class SecurityCameraController : Item
 
     void UpdateMaterials(Material mat)
     {
-        foreach(var renderer in renderers)
+        foreach (var renderer in renderers)
         {
             renderer.material = mat;
         }
@@ -87,7 +87,7 @@ public class SecurityCameraController : Item
 
     public override void Primary()
     {
-        if (!tablet.tabletEquipped) TryPlace();
+        if (!tablet.equipped) TryPlace();
         else
         {
             //switch cameras
@@ -112,11 +112,14 @@ public class SecurityCameraController : Item
     {
         if (tablet.Toggle())
         {
-            if (tablet.tabletEquipped)
+            if (tablet.battery.Dead) return;
+
+            if (cameras.Count > 0) tablet.battery.ToggleBattery(batteryDrain);
+
+            if (tablet.equipped)
             {
                 DefaultScreen();
             }
-            else if (tablet.battery.on) tablet.battery.ToggleBattery();
         }
     }
 
@@ -124,22 +127,24 @@ public class SecurityCameraController : Item
     {
         tablet.holdingTabletGadget = true;
         isSelected = true;
-        if (tablet.tabletEquipped) DefaultScreen();
+
         tablet.battery.Select();
-        tablet.battery.batteryDrain = this.batteryDrain;
+        if (tablet.equipped)
+        {
+            DefaultScreen();
+            if (cameras.Count > 0) tablet.battery.ToggleBattery(batteryDrain);
+        }
     }
 
     void DefaultScreen()
     {
         if (cameras.Count > 0)
         {
-            if (!tablet.battery.on) tablet.battery.ToggleBattery();
-            if (!tablet.battery.Dead) tablet.textureRenderer.SetActive(true);
+            tablet.textureRenderer.SetActive(true);
             ToggleCamera(cameras[currentCameraIndex], true);
         }
         else
         {
-            tablet.battery.on = false;
             tablet.textureRenderer.SetActive(false);
         }
     }
@@ -152,6 +157,7 @@ public class SecurityCameraController : Item
         ghostCamera.SetActive(false);
         if (cameras.Count > 0) ToggleCamera(cameras[currentCameraIndex], false);
         tablet.textureRenderer.SetActive(false);
+        if (tablet.battery.On) tablet.battery.ToggleBattery(0);
         tablet.battery.Deselect();
         tablet.SwitchGadget();
     }

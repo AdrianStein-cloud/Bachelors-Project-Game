@@ -6,7 +6,7 @@ public class TabletGadget : MonoBehaviour
 {
     [SerializeField] float itemToggleDelay;
     
-    public bool tabletEquipped;
+    public bool equipped;
     public GameObject textureRenderer;
 
     public BatteryItem batteryPrefab;
@@ -33,20 +33,23 @@ public class TabletGadget : MonoBehaviour
     }
     IEnumerator switchGadget()
     {
-        yield return new WaitForSeconds(0.1f);
-        if (!holdingTabletGadget && tabletEquipped)
+        yield return new WaitForSeconds(0.02f);
+        if (!holdingTabletGadget && equipped)
         {
             Toggle();
-            battery.on = false;
         }
     }
 
+    /// <summary>
+    /// Describes whether or not the tablet actually toggled. Is false if on cooldown
+    /// </summary>
+    /// <returns></returns>
     public bool Toggle()
     {
         if (lastTimeUsed + itemToggleDelay <= Time.time)
         {
             lastTimeUsed = Time.time;
-            tabletEquipped = !tabletEquipped;
+            equipped = !equipped;
             anim.SetTrigger("Toggle");
             //PostProcessingHandler.Instance.SetDOF(tabletEquipped);
             return true;

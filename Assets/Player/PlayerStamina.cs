@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStamina : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class PlayerStamina : MonoBehaviour
 
     public bool SufficientStamina => currentStamina > 0 || !enableStamina;
 
-    Transform fill;
+    Image fill;
     PlayerMovement player;
 
     float currentStamina;
@@ -23,7 +24,7 @@ public class PlayerStamina : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<PlayerMovement>();
-        fill = GameObject.Find("Canvas").transform.Find("StaminaBar").GetChild(0);
+        fill = GameObject.Find("Canvas").transform.Find("StaminaBar").GetChild(0).GetComponent<Image>();
         fill.gameObject.SetActive(false);
         currentStamina = stamina;
 
@@ -50,9 +51,7 @@ public class PlayerStamina : MonoBehaviour
 
         fill.gameObject.SetActive(currentStamina != stamina);
 
-        var scale = fill.localScale;
-        scale.x = currentStamina / stamina;
-        fill.localScale = scale;
+        fill.fillAmount = currentStamina / stamina;
     }
 
     public void UpgradeStamina(float staminaMultiplier, float recoverySpeedMultiplier)

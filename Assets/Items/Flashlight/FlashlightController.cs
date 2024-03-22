@@ -27,13 +27,12 @@ public class FlashlightController : Item
 
     public override void Select()
     {
-        battery.batteryDrain = this.batteryDrain;
         battery.Select();
     }
 
     public override void Deselect()
     {
-        if (battery.on) ToggleFlashlight();
+        if (battery.On) ToggleFlashlight();
         battery.Deselect();
     }
 
@@ -41,9 +40,9 @@ public class FlashlightController : Item
     {
         audio.Play();
 
-        battery.ToggleBattery();
+        battery.ToggleBattery(batteryDrain);
 
-        flashlight.intensity = battery.on ? intensity : 0;
+        flashlight.intensity = battery.On ? intensity : 0;
     }
 
     public void Upgrade(int intensity, int range, int angle, int batteryLife)
@@ -53,7 +52,7 @@ public class FlashlightController : Item
         flashlight.spotAngle += angle;
 
         this.intensity += intensity;
-        if (battery.on) flashlight.intensity = this.intensity;
+        if (battery.On) flashlight.intensity = this.intensity;
 
         battery.UpgradeBattery(batteryLife);
     }
