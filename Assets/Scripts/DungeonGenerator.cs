@@ -77,6 +77,7 @@ public class DungeonGenerator : MonoBehaviour
         spawnedRooms = new List<GameObject>();
         spawnedRoomsDepth = new List<(GameObject, int)>();
         potentialConnections = new List<(Door, Door)>();
+        doorQueue = new Queue<(Door, int)>();
 
         //instantiate first object in rooms
         GameObject entrance = Instantiate(startRoom, new Vector3(0, 0, 0), transform.rotation, dungeon.transform);
@@ -84,13 +85,30 @@ public class DungeonGenerator : MonoBehaviour
         playerSpawnPosition = entrance.transform.Find("PlayerSpawnPosition").gameObject;
         spawnedRooms.Add(entrance);
 
+        bool dungeonFailed = false;
+
         foreach (Door door in entrance.GetComponent<Room>().GetDoors())
         {
             doorQueue.Enqueue((door, 0));
         }
 
+
         while (doorQueue.Count > 0)
         {
+            if(spawnedRooms.Count == 4)
+            {
+                foreach (Door door in entrance.GetComponent<Room>().GetDoors())
+                {
+                    if (!door.GetDoorConnected())
+                    {
+                        StopAllCoroutines();
+                        foreach (Transform child in dungeon.transform) Destroy(child.gameObject);
+                        dungeonFailed = true;
+                        StartCoroutine(GenerateDungeon(dungeon, depth));
+                        yield break;
+                    }
+                }
+            }
             (Door, int) element = doorQueue.Dequeue();
             yield return SpawnRoomAtDoor(element.Item1, element.Item2, dungeon.transform);
         }
@@ -107,20 +125,7 @@ public class DungeonGenerator : MonoBehaviour
                 if (!p.Item1.GetDoorConnected() & !p.Item2.GetDoorConnected())
                     SpawnLoopConnection(p.Item1, p.Item2, dungeon.transform);
             });
-
-
-
-        bool dungeonFailed = false;
-
-        foreach(Door door in entrance.GetComponent<Room>().GetDoors())
-        {
-            if (!door.GetDoorConnected())
-            {
-                foreach (Transform child in dungeon.transform) Destroy(child.gameObject);
-                dungeonFailed = true;
-                yield return GenerateDungeon(dungeon, depth);
-            }
-        }
+        
 
         if (!dungeonFailed)
         {

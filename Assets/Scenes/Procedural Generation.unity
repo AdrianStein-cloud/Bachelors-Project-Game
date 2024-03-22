@@ -228,6 +228,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
+      propertyPath: seed
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
       propertyPath: flood
       value: 
       objectReference: {fileID: 1786471875}
@@ -316,6 +321,11 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 1414814842}
+    - target: {fileID: 6251193281981130515, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: dungeonStartDepth
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
