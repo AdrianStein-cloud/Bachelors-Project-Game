@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 //https://github.com/deadlykam/TutorialFPSRotation/blob/20c94069f25b51205404a644a49f7b378506668e/TutorialFPSRotation/Assets/TutorialFPSRotation/Scripts/PlayerRotateSmooth.cs
 public class CameraController : MonoBehaviour
 {
     [field: SerializeField] public float HorizontalSensitivity { get; set; }
     [field: SerializeField] public float VerticalSensitivity { get; set; }
+    public bool CameraFollowsPlayer { get; set; } = true;
 
     [SerializeField] float sensitivityMultiplier = 1f;
 
@@ -58,11 +62,32 @@ public class CameraController : MonoBehaviour
         dir = context.ReadValue<Vector2>();
     }
 
+    public void LerpPosition(Vector3 position, float smoothTime)
+    {
+        CameraFollowsPlayer = false;
+        StartCoroutine(LerpPositionCoroutine(position, smoothTime));
+    }
+
+    IEnumerator LerpPositionCoroutine(Vector3 position, float smoothTime)
+    {
+        float elapsedTime = 0;
+        var startValue = transform.position;
+        while (elapsedTime < smoothTime)
+        {
+            transform.position = Vector2.Lerp(startValue, position, elapsedTime / smoothTime);
+            elapsedTime += Time.unscaledDeltaTime;
+            yield return null;
+        }
+    }
+
     private void Update()
     {
         Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, startingFOV * (player.IsRunning ? runFOVChangeAmount : 1f), runFOVChangeSpeed * Time.deltaTime);
 
-        transform.position = Vector3.SmoothDamp(transform.position, cameraPosition.position, ref velocity, followSmoothTime * Time.deltaTime);
+        if (CameraFollowsPlayer)
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, cameraPosition.position, ref velocity, followSmoothTime * Time.deltaTime);
+        }
 
         var mouseDir = new Vector2(dir.x * HorizontalSensitivity, dir.y * VerticalSensitivity) * sensitivityMultiplier / 100;
 
