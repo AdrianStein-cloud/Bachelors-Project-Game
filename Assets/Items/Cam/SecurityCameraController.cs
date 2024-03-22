@@ -25,18 +25,26 @@ public class SecurityCameraController : Item
 
     RaycastHit hit;
     GameObject ghostCamera;
+    SecurityCameraScript ghostScript;
     bool isSelected;
     bool canPlace;
     int currentCamCount;
+
+    GameObject cameraCounter;
+    TextMeshProUGUI cameraText;
+
 
     List<MeshRenderer> renderers;
 
     private void Awake()
     {
         tablet = GameObject.FindGameObjectWithTag("Tablet").GetComponent<TabletGadget>();
+        cameraCounter = GameSettings.Instance.canvas.transform.Find("GadgetText").gameObject;
+        cameraText = cameraCounter.GetComponent<TextMeshProUGUI>();
 
         ghostCamera = Instantiate(cameraPrefab);
         ghostCamera.SetActive(false);
+        ghostScript = ghostCamera.GetComponent<SecurityCameraScript>();
         //cameraRenderer = ghostCamera.GetComponentInChildren<MeshRenderer>();
         renderers = new List<MeshRenderer>();
         foreach (var renderer in ghostCamera.GetComponentsInChildren<MeshRenderer>())
@@ -44,6 +52,24 @@ public class SecurityCameraController : Item
             renderers.Add(renderer);
         }
         currentCamCount = MaxCamCount;
+
+        UpdateCounter();
+
+        var gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+            gameManager.OnWaveOver += () =>
+            {
+                foreach (var cam in cameras)
+                {
+                    if (cam != null) Destroy(cam.gameObject);
+                }
+
+                cameras = new List<GameObject>();
+                
+                currentCamCount = MaxCamCount;
+                currentCameraIndex = 0;
+                UpdateCounter();
+            };
     }
 
     private void Update()
@@ -58,7 +84,6 @@ public class SecurityCameraController : Item
 
             Rotate(ghostCamera.transform);
 
-            var ghostScript = ghostCamera.GetComponent<SecurityCameraScript>();
             if (ghostScript.colliding)
             {
                 UpdateMaterials(invalidMaterial);
@@ -127,8 +152,10 @@ public class SecurityCameraController : Item
     {
         tablet.holdingTabletGadget = true;
         isSelected = true;
+        cameraCounter.SetActive(true);
 
         tablet.battery.Select();
+        if (tablet.battery.Dead) return;
         if (tablet.equipped)
         {
             DefaultScreen();
@@ -154,6 +181,7 @@ public class SecurityCameraController : Item
         tablet.holdingTabletGadget = false;
         isSelected = false;
         canPlace = false;
+        cameraCounter.SetActive(false);
         ghostCamera.SetActive(false);
         if (cameras.Count > 0) ToggleCamera(cameras[currentCameraIndex], false);
         tablet.textureRenderer.SetActive(false);
@@ -167,12 +195,18 @@ public class SecurityCameraController : Item
         if (!canPlace || maximumPlaced) return;
 
         var instance = Instantiate(cameraPrefab, hit.point, Quaternion.identity);
+        var camScript = instance.GetComponent<SecurityCameraScript>();
 
         Rotate(instance.transform);
         instance.transform.SetParent(hit.transform);
 
         cameras.Add(instance);
+        camScript.camName = "CAMERA " + cameras.Count;
+
+        camScript.Init();
+
         currentCamCount--;
+        UpdateCounter();
 
         if (maximumPlaced)
         {
@@ -187,4 +221,7 @@ public class SecurityCameraController : Item
         Vector3 newForward = areParallel ? Vector3.up : Vector3.ProjectOnPlane(Vector3.up, hit.normal).normalized;
         sensor.rotation = Quaternion.LookRotation(hit.normal, newForward);
     }
+
+    private void UpdateCounter() => cameraText.text = currentCamCount + " / " + MaxCamCount;
+
 }

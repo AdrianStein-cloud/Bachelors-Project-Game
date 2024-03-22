@@ -9,6 +9,13 @@ public class SecurityCameraScript : MonoBehaviour
     float timePlaced = 0;
 
     public TextMeshProUGUI timePlacedText;
+    public TextMeshProUGUI nameText;
+    public string camName;
+
+    public void Init()
+    {
+        nameText.text = camName;
+    }
 
     private void Update()
     {
