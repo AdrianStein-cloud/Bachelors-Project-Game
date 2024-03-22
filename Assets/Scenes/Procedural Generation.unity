@@ -319,7 +319,7 @@ PrefabInstance:
     - target: {fileID: 4648741839162076814, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: startUpgrades.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4648741839162076814, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
