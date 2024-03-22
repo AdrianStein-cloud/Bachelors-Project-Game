@@ -80,14 +80,24 @@ public class Room : MonoBehaviour
         return entrance;
     }
 
-    public List<Door> GetDoors()
+    public void SetEntrance(Door door)
+    {
+        entrance = door.gameObject;
+        foreach (GameObject _door in doors)
+        {
+            _door.GetComponent<Door>().isEntrance = false;
+        }
+        door.isEntrance = true;
+    }
+
+    public List<Door> GetDoors(bool inclEntrance = false)
     {
         List<Door> doorScripts = new List<Door>();
 
         foreach (GameObject door in doors)
         {
             Door doorScript = door.GetComponent<Door>();
-            if (!doorScript.isEntrance)
+            if (inclEntrance || !doorScript.isEntrance)
             {
                 doorScripts.Add(doorScript);
             }
