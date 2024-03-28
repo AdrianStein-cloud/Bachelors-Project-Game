@@ -152,8 +152,6 @@ public class WandererSight : MonoBehaviour
         Debug.DrawLine(raycastStartPoint, raycastStartPoint + doorEyes.transform.forward * doorFindDistance);
         if (Physics.Raycast(raycastStartPoint, doorEyes.transform.forward, out hit, doorFindDistance, findDoorMask))
         {
-            //Debug.DrawLine(raycastStartPoint, hit.point);
-            Debug.Log(raycastStartPoint);
             if (hit.transform.CompareTag("Door"))
             {
                 return hit.transform.gameObject;

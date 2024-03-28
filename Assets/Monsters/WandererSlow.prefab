@@ -1786,7 +1786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 25
-  damage: 50
+  damage: 35
   damageDelay: 0.7
   cooldown: 1.4
   angle: 360

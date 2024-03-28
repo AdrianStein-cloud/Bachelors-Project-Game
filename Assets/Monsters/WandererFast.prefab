@@ -1837,7 +1837,7 @@ NavMeshAgent:
   m_Acceleration: 10000
   avoidancePriority: 50
   m_AngularSpeed: 3600
-  m_StoppingDistance: 1.56
+  m_StoppingDistance: 14
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -2169,9 +2169,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  damage: 100
-  damageDelay: 0.7
-  cooldown: 1.4
+  damage: 60
+  damageDelay: 1.15
+  cooldown: 2
   angle: 360
   attackStartRange: 15
   attackHitRange: 20
