@@ -19,5 +19,6 @@ public class CoilStateController : StateController<CoilState>, IStunnable
 
 public enum CoilState
 {
-    Attack
+    Attack,
+    Roam
 }

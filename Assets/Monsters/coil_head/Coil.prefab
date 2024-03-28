@@ -1565,6 +1565,7 @@ GameObject:
   - component: {fileID: 2429449893314326291}
   - component: {fileID: 2116237405653279951}
   - component: {fileID: 5018436924629602712}
+  - component: {fileID: 8396227508461569314}
   m_Layer: 10
   m_Name: Coil
   m_TagString: Untagged
@@ -1682,9 +1683,11 @@ MonoBehaviour:
   stateProcess:
   - Key: 0
     Value: {fileID: 2116237405653279951}
+  - Key: 1
+    Value: {fileID: 8396227508461569314}
   stateInterrupts: []
-  start: 0
-  currentState: 0
+  start: 1
+  currentState: 1
 --- !u!114 &-5973098871365891471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1699,6 +1702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   IsVisible: 0
+  ThereIsBockingDoor: 0
 --- !u!114 &2429449893314326291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1711,6 +1715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4775fbb76df97254ca798c4c6eb23236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorEyes: {fileID: 8514651411286326516}
+  doorFindDistance: 10
   blocking:
     serializedVersion: 2
     m_Bits: 577
@@ -1768,7 +1774,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78ab18ce6acb8a44db4e414312ae9fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 300
+  detectionRange: 200
+--- !u!114 &8396227508461569314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978024783357441720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071f413d8e2e32046bed03ffad3492f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 30
 --- !u!1001 &227254927815958481
 PrefabInstance:
   m_ObjectHideFlags: 0

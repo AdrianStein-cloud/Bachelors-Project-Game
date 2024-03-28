@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(CoilMovement), typeof(CoilInfo))]
 public class CoilAttack : StateProcess<CoilState>
@@ -16,11 +17,13 @@ public class CoilAttack : StateProcess<CoilState>
 
     CoilInfo info;
     CoilMovement movement;
+    NavMeshAgent agent;
 
     private void Awake()
     {
         info = GetComponent<CoilInfo>();
         movement = GetComponent<CoilMovement>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
 
@@ -29,7 +32,11 @@ public class CoilAttack : StateProcess<CoilState>
         if (info.Target != null & !info.IsVisible)
         {
             movement.SetTargetPosition(info.Target.transform.position, speed);
-            DoRandomStepSound();
+            if(!agent.isStopped) DoRandomStepSound();
+        }
+        if(info.Target == null)
+        {
+            StateController.SwitchState(CoilState.Roam);
         }
     }
 

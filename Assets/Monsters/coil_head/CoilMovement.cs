@@ -5,6 +5,8 @@ using UnityEngine.AI;
 public class CoilMovement : MonoBehaviour
 {
 
+    [SerializeField] GameObject doorEyes;
+    [SerializeField] float doorFindDistance = 10f;
     [SerializeField] LayerMask blocking;
     [SerializeField] GameObject[] visiblePoints;
     [SerializeField] AnimationClip[] poses;
@@ -36,23 +38,23 @@ public class CoilMovement : MonoBehaviour
         {
             if(info.IsVisible) DoRandomPose(); //Update pose if coil was visible last frame
 
+
             agent.isStopped = false;
             info.IsVisible = false;
             transform.rotation = Quaternion.LookRotation(Camera.main.transform.position - transform.position, Vector3.up);
+
+            info.ThereIsBockingDoor = IsThereBlockingDoor();
+            if (info.ThereIsBockingDoor)
+            {
+                agent.isStopped = true;
+            }
         }
     }
 
     public void SetTargetPosition(Vector3 position, float speed)
     {
-        if (agent.path.status == NavMeshPathStatus.PathComplete)
-        {
-            agent.speed = speed;
-            agent.SetDestination(position);
-        }
-        else
-        {
-            Debug.LogWarning("NavMesh path not complete");
-        }
+        agent.speed = speed;
+        agent.SetDestination(position);
     }
 
     bool IsCoilVisisble(Camera camera)
@@ -81,6 +83,47 @@ public class CoilMovement : MonoBehaviour
         Physics.Raycast(pos, dir, out RaycastHit hit, Mathf.Infinity, blocking);
         Debug.DrawLine(pos, pos + dir.normalized * hit.distance);
         return hit.collider.CompareTag("Player");
+    }
+
+    bool IsThereBlockingDoor()
+    {
+        var doorObj = IsDoorInFront();
+        if (doorObj != null)
+        {
+            var door = doorObj.GetComponent<ToggleDoor>();
+            if (!door.open) return true;
+        }
+        return false;
+    }
+
+    GameObject IsDoorInFront()
+    {
+        var direction = PathingDirection();
+        RaycastHit hit;
+        var raycastStartPoint = doorEyes.transform.position;
+        Debug.DrawLine(raycastStartPoint, raycastStartPoint + direction * doorFindDistance);
+        if (Physics.Raycast(raycastStartPoint, direction, out hit, doorFindDistance, LayerMask.GetMask("Door")))
+        {
+            if (hit.transform.CompareTag("Door"))
+            {
+                return hit.transform.gameObject;
+            }
+        }
+        return null;
+    }
+
+    Vector3 PathingDirection()
+    {
+        if (agent.hasPath && agent.path.corners.Length > 1)
+        {
+            Vector3 direction = (agent.path.corners[1] - agent.transform.position).normalized;
+            return direction;
+        }
+        else
+        {
+            //Debug.LogWarning("Defaulting to transform forward instead of agent path");
+            return transform.forward;
+        }
     }
 
     void DoRandomPose()
