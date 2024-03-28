@@ -286,11 +286,11 @@ public class DungeonGenerator : MonoBehaviour
     bool IsColliding(Room newRoomScript, Door door, out Door potentialLoop, Door randomDoor = null)
     {
         var degree = randomDoor == null ? 0f : door.transform.eulerAngles.y - randomDoor.transform.eulerAngles.y;
-        Vector3 doorOffset = Quaternion.AngleAxis(180, Vector3.up) * randomDoor.transform.position;
+        //Vector3 doorOffset = Quaternion.AngleAxis(180, Vector3.up) * randomDoor.transform.position;
 
         Vector3 roomSize = Quaternion.AngleAxis(180 + degree, Vector3.up) * new Vector3(newRoomScript.bounding_x - 1f, newRoomScript.bounding_y, newRoomScript.bounding_z - 1f);
         roomSize = new Vector3(Mathf.Abs(roomSize.x), Mathf.Abs(roomSize.y), Mathf.Abs(roomSize.z));
-        Vector3 offset = new Vector3(newRoomScript.offset_x + doorOffset.x, newRoomScript.offset_y - randomDoor.transform.position.y, newRoomScript.offset_z + doorOffset.z);
+        Vector3 offset = Quaternion.AngleAxis(360 - degree, Vector3.up) * new Vector3(newRoomScript.offset_x, newRoomScript.offset_y - randomDoor.transform.position.y, newRoomScript.offset_z);
 
         var offsetCalculated = door.transform.forward * offset.z + door.transform.right * offset.x + door.transform.up * offset.y;
         var roomCenter = door.transform.position + (door.transform.forward * newRoomScript.bounding_z / 2) + new Vector3(0, newRoomScript.bounding_y / 2, 0) + offsetCalculated;
@@ -298,6 +298,7 @@ public class DungeonGenerator : MonoBehaviour
         bool isColliding = false;
 
         Debug.Log("Name: " + newRoomScript.gameObject.name);
+        Debug.Log("degree: " + degree);
         Debug.Log("roomCenter: " + roomCenter);
         Debug.Log("roomSize: " + roomSize);
         
