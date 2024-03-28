@@ -15,6 +15,7 @@ public class WandererSight : MonoBehaviour
     public float persitanceDuration = 0.4f;
 
     [Header("Door Sight")]
+    public GameObject doorEyes;
     public float doorFindDistance;
     public LayerMask findDoorMask;
     public LayerMask lookThroughDoorMask;
@@ -147,8 +148,12 @@ public class WandererSight : MonoBehaviour
     GameObject IsDoorInFront()
     {
         RaycastHit hit;
-        if (Physics.Raycast(eyes.transform.position, eyes.transform.forward, out hit, doorFindDistance, findDoorMask))
+        var raycastStartPoint = doorEyes.transform.position;
+        Debug.DrawLine(raycastStartPoint, raycastStartPoint + doorEyes.transform.forward * doorFindDistance);
+        if (Physics.Raycast(raycastStartPoint, doorEyes.transform.forward, out hit, doorFindDistance, findDoorMask))
         {
+            //Debug.DrawLine(raycastStartPoint, hit.point);
+            Debug.Log(raycastStartPoint);
             if (hit.transform.CompareTag("Door"))
             {
                 return hit.transform.gameObject;
