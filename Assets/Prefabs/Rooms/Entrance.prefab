@@ -6561,6 +6561,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallWithDoor (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8330817539011851199, guid: 74ffa464a58fede4ba1cfaf1f22922f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8605223307445634414, guid: 74ffa464a58fede4ba1cfaf1f22922f7,
         type: 3}
       propertyPath: m_SelectedEditorRenderState
@@ -7691,6 +7696,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallWithDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 8330817539011851199, guid: 74ffa464a58fede4ba1cfaf1f22922f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8605223307445634414, guid: 74ffa464a58fede4ba1cfaf1f22922f7,
         type: 3}
       propertyPath: m_SelectedEditorRenderState
@@ -8080,6 +8090,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WallWithDoor (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330817539011851199, guid: 74ffa464a58fede4ba1cfaf1f22922f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8605223307445634414, guid: 74ffa464a58fede4ba1cfaf1f22922f7,
         type: 3}

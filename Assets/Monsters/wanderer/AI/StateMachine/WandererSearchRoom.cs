@@ -23,8 +23,16 @@ public class WandererSearchRoom : StateProcess<WandererState>
         anim.SetBool("Wander", true);
 
         var roomScript = info.CurrentRoom.GetComponent<Room>();
-        var roamPoint = roomScript.roamPositions[Random.Range(0, roomScript.roamPositions.Count)];
-        movement.MoveTo(roamPoint.transform.position, speed, DestinationReached);
+        if (roomScript.roamPositions.Count > 0)
+        {
+            var roamPoint = roomScript.roamPositions[Random.Range(0, roomScript.roamPositions.Count)];
+            movement.MoveTo(roamPoint.transform.position, speed, DestinationReached);
+        }
+        else
+        {
+            Debug.Log("No roam positions found. Shouldnt happen i think");
+            DestinationReached();
+        }
     }
 
     private void OnDisable()
