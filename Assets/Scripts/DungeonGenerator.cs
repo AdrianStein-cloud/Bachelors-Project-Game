@@ -163,8 +163,8 @@ public class DungeonGenerator : MonoBehaviour
             Room newRoomScript = randomRoom.room.GetComponent<Room>();
             newRoomScript.depth = depth;
             doors = newRoomScript.GetDoors(true);
-            int index = random.Next(newRoomScript.GetDoors(true).Count);
-            Door randomDoor = newRoomScript.GetDoors(true)[index];
+            int index = random.Next(doors.Count);
+            Door randomDoor = doors[index];
 
             if (IsColliding(newRoomScript, door, out Door potentialConnection, randomDoor) || (doors.Count == 0 && (depth + 1) % GameSettings.Instance.GenerationLookahead != 0))
             {
@@ -176,11 +176,9 @@ public class DungeonGenerator : MonoBehaviour
             {
                 var degree = door.transform.eulerAngles.y - randomDoor.transform.eulerAngles.y;
                 Vector3 newPosition = Quaternion.AngleAxis(degree, Vector3.up) * randomDoor.transform.position + door.transform.position;
-                var rotation = Quaternion.Euler(Vector3.up * door.transform.eulerAngles.y) * randomDoor.transform.rotation;
-                Debug.Log("Door rot: " + door.transform.eulerAngles.y);
-                Debug.Log("Random Door rot: " + randomDoor.transform.eulerAngles.y);
+                var rotation = Quaternion.AngleAxis(180 + degree, Vector3.up);
 
-                var newRoom = Instantiate(randomRoom.room, door.transform.position, Quaternion.Euler(new Vector3(0, degree, 0)), dungeon);
+                var newRoom = Instantiate(randomRoom.room, newPosition, rotation, dungeon);
                 newRoomScript = newRoom.GetComponent<Room>();
                 newRoomScript.SetEntrance(newRoomScript.GetDoors(true)[index]);
                 doors = newRoomScript.GetDoors();
@@ -246,7 +244,7 @@ public class DungeonGenerator : MonoBehaviour
             }
             else
             {
-                var newRoom = Instantiate(randomRoom.room, door.gameObject.transform.position, door.direction, dungeon);
+                var newRoom = Instantiate(randomRoom.room, door.transform.position, door.direction, dungeon);
                 newRoomScript = newRoom.GetComponent<Room>();
                 door.SetDoorConnected(true);
                 newRoomScript.GetEntrance().GetComponent<Door>().SetDoorConnected(true);
@@ -287,25 +285,22 @@ public class DungeonGenerator : MonoBehaviour
 
     bool IsColliding(Room newRoomScript, Door door, out Door potentialLoop, Door randomDoor = null)
     {
-        var degree = randomDoor == null ? 0f : 180 - randomDoor.transform.eulerAngles.y;
-        Vector3 doorOffset = Quaternion.AngleAxis(degree, Vector3.up) * randomDoor.transform.position;
+        var degree = randomDoor == null ? 0f : door.transform.eulerAngles.y - randomDoor.transform.eulerAngles.y;
+        Vector3 doorOffset = Quaternion.AngleAxis(180, Vector3.up) * randomDoor.transform.position;
 
-        Vector3 roomSize = Quaternion.AngleAxis(degree, Vector3.up) * new Vector3(newRoomScript.bounding_x - 1f, newRoomScript.bounding_y, newRoomScript.bounding_z - 1f);
+        Vector3 roomSize = Quaternion.AngleAxis(180 + degree, Vector3.up) * new Vector3(newRoomScript.bounding_x - 1f, newRoomScript.bounding_y, newRoomScript.bounding_z - 1f);
         roomSize = new Vector3(Mathf.Abs(roomSize.x), Mathf.Abs(roomSize.y), Mathf.Abs(roomSize.z));
-        Vector3 offset = new Vector3(-(newRoomScript.bounding_x / 2 + doorOffset.x), newRoomScript.offset_y - randomDoor.transform.position.y, -(newRoomScript.bounding_z / 2 + doorOffset.z));
+        Vector3 offset = new Vector3(newRoomScript.offset_x + doorOffset.x, newRoomScript.offset_y - randomDoor.transform.position.y, newRoomScript.offset_z + doorOffset.z);
 
         var offsetCalculated = door.transform.forward * offset.z + door.transform.right * offset.x + door.transform.up * offset.y;
-        Debug.Log($"Offset: " + offsetCalculated);
         var roomCenter = door.transform.position + (door.transform.forward * newRoomScript.bounding_z / 2) + new Vector3(0, newRoomScript.bounding_y / 2, 0) + offsetCalculated;
         var colliders = Physics.OverlapBox(roomCenter, roomSize / 2, door.transform.rotation, LayerMask.GetMask("ExcludeVision"));
         bool isColliding = false;
 
-        
         Debug.Log("Name: " + newRoomScript.gameObject.name);
-        Debug.Log("roomSize: " + roomSize);
         Debug.Log("roomCenter: " + roomCenter);
+        Debug.Log("roomSize: " + roomSize);
         
-
         potentialLoop = null;
 
         foreach (var collider in colliders)
