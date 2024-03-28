@@ -1454,7 +1454,7 @@ NavMeshAgent:
   m_Acceleration: 10000
   avoidancePriority: 50
   m_AngularSpeed: 3600
-  m_StoppingDistance: 13
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -1764,6 +1764,7 @@ MonoBehaviour:
   distance: 250
   omniDirectionalVisionDistance: 40
   persitanceDuration: 1
+  proximityRange: 20
   doorEyes: {fileID: 7758218010270108908}
   doorFindDistance: 12
   findDoorMask:
@@ -1790,8 +1791,8 @@ MonoBehaviour:
   damageDelay: 0.7
   cooldown: 1.4
   angle: 360
-  attackStartRange: 15
-  attackHitRange: 20
+  attackStartRange: 20
+  attackHitRange: 25
 --- !u!114 &-5056355623399845551
 MonoBehaviour:
   m_ObjectHideFlags: 0

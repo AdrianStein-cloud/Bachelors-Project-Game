@@ -13,6 +13,7 @@ public class WandererSight : MonoBehaviour
     public float distance;
     public float omniDirectionalVisionDistance;
     public float persitanceDuration = 0.4f;
+    public float proximityRange = 15f;
 
     [Header("Door Sight")]
     public GameObject doorEyes;
@@ -34,6 +35,11 @@ public class WandererSight : MonoBehaviour
     float lastSeenPlayerTime;
     bool buildingUpVision = false;
 
+    GameObject hidingLocation;
+
+    readonly Collider[] playerProximityResults = new Collider[5];
+    readonly Collider[] hidingSpotColliderCastResults = new Collider[1];
+
     private void Awake()
     {
         info = GetComponent<WandererInfo>();
@@ -49,9 +55,16 @@ public class WandererSight : MonoBehaviour
             info.DoorToOpen = door;
         }
 
-        info.TargetPlayer = CheckForPlayerInSight(360f, omniDirectionalVisionDistance);
-        var normalVision = CheckForPlayerInSight(angle, distance);
-        info.TargetPlayer = info.TargetPlayer != null ? info.TargetPlayer : normalVision;
+
+        GameObject targetPlayer = null;
+
+        bool checkProximity = hidingLocation != null && Vector3.Distance(hidingLocation.transform.position, transform.position) < proximityRange;
+        if (checkProximity) targetPlayer = CheckForPlayerInCloseProximity(proximityRange);
+        if (targetPlayer == null) targetPlayer = CheckForPlayerInSight(360f, omniDirectionalVisionDistance);
+        if (targetPlayer == null) targetPlayer = CheckForPlayerInSight(angle, distance);
+
+        info.TargetPlayer = targetPlayer;
+
         if (info.TargetPlayer != null)
         {
             if ((buildingUpVision && Time.time >= firstTimeSeenPlayer + detectionTime))
@@ -79,6 +92,8 @@ public class WandererSight : MonoBehaviour
         {
             buildingUpVision = false;
         }
+
+        CheckIfPlayerWasSeenHiding();
     }
 
 
@@ -118,6 +133,17 @@ public class WandererSight : MonoBehaviour
         return null;
     }
 
+    public GameObject CheckForPlayerInCloseProximity(float range)
+    {
+        int hitAmount = Physics.OverlapSphereNonAlloc(transform.position, range, playerProximityResults, LayerMask.GetMask("Player"));
+        if (hitAmount > 0)
+        {
+            var playerObj = playerProximityResults[0].gameObject;
+            return playerObj;
+        }
+        return null;
+    }
+
     public GameObject CheckForBlockingDoor()
     {
         var doorObj = IsDoorInFront();
@@ -129,14 +155,15 @@ public class WandererSight : MonoBehaviour
             if (doorObj != null & doorIsInTheWay & !door.open) return doorObj;
         }
         return null;
+    }
 
-
-        /*if (door != null && doorToOpen == null && info.CurrentRoom != info.DestinationRoom)
-        {
-            doorToOpen = door;
-            OpenDoor(door);
-            return;
-        }*/
+    void CheckIfPlayerWasSeenHiding()
+    {
+        int hitAmount = Physics.OverlapSphereNonAlloc(info.LastSeenPlayerLocation, 1, hidingSpotColliderCastResults, LayerMask.GetMask("HidingSpot"));
+        if (hitAmount == 0) return;
+        var hidingSpot = hidingSpotColliderCastResults[0].GetComponent<HidingSpot>();
+        info.LastSeenPlayerLocation = hidingSpot.FoundLocation.transform.position;
+        hidingLocation = hidingSpot.FoundLocation;
     }
 
     public float DistanceToTarget(GameObject target)

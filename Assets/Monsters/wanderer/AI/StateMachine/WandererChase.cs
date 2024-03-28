@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Timeline;
-using static UnityEngine.GraphicsBuffer;
 
 public class WandererChase : StateProcess<WandererState>
 {
@@ -13,7 +9,6 @@ public class WandererChase : StateProcess<WandererState>
     public int damage;
     public float damageDelay;
     public float cooldown;
-    public int angle;
     public int attackStartRange;
     public float attackHitRange;
 
@@ -56,8 +51,8 @@ public class WandererChase : StateProcess<WandererState>
             return;
         }
 
-        var player = sight.CheckForPlayerInSight(angle, attackStartRange);
-        if(player != null)
+        var player = info.TargetPlayer;
+        if (player != null && Vector3.Distance(transform.position, player.transform.position) < attackStartRange)
         {
             AttackPlayer(player);
         }
@@ -92,7 +87,7 @@ public class WandererChase : StateProcess<WandererState>
     {
         StartCoroutine(AttackCooldown());
 
-        movement.LookAtTarget(info.LastSeenPlayerLocation);
+        movement.LookAtTarget(player.transform.position);
         anim.SetTrigger("Attack");
 
         yield return new WaitForSeconds(damageDelay);
