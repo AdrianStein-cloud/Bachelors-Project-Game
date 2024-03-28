@@ -1763,7 +1763,7 @@ MonoBehaviour:
   angle: 180
   distance: 250
   omniDirectionalVisionDistance: 40
-  persitanceDuration: 1
+  persitanceDuration: 0.5
   proximityRange: 20
   doorEyes: {fileID: 7758218010270108908}
   doorFindDistance: 12
@@ -1790,7 +1790,6 @@ MonoBehaviour:
   damage: 35
   damageDelay: 0.7
   cooldown: 1.4
-  angle: 360
   attackStartRange: 20
   attackHitRange: 25
 --- !u!114 &-5056355623399845551

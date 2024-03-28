@@ -1774,7 +1774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78ab18ce6acb8a44db4e414312ae9fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 200
+  detectionRange: 150
 --- !u!114 &8396227508461569314
 MonoBehaviour:
   m_ObjectHideFlags: 0
