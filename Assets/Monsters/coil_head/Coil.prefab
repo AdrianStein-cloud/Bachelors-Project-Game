@@ -1562,7 +1562,9 @@ GameObject:
   - component: {fileID: 545524966101764781}
   - component: {fileID: 5744492474670784729}
   - component: {fileID: -5973098871365891471}
+  - component: {fileID: 2429449893314326291}
   - component: {fileID: 2116237405653279951}
+  - component: {fileID: 5018436924629602712}
   m_Layer: 10
   m_Name: Coil
   m_TagString: Untagged
@@ -1696,7 +1698,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
---- !u!114 &2116237405653279951
+  IsVisible: 0
+--- !u!114 &2429449893314326291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1705,7 +1708,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8978024783357441720}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5afdd4d0251af984395169d012c9d1ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 4775fbb76df97254ca798c4c6eb23236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   blocking:
@@ -1718,8 +1721,6 @@ MonoBehaviour:
   - {fileID: 1138472173004351328}
   - {fileID: 8514651411286326516}
   poses:
-  - {fileID: 7400000, guid: 86b38ac0f616bcd469fe7b2d701505c4, type: 2}
-  - {fileID: 7400000, guid: b31e86053686f9f4b8e3ab9368e3538e, type: 2}
   - {fileID: 7400000, guid: 9328262631244fd4e904d507457ebab7, type: 2}
   - {fileID: 7400000, guid: abcfac9a5cb9baa4e8dbf6a5a6375e93, type: 2}
   - {fileID: 7400000, guid: 13817a1636cb53c458597bee9c6a506d, type: 2}
@@ -1735,14 +1736,39 @@ MonoBehaviour:
   - {fileID: 7400000, guid: fbc06fe6d356c9445967b90bc036f78c, type: 2}
   - {fileID: 7400000, guid: f2c218d11f1507e4b86b6d2ef171d9d4, type: 2}
   - {fileID: 7400000, guid: 560c4297722dc984abcee322891889dd, type: 2}
+--- !u!114 &2116237405653279951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978024783357441720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afdd4d0251af984395169d012c9d1ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 50
+  speed: 100
   footstepSource: {fileID: 579540658091824859}
   footstepSounds:
   - {fileID: 8300000, guid: c5de246fcedb7644da1bd7064e1aabc2, type: 3}
   - {fileID: 8300000, guid: 18407cc44f2740143886812d1327a953, type: 3}
   - {fileID: 8300000, guid: 4d2e596c6273f2d46b9d50822e9af752, type: 3}
   footstepSoundDelay: 0.2
-  speed: 100
-  damage: 50
+--- !u!114 &5018436924629602712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978024783357441720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78ab18ce6acb8a44db4e414312ae9fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRange: 300
 --- !u!1001 &227254927815958481
 PrefabInstance:
   m_ObjectHideFlags: 0
