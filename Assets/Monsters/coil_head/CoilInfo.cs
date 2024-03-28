@@ -5,4 +5,6 @@ using UnityEngine;
 public class CoilInfo : MonoBehaviour
 {
     public GameObject Target;
+    public bool IsVisible;
+    public bool ThereIsBockingDoor;
 }

@@ -33,8 +33,8 @@ public class ToggleDoor : Interactable
         anim = transform.parent.GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         cam = Camera.main.gameObject;
-        //navObstacle = GetComponentInChildren<NavMeshObstacle>();
-        //if (!isLocked) navObstacle.enabled = false;
+        navObstacle = GetComponentInChildren<NavMeshObstacle>();
+        if (!isLocked) navObstacle.enabled = false;
     }
 
     private void Update()
@@ -52,7 +52,6 @@ public class ToggleDoor : Interactable
             canInteract = false;
             lastInteract = Time.time;
             anim.SetTrigger("Toggle");
-            //navObstacle.enabled = true;
 
             if (user == player) audioSource.volume = 0.5f;
             else audioSource.volume = 1f;
@@ -61,6 +60,7 @@ public class ToggleDoor : Interactable
 
             audioSource.Play();
             open = !open;
+            navObstacle.enabled = open;
         }
     }
 
