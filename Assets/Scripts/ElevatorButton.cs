@@ -18,7 +18,7 @@ public class ElevatorButton : Interactable
 
     private void Update()
     {
-        if (inFocus && InputManager.Player.Interact.triggered)
+        if (inFocus && InputManager.Player.Interact.triggered && !elevator.Moving)
         {
             if (DungeonIsAvailable && !GameSettings.Instance.PlayerInDungeon)
             {
@@ -55,6 +55,12 @@ public class ElevatorButton : Interactable
     {
         inFocus = true;
         var exit = FindObjectOfType<ElevatorExit>();
+
+        if (elevator.Moving)
+        {
+            InteractionUIText.Instance.SetText("");
+            return;
+        }
 
         if (exit != null && GameSettings.Instance.PlayerInDungeon)
         {

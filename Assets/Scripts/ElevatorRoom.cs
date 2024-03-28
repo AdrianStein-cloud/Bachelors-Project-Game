@@ -8,6 +8,8 @@ public class ElevatorRoom : MonoBehaviour
     [SerializeField] Animator exitAnim;
     [SerializeField] float elevatorTime;
 
+    public bool Moving { get; private set; }
+
     float startPositionY;
 
     private void Start()
@@ -29,23 +31,27 @@ public class ElevatorRoom : MonoBehaviour
 
     public void Enter()
     {
+        Moving = true;
         StartCoroutine(Go(0f));
         StartCoroutine(Wait());
         IEnumerator Wait()
         {
             yield return new WaitForSeconds(elevatorTime);
             ToggleExitElevator(true);
+            Moving = false;
         }
     }
 
     public void Exit()
     {
+        Moving = true;
         StartCoroutine(Go(startPositionY));
         StartCoroutine(Wait());
         IEnumerator Wait()
         {
             yield return new WaitForSeconds(elevatorTime);
             ToggleEntranceElevator(true);
+            Moving = false;
         }
     }
 
