@@ -1412,7 +1412,7 @@ GameObject:
   - component: {fileID: -1455468899765472073}
   m_Layer: 10
   m_Name: WandererSlow
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
