@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cedb63304414543877a02bc3179f1d, type: 3}
+  m_Name: Bill Gates
+  m_EditorClassIdentifier: 
+  Name: Bill Gates
+  description: All money upgrades have increased effect by {0}%
+  Rarity: 1
+  Tags: 128
+  NewlyAvailableUpgrades:
+  - {fileID: 11400000}
+  increaseOnAllMoneyUpgradesPercent: 20

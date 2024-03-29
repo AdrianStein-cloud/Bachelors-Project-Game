@@ -7,6 +7,7 @@ public class Stats : MonoBehaviour
     public GrenadeStats grenade;
     public ElectronicStats eletronics;
     public PlayerStats player;
+    public MoneyStats money;
 
 
     private void Awake()

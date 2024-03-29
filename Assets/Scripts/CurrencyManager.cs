@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -20,12 +18,13 @@ public class CurrencyManager : MonoBehaviour
             currentCurrency = value;
             currencyText.text = $"{currentCurrency} $";
         }
-    } 
+    }
 
     TextMeshProUGUI currencyText;
 
     private void Awake()
     {
+        UnitySingleton<CurrencyManager>.BecomeSingleton(this);
         currencyText = GameObject.Find("Currency").GetComponent<TextMeshProUGUI>();
     }
 

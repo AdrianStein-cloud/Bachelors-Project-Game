@@ -39,6 +39,7 @@ public enum Tag
     Placeable = 1 << 4,
     Quantity = 1 << 5,
     Passive = 1 << 6,
+    Money = 1 << 7,
 }
 
 
