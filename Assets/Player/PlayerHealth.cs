@@ -1,10 +1,9 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEngine.ProBuilder.AutoUnwrapSettings;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -13,6 +12,8 @@ public class PlayerHealth : MonoBehaviour
 
     public float invulnerabilityTime = 0.5f;
     private float lastDamage;
+
+    public Action<int> OnTakeDamage;
 
     Image bloodScreen;
     TextMeshProUGUI healthText;
@@ -57,6 +58,8 @@ public class PlayerHealth : MonoBehaviour
                 Die();
             }
             else UpdateHealthBar();
+
+            if(damage > 0) OnTakeDamage?.Invoke(damage);
 
             lastDamage = Time.time;
         }
