@@ -9,6 +9,7 @@ TagManager:
   - Tablet
   - MapCamera
   - NoiseMaker
+  - Enemy
   layers:
   - Default
   - TransparentFX

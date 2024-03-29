@@ -12,6 +12,7 @@ public abstract class Upgrade : ScriptableObject, IWeighted
     public Rarity Rarity;
     public Tag Tags;
     public List<Upgrade> NewlyAvailableUpgrades;
+    public int Price { get; set; }
     public string Description => string.Format(description, Args);
 
     protected virtual object[] Args => new object[0];
@@ -39,6 +40,7 @@ public enum Tag
     Placeable = 1 << 4,
     Quantity = 1 << 5,
     Passive = 1 << 6,
+    Money = 1 << 7,
 }
 
 

@@ -62,12 +62,22 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
             upgradesCopy.Remove(upgrade);
             return upgrade;
         });
+
         currentUpgrades = randomUpgrades.ToList();
+
+        //Randomize prices slightly
+        currentUpgrades.ForEach(u =>
+        {
+            int normalPrice = u.Rarity.GetPrice();
+            int maxDiscount = normalPrice / 5;
+            int discount = UnityEngine.Random.Range(0, maxDiscount);
+            u.Price = normalPrice - discount;
+        });
     }
 
     public void ChooseUpgrade(Upgrade upgrade)
     {
-        if (currencyManager.Spend(upgrade.Rarity.GetPrice()))
+        if (currencyManager.Spend(upgrade.Price))
         {
             upgradeUIController.RemoveUpgrade(upgrade);
             availableUpgrades.Remove(upgrade);

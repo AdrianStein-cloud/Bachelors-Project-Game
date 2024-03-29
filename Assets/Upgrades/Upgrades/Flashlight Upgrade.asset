@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Flashlight
   description: Grants you a {0}
-  Rarity: 2
+  Rarity: 1
   Tags: 4
   NewlyAvailableUpgrades:
   - {fileID: 11400000, guid: 2d71bb33b85c47d41b38d333e5b64c5d, type: 2}

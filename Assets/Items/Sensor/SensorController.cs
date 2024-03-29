@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class SensorController : Item
 {
+    public Action<GameObject> OnSensorBeep;
+
     [SerializeField] GameObject sensorPrefab;
     [SerializeField] Material validMaterial;
     [SerializeField] Material invalidMaterial;
@@ -104,7 +107,7 @@ public class SensorController : Item
         instance.transform.SetParent(hit.transform);
 
         var sensor = instance.GetComponent<Sensor>();
-        sensor.Init();
+        sensor.Init(OnSensorBeep);
 
         sensors.Add(instance);
         currentSensorCount--;

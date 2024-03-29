@@ -16,11 +16,13 @@ public class GameManager : MonoBehaviour
 
     public Action<int> OnDungeonGenerated;
     public Action OnWaveOver;
+    public Action OnDungeonEnter;
 
     GameObject dungeon;
 
     private void Start()
     {
+        UnitySingleton<GameManager>.BecomeSingleton(this);
         waitingRoomSpawnPoint = GameObject.Find("WaitingRoomSpawnPoint");
         player = GameObject.FindGameObjectWithTag("Player");
         dungeonGenerator = GetComponent<DungeonGenerator>();
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
     {
         enemySpawner.SpawnEnemies(dungeonGenerator.spawnedRooms, dungeon.transform, GameSettings.Instance.CurrentDepth - 1);
         objectiveSpawner.SpawnObjectives(dungeonGenerator.spawnedRoomsDepth, dungeon.transform, SwitchToUpgrades);
+        OnDungeonEnter?.Invoke();
         //player.SetActive(false);
         //player.transform.position = dungeonGenerator.playerSpawnPosition.transform.position;
         //player.SetActive(true);
@@ -58,7 +61,7 @@ public class GameManager : MonoBehaviour
         enemySpawner.SpawnSingleEnemy(dungeonGenerator.spawnedRooms, dungeon.transform, GameSettings.Instance.CurrentDepth - 1);
     }
 
-    public void SwitchToUpgrades(int upgrades)
+    void SwitchToUpgrades(int upgrades)
     {
         //player.SetActive(false);
         //player.transform.position = waitingRoomSpawnPoint.transform.position;

@@ -21,6 +21,11 @@ public class BatteryItem : Item
 
     private void Awake()
     {
+        Stats.Instance.eletronics.rechargeBattery += (fraction) =>
+        {
+            currentBatteryLife = Mathf.Min(currentBatteryLife + batteryLife * fraction, batteryLife);
+            UpdateBar();
+        };
         var gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
         {

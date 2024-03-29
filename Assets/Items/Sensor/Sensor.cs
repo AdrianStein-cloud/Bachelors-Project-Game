@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class Sensor : MonoBehaviour
     bool placed;
     bool beeping;
     bool canBeep;
+    Action<GameObject> onSensorBeep;
 
     private void Awake()
     {
@@ -20,8 +22,9 @@ public class Sensor : MonoBehaviour
         canBeep = true;
     }
 
-    public void Init()
+    public void Init(Action<GameObject> onSensorBeep)
     {
+        this.onSensorBeep = onSensorBeep;
         laser.SetActive(true);
         placed = true;
     }
@@ -42,11 +45,12 @@ public class Sensor : MonoBehaviour
             scale.y = laserScale;
             laser.transform.localScale = scale;
 
-            if (Physics.Raycast(transform.position, transform.up, distance, detectionLayer))
+            if (Physics.Raycast(transform.position, transform.up, out RaycastHit detectionHit, distance, detectionLayer))
             {
                 if (!beeping && canBeep)
                 {
                     source.Play();
+                    onSensorBeep?.Invoke(detectionHit.collider.gameObject);
                     canBeep = false;
                     StartCoroutine(Wait());
                 }
