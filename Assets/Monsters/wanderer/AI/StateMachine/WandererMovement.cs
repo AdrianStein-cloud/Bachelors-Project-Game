@@ -15,7 +15,6 @@ public class WandererMovement : MonoBehaviour, ISlowable
 
     Action onDestinationReached;
 
-    bool slowed;
     float slowFactor = 1;
 
 
