@@ -94,13 +94,11 @@ public class WandererMovement : MonoBehaviour, ISlowable
 
     public void SlowDown(float slowFactor)
     {
-        slowed = true;
         this.slowFactor = slowFactor;
     }
 
     public void ResetSpeed()
     {
-        slowed = false;
         agent.speed /= slowFactor;
         slowFactor = 1;
     }
