@@ -60,7 +60,7 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
         var randomUpgrades = Enumerable.Range(0, Math.Min(selectionAmount, upgradesCopy.Count)).Select(_ => {
             var upgrade = upgradesCopy.GetRollFromWeights(random);
             upgradesCopy.Remove(upgrade);
-            return Instantiate(upgrade);
+            return upgrade;
         });
 
         currentUpgrades = randomUpgrades.ToList();
@@ -80,7 +80,7 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
         if (currencyManager.Spend(upgrade.Price))
         {
             upgradeUIController.RemoveUpgrade(upgrade);
-            availableUpgrades = availableUpgrades.Where(u => u.Name != upgrade.Name).ToList(); //Removes upgrade based on Name
+            availableUpgrades.Remove(upgrade);
             currentUpgrades.Remove(upgrade);
             availableUpgrades.AddRange(upgrade.NewlyAvailableUpgrades);
             upgrade.Apply(player);
