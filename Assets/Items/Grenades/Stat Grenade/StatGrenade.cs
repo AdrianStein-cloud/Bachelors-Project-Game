@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class StatGrenade : EffectGrenade<(PlayerHealth health, PlayerMovement movement)>
 {
+    protected override LayerMask Mask => LayerMask.GetMask("Player");
+
     protected override void StartEffect((PlayerHealth, PlayerMovement) target)
     {
         throw new System.NotImplementedException();
@@ -12,14 +14,20 @@ public class StatGrenade : EffectGrenade<(PlayerHealth health, PlayerMovement mo
         throw new System.NotImplementedException();
     }
 
-    protected override (PlayerHealth health, PlayerMovement movement) ExtractTargetComponent(Collider collider)
+    protected override bool TryExtractTargetComponent(Collider collider, out (PlayerHealth health, PlayerMovement movement) target)
     {
         var health = collider.GetComponent<PlayerHealth>();
         var movement = collider.GetComponent<PlayerMovement>();
 
-        return (health, movement);
+        if(health != null & movement != null)
+        {
+            target = (health, movement);
+            return true;
+        }
+        else
+        {
+            target = (null, null);
+            return false;
+        }
     }
-
-    protected override bool IsColliderTarget(Collider collider) => collider.CompareTag("Player");
-
 }

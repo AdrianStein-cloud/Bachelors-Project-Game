@@ -6,20 +6,18 @@ public abstract class EffectGrenade<T> : Throwable
     [SerializeField] float explosionRadius;
     [SerializeField] float effectDuration;
 
-    protected abstract bool IsColliderTarget(Collider collider);
-    protected abstract T ExtractTargetComponent(Collider collider);
+    protected abstract LayerMask Mask { get; }
+    protected abstract bool TryExtractTargetComponent(Collider collider, out T target);
     protected abstract void StartEffect(T target);
     protected abstract void EndEffect(T target);
 
     protected override void OnDetonate()
     {
-        var colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        var colliders = Physics.OverlapSphere(transform.position, explosionRadius, Mask);
         foreach (var collider in colliders)
         {
-            if (IsColliderTarget(collider))
+            if (TryExtractTargetComponent(collider, out T component))
             {
-                T component = ExtractTargetComponent(collider);
-
                 StartCoroutine(Effect(component));
             }
         }
@@ -27,10 +25,10 @@ public abstract class EffectGrenade<T> : Throwable
 
     IEnumerator Effect(T target)
     {
-        if (target == null) Debug.LogError("Grenade target was null");
+        if (target == null) Debug.LogWarning("Grenade target was null");
         StartEffect(target);
         yield return new WaitForSeconds(effectDuration);
-        if (target == null) Debug.LogError("Grenade target was null");
+        if (target == null) Debug.LogWarning("Grenade target was null");
         EndEffect(target);
     }
 
