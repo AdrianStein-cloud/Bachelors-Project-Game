@@ -6030,6 +6030,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4500579589746276875}
     m_Modifications:
+    - target: {fileID: 3441732571063021112, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
+        type: 3}
+      propertyPath: canScare
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8596402645481335191, guid: 2e05ae284d0dfbe438040d1f6b84ad08,
         type: 3}
       propertyPath: m_Name
@@ -6414,6 +6419,8 @@ MonoBehaviour:
   alwaysOn: 0
   hasSound: 0
   cantFail: 0
+  canScare: 0
+  scaryObject: {fileID: 0}
 --- !u!1001 &3062626871379649217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7085,6 +7092,8 @@ MonoBehaviour:
   alwaysOn: 0
   hasSound: 0
   cantFail: 0
+  canScare: 0
+  scaryObject: {fileID: 0}
 --- !u!4 &5473039424222175483 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c256337abb724bd478c57bffbfd457ef,

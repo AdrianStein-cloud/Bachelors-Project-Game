@@ -12,15 +12,16 @@ public class UpgradeUIController : MonoBehaviour
     private TextMeshProUGUI currency;
 
     List<UpgradeCard> cards;
-    List<UpgradeCard> Cards { 
+    List<UpgradeCard> Cards
+    {
         get
         {
-            if(cards == null)
+            if (cards == null)
             {
                 cards = GetComponentsInChildren<UpgradeCard>(true).ToList();
             }
             return cards;
-        } 
+        }
     }
 
     public void Start()
@@ -58,7 +59,11 @@ public class UpgradeUIController : MonoBehaviour
     public void Init(IUpgradeManager upgradeManager)
     {
 
-        Cards.ForEach(card => card.OnClick = () => upgradeManager.ChooseUpgrade(card.Upgrade));
+        Cards.ForEach(card => card.OnClick = () =>
+        {
+            upgradeManager.ChooseUpgrade(card.Upgrade);
+            RefreshCardUI();
+        });
         RerollController.OnClick = upgradeManager.Reroll;
         CloseButton.OnClick += CloseUpgrades;
         CloseButton.OnClick += upgradeManager.CloseUpgrades;
@@ -79,6 +84,11 @@ public class UpgradeUIController : MonoBehaviour
             card.gameObject.SetActive(true);
             i++;
         }
+    }
+
+    void RefreshCardUI()
+    {
+        foreach (var c in cards) c.SetUpgrade(c.Upgrade);
     }
 
     public void SetRerollPrice(int price)
