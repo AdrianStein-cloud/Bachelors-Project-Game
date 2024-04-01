@@ -30,17 +30,11 @@ public class SecurityCameraController : Item
     bool canPlace;
     int currentCamCount;
 
-    GameObject cameraCounter;
-    TextMeshProUGUI cameraText;
-
-
     List<MeshRenderer> renderers;
 
     private void Awake()
     {
         tablet = GameObject.FindGameObjectWithTag("Tablet").GetComponent<TabletGadget>();
-        cameraCounter = GameSettings.Instance.canvas.transform.Find("GadgetText").gameObject;
-        cameraText = cameraCounter.GetComponent<TextMeshProUGUI>();
 
         ghostCamera = Instantiate(cameraPrefab);
         ghostCamera.SetActive(false);
@@ -52,8 +46,6 @@ public class SecurityCameraController : Item
             renderers.Add(renderer);
         }
         currentCamCount = MaxCamCount;
-
-        UpdateCounter();
 
         var gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
@@ -70,6 +62,11 @@ public class SecurityCameraController : Item
                 currentCameraIndex = 0;
                 UpdateCounter();
             };
+    }
+    
+    private void Start()
+    {
+        UpdateCounter();
     }
 
     private void Update()
@@ -152,7 +149,6 @@ public class SecurityCameraController : Item
     {
         tablet.holdingTabletGadget = true;
         isSelected = true;
-        cameraCounter.SetActive(true);
 
         tablet.battery.Select();
         if (tablet.battery.Dead) return;
@@ -181,7 +177,6 @@ public class SecurityCameraController : Item
         tablet.holdingTabletGadget = false;
         isSelected = false;
         canPlace = false;
-        cameraCounter.SetActive(false);
         ghostCamera.SetActive(false);
         if (cameras.Count > 0) ToggleCamera(cameras[currentCameraIndex], false);
         tablet.textureRenderer.SetActive(false);
@@ -222,6 +217,5 @@ public class SecurityCameraController : Item
         sensor.rotation = Quaternion.LookRotation(hit.normal, newForward);
     }
 
-    private void UpdateCounter() => cameraText.text = currentCamCount + " / " + MaxCamCount;
-
+    private void UpdateCounter() => UnitySingleton<Inventory>.Instance.UpdateItemText(this, currentCamCount.ToString());
 }
