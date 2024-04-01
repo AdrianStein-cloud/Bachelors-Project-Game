@@ -1,10 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Flood : MonoBehaviour
 {
     [SerializeField] private float slowFactor;
+
+    private void OnDisable()
+    {
+        foreach (var slowable in FindObjectsOfType<MonoBehaviour>().OfType<ISlowable>())
+        {
+            slowable.ResetSpeed();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out ISlowable slowable))
