@@ -138,7 +138,7 @@ MonoBehaviour:
   batteryPrefab: {fileID: 5951866457771750284, guid: c0cd3cb78b9e7d249b8337fcd7131294,
     type: 3}
   battery: {fileID: 0}
-  batteryDrain: 4
+  batteryDrain: 2
 --- !u!82 &8677481591294598909
 AudioSource:
   m_ObjectHideFlags: 0
