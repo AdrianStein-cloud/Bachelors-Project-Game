@@ -89,6 +89,7 @@ public class UpgradeUIController : MonoBehaviour
     public void RemoveUpgrade(Upgrade upgrade)
     {
         Cards.Where(c => c.Upgrade == upgrade).First().gameObject.SetActive(false);
+        currency.text = $"{UnitySingleton<CurrencyManager>.Instance.Currency}$";
     }
 
     public void CloseUpgrades()
