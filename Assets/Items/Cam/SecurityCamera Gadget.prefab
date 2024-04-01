@@ -57,5 +57,5 @@ MonoBehaviour:
   tabletTexture: {fileID: 8400000, guid: ec3b70d1ecdfdaa4d813efe07f551e4f, type: 2}
   tablet: {fileID: 0}
   batteryDrain: 2
-  <MaxCamCount>k__BackingField: 3
+  <MaxCamCount>k__BackingField: 6
   cameras: []
