@@ -86,7 +86,7 @@ public class BatteryItem : Item
 
     public void UpgradeBattery(int batteryLife)
     {
-        this.batteryLife += batteryLife;
+        this.batteryLife *= 1 + (batteryLife/100);
         currentBatteryLife = this.batteryLife;
     }
 }

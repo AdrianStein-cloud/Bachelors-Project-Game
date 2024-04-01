@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Battery Upgrade
   m_EditorClassIdentifier: 
   Name: Supercharged Battery
-  description: '{3} longer flashlight battery'
-  rarity: 0
+  description: '{3}% longer flashlight battery'
+  Rarity: 0
+  Tags: 0
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
   intensity: 0

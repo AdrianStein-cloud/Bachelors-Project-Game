@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Highlight Grenade
   m_EditorClassIdentifier: 
   Name: Sensor Grenade
-  description: Large explosion that for at short period reveals monster through walls
+  description: Grenade that reveals enemies in a large radius
   Rarity: 2
   Tags: 34
   NewlyAvailableUpgrades: []
