@@ -695,7 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e422bf3dfb9ee034ba1a349a1a8c9eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactRange: 15
+  interactRange: 20
   interactableMask:
     serializedVersion: 2
     m_Bits: 2049

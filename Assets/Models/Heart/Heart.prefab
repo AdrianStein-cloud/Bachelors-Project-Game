@@ -1491,6 +1491,11 @@ PrefabInstance:
       propertyPath: pitchRange.y
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 6224523871015018565, guid: d0a8187828577014b8997fefe7848582,
+        type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7470885762784527621, guid: d0a8187828577014b8997fefe7848582,
         type: 3}
       propertyPath: m_LocalPosition.x
