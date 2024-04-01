@@ -4,9 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeUIController : MonoBehaviour
 {
+    [SerializeField] private Image backgroundImage;
+    private TextMeshProUGUI currency;
+
     List<UpgradeCard> cards;
     List<UpgradeCard> Cards { 
         get
@@ -17,6 +21,11 @@ public class UpgradeUIController : MonoBehaviour
             }
             return cards;
         } 
+    }
+
+    public void Start()
+    {
+        currency = backgroundImage.GetComponentInChildren<TextMeshProUGUI>();
     }
 
 
@@ -60,6 +69,8 @@ public class UpgradeUIController : MonoBehaviour
         Cards.ForEach(c => c.gameObject.SetActive(false));
         RerollController.gameObject.SetActive(true);
         CloseButton.gameObject.SetActive(true);
+        backgroundImage.gameObject.SetActive(true);
+        currency.text = $"{UnitySingleton<CurrencyManager>.Instance.Currency}$";
         int i = 0;
         foreach (var upgrade in upgrades)
         {
@@ -85,5 +96,6 @@ public class UpgradeUIController : MonoBehaviour
         Cards.ForEach(c => c.gameObject.SetActive(false));
         RerollController.gameObject.SetActive(false);
         CloseButton.gameObject.SetActive(false);
+        backgroundImage.gameObject.SetActive(false);
     }
 }
