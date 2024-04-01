@@ -19,11 +19,24 @@ public class LightFlicker : MonoBehaviour
     [SerializeField] bool alwaysOn;
     [SerializeField] bool hasSound;
     [SerializeField] bool cantFail;
+    [SerializeField] bool canScare;
+    [SerializeField] GameObject scaryObject;
+
+    private bool reversed;
+    private bool off;
 
     private void Start()
     {
+        if (scaryObject != null)
+            scaryObject.SetActive(false);
+
         if(bulb != null)
             glowMaterial = bulb.GetComponent<Renderer>().material;
+
+        if (!alwaysOn && Random.Range(0, 100) < 10)
+        {
+            ReverseFlicker();
+        }
 
         childObjects = transform.Cast<Transform>().Select(t => t.gameObject).ToArray();
 
@@ -51,6 +64,19 @@ public class LightFlicker : MonoBehaviour
         }
     }
 
+    void ReverseFlicker()
+    {
+        reversed = true;
+
+        var temp = offFlickerSpeedMax;
+        offFlickerSpeedMax = onFlickerSpeedMax;
+        onFlickerSpeedMax = temp;
+
+        temp = offFlickerSpeedMin;
+        offFlickerSpeedMin = onFlickerSpeedMin;
+        onFlickerSpeedMin = temp;
+    }
+
     void TurnOff()
     {
         if (!alwaysOn)
@@ -73,11 +99,41 @@ public class LightFlicker : MonoBehaviour
     {
         while (!GameSettings.Instance.PowerOutage)
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(Random.Range(3f, 6f));
             if (GameSettings.Instance.PowerOnMode)
             {
+                off = false;
                 StartCoroutine(Flicker());
                 yield break;
+            }
+            else if (canScare && Random.Range(0, 100) < 5)
+            {
+                for (int i = 0; i < Random.Range(0, 3); i++)
+                {
+                    FlickerAllOn();
+                    yield return new WaitForSeconds(Random.Range(0.01f, 0.1f));
+                    FlickerAllOff();
+                    yield return new WaitForSeconds(Random.Range(0.01f, 0.1f));
+                }
+
+                off = true;
+                scaryObject.SetActive(true);
+
+                Transform camPos = Camera.main.transform;
+                scaryObject.transform.LookAt(camPos.position - camPos.forward);
+
+                FlickerAllOn();
+                yield return new WaitForSeconds(Random.Range(0.2f, 0.5f));
+                FlickerAllOff();
+                scaryObject.SetActive(false);
+
+                for (int i = 0; i < Random.Range(0, 3); i++)
+                {
+                    yield return new WaitForSeconds(Random.Range(0.01f, 0.1f));
+                    FlickerAllOn();
+                    yield return new WaitForSeconds(Random.Range(0.01f, 0.1f));
+                    FlickerAllOff();
+                }
             }
         }
     }
@@ -96,20 +152,29 @@ public class LightFlicker : MonoBehaviour
             {
                 break;
             }
-            for (int i = 0; i < childObjects.Length; i++)
-            {
-                FlickerOff(childObjects[i].GetComponent<Light>(), lightIntensities[i]);
-                if (glowMaterial != null)
-                    glowMaterial.DisableKeyword("_EMISSION");
-            }
+            FlickerAllOff();
             yield return new WaitForSeconds(Random.Range(offFlickerSpeedMin, offFlickerSpeedMax));
-            for (int i = 0; i < childObjects.Length; i++)
-            {
-                FlickerOn(childObjects[i].GetComponent<Light>(), lightIntensities[i]);
-                if (glowMaterial != null)
-                    glowMaterial.EnableKeyword("_EMISSION");
-            }
+            FlickerAllOn();
             yield return new WaitForSeconds(Random.Range(onFlickerSpeedMin, onFlickerSpeedMax));
+        }
+    }
+    private void FlickerAllOn()
+    {
+        for (int i = 0; i < childObjects.Length; i++)
+        {
+            FlickerOn(childObjects[i].GetComponent<Light>(), lightIntensities[i]);
+            if (glowMaterial != null)
+                glowMaterial.EnableKeyword("_EMISSION");
+        }
+    }
+
+    private void FlickerAllOff()
+    {
+        for (int i = 0; i < childObjects.Length; i++)
+        {
+            FlickerOff(childObjects[i].GetComponent<Light>(), lightIntensities[i]);
+            if (glowMaterial != null)
+                glowMaterial.DisableKeyword("_EMISSION");
         }
     }
 
@@ -120,6 +185,9 @@ public class LightFlicker : MonoBehaviour
 
     private void FlickerOff(Light light, float maxIntensity)
     {
-        light.intensity = Random.Range(0, maxIntensity/3);
+        if (!reversed && !off)
+            light.intensity = Random.Range(0, maxIntensity / 3);
+        else
+            light.intensity = 0;
     }
 }

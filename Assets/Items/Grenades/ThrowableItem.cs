@@ -15,25 +15,16 @@ public class ThrowableItem : Item
     [SerializeField] Vector3 offsetPosition;
     [SerializeField] int maxAmount;
 
-    GameObject counter;
-    GameObject throwables;
     Transform player;
-    TextMeshProUGUI counterText;
     int currentAmount;
 
+    static GameObject throwables;
     static bool initialized;
 
     private void Awake()
     {
-        counter = GameSettings.Instance.canvas.transform.Find("GadgetText").gameObject;
-        counterText = counter.GetComponent<TextMeshProUGUI>();
         player = GameObject.FindWithTag("Player").transform;
         currentAmount = maxAmount;
-
-        if (initialized) return;
-        initialized = true;
-
-        throwables = new("Throwables Container");
 
         var gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
@@ -44,7 +35,18 @@ public class ThrowableItem : Item
                 {
                     Destroy(throwable.gameObject);
                 }
+                UpdateCounter();
             };
+
+        if (initialized) return;
+        initialized = true;
+
+        throwables = new("Throwables Container");
+    }
+
+    private void Start()
+    {
+        UpdateCounter();
     }
 
     void Throw()
@@ -73,16 +75,5 @@ public class ThrowableItem : Item
         Throw();
     }
 
-    public override void Select()
-    {
-        counter.SetActive(true);
-        UpdateCounter();
-    }
-
-    public override void Deselect()
-    {
-        counter.SetActive(false);
-    }
-
-    private void UpdateCounter() => counterText.text = currentAmount + " / " + maxAmount;
+    private void UpdateCounter() => UnitySingleton<Inventory>.Instance.UpdateItemText(this, currentAmount.ToString());
 }

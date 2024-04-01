@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,11 @@ public class Inventory : MonoBehaviour
     public int itemIndex = 0;
 
     int lastIndex = 0;
+
+    private void Awake()
+    {
+        UnitySingleton<Inventory>.BecomeSingleton(this);
+    }
 
     private void Start()
     {
@@ -50,6 +56,11 @@ public class Inventory : MonoBehaviour
         InventoryUI.Instance.SetIcon(index, item.icon);
         items[itemIndex]?.Select();
         return item;
+    }
+
+    public void UpdateItemText(Item item, string text)
+    {
+        InventoryUI.Instance.SetText(items.IndexOf(item), text);
     }
 
     void PreviousItem()

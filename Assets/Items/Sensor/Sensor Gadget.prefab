@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Sensor
-  icon: {fileID: 21300000, guid: 7f27c2e00434d2c459678de41124a68b, type: 3}
+  icon: {fileID: 21300000, guid: 607c6aaf4572a7c49af07f61095f2700, type: 3}
   sensorPrefab: {fileID: 1837672091656004237, guid: d08af12b6e5eee04095a9e580171d777,
     type: 3}
   validMaterial: {fileID: 2100000, guid: 7ba16966935462841af7f2401fb8eeb7, type: 2}

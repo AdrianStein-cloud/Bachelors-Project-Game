@@ -15,6 +15,7 @@ public class Clickable : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
     public void OnPointerClick(PointerEventData eventData)
     {
         OnClick();
+        anim.SetBool("Hover", false);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
