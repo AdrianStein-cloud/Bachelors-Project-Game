@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Highlight Grenade
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 95a09c5de8c964a4982b7cac6e34aca0, type: 3}
   throwablePrefab: {fileID: 6512612436465038166, guid: fbe1dc42747b2da4e99a42f7d0462cbf,
     type: 3}
   throwForce: 100

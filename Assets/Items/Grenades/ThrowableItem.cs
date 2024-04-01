@@ -16,11 +16,11 @@ public class ThrowableItem : Item
     [SerializeField] int maxAmount;
 
     GameObject counter;
-    GameObject throwables;
     Transform player;
     TextMeshProUGUI counterText;
     int currentAmount;
 
+    static GameObject throwables;
     static bool initialized;
 
     private void Awake()
