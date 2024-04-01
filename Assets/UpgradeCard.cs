@@ -63,7 +63,8 @@ public class UpgradeCard : Clickable
         Tags.color = value.Rarity.GetColor();
         Description.color = value.Rarity.GetColor();
         Price.color = value.Rarity.GetColor();
-        Tags.text = string.Join(", ", value.Tags.GetFlags());
+        var tagText = string.Join(", ", value.Tags.GetFlags());
+        Tags.text = tagText == "" ? "" : "(" + tagText + ")";
         Description.text = value.Description;
         Price.text = "Price: " + value.Price;
         GetComponentInChildren<Image>().color = value.Rarity.GetColor();
