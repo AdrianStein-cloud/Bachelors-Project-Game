@@ -36,6 +36,7 @@ public class TeleportGun : Item
             tpLocation = transform.position + transform.forward * range;
             location.transform.position = tpLocation;
             canTP = IsLocationTeleportable(tpLocation);
+            UnitySingleton<TeleportTextController>.Instance.Display(canTP & Time.time >= startedCharging + chargeTime);
             if (!charging)
             {
                 chargingSound.Play();
