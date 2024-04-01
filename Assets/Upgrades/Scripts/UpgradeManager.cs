@@ -7,7 +7,22 @@ using System;
 
 public class UpgradeManager : MonoBehaviour, IUpgradeManager
 {
-    public int rerollPrice = 20;
+    [SerializeField] int rerollPrice = 20;
+    [SerializeField] float divideNumber, expoNumber;
+
+    public int RerollPrice
+    {
+        get
+        {
+            if (currentRerolls >= Stats.Instance.money.CalculatedFreeRerolls)
+            {
+                return (int)(rerollPrice * (1 + Mathf.Pow(currentRerolls - Stats.Instance.money.CalculatedFreeRerolls, expoNumber) / divideNumber));
+            }
+            else return 0;
+        }
+    }
+
+    int currentRerolls = 0;
 
     [SerializeField] List<Upgrade> startUpgrades;
     [SerializeField] List<Upgrade> upgrades;
@@ -33,7 +48,7 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
         availableUpgrades = new List<Upgrade>(upgrades);
         upgradeUIController = FindAnyObjectByType<UpgradeUIController>();
         upgradeUIController.Init(this);
-        upgradeUIController.SetRerollPrice(rerollPrice);
+        upgradeUIController.SetRerollPrice(RerollPrice);
 
         player = GameObject.FindWithTag("Player");
 
@@ -43,6 +58,8 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
         {
             upgrade.Apply(player);
         }
+
+        GetComponent<GameManager>().OnWaveOver += () => currentRerolls = 0;
     }
 
     public void DisplayUpgrades(Action upgradeChosen = null)
@@ -52,6 +69,7 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
         Cursor.visible = true;
         this.DoneChoosingUpgrades = upgradeChosen;
         upgradeUIController.EnableCards(currentUpgrades);
+        upgradeUIController.SetRerollPrice(RerollPrice);
     }
 
     public void RefreshUpgrades()
@@ -89,11 +107,12 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
 
     public void Reroll()
     {
-        if (currencyManager.Spend(rerollPrice))
+        if (currencyManager.Spend(RerollPrice))
         {
+            currentRerolls++;
             RefreshUpgrades();
             upgradeUIController.EnableCards(currentUpgrades);
-            upgradeUIController.SetRerollPrice(rerollPrice);
+            upgradeUIController.SetRerollPrice(RerollPrice);
         }
     }
 
