@@ -33,7 +33,7 @@ public class LightFlicker : MonoBehaviour
         if(bulb != null)
             glowMaterial = bulb.GetComponent<Renderer>().material;
 
-        if (Random.Range(0, 100) < 10)
+        if (!alwaysOn && Random.Range(0, 100) < 10)
         {
             ReverseFlicker();
         }
