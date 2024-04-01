@@ -22,8 +22,6 @@ public class SensorController : Item
     List<GameObject> sensors;
 
     RaycastHit hit;
-    GameObject sensorCounter;
-    TextMeshProUGUI sensorText;
     GameObject ghostSensor;
     MeshRenderer sensorRenderer;
     bool isSelected;
@@ -36,13 +34,9 @@ public class SensorController : Item
         ghostSensor.SetActive(false);
         sensorRenderer = ghostSensor.GetComponentInChildren<MeshRenderer>();
 
-        sensorCounter = GameSettings.Instance.canvas.transform.Find("GadgetText").gameObject;
-        sensorText = sensorCounter.GetComponent<TextMeshProUGUI>();
-
         currentSensorCount = SensorCount;
         sensors = new();
 
-        UpdateCounter();
         var gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
             gameManager.OnWaveOver += () =>
@@ -50,6 +44,11 @@ public class SensorController : Item
                 currentSensorCount = SensorCount;
                 UpdateCounter();
             };
+    }
+
+    private void Start()
+    {
+        UpdateCounter();
     }
 
     private void Update()
@@ -86,8 +85,6 @@ public class SensorController : Item
     public override void Select()
     {
         isSelected = true;
-        sensorCounter.SetActive(true);
-        UpdateCounter();
     }
 
     public override void Deselect()
@@ -95,7 +92,6 @@ public class SensorController : Item
         isSelected = false;
         canPlace = false;
         ghostSensor.SetActive(false);
-        sensorCounter.SetActive(false);
     }
 
     private void TryPlace()
@@ -121,7 +117,7 @@ public class SensorController : Item
         }
     }
 
-    private void UpdateCounter() => sensorText.text = currentSensorCount + " / " + SensorCount;
+    private void UpdateCounter() => UnitySingleton<Inventory>.Instance.UpdateItemText(this, currentSensorCount.ToString());
 
     public void UpgradeSensor(int count)
     {

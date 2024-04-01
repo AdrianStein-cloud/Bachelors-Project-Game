@@ -23,8 +23,15 @@ public class InventoryUI : MonoBehaviour
 
     public void SetIcon(int index, Sprite icon)
     {
-        var image = inventorySlotBorders[index].transform.GetChild(0).GetComponent<Image>();
-        image.gameObject.SetActive(true);
-        image.sprite = icon;
+        var slotUI = inventorySlotBorders[index].GetComponent<InventorySlotUI>();
+        slotUI.Icon.gameObject.SetActive(true);
+        slotUI.Icon.sprite = icon;
+    }
+
+    public void SetText(int index, string text)
+    {
+        var slotUI = inventorySlotBorders[index].GetComponent<InventorySlotUI>();
+        slotUI.Text.gameObject.SetActive(true);
+        slotUI.Text.text = text;
     }
 }
