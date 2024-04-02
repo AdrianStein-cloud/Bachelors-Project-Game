@@ -101,5 +101,30 @@ public static class Extensions
 
     public static Vector2 AddY(this Vector2 v, float x) => new(v.x + x, v.y);
 
+    public static bool ApproxEquals(this Vector3 a, Vector3 b, float tolerance)
+    {
+        bool x = Mathf.Abs(a.x - b.x) < tolerance;
+        bool y = Mathf.Abs(a.y - b.y) < tolerance;
+        bool z = Mathf.Abs(a.z - b.z) < tolerance;
+        return x & y & z;
+    }
+
+}
+
+public class VectorComparer : IEqualityComparer<Vector3>
+{
+    public bool Equals(Vector3 a, Vector3 b)
+    {
+        bool equal = Mathf.Approximately(a.x, b.x)
+            && Mathf.Approximately(a.y, b.y)
+            && Mathf.Approximately(a.z, b.z);
+        Debug.Log($"{a} == {b}: {equal.ToString()}");
+        return equal;
+    }
+
+    public int GetHashCode(Vector3 obj)
+    {
+        return obj.GetHashCode();
+    }
 }
 

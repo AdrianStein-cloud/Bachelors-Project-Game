@@ -73,6 +73,8 @@ MonoBehaviour:
     <Weight>k__BackingField: 200
   - room: {fileID: 1421951242794949396, guid: 955bdf06bec7c4a46a9cfda80bc0744e, type: 3}
     <Weight>k__BackingField: 75
+  - room: {fileID: 5014814787121242839, guid: 5788a8308e8ab344ea7d4775eb2c5a4c, type: 3}
+    <Weight>k__BackingField: 150
   endRooms:
   - corridorOnly: 0
     room: {fileID: 6404158268688364315, guid: 1986930d39facb443a5b4da6f1f53157, type: 3}
