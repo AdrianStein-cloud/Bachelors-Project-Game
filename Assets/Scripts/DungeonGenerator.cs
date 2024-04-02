@@ -131,6 +131,8 @@ public class DungeonGenerator : MonoBehaviour
         if (!dungeonFailed)
         {
             eventManager.SpawnRandomEvent(random);
+            RemoveUnecessaryWalls();
+
 
             Stats.Instance.player.keysHeld = 0;
             SpawnChestWithKeys();
@@ -468,6 +470,32 @@ public class DungeonGenerator : MonoBehaviour
         if(eventManager != null)
         {
             eventManager.GuaranteeFlood();
+        }
+    }
+
+    void RemoveUnecessaryWalls()
+    {
+        var doors = spawnedRooms
+                .Select(r => r.GetComponent<Room>().GetDoors())
+                .SelectMany(doors => doors)
+                .OrderBy(d => d.transform.position.x)
+                .ToList();
+
+        for (int i = 0; i < doors.Count - 1; i++)
+        {
+            if (doors[i].transform.position.ApproxEquals(doors[i + 1].transform.position, 0.001f))
+            {
+                RemoveWallIfCorridor(doors[i]);
+                RemoveWallIfCorridor(doors[i + 1]);
+            }
+        }
+
+        void RemoveWallIfCorridor(Door door)
+        {
+            if (door.transform.parent.GetComponent<Room>().isCorridor)
+            {
+                door.SetDoorConnected(true);
+            }
         }
     }
 }
