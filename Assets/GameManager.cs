@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         elevator.DungeonIsAvailable = false;
         dungeon = new GameObject("Dungeon");
+        dungeon.AddComponent<Dungeon>();
         dangerScaler.ScaleDanger();
         yield return dungeonGenerator.GenerateDungeon(dungeon, GameSettings.Instance.CurrentDepth);
         elevator.DungeonIsAvailable = true;
