@@ -26,6 +26,7 @@ public class CurrencyManager : MonoBehaviour
     {
         UnitySingleton<CurrencyManager>.BecomeSingleton(this);
         currencyText = GameObject.Find("Currency").GetComponent<TextMeshProUGUI>();
+        currencyText.text = $"{currentCurrency} $";
     }
 
 
