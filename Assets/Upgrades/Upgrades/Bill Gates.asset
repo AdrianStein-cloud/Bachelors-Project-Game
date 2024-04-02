@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Bill Gates
   description: Money upgrades have {0}% increased effect
-  Rarity: 1
+  Rarity: 2
   Tags: 128
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
