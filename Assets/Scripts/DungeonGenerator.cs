@@ -133,6 +133,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             Stats.Instance.player.keysHeld = 0;
             SpawnChestWithKeys();
+            dungeon.GetComponent<Dungeon>().Init(spawnedRooms);
 
             //Done spawning dungeon
             yield return new WaitForSeconds(0.2f);
