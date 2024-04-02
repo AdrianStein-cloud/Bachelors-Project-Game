@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.004
+  m_FogDensity: 0
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
@@ -226,99 +226,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 775176127590199493, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: enemies.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 775176127590199493, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: enemies.Array.data[0].name
-      value: Coil
-      objectReference: {fileID: 0}
-    - target: {fileID: 775176127590199493, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: enemies.Array.data[1].name
-      value: Slow
-      objectReference: {fileID: 0}
-    - target: {fileID: 775176127590199493, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: enemies.Array.data[2].name
-      value: Fast
-      objectReference: {fileID: 0}
-    - target: {fileID: 775176127590199493, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: enemies.Array.data[0].enemyPrefab
-      value: 
-      objectReference: {fileID: 8978024783357441720, guid: 767e425ea2925be4d8dac8cba5ea560a,
-        type: 3}
-    - target: {fileID: 775176127590199493, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: enemies.Array.data[1].enemyPrefab
-      value: 
-      objectReference: {fileID: 8978024783357441720, guid: b2f69f53191684f438498148e6df7f2b,
-        type: 3}
-    - target: {fileID: 775176127590199493, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: enemies.Array.data[2].enemyPrefab
-      value: 
-      objectReference: {fileID: 8978024783357441720, guid: 4dbec6c72cfa7da4e8a290c0d81fedd0,
-        type: 3}
-    - target: {fileID: 775176127590199493, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: enemies.Array.data[0].<Weight>k__BackingField
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 775176127590199493, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: enemies.Array.data[1].<Weight>k__BackingField
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 775176127590199493, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: enemies.Array.data[2].<Weight>k__BackingField
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: seed
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: flood
       value: 
       objectReference: {fileID: 1786471875}
-    - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: endRooms.Array.data[0].room
-      value: 
-      objectReference: {fileID: 6404158268688364315, guid: 1986930d39facb443a5b4da6f1f53157,
-        type: 3}
-    - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: endRooms.Array.data[1].room
-      value: 
-      objectReference: {fileID: 7813503066319441342, guid: cf2c72df1e5e3b041907ae370b7991fd,
-        type: 3}
-    - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: endRooms.Array.data[2].room
-      value: 
-      objectReference: {fileID: 8620508088445856826, guid: dbd82918bb4dfb14993836d7172605f4,
-        type: 3}
-    - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: endRooms.Array.data[3].room
-      value: 
-      objectReference: {fileID: 7680414859084646631, guid: cf5d85f43e413e64aa01bdd92dbaed45,
-        type: 3}
-    - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: endRooms.Array.data[4].room
-      value: 
-      objectReference: {fileID: 1421951242794949396, guid: 955bdf06bec7c4a46a9cfda80bc0744e,
-        type: 3}
     - target: {fileID: 4117347281418660289, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -369,39 +281,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4648741839162076814, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: startUpgrades.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4648741839162076814, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: startUpgrades.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 6b5f01de9b6d96048986483d6048440d,
-        type: 2}
-    - target: {fileID: 4648741839162076814, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: startUpgrades.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: ecaed49935297084ca4de995fd4753a3,
-        type: 2}
-    - target: {fileID: 4648741839162076814, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: startUpgrades.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: df4aafb330286d142824e0c575e386f2,
-        type: 2}
     - target: {fileID: 6251193281981130515, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: canvas
       value: 
       objectReference: {fileID: 1414814842}
-    - target: {fileID: 6251193281981130515, guid: 133054512c61b764891ea66fa32972e3,
-        type: 3}
-      propertyPath: dungeonStartDepth
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
