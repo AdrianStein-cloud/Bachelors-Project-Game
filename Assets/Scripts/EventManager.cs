@@ -40,12 +40,10 @@ public class EventManager : MonoBehaviour
         ResetFog();
         if (!guaranteeFlood)
         {
-            Debug.Log("Random Event");
             events.GetRollFromWeights(random)._event.Invoke();
         }
         else
         {
-            Debug.Log("Flood Event");
             Flooded();
         }
     }
