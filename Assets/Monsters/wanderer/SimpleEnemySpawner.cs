@@ -9,6 +9,13 @@ public class SimpleEnemySpawner : MonoBehaviour
 
     public int extraEnemies;
 
+    private System.Random random;
+
+    private void Start()
+    {
+        random = new System.Random(GameSettings.Instance.GetSeed());
+    }
+
     public void SpawnEnemies(List<GameObject> rooms, Transform dungeon, int depth)
     {
         rooms = new List<GameObject>(rooms);
@@ -21,7 +28,7 @@ public class SimpleEnemySpawner : MonoBehaviour
                 room = rooms[UnityEngine.Random.Range(0, rooms.Count)];
             }
 
-            var enemy = enemies.GetRollFromWeights(new System.Random(GameSettings.Instance.GetSeed()));
+            var enemy = enemies.GetRollFromWeights(random);
 
             Instantiate(enemy.enemyPrefab, room.transform.localPosition, Quaternion.identity, dungeon);
 
@@ -39,7 +46,7 @@ public class SimpleEnemySpawner : MonoBehaviour
             room = rooms[UnityEngine.Random.Range(0, rooms.Count)];
         }
 
-        var enemy = enemies.GetRollFromWeights(new System.Random(GameSettings.Instance.GetSeed()));
+        var enemy = enemies.GetRollFromWeights(random);
 
         Instantiate(enemy.enemyPrefab, room.transform.localPosition, Quaternion.identity, dungeon);
 
