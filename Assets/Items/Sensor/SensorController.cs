@@ -119,7 +119,7 @@ public class SensorController : Item
 
     private void UpdateCounter() => UnitySingleton<Inventory>.Instance.UpdateItemText(this, currentSensorCount.ToString());
 
-    public void UpgradeSensor(int count)
+    public void Upgrade(int count)
     {
         SensorCount += count;
         currentSensorCount = SensorCount;

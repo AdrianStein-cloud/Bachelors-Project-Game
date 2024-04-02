@@ -19,6 +19,8 @@ public class CoilAttack : StateProcess<CoilState>
     CoilMovement movement;
     NavMeshAgent agent;
 
+    readonly Collider[] hidingSpotColliderCastResults = new Collider[1];
+
     private void Awake()
     {
         info = GetComponent<CoilInfo>();
@@ -31,8 +33,9 @@ public class CoilAttack : StateProcess<CoilState>
     {
         if (info.Target != null & !info.IsVisible)
         {
+            float speed = IsPlayerHiding(info.Target.transform.position) ? 0 : this.speed;
             movement.SetTargetPosition(info.Target.transform.position, speed);
-            if(!agent.isStopped) DoRandomStepSound();
+            if(!agent.isStopped & speed > 0) DoRandomStepSound();
         }
         if(info.Target == null)
         {
@@ -56,5 +59,12 @@ public class CoilAttack : StateProcess<CoilState>
             var health = other.GetComponent<PlayerHealth>();
             health.TakeDamage(damage);
         }
+    }
+
+    bool IsPlayerHiding(Vector3 playerPosition)
+    {
+        int hitAmount = Physics.OverlapSphereNonAlloc(playerPosition, 7, hidingSpotColliderCastResults, LayerMask.GetMask("HidingSpot"));
+        Debug.Log(hitAmount);
+        return hitAmount > 0;
     }
 }

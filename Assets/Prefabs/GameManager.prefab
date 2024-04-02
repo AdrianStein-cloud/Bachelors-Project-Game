@@ -75,19 +75,19 @@ MonoBehaviour:
     <Weight>k__BackingField: 75
   endRooms:
   - corridorOnly: 0
-    room: {fileID: 0}
+    room: {fileID: 6404158268688364315, guid: 1986930d39facb443a5b4da6f1f53157, type: 3}
     <Weight>k__BackingField: 100
   - corridorOnly: 1
-    room: {fileID: 0}
+    room: {fileID: 7813503066319441342, guid: cf2c72df1e5e3b041907ae370b7991fd, type: 3}
     <Weight>k__BackingField: 200
   - corridorOnly: 1
-    room: {fileID: 0}
+    room: {fileID: 8620508088445856826, guid: dbd82918bb4dfb14993836d7172605f4, type: 3}
     <Weight>k__BackingField: 200
   - corridorOnly: 1
-    room: {fileID: 0}
+    room: {fileID: 7680414859084646631, guid: cf5d85f43e413e64aa01bdd92dbaed45, type: 3}
     <Weight>k__BackingField: 200
   - corridorOnly: 1
-    room: {fileID: 0}
+    room: {fileID: 1421951242794949396, guid: 955bdf06bec7c4a46a9cfda80bc0744e, type: 3}
     <Weight>k__BackingField: 200
   startRoom: {fileID: 3502592813776399691, guid: 71fc35092c2e358448a1f1ecca347030,
     type: 3}
@@ -169,10 +169,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a38dca21e367f4cab8f44f642cc6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 8978024783357441720, guid: 4dbec6c72cfa7da4e8a290c0d81fedd0, type: 3}
-  - {fileID: 8978024783357441720, guid: 767e425ea2925be4d8dac8cba5ea560a, type: 3}
-  - {fileID: 8978024783357441720, guid: b2f69f53191684f438498148e6df7f2b, type: 3}
+  enemies:
+  - name: Coil
+    enemyPrefab: {fileID: 8978024783357441720, guid: 767e425ea2925be4d8dac8cba5ea560a,
+      type: 3}
+    <Weight>k__BackingField: 100
+  - name: Slow
+    enemyPrefab: {fileID: 8978024783357441720, guid: b2f69f53191684f438498148e6df7f2b,
+      type: 3}
+    <Weight>k__BackingField: 200
+  - name: Fast
+    enemyPrefab: {fileID: 8978024783357441720, guid: 4dbec6c72cfa7da4e8a290c0d81fedd0,
+      type: 3}
+    <Weight>k__BackingField: 100
   extraEnemies: 0
 --- !u!114 &7560089572570469592
 MonoBehaviour:
@@ -242,6 +251,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 22a50303158aada46a8b7c370bf34d3a, type: 2}
   - {fileID: 11400000, guid: 42255a59e555f8340acc595859f8a6ec, type: 2}
   - {fileID: 11400000, guid: 4bb4fcaa1238dc24ca6ed620baa547f4, type: 2}
+  - {fileID: 11400000, guid: a06a4d41f10ff01489d53f9f9ccad599, type: 2}
   selectionAmount: 5
 --- !u!114 &6193125661974434217
 MonoBehaviour:

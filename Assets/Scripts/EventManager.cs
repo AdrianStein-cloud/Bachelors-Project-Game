@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using Unity.VisualScripting;
 using UnityEngine;
 using UniversalForwardPlusVolumetric;
 
-public class EventManager
+public class EventManager : MonoBehaviour
 {
     private List<WeightedEvent> events;
     private GameObject flood;
@@ -13,7 +14,7 @@ public class EventManager
     private float defaultFogAttenuationDistance;
     private float defaultLocalScatteringIntensity;
 
-    public EventManager(GameObject flood, VolumetricConfig volumetricConfig)
+    public void Init(GameObject flood, VolumetricConfig volumetricConfig)
     {
         this.flood = flood;
         this.volumetricConfig = volumetricConfig;
@@ -24,10 +25,10 @@ public class EventManager
 
         events = new List<WeightedEvent>
         {
-            new WeightedEvent(Flooded, 100),
-            new WeightedEvent(PowerOutage, 100),
+            //new WeightedEvent(Flooded, 100),
+            //new WeightedEvent(PowerOutage, 100),
             new WeightedEvent(Foggy, 100),
-            new WeightedEvent(NoEvent, 200)
+            //new WeightedEvent(NoEvent, 200)
         };
     }
 
@@ -86,16 +87,37 @@ public class EventManager
 
     private void SetFoggy()
     {
-        volumetricConfig.fogAttenuationDistance = 160;
-        volumetricConfig.localScatteringIntensity = 40;
+        StartCoroutine(LerpFog(400, 30, 0.05f));
     }
 
     public void ResetFog()
     {
-        /*Debug.Log("defaultFogAttenuationDistance: " + defaultFogAttenuationDistance);
-        Debug.Log("defaultLocalScatteringIntensity: " + defaultLocalScatteringIntensity);*/
+        StartCoroutine(LerpFog(defaultFogAttenuationDistance, defaultLocalScatteringIntensity, 0f));
+    }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
         volumetricConfig.fogAttenuationDistance = defaultFogAttenuationDistance;
         volumetricConfig.localScatteringIntensity = defaultLocalScatteringIntensity;
+        RenderSettings.fogDensity = 0f;
+    }
+
+    IEnumerator LerpFog(float attenuationDistance, float localScatteringIntensity, float fogDensity)
+    {
+        float elapsedTime = 0;
+        var startAttenuationDistance = volumetricConfig.fogAttenuationDistance;
+        var startLocalScatteringIntensity = volumetricConfig.localScatteringIntensity;
+        var startFogDensity = RenderSettings.fogDensity;
+        float smoothTime = 20f;
+        while (elapsedTime < smoothTime)
+        {
+            RenderSettings.fogDensity = Mathf.Lerp(startFogDensity, fogDensity, elapsedTime / smoothTime);
+            volumetricConfig.fogAttenuationDistance = Mathf.Lerp(startAttenuationDistance, attenuationDistance, elapsedTime / smoothTime);
+            volumetricConfig.localScatteringIntensity = Mathf.Lerp(startLocalScatteringIntensity, localScatteringIntensity, elapsedTime / smoothTime);
+            elapsedTime += Time.unscaledDeltaTime;
+            yield return null;
+        }
     }
 
     public void SetSizeOfDungeon(Vector3 size)

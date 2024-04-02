@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29cedb63304414543877a02bc3179f1d, type: 3}
-  m_Name: Bill Gates
+  m_Script: {fileID: 11500000, guid: b8bf9c03b75253d4a99ae31714dc4eef, type: 3}
+  m_Name: Sensor Amount Upgrade
   m_EditorClassIdentifier: 
-  Name: Bill Gates
-  description: Money upgrades have {0}% increased effect
-  Rarity: 2
-  Tags: 128
-  NewlyAvailableUpgrades:
-  - {fileID: 11400000}
-  increaseOnAllMoneyUpgradesPercent: 20
+  Name: 
+  description: 
+  Rarity: 0
+  Tags: 0
+  NewlyAvailableUpgrades: []
+  amount: 0

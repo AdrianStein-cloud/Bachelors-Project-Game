@@ -2,19 +2,15 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TeleportGun : Item
+public class TeleportGun : CooldownItem
 {
     public int range;
     public float chargeTime = 2f;
-    public int cooldown = 30;
 
     bool isHeld = false;
 
     bool charging = false;
     bool canTP = false;
-    bool isOffCooldown = true;
-
-    float usedTime;
 
     Vector3 tpLocation;
 
@@ -32,7 +28,7 @@ public class TeleportGun : Item
 
     private void Update()
     {
-        bool chargeTP = isHeld & isOffCooldown && InputManager.Player.ItemPrimary.phase == InputActionPhase.Performed;
+        bool chargeTP = isHeld & IsOffCooldown && InputManager.Player.ItemPrimary.phase == InputActionPhase.Performed;
         if (chargeTP)
         {
             Charge();
@@ -55,11 +51,6 @@ public class TeleportGun : Item
         {
             StopCharging();
         }
-
-        if (!isOffCooldown)
-        {
-            UnitySingleton<Inventory>.Instance.UpdateItemText(this, (cooldown - (Time.time - usedTime)).ToString("N0"));
-        }
     }
 
     void Teleport()
@@ -67,7 +58,6 @@ public class TeleportGun : Item
         //Debug.Log("Triggerd");
         teleportSound.Play();
         movement.Teleport(tpLocation);
-        usedTime = Time.time;
         StartCoroutine(Cooldown());
     }
 
@@ -119,13 +109,5 @@ public class TeleportGun : Item
     public override void Deselect()
     {
         isHeld = false;
-    }
-
-    IEnumerator Cooldown()
-    {
-        isOffCooldown = false;
-        yield return new WaitForSeconds(cooldown);
-        isOffCooldown = true;
-        UnitySingleton<Inventory>.Instance.UpdateItemText(this, "");
     }
 }
