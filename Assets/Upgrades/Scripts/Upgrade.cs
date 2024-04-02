@@ -41,6 +41,7 @@ public enum Tag
     Quantity = 1 << 5,
     Passive = 1 << 6,
     Money = 1 << 7,
+    Teleport = 1 << 8,
 }
 
 

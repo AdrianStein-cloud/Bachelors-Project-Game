@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3828694563080924520}
   - component: {fileID: 8158143748628859777}
   m_Layer: 0
-  m_Name: Distance Gadget
+  m_Name: Compass Gadget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,4 +47,3 @@ MonoBehaviour:
   itemName: Distance Gadget
   icon: {fileID: 21300000, guid: 89f87bf618653034387763dcf458bf6e, type: 3}
   target: {fileID: 0}
-  multiplier: 0.1

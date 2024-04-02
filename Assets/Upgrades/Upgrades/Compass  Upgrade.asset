@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8e6eb8c06cb5064ba77fcf813da9a03, type: 3}
-  m_Name: Distance Gadget Upgrade
+  m_Name: Compass  Upgrade
   m_EditorClassIdentifier: 
-  Name: Distance Gadget
-  description: Grants you a {0}
+  Name: Compass
+  description: Grants you a {0} that points towards the exit
   Rarity: 1
+  Tags: 0
   NewlyAvailableUpgrades: []
   item: {fileID: 8158143748628859777, guid: 0c7a5abfc9ba865478bdbc4b0791b759, type: 3}

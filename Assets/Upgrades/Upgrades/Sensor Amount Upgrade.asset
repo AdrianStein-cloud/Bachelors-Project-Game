@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8bf9c03b75253d4a99ae31714dc4eef, type: 3}
   m_Name: Sensor Amount Upgrade
   m_EditorClassIdentifier: 
-  Name: 
-  description: 
-  Rarity: 0
+  Name: Sensory Amplifier Plus
+  description: Gives you {0} additional sensors
+  Rarity: 2
   Tags: 0
   NewlyAvailableUpgrades: []
-  amount: 0
+  amount: 3

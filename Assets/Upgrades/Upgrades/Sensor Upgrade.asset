@@ -15,7 +15,8 @@ MonoBehaviour:
   Name: Sensor
   description: Grants you 3 {0}s
   Rarity: 2
-  Tags: 16
+  Tags: 48
   NewlyAvailableUpgrades:
   - {fileID: 11400000, guid: 759494b4eff4cbe44a4434ac31ac28cf, type: 2}
+  - {fileID: 11400000, guid: d0163134068221d4a919c9c54a61ad88, type: 2}
   item: {fileID: 8346296030083092963, guid: ed7193b98451e164ea6509762f9a57c9, type: 3}
