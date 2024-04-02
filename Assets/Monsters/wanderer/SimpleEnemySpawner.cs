@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SimpleEnemySpawner : MonoBehaviour
 {
-    public List<GameObject> enemyPrefabs;
+    public List<WeightedEnemy> enemies;
 
     public int extraEnemies;
 
@@ -21,9 +21,9 @@ public class SimpleEnemySpawner : MonoBehaviour
                 room = rooms[UnityEngine.Random.Range(0, rooms.Count)];
             }
 
-            var enemyPrefab = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)];
+            var enemy = enemies.GetRollFromWeights(new System.Random(GameSettings.Instance.GetSeed()));
 
-            Instantiate(enemyPrefab, room.transform.localPosition, Quaternion.identity, dungeon);
+            Instantiate(enemy.enemyPrefab, room.transform.localPosition, Quaternion.identity, dungeon);
 
             rooms.Remove(room);
         }
@@ -39,10 +39,18 @@ public class SimpleEnemySpawner : MonoBehaviour
             room = rooms[UnityEngine.Random.Range(0, rooms.Count)];
         }
 
-        var enemyPrefab = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Count)];
+        var enemy = enemies.GetRollFromWeights(new System.Random(GameSettings.Instance.GetSeed()));
 
-        Instantiate(enemyPrefab, room.transform.localPosition, Quaternion.identity, dungeon);
+        Instantiate(enemy.enemyPrefab, room.transform.localPosition, Quaternion.identity, dungeon);
 
         rooms.Remove(room);
     }
+}
+
+[System.Serializable]
+public class WeightedEnemy : IWeighted
+{
+    public string name;
+    public GameObject enemyPrefab;
+    [field: SerializeField] public int Weight { get; set; }
 }
