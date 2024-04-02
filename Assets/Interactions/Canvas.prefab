@@ -879,8 +879,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTpColor: {r: 0, g: 1, b: 0, a: 1}
   cannotTpColor: {r: 1, g: 0, b: 0, a: 1}
-  canTpText: Valid
+  canTpText: Ready
   cannotTpText: Invalid
+  chargingText: Charging
 --- !u!1 &1991437675048711540
 GameObject:
   m_ObjectHideFlags: 0
