@@ -238,7 +238,7 @@ public class PlayerMovement : MonoBehaviour, IStunnable, ISlowable
         this.slowFactor = slowFactor;
     }
 
-    float slowFactor;
+    float slowFactor = 1f;
     public void ResetSpeed()
     {
         speedMultiplier /= slowFactor;
