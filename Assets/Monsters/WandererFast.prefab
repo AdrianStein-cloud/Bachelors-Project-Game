@@ -2331,6 +2331,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cf09212a67da30e46ad8e10cda27331a, type: 3}
   - {fileID: 8300000, guid: fef6acc98b41bb64ba5deae8bff8a0e1, type: 3}
   - {fileID: 8300000, guid: 8e45bbbf84ddf924f914dbd42dab34cd, type: 3}
+  attackSource: {fileID: 0}
 --- !u!114 &-3388323793867589819
 MonoBehaviour:
   m_ObjectHideFlags: 0

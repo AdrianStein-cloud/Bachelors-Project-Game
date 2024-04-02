@@ -18,7 +18,7 @@ public class RandomTeleporter : QuantityItem
         {
             var rooms = UnitySingleton<Dungeon>.Instance.Rooms;
             var randomRoom = rooms[Random.Range(0, rooms.Count)];
-            var position = randomRoom.centerObject.transform.position;
+            var position = randomRoom.centerObject.transform.position + Vector3.up * 6;
             movement.Teleport(position);
             teleportSound.Play();
             SpendQuantity();

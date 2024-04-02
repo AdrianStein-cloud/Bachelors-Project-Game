@@ -20,6 +20,9 @@ public class WandererSounds : MonoBehaviour
     private List<AudioClip> tempFootsteps = new List<AudioClip>();
     private List<AudioClip> tempRunningFootsteps = new List<AudioClip>();
 
+    [Header("Attack")]
+    public AudioSource attackSource;
+
     public Action OnScreamEnd;
 
     public void PlayFootstepSound()
@@ -63,5 +66,10 @@ public class WandererSounds : MonoBehaviour
     {
         monsterSource.clip = ambianceSound;
         monsterSource.Play();
+    }
+
+    public void PlayAttackSound()
+    {
+        attackSource.Play();
     }
 }

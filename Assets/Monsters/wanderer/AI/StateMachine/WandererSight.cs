@@ -83,7 +83,7 @@ public class WandererSight : MonoBehaviour
                 info.TargetPlayer = null;
             }
         }
-        else if (Time.time - lastSeenPlayerTime <= persitanceDuration)
+        else if (Time.time - lastSeenPlayerTime <= persitanceDuration && Vector3.Distance(info.LastSeenPlayerLocation, target.transform.position) < 30)
         {
             info.TargetPlayer = target;
             info.LastSeenPlayerLocation = info.TargetPlayer.transform.position;
