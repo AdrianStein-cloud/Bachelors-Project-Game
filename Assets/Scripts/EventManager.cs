@@ -13,6 +13,7 @@ public class EventManager : MonoBehaviour
     private VolumetricConfig volumetricConfig;
     private float defaultFogAttenuationDistance;
     private float defaultLocalScatteringIntensity;
+    private bool guaranteeFlood = false;
 
     public void Init(GameObject flood, VolumetricConfig volumetricConfig)
     {
@@ -25,10 +26,10 @@ public class EventManager : MonoBehaviour
 
         events = new List<WeightedEvent>
         {
-            //new WeightedEvent(Flooded, 100),
-            //new WeightedEvent(PowerOutage, 100),
+            new WeightedEvent(Flooded, 100),
+            new WeightedEvent(PowerOutage, 100),
             new WeightedEvent(Foggy, 100),
-            //new WeightedEvent(NoEvent, 200)
+            new WeightedEvent(NoEvent, 200)
         };
     }
 
@@ -37,7 +38,16 @@ public class EventManager : MonoBehaviour
         flood.gameObject.SetActive(false);
         GameSettings.Instance.PowerOutage = false;
         ResetFog();
-        events.GetRollFromWeights(random)._event.Invoke();
+        if (!guaranteeFlood)
+        {
+            Debug.Log("Random Event");
+            events.GetRollFromWeights(random)._event.Invoke();
+        }
+        else
+        {
+            Debug.Log("Flood Event");
+            Flooded();
+        }
     }
 
     private void PowerOutage()
@@ -56,10 +66,11 @@ public class EventManager : MonoBehaviour
 
     private void Flooded()
     {
-        if (GameSettings.Instance.Wave > 3)
+        if (GameSettings.Instance.Wave > 3 || guaranteeFlood)
         {
             flood.SetActive(true);
             GameSettings.Instance.Event = "Flooded!";
+            guaranteeFlood = false;
         }
         else
         {
@@ -118,6 +129,11 @@ public class EventManager : MonoBehaviour
             elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
+    }
+
+    public void GuaranteeFlood()
+    {
+        guaranteeFlood = true;
     }
 
     public void SetSizeOfDungeon(Vector3 size)

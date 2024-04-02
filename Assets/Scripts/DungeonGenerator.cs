@@ -74,7 +74,6 @@ public class DungeonGenerator : MonoBehaviour
         this.depth = depth;
         SetSeed(seed);
         RandomMaterialPackage(random);
-        eventManager.SpawnRandomEvent(random);
 
         spawnedRooms = new List<GameObject>();
         spawnedRoomsDepth = new List<(GameObject, int)>();
@@ -131,6 +130,8 @@ public class DungeonGenerator : MonoBehaviour
 
         if (!dungeonFailed)
         {
+            eventManager.SpawnRandomEvent(random);
+
             Stats.Instance.player.keysHeld = 0;
             SpawnChestWithKeys();
             dungeon.GetComponent<Dungeon>().Init(spawnedRooms);
@@ -460,6 +461,15 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void GuaranteeFlood()
+    {
+        if(eventManager != null)
+        {
+            eventManager.GuaranteeFlood();
+            Debug.Log("Flood Released");
+        }
     }
 }
 

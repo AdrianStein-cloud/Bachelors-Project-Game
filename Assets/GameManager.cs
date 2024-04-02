@@ -62,6 +62,16 @@ public class GameManager : MonoBehaviour
         enemySpawner.SpawnSingleEnemy(dungeonGenerator.spawnedRooms, dungeon.transform, GameSettings.Instance.CurrentDepth - 1);
     }
 
+    public void GuaranteeFlood()
+    {
+        dungeonGenerator.GuaranteeFlood();
+    }
+
+    public void AddExtraTempEnemy(int amount)
+    {
+        enemySpawner.AddExtraTemporaryEnemies(amount);
+    }
+
     void SwitchToUpgrades(int upgrades)
     {
         //player.SetActive(false);
