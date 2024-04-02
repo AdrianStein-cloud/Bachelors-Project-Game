@@ -125,6 +125,13 @@ public class PlayerMovement : MonoBehaviour, IStunnable, ISlowable
         }
     }
 
+    public void Teleport(Vector3 position)
+    {
+        controller.enabled = false;
+        transform.position = position;
+        controller.enabled = true;
+    }
+
     private void Move(InputAction.CallbackContext context)
     {
         dir = context.ReadValue<Vector2>();
