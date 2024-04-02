@@ -7,6 +7,7 @@ using UnityEngine;
 using System.Linq;
 using Random = System.Random;
 using UniversalForwardPlusVolumetric;
+using BBUnity.Actions;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -45,7 +46,8 @@ public class DungeonGenerator : MonoBehaviour
     void Awake()
     {
         LoadRooms();
-        eventManager = new EventManager(flood, volumetricConfig);
+        eventManager = gameObject.AddComponent<EventManager>();
+        eventManager.Init(flood, volumetricConfig);
     }
     public void SetSeed(int seed)
     {
