@@ -53,6 +53,7 @@ public class TeleportGun : Item
 
         if (charging & InputManager.Player.ItemPrimary.phase != InputActionPhase.Performed)
         {
+            UnitySingleton<TeleportTextController>.Instance.Hide();
             chargingSound.Stop();
             charging = false;
             canTP = false;
