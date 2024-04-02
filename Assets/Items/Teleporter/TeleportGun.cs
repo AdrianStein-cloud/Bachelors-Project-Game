@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,11 +6,15 @@ public class TeleportGun : Item
 {
     public int range;
     public float chargeTime = 2f;
+    public int cooldown = 30;
 
     bool isHeld = false;
 
     bool charging = false;
     bool canTP = false;
+    bool isOffCooldown = true;
+
+    float usedTime;
 
     Vector3 tpLocation;
 
@@ -17,58 +22,79 @@ public class TeleportGun : Item
     [SerializeField] AudioSource chargingSound;
     [SerializeField] AudioSource teleportSound;
 
-    GameObject location;
-
     float startedCharging;
 
     private void Awake()
     {
         movement = transform.root.GetComponentInChildren<PlayerMovement>();
-        location = new GameObject("Location");
     }
 
 
     private void Update()
     {
-        if (isHeld && InputManager.Player.ItemPrimary.phase == InputActionPhase.Performed)
+        bool chargeTP = isHeld & isOffCooldown && InputManager.Player.ItemPrimary.phase == InputActionPhase.Performed;
+        if (chargeTP)
         {
-            Debug.Log("Held");
-            tpLocation = transform.position + transform.forward * range;
-            location.transform.position = tpLocation;
-            canTP = IsLocationTeleportable(tpLocation);
-            UnitySingleton<TeleportTextController>.Instance.Display(canTP & Time.time >= startedCharging + chargeTime);
-            if (!charging)
-            {
-                chargingSound.Play();
-                startedCharging = Time.time;
-            }
+            Charge();
+        }
+
+        bool teleport = 
+              isHeld 
+            & canTP 
+            & charging 
+            & Time.time >= startedCharging + chargeTime 
+            & InputManager.Player.ItemPrimary.phase == InputActionPhase.Waiting;
+     
+        if (!chargeTP & teleport)
+        {
+            Teleport();
+        }
+
+        bool stoppedCharging = charging & InputManager.Player.ItemPrimary.phase != InputActionPhase.Performed;
+        if (stoppedCharging)
+        {
+            StopCharging();
+        }
+
+        if (!isOffCooldown)
+        {
+            UnitySingleton<Inventory>.Instance.UpdateItemText(this, (cooldown - (Time.time - usedTime)).ToString("N0"));
+        }
+    }
+
+    void Teleport()
+    {
+        //Debug.Log("Triggerd");
+        teleportSound.Play();
+        movement.Teleport(tpLocation);
+        usedTime = Time.time;
+        StartCoroutine(Cooldown());
+    }
+
+    void Charge()
+    {
+        //Debug.Log("Held");
+        tpLocation = transform.position + transform.forward * range;
+        canTP = IsLocationTeleportable(tpLocation);
+        UnitySingleton<TeleportTextController>.Instance.Display(canTP, Time.time >= startedCharging + chargeTime);
+        if (!charging)
+        {
+            chargingSound.Play();
+            startedCharging = Time.time;
             charging = true;
-        }
-        else if (isHeld & canTP & charging & Time.time >= startedCharging + chargeTime & InputManager.Player.ItemPrimary.phase == InputActionPhase.Waiting)
-        {
-            Debug.Log("Triggerd");
-            teleportSound.Play();
-            movement.Teleport(tpLocation);
-        }
 
-        if (charging & InputManager.Player.ItemPrimary.phase != InputActionPhase.Performed)
-        {
-            UnitySingleton<TeleportTextController>.Instance.Hide();
-            chargingSound.Stop();
-            charging = false;
-            canTP = false;
+            InputManager.Player.Move.Disable();
         }
-
     }
 
-    public override void Select()
-    {
-        isHeld = true;
-    }
 
-    public override void Deselect()
+    void StopCharging()
     {
-        isHeld = false;
+        InputManager.Player.Move.Enable();
+        UnitySingleton<TeleportTextController>.Instance.Hide();
+        chargingSound.Stop();
+        charging = false;
+        canTP = false;
     }
 
     bool IsLocationTeleportable(Vector3 location)
@@ -84,5 +110,22 @@ public class TeleportGun : Item
             }
         }
         return false;
+    }
+    public override void Select()
+    {
+        isHeld = true;
+    }
+
+    public override void Deselect()
+    {
+        isHeld = false;
+    }
+
+    IEnumerator Cooldown()
+    {
+        isOffCooldown = false;
+        yield return new WaitForSeconds(cooldown);
+        isOffCooldown = true;
+        UnitySingleton<Inventory>.Instance.UpdateItemText(this, "");
     }
 }

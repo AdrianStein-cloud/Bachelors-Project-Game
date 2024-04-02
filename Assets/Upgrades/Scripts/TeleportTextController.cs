@@ -7,6 +7,7 @@ public class TeleportTextController : MonoBehaviour
     [SerializeField] Color cannotTpColor = Color.red;
     [SerializeField] string canTpText;
     [SerializeField] string cannotTpText;
+    [SerializeField] string chargingText;
 
     TextMeshProUGUI textMesh;
 
@@ -16,17 +17,21 @@ public class TeleportTextController : MonoBehaviour
         textMesh = GetComponent<TextMeshProUGUI>();
     }
 
-    public void Display(bool canTeleport)
+    public void Display(bool validDestination, bool ready)
     {
-        if (canTeleport)
+        textMesh.color = validDestination ? canTpColor : cannotTpColor;
+
+        if (ready & validDestination)
         {
             textMesh.text = canTpText;
-            textMesh.color = canTpColor;
+        }
+        else if(ready & !validDestination)
+        {
+            textMesh.text = cannotTpText;
         }
         else
         {
-            textMesh.text = cannotTpText;
-            textMesh.color = cannotTpColor;
+            textMesh.text = chargingText;
         }
     }
 
