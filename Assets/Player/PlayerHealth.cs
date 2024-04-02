@@ -21,6 +21,8 @@ public class PlayerHealth : MonoBehaviour
     Coroutine fadeOutCoroutine;
     public CameraShakePreset cameraShakePreset;
 
+    [SerializeField] private AudioSource hitSource, dieSource;
+
     private void Awake()
     {
         bloodScreen = GameObject.Find("BloodScreen")?.GetComponent<Image>();
@@ -51,11 +53,12 @@ public class PlayerHealth : MonoBehaviour
             //Debug.Log("take damage");
             health -= damage;
             CameraShake.Instance.Shake(cameraShakePreset);
+            hitSource.Play();
             if (health <= 0)
             {
                 health = 0;
                 UpdateHealthBar();
-                Die();
+                StartCoroutine(WaitBeforeDeath());
             }
             else UpdateHealthBar();
 
@@ -63,6 +66,13 @@ public class PlayerHealth : MonoBehaviour
 
             lastDamage = Time.time;
         }
+    }
+
+    IEnumerator WaitBeforeDeath()
+    {
+        dieSource.Play();
+        yield return new WaitForSeconds(0.2f);
+        Die();
     }
 
     public void Die()
