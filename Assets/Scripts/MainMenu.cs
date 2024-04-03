@@ -8,11 +8,13 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] Button exitButton;
+    [SerializeField] GameObject difficultyMenu;
 
     // Start is called before the first frame update
     void Start()
     {
         exitButton.onClick.AddListener(ExitGame);
+        difficultyMenu.SetActive(false);
     }
 
     private void ExitGame()
@@ -20,8 +22,8 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void StartGame()
+    public void LoadDifficulties()
     {
-        SceneManager.LoadScene("Procedural Generation");
+        difficultyMenu.SetActive(true);
     }
 }

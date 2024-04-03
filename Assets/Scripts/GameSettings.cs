@@ -40,6 +40,15 @@ public class GameSettings : Singleton<GameSettings>
     public bool PowerOnMode { get; set; } = false;
     public int EnemyAmount { get; set; }
     public bool PlayerInDungeon { get; set; }
+
+    public DifficultyConfig DifficultyConfig
+    {
+        get
+        {
+            return UnitySingleton<DifficultyManager>.Instance.Difficulties[(Difficulty) PlayerPrefs.GetInt("Difficulty")];
+        }
+    }
+
     public string Event
     {
         get => eventValue;

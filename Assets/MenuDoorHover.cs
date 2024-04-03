@@ -31,7 +31,7 @@ public class MenuDoorHover : MonoBehaviour
     IEnumerator StartGame()
     {
         yield return new WaitForSeconds(1f);
-        menu.StartGame();
+        menu.LoadDifficulties();
     }
 
     private void OnMouseEnter()
