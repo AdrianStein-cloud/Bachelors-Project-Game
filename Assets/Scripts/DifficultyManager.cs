@@ -28,12 +28,13 @@ public class DifficultyConfig
     public float enemySpawnRate;
     public float lightFailSlope;
     public float lightSlopeMiddleRound;
+    public float priceMultiplier;
 }
 
 public enum Difficulty
 {
-    Easy,
     Normal,
     Hard,
-    Insane
+    Nightmare,
+    Hell
 }

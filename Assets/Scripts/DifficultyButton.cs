@@ -22,16 +22,16 @@ public class DifficultyButton : MonoBehaviour
         buttonText.color = new Color32(0xFF, 0x59, 0x67, 0xFF);
         switch (difficulty)
         {
-            case Difficulty.Easy:
+            case Difficulty.Normal:
                 background.color = new Color(1, 1, 1, 0);
                 break;
-            case Difficulty.Normal:
+            case Difficulty.Hard:
                 background.color = new Color(1, 1, 1, 1f/4f);
                 break;
-            case Difficulty.Hard:
+            case Difficulty.Nightmare:
                 background.color = new Color(1, 1, 1, 1f/2f);
                 break;
-            case Difficulty.Insane:
+            case Difficulty.Hell:
                 background.color = new Color(1, 1, 1, 1);
                 break;
         }

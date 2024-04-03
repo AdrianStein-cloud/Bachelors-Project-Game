@@ -2319,7 +2319,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hard
+  m_text: Nightmare
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 35a81c76aa8a385478369d2a4e1ff212, type: 2}
   m_sharedMaterial: {fileID: -2135733669968461480, guid: 35a81c76aa8a385478369d2a4e1ff212,
@@ -4707,7 +4707,7 @@ GameObject:
   - component: {fileID: 1375850379}
   - component: {fileID: 1375850380}
   m_Layer: 5
-  m_Name: Normal
+  m_Name: Hard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5084,7 +5084,7 @@ GameObject:
   - component: {fileID: 1457817490}
   - component: {fileID: 1457817491}
   m_Layer: 5
-  m_Name: Easy
+  m_Name: Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5351,7 +5351,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Easy
+  m_text: Normal
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a7f7fd69baccc14481364beeeaa4289, type: 2}
   m_sharedMaterial: {fileID: -1423445867419092502, guid: 7a7f7fd69baccc14481364beeeaa4289,
@@ -5832,7 +5832,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Insane
+  m_text: Hell
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 43a7354b69e6c3a40b3bef6fdb460267, type: 2}
   m_sharedMaterial: {fileID: 4976483259004323557, guid: 43a7354b69e6c3a40b3bef6fdb460267,
@@ -5860,8 +5860,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 118.6
-  m_fontSizeBase: 118.6
+  m_fontSize: 133.2
+  m_fontSizeBase: 133.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5870,7 +5870,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 48.51
+  m_characterSpacing: 10.79
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -6723,7 +6723,7 @@ GameObject:
   - component: {fileID: 1678554770}
   - component: {fileID: 1678554771}
   m_Layer: 5
-  m_Name: Hard
+  m_Name: Nightmare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6916,7 +6916,7 @@ GameObject:
   - component: {fileID: 1723406962}
   - component: {fileID: 1723406963}
   m_Layer: 5
-  m_Name: Insane
+  m_Name: Hell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8321,7 +8321,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Normal
+  m_text: Hard
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06a7e79576a462447a44a2e346a90d32, type: 2}
   m_sharedMaterial: {fileID: -7236107498272433305, guid: 06a7e79576a462447a44a2e346a90d32,
