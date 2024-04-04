@@ -808,9 +808,9 @@ MonoBehaviour:
   idleBobbingSpeed: 2
   idleBobbingAmount: 0.02
   walkingBobbingSpeed: 10
-  walkingBobbingAmount: 0.05
-  runningBobbingSpeed: 13
-  runningBobbingAmount: 0.075
+  walkingBobbingAmount: 0.07
+  runningBobbingSpeed: 16
+  runningBobbingAmount: 0.09
   player: {fileID: 5852719042983267109}
 --- !u!114 &6034051921019033551
 MonoBehaviour:
