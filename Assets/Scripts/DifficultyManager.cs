@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DifficultyManager : MonoBehaviour
@@ -21,6 +22,7 @@ public class DifficultyManager : MonoBehaviour
     public Dictionary<Difficulty, DifficultyConfig> Difficulties { get { return difficulties; } }
 }
 
+
 [System.Serializable]
 public class DifficultyConfig
 {
@@ -29,6 +31,7 @@ public class DifficultyConfig
     public float lightFailSlope;
     public float lightSlopeMiddleRound;
     public float priceMultiplier;
+    public int startMoney;
 }
 
 public enum Difficulty
