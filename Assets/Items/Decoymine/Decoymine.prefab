@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e19d155ba839d44afaadada19bb70b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundRadius: 1000
+  soundRadius: 200
   soundDuration: 5
   blinkDelay: 0.25
 --- !u!82 &4731983601265054865

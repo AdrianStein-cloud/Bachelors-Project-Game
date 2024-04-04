@@ -52,12 +52,13 @@ MonoBehaviour:
   invalidMaterial: {fileID: 2100000, guid: bd37bf199de11c844890adf18983fceb, type: 2}
   hitLayer:
     serializedVersion: 2
-    m_Bits: 3137
+    m_Bits: 1089
   placeLayer:
     serializedVersion: 2
     m_Bits: 65
-  mineLayer:
+  activationLayer:
     serializedVersion: 2
     m_Bits: 8388608
   placeDistance: 30
+  maxActivationDistance: 200
   <MineCount>k__BackingField: 3

@@ -9,9 +9,9 @@ public class DecoymineController : Item
     [SerializeField] Material invalidMaterial;
     [SerializeField] LayerMask hitLayer;
     [SerializeField] LayerMask placeLayer;
-    [SerializeField] LayerMask mineLayer;
+    [SerializeField] LayerMask activationLayer;
     [SerializeField] float placeDistance;
-    //[SerializeField] float activationOffset;
+    [SerializeField] float maxActivationDistance;
 
     [field: SerializeField] public int MineCount { get; private set; }
 
@@ -60,8 +60,7 @@ public class DecoymineController : Item
 
             Rotate(ghostMine.transform);
 
-            canPlace = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, placeLayer);
-            //Debug.Log(canPlace + " : " + hit.transform.gameObject.layer);
+            canPlace = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, placeDistance, placeLayer);
             mineRenderer.material = canPlace ? validMaterial : invalidMaterial;
         }
         else
@@ -122,7 +121,7 @@ public class DecoymineController : Item
     {
         foreach (var mine in mines)
         {
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit, Mathf.Infinity, mineLayer))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit, maxActivationDistance, activationLayer))
             {
                 if (hit.collider.gameObject == mine.gameObject)
                 {
@@ -130,19 +129,6 @@ public class DecoymineController : Item
                     break;
                 }
             }
-
-            /*var vpPos = Camera.main.WorldToViewportPoint(mine.transform.position);
-            if (vpPos.x >= activationOffset && vpPos.x <= 1f - activationOffset && vpPos.y >= activationOffset && vpPos.y <= 1f - activationOffset && vpPos.z > 0f)
-            {
-                Vector3 direction = mine.transform.position - Camera.main.transform.position;
-                if (Physics.Raycast(Camera.main.transform.position, direction, out var hit))
-                {
-                    if (hit.transform == mine.transform)
-                    {
-                        mine.Activate();
-                    }
-                }
-            }*/
         }
     }
 
