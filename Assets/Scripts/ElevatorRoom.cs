@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ElevatorRoom : MonoBehaviour
 {
@@ -39,6 +42,9 @@ public class ElevatorRoom : MonoBehaviour
             yield return new WaitForSeconds(elevatorTime);
             ToggleExitElevator(true);
             Moving = false;
+
+            var navmeshSurface = FindFirstObjectByType<NavMeshSurface>();
+            navmeshSurface.BuildNavMesh();
         }
     }
 

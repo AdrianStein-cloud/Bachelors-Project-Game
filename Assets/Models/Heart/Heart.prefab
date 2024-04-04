@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4602115902800712613}
   - component: {fileID: 227384270945930318}
   - component: {fileID: 7363296703184193997}
-  m_Layer: 14
+  m_Layer: 25
   m_Name: MapMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4502625646986227745}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.529, y: 0.91, z: -1.415}
+  m_LocalPosition: {x: -1.47, y: 0.91, z: -1.48}
   m_LocalScale: {x: 1.5, y: 0.2, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []

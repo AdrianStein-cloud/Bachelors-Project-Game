@@ -5,7 +5,7 @@ using UnityEngine;
 public class TabletGadget : MonoBehaviour
 {
     [SerializeField] float itemToggleDelay;
-    
+
     public bool equipped;
     public GameObject textureRenderer;
 
@@ -46,14 +46,10 @@ public class TabletGadget : MonoBehaviour
     /// <returns></returns>
     public bool Toggle()
     {
-        if (lastTimeUsed + itemToggleDelay <= Time.time)
-        {
-            lastTimeUsed = Time.time;
-            equipped = !equipped;
-            anim.SetTrigger("Toggle");
-            //PostProcessingHandler.Instance.SetDOF(tabletEquipped);
-            return true;
-        }
-        return false;
+        lastTimeUsed = Time.time;
+        equipped = !equipped;
+        anim.SetTrigger("Toggle");
+        //PostProcessingHandler.Instance.SetDOF(tabletEquipped);
+        return true;
     }
 }

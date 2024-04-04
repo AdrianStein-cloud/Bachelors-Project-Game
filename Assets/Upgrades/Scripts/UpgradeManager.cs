@@ -9,16 +9,20 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
 {
     [SerializeField] int rerollPrice = 20;
     [SerializeField] float divideNumber, expoNumber;
+    private float freeRerollsUsed;
 
     public int RerollPrice
     {
         get
         {
-            if (currentRerolls >= Stats.Instance.money.CalculatedFreeRerolls)
+            if (freeRerollsUsed >= Stats.Instance.money.CalculatedFreeRerolls)
             {
                 return (int)(rerollPrice * (1 + Mathf.Pow(currentRerolls - Stats.Instance.money.CalculatedFreeRerolls, expoNumber) / divideNumber));
             }
-            else return 0;
+            else
+            {
+                return 0;
+            }
         }
     }
 
@@ -59,7 +63,11 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
             upgrade.Apply(player);
         }
 
-        GetComponent<GameManager>().OnWaveOver += () => currentRerolls = 0;
+        GetComponent<GameManager>().OnWaveOver += () =>
+        {
+            currentRerolls = 0;
+            freeRerollsUsed = 0;
+        };
     }
 
     public void DisplayUpgrades(Action upgradeChosen = null)
@@ -91,6 +99,8 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
             int discount = UnityEngine.Random.Range(0, maxDiscount);
             u.Price = normalPrice - discount;
         });
+
+        upgradeUIController.SetRerollPrice(RerollPrice);
     }
 
     public void ChooseUpgrade(Upgrade upgrade)
@@ -102,6 +112,8 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
             currentUpgrades.Remove(upgrade);
             availableUpgrades.AddRange(upgrade.NewlyAvailableUpgrades);
             upgrade.Apply(player);
+
+            upgradeUIController.SetRerollPrice(RerollPrice);
         }
     }
 
@@ -109,6 +121,7 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
     {
         if (currencyManager.Spend(RerollPrice))
         {
+            if (RerollPrice <= 0) freeRerollsUsed++;
             currentRerolls++;
             RefreshUpgrades();
             upgradeUIController.EnableCards(currentUpgrades);
@@ -122,6 +135,11 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
         Cursor.visible = false;
         InputManager.Player.Enable();
         DoneChoosingUpgrades?.Invoke();
+    }
+
+    public void AddRemainingFreeReroll(int amount)
+    {
+        freeRerollsUsed += amount;
     }
 }
 
