@@ -255,7 +255,7 @@ PrefabInstance:
     - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: seed
-      value: 9001823
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
@@ -331,7 +331,7 @@ PrefabInstance:
     - target: {fileID: 6552894007565172604, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: currentCurrency
-      value: 123211321
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
