@@ -22,6 +22,7 @@ public class WandererSounds : MonoBehaviour
 
     [Header("Attack")]
     public AudioSource attackSource;
+    public Vector2 pitchRange = Vector2.one;
 
     public Action OnScreamEnd;
 
@@ -70,6 +71,7 @@ public class WandererSounds : MonoBehaviour
 
     public void PlayAttackSound()
     {
+        attackSource.pitch = Random.Range(pitchRange.x, pitchRange.y);
         attackSource.Play();
     }
 }

@@ -513,9 +513,9 @@ public class DungeonGenerator : MonoBehaviour
             float forwardDistance = diff.DistanceAlongDirection(a.direction * Vector3.forward);
             float sidewaysDistance = diff.DistanceAlongDirection(a.direction * Vector3.right);
             bool forwardClose = Mathf.Abs(forwardDistance) < 0.1f;
+            bool sidewaysDoable = Mathf.Abs(sidewaysDistance) < 11f && (a.GetComponentInParent<Room>().isCorridor || b.GetComponentInParent<Room>().isCorridor);
             bool sidewaysClose = Mathf.Abs(sidewaysDistance) < 0.1f;
-            //return opposite & a.transform.position.ApproxEquals(b.transform.position, 1f);
-            return opposite & sidewaysClose & forwardClose;
+            return opposite & forwardClose & (sidewaysClose | sidewaysDoable);
         }
     }
 }
