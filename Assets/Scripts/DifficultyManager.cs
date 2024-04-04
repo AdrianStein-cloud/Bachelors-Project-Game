@@ -29,6 +29,7 @@ public class DifficultyConfig
     public float lightFailSlope;
     public float lightSlopeMiddleRound;
     public float priceMultiplier;
+    public int startMonsters;
 }
 
 public enum Difficulty
