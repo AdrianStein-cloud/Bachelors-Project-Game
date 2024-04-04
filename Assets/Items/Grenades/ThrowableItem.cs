@@ -34,21 +34,20 @@ public class ThrowableItem : Item
     private void Awake()
     {
         player = GameObject.FindWithTag("Player").transform;
-        currentAmount = maxAmount;
 
         var gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
             gameManager.OnWaveOver += () =>
             {
-                currentAmount = maxAmount;
                 Destroy(ThrowableParent);
-                UpdateCounter();
+                RefreshGrenade();
             };
     }
 
     private void Start()
     {
-        UpdateCounter();
+        Stats.Instance.grenade.Grenades.Add(this);
+        Stats.Instance.grenade.RefreshGrenades();
     }
 
     void Throw()
@@ -78,6 +77,12 @@ public class ThrowableItem : Item
     public override void Primary()
     {
         Throw();
+    }
+
+    public void RefreshGrenade()
+    {
+        currentAmount = maxAmount + Stats.Instance.grenade.ExtraGrenades;
+        UpdateCounter();
     }
 
     private void UpdateCounter() => UnitySingleton<Inventory>.Instance.UpdateItemText(this, currentAmount.ToString());
