@@ -90,10 +90,21 @@ public class DramaMaker : Interactable
     {
         InteractionUIText.Instance.SetText("");
         buttonSound.Play();
-        gameManager.GetComponent<CurrencyManager>().AddCurrency(drama.bonus);
         transform.position -= new Vector3(0, 0.09f, 0);
+        if(drama.bonus < 0 && gameManager.GetComponent<CurrencyManager>().Currency < (drama.bonus * -1))
+        {
+            StartCoroutine(ButtonWait());
+            return;
+        }
+        gameManager.GetComponent<CurrencyManager>().AddCurrency(drama.bonus);
         pressed = true;
         drama.drama.Invoke();
+    }
+
+    IEnumerator ButtonWait()
+    {
+        yield return new WaitForSeconds(0.5f);
+        transform.position += new Vector3(0, 0.09f, 0);
     }
 
     IEnumerator SlowWrite(TextMeshProUGUI text, string content)
