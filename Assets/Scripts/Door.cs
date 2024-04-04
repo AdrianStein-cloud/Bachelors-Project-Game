@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public quaternion direction;
+    public Quaternion direction;
     private bool doorConnected = false;
     public bool debugHighlight = false;
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -46,6 +47,16 @@ public static class Extensions
         return Mathf.Approximately(Mathf.Abs(Vector3.Dot(a, b)), 1);
     }
 
+    public static bool Opposite(this Vector3 a, Vector3 b)
+    {
+        return Mathf.Approximately(Vector3.Dot(a.normalized, b.normalized), -1);
+    }
+
+    public static float DistanceAlongDirection(this Vector3 v, Vector3 direction)
+    {
+        return Vector3.Dot(v, direction.normalized);
+    }
+
     public static int GetChance(this Rarity rarity)
     {
         return UpgradeConstants.Instance.chance
@@ -81,6 +92,11 @@ public static class Extensions
             .ToList();
     }
 
+    public static Vector3 RoundToNearestInt(this Vector3 v)
+    {
+        return new Vector3(Mathf.Round(v.x), Mathf.Round(v.y), Mathf.Round(v.z));
+    }
+
     public static Vector3 WithX(this Vector3 v, float x) => new(x, v.y, v.z);
 
     public static Vector3 WithY(this Vector3 v, float y) => new(v.x, y, v.z);
@@ -106,7 +122,24 @@ public static class Extensions
         bool x = Mathf.Abs(a.x - b.x) < tolerance;
         bool y = Mathf.Abs(a.y - b.y) < tolerance;
         bool z = Mathf.Abs(a.z - b.z) < tolerance;
+        Debug.Log($"{a} == {b} is {x & y & z}");
         return x & y & z;
+    }
+
+    public static IEnumerable<Tuple<T, T>> GetPairs<T>(this IEnumerable<T> enumerable, Func<T, T, bool> pairSeletor)
+    {
+        var list = enumerable.ToList();
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            for (int j = i + 1; j < list.Count; j++)
+            {
+                if (pairSeletor(list[i], list[j]))
+                {
+                    yield return new Tuple<T, T>(list[i], list[j]);
+                }
+            }
+        }
     }
 
 }
