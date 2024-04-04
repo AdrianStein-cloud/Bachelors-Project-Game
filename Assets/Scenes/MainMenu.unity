@@ -4840,6 +4840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
+  loadingScreen: {fileID: 1545889772}
 --- !u!114 &1375850380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5217,6 +5218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 0
+  loadingScreen: {fileID: 1545889772}
 --- !u!114 &1457817491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6273,7 +6275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1545889773
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6991,6 +6993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 2
+  loadingScreen: {fileID: 1545889772}
 --- !u!114 &1678554771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7184,6 +7187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 3
+  loadingScreen: {fileID: 1545889772}
 --- !u!114 &1723406963
 MonoBehaviour:
   m_ObjectHideFlags: 0
