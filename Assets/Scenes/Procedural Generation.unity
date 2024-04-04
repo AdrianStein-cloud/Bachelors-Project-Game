@@ -9155,7 +9155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highscoreText: {fileID: 1844509143}
-  difficultyText: {fileID: 0}
+  difficultyText: {fileID: 331969775}
 --- !u!64 &2058663674
 MeshCollider:
   m_ObjectHideFlags: 0
