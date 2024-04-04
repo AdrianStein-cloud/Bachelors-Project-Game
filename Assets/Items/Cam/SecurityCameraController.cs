@@ -128,6 +128,14 @@ public class SecurityCameraController : Item
         if (!tablet.battery.Dead) tablet.textureRenderer.SetActive(true);
         var camera = cam.GetComponentInChildren<Camera>();
         camera.targetTexture = enable ? tabletTexture : null;
+        if (enable & !tablet.battery.Dead)
+        {
+            UnitySingleton<CameraManager>.Instance.activeCameras.Add(camera);
+        }
+        if(!enable)
+        {
+            UnitySingleton<CameraManager>.Instance.activeCameras.Remove(camera);
+        }
     }
 
     public override void Secondary()
@@ -191,6 +199,7 @@ public class SecurityCameraController : Item
 
         var instance = Instantiate(cameraPrefab, hit.point, Quaternion.identity);
         var camScript = instance.GetComponent<SecurityCameraScript>();
+        
 
         Rotate(instance.transform);
         instance.transform.SetParent(hit.transform);
@@ -198,7 +207,7 @@ public class SecurityCameraController : Item
         cameras.Add(instance);
         camScript.camName = "CAMERA " + cameras.Count;
 
-        camScript.Init();
+        camScript.Init(tablet);
 
         currentCamCount--;
         UpdateCounter();

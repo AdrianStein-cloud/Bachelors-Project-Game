@@ -1,10 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.Rendering.DebugUI;
 
 //https://github.com/deadlykam/TutorialFPSRotation/blob/20c94069f25b51205404a644a49f7b378506668e/TutorialFPSRotation/Assets/TutorialFPSRotation/Scripts/PlayerRotateSmooth.cs
 public class CameraController : MonoBehaviour
@@ -50,6 +46,9 @@ public class CameraController : MonoBehaviour
         InputManager.Player.Look.OnAnyEvent(Look);
 
         horiRotHelper.localRotation = transform.localRotation;
+        var camera = GetComponentInChildren<Camera>();
+        UnitySingleton<CameraManager>.Instance.activeCameras.Add(camera);
+        UnitySingleton<CameraManager>.Instance.cameraPositions.Add(camera, transform.root.GetComponentInChildren<CharacterController>().gameObject);
     }
 
     public void IncrementFov(float fov)

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,6 +17,8 @@ public class CoilMovement : MonoBehaviour
     Animation anim;
     NavMeshAgent agent;
 
+    CameraManager cameraManager => UnitySingleton<CameraManager>.Instance;
+
     private void Awake()
     {
         collider = GetComponent<Collider>();
@@ -27,7 +30,9 @@ public class CoilMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        bool isVisible = IsCoilVisisble(Camera.main);
+        var camPositions = cameraManager.cameraPositions;
+        bool isVisible = UnitySingleton<CameraManager>.Instance.activeCameras.FirstOrDefault(cam => IsCoilVisisble(cam, camPositions[cam])) != null;
+        //bool isVisible = IsCoilVisisble(Camera.main);
 
         if (isVisible)
         {
@@ -57,17 +62,18 @@ public class CoilMovement : MonoBehaviour
         agent.SetDestination(position);
     }
 
-    bool IsCoilVisisble(Camera camera)
+    bool IsCoilVisisble(Camera camera, GameObject cameraCollider)
     {
+        if (camera == null) return false;
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(camera);
 
         if (GeometryUtility.TestPlanesAABB(planes, collider.bounds))
         {
             //Nessecary as player camera is always a bit offset from player controller due to smoothing
             //Needs changes if it so to work with other cameras, fx security camera gadget
-            Vector3 cameraPosition = camera.transform.root.GetComponentInChildren<CharacterController>().transform.position;
+            //Vector3 cameraPosition = camera.transform.root.GetComponentInChildren<CharacterController>().transform.position;
 
-            bool isVisible = visiblePoints.FirstOrDefault((g) => CanPlayerSeeGameobject(g, cameraPosition));
+            bool isVisible = visiblePoints.FirstOrDefault((g) => CanPlayerSeeGameobject(g, cameraCollider));
             if (isVisible)
             {
                 return true;
@@ -76,13 +82,13 @@ public class CoilMovement : MonoBehaviour
         return false;
     }
 
-    bool CanPlayerSeeGameobject(GameObject obj, Vector3 cameraPosition)
+    bool CanPlayerSeeGameobject(GameObject obj, GameObject cameraSrc)
     {
         var pos = obj.transform.position;
-        var dir = cameraPosition - pos;
-        Physics.Raycast(pos, dir, out RaycastHit hit, Mathf.Infinity, blocking);
+        var dir = cameraSrc.transform.position - pos;
+        Physics.Raycast(pos, dir, out RaycastHit hit, Mathf.Infinity, blocking + LayerMask.GetMask(LayerMask.LayerToName(cameraSrc.layer)));
         Debug.DrawLine(pos, pos + dir.normalized * hit.distance);
-        return hit.collider.CompareTag("Player");
+        return hit.collider.gameObject == cameraSrc;
     }
 
     bool IsThereBlockingDoor()
