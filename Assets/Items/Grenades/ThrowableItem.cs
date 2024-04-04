@@ -19,7 +19,17 @@ public class ThrowableItem : Item
     int currentAmount;
 
     static GameObject throwables;
-    static bool initialized;
+    GameObject ThrowableParent
+    {
+        get
+        {
+            if(throwables == null)
+            {
+                throwables = new("Throwables Container");
+            }
+            return throwables;
+        }
+    }
 
     private void Awake()
     {
@@ -31,17 +41,9 @@ public class ThrowableItem : Item
             gameManager.OnWaveOver += () =>
             {
                 currentAmount = maxAmount;
-                foreach (Transform throwable in throwables.transform)
-                {
-                    Destroy(throwable.gameObject);
-                }
+                Destroy(ThrowableParent);
                 UpdateCounter();
             };
-
-        if (initialized) return;
-        initialized = true;
-
-        throwables = new("Throwables Container");
     }
 
     private void Start()
@@ -55,7 +57,10 @@ public class ThrowableItem : Item
         currentAmount--;
 
         var offset = new Vector3(0f, offsetPosition.y) + player.forward * offsetPosition.z + player.right * offsetPosition.x;
-        var instance = Instantiate(throwablePrefab, player.position + offset, Quaternion.identity, throwables.transform);
+        var instance = Instantiate(throwablePrefab, 
+            player.position + offset, 
+            Quaternion.identity,
+            ThrowableParent.transform);
         var rb = instance.GetComponent<Rigidbody>();
 
         var angle = Vector3.Angle(player.up, Camera.main.transform.forward) - 90;

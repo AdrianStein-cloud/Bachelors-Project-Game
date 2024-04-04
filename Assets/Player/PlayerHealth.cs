@@ -39,10 +39,17 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthBar();
     }
 
-    public void UpgradeHealth(int health)
+    public void AddMaxHealth(int health)
     {
         maxHealth += health;
         this.health += health;
+        UpdateHealthBar();
+    }
+
+    public void RemoveMaxHealth(int health)
+    {
+        maxHealth -= health;
+        if (this.health > maxHealth) this.health = maxHealth;
         UpdateHealthBar();
     }
 

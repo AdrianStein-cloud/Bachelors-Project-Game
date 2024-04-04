@@ -49,7 +49,7 @@ public class Sandevistan : Item
 
     IEnumerator SlowTime()
     {
-        float fov = Camera.main.fieldOfView;
+        float fov = 20;
         StartCoroutine(FadeIn(fov));
         yield return new WaitForSecondsRealtime(duration);
         
@@ -64,10 +64,13 @@ public class Sandevistan : Item
         PostProcessingHandler.Instance.SetBloom(smoothTime, 30);
         PostProcessingHandler.Instance.SetChromaticAberration(smoothTime, 1f);
         PostProcessingHandler.Instance.SetSaturation(smoothTime, 100f);
+        float currentFovIncrease = 0;
         while (elapsedTime < smoothTime)
         {
             Time.timeScale = Mathf.Lerp(startValue, timeScale, elapsedTime / smoothTime);
-            cameraController.SetFov(Mathf.Lerp(fov, fov + 20, elapsedTime / smoothTime));
+            float fovIncrement = Mathf.Lerp(0, fov, elapsedTime / smoothTime) - currentFovIncrease;
+            cameraController.IncrementFov(fovIncrement);
+            currentFovIncrease += fovIncrement;
             elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
@@ -76,17 +79,20 @@ public class Sandevistan : Item
     IEnumerator FadeOut(float fov)
     {
         Time.timeScale = 1f;
-        cameraController.SetFov(fov);
+        //cameraController.SetFov(fov);
 
         float elapsedTime = 0f;
         float smoothTime = 1f;
         PostProcessingHandler.Instance.ResetBloom(smoothTime);
         PostProcessingHandler.Instance.SetChromaticAberration(smoothTime);
         PostProcessingHandler.Instance.ResetSaturation(smoothTime);
+        float currentFovDecrease = 0;
         while (elapsedTime < smoothTime)
         {
             Time.timeScale = Mathf.Lerp(timeScale, 1f, elapsedTime / smoothTime);
-            cameraController.SetFov(Mathf.Lerp(fov + 20, fov, elapsedTime / smoothTime));
+            float fovIncrement = Mathf.Lerp(0, fov, elapsedTime / smoothTime) - currentFovDecrease;
+            cameraController.IncrementFov(-fovIncrement);
+            currentFovDecrease += fovIncrement;
             elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }

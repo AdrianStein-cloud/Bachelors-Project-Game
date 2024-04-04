@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour
     Vector2 dir;
     Vector3 velocity = Vector3.zero;
     float xRotation = 0f;
-    float startingFOV;
+    float currentFov;
     float startingSensitivityMultiplier;
 
     float xOld;
@@ -44,7 +44,7 @@ public class CameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        startingFOV = Camera.main.fieldOfView;
+        currentFov = Camera.main.fieldOfView;
         startingSensitivityMultiplier = sensitivityMultiplier;
 
         InputManager.Player.Look.OnAnyEvent(Look);
@@ -52,9 +52,9 @@ public class CameraController : MonoBehaviour
         horiRotHelper.localRotation = transform.localRotation;
     }
 
-    public void SetFov(float fov)
+    public void IncrementFov(float fov)
     {
-        startingFOV = fov;
+        currentFov += fov;
     }
 
     private void Look(InputAction.CallbackContext context)
@@ -82,7 +82,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, startingFOV * (player.IsRunning ? runFOVChangeAmount : 1f), runFOVChangeSpeed * Time.deltaTime);
+        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, currentFov * (player.IsRunning ? runFOVChangeAmount : 1f), runFOVChangeSpeed * Time.deltaTime);
 
         if (CameraFollowsPlayer)
         {

@@ -12,6 +12,6 @@ public class HeealthUpgrade : Upgrade
     public override void Apply(GameObject playerObject)
     {
         var player = playerObject.GetComponentInChildren<PlayerHealth>();
-        player.UpgradeHealth(health);
+        player.AddMaxHealth(health);
     }
 }

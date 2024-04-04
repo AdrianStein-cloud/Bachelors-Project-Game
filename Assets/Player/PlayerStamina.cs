@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,14 +28,17 @@ public class PlayerStamina : MonoBehaviour
 
         player.OnJump += () =>
         {
-            currentStamina -= jumpStaminaUse;
-            lastRecoveryTime = Time.time;
+            if (enableStamina)
+            {
+                currentStamina -= jumpStaminaUse;
+                lastRecoveryTime = Time.time;
+            }
         };
     }
 
     private void Update()
     {
-        if (player.IsRunning)
+        if (player.IsRunning & enableStamina)
         {
             currentStamina -= drainSpeed * Time.deltaTime;
             lastRecoveryTime = Time.time;
@@ -59,5 +60,10 @@ public class PlayerStamina : MonoBehaviour
         stamina *= staminaMultiplier / 100 + 1;
         recoverySpeed *= recoverySpeedMultiplier / 100 + 1;
         currentStamina = stamina;
+    }
+
+    public void SetStaminaEnabled(bool value)
+    {
+        enableStamina = value;
     }
 }
