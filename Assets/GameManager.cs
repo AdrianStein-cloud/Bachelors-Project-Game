@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     void StartLevel()
     {
-        enemySpawner.SpawnEnemies(dungeonGenerator.spawnedRooms, dungeon.transform, GameSettings.Instance.CurrentDepth - 1);
+        enemySpawner.SpawnEnemies(dungeonGenerator.spawnedRooms, dungeon.transform);
         objectiveSpawner.SpawnObjectives(dungeonGenerator.spawnedRoomsDepth, dungeon.transform, SwitchToUpgrades);
         OnDungeonEnter?.Invoke();
         //player.SetActive(false);
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnSingleEnemy()
     {
-        enemySpawner.SpawnSingleEnemy(dungeonGenerator.spawnedRooms, dungeon.transform, GameSettings.Instance.CurrentDepth - 1);
+        enemySpawner.SpawnSingleEnemy(dungeonGenerator.spawnedRooms, dungeon.transform);
     }
 
     public void GuaranteeFlood()
