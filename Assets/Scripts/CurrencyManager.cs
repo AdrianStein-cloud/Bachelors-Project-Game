@@ -29,6 +29,11 @@ public class CurrencyManager : MonoBehaviour
         currencyText.text = $"{currentCurrency} $";
     }
 
+    private void Start()
+    {
+        AddCurrency(GameSettings.Instance.DifficultyConfig.startMoney);
+    }
+
 
     public void OnObjectiveCollected()
     {

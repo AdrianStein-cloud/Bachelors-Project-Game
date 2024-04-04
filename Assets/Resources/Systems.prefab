@@ -121,21 +121,29 @@ MonoBehaviour:
     lightFailSlope: 0.75
     lightSlopeMiddleRound: 6
     priceMultiplier: 1
+    startMoney: 100
+    startMonsters: 0
   - difficulty: 1
     enemySpawnRate: 2
     lightFailSlope: 1
     lightSlopeMiddleRound: 5
     priceMultiplier: 1
+    startMoney: 50
+    startMonsters: 0
   - difficulty: 2
     enemySpawnRate: 1
     lightFailSlope: 1
     lightSlopeMiddleRound: 4
     priceMultiplier: 1.5
+    startMoney: 0
+    startMonsters: 0
   - difficulty: 3
     enemySpawnRate: 0.5
     lightFailSlope: 1
     lightSlopeMiddleRound: 2
     priceMultiplier: 2
+    startMoney: 0
+    startMonsters: 1
 --- !u!1 &6099575871876625012
 GameObject:
   m_ObjectHideFlags: 0
