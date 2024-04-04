@@ -46,4 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grenade:
     detonateOnImpact: 0
-    grenadeAmountMultiplier: 1
+    extraGrenadesPerUniqueGrenade: 0
+  eletronics:
+    batteryLifeMultiplier: 0
+  player:
+    keysHeld: 0
+    speedMultiplier: 1
+  money:
+    IncreaseOnAllMoneyUpgrades: 0
+    FreeRerolls: 0

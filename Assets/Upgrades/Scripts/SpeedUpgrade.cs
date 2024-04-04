@@ -11,10 +11,6 @@ public class SpeedUpgrade : Upgrade
 
     public override void Apply(GameObject playerObject)
     {
-        var player = playerObject.GetComponentInChildren<PlayerMovement>();
-        float speedMultiplier = speedPercentIncrease / 100 + 1;
-        player.walkSpeed *= speedMultiplier;
-        player.runSpeed *= speedMultiplier;
-        player.crouchSpeed *= speedMultiplier;
+        Stats.Instance.player.speedMultiplier += speedPercentIncrease / 100;
     }
 }
