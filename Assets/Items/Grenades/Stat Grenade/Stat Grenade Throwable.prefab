@@ -44,14 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400b5decdea48fc4fa0d7e005b5ec531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
-  icon: {fileID: 0}
-  throwablePrefab: {fileID: 0}
-  throwForce: 0
-  offsetAngle: 0
-  minAngle: 0
-  maxAngle: 0
-  minTorque: 0
-  maxTorque: 0
-  offsetPosition: {x: 0, y: 0, z: 0}
-  maxAmount: 0
+  itemName: Buff Grenade
+  icon: {fileID: 21300000, guid: 25bcf9c9726c62f419dc64fe9d46359f, type: 3}
+  throwablePrefab: {fileID: 6512612436465038166, guid: a593778ce835ed54fb9b6fce6a211c13,
+    type: 3}
+  throwForce: 100
+  offsetAngle: -30
+  minAngle: 80
+  maxAngle: 40
+  minTorque: 2
+  maxTorque: 4
+  offsetPosition: {x: 0, y: 0, z: 2.5}
+  maxAmount: 2

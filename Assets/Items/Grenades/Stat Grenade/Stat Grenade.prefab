@@ -758,7 +758,6 @@ GameObject:
   - component: {fileID: 4443068307360101972}
   - component: {fileID: 2115038368749871182}
   - component: {fileID: 5035619176183979531}
-  - component: {fileID: 3494997859946075719}
   - component: {fileID: 1803320689590525105}
   - component: {fileID: 7692822914023432863}
   - component: {fileID: 4216508924475972915}
@@ -845,28 +844,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &3494997859946075719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6512612436465038166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 246fad651c90ad4439b3b2c50afe67e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  throwSource: {fileID: 1803320689590525105}
-  detonateSource: {fileID: 7692822914023432863}
-  detonationTime: 2
-  explosionRadius: 30
-  effectDuration: 4
-  particles:
-  - {fileID: 1998830269065593975, guid: b70fbea4bc8994749ba52e4f560f9f28, type: 3}
-  - {fileID: 9111320563476075608, guid: c6fb71e58ec36784687d958bc39de3f2, type: 3}
-  - {fileID: 3654741155788002240, guid: ac8053bb68b7997419467a34b74fb975, type: 3}
-  - {fileID: 3352391191284423539, guid: 9571e0e1b1e65834cbba759493c171d3, type: 3}
 --- !u!82 &1803320689590525105
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1090,6 +1067,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfcd0f31028de544aa9584bbbcdba04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwSource: {fileID: 1803320689590525105}
+  detonateSource: {fileID: 7692822914023432863}
+  detonationTime: 1
+  explosionRadius: 50
+  effectDuration: 5
+  movespeedMultiplier: 1.3
+  maxHealthMultiplier: 1.5
 --- !u!1 &6900532876091287775
 GameObject:
   m_ObjectHideFlags: 0

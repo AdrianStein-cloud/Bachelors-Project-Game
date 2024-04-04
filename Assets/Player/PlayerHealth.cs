@@ -39,10 +39,17 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthBar();
     }
 
-    public void UpgradeHealth(int health)
+    public void AddMaxHealth(int health)
     {
         maxHealth += health;
         this.health += health;
+        UpdateHealthBar();
+    }
+
+    public void RemoveMaxHealth(int health)
+    {
+        maxHealth -= health;
+        if (this.health > maxHealth) this.health = maxHealth;
         UpdateHealthBar();
     }
 
@@ -77,7 +84,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Die()
     {
-        PlayerPrefs.SetInt("player_score", GameSettings.Instance.Wave);
+        PlayerPrefs.SetInt("player_score_" + GameSettings.Instance.DifficultyConfig.difficulty, GameSettings.Instance.Wave);
 
         SceneManager.LoadScene("DeathScene");
     }

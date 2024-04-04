@@ -13,6 +13,7 @@ public class DeathScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI roundText;
     [SerializeField] private TextMeshProUGUI highscoreText;
     [SerializeField] private TextMeshProUGUI youDiedText;
+    [SerializeField] private TextMeshProUGUI newDifficulty;
 
     private void Start()
     {
@@ -22,9 +23,10 @@ public class DeathScreen : MonoBehaviour
         restartButton.onClick.AddListener(RestartGame);
         restartText = restartButton.GetComponentInChildren<TextMeshProUGUI>();
         restartButton.gameObject.SetActive(false);
-        roundText.text = "Round " + PlayerPrefs.GetInt("player_score");
+        roundText.text = "Round " + PlayerPrefs.GetInt("player_score_" + GameSettings.Instance.DifficultyConfig.difficulty);
         roundText.gameObject.SetActive(false);
         highscoreText.gameObject.SetActive(false);
+        newDifficulty.gameObject.SetActive(false);
         StartCoroutine(Restart());
     }
 
@@ -51,12 +53,34 @@ public class DeathScreen : MonoBehaviour
         StartCoroutine(FadeIn(youDiedText));
         yield return new WaitForSeconds(delay);
 
-        int score = PlayerPrefs.GetInt("player_score");
+        int score = PlayerPrefs.GetInt("player_score_" + GameSettings.Instance.DifficultyConfig.difficulty);
+        int currentHighscore = PlayerPrefs.GetInt("high_score_" + GameSettings.Instance.DifficultyConfig.difficulty);
 
-        if (score > PlayerPrefs.GetInt("high_score"))
+        if (score > currentHighscore)
         {
-            PlayerPrefs.SetInt("high_score", score);
+            PlayerPrefs.SetInt("high_score_" + GameSettings.Instance.DifficultyConfig.difficulty, score);
             highscoreText.gameObject.SetActive(true);
+
+            switch (GameSettings.Instance.DifficultyConfig.difficulty)
+            {
+                case Difficulty.Hard:
+                    if(currentHighscore <= 5 && score > 5)
+                    {
+                        newDifficulty.gameObject.SetActive(true);
+                        newDifficulty.text = "Nightmare Unlocked!";
+                        StartCoroutine(FadeIn(newDifficulty));
+                    }
+                    break;
+                case Difficulty.Nightmare:
+                    if (currentHighscore <= 5 && score > 5)
+                    {
+                        newDifficulty.gameObject.SetActive(true);
+                        newDifficulty.text = "Hell Unlocked!";
+                        StartCoroutine(FadeIn(newDifficulty));
+                    }
+                    break;
+            }
+
             StartCoroutine(FadeIn(highscoreText));
         }
 
@@ -64,5 +88,10 @@ public class DeathScreen : MonoBehaviour
         restartButton.gameObject.SetActive(true);
         StartCoroutine(FadeIn(roundText));
         StartCoroutine(FadeIn(restartText));
+    }
+
+    private void CheckIfDifficultyUnlocked()
+    {
+
     }
 }

@@ -11,7 +11,7 @@ public class Flood : MonoBehaviour
     {
         foreach (var slowable in FindObjectsOfType<MonoBehaviour>().OfType<ISlowable>())
         {
-            slowable.ResetSpeed();
+            slowable.ResetSpeed(slowFactor);
         }
     }
 
@@ -27,7 +27,7 @@ public class Flood : MonoBehaviour
     {
         if (other.TryGetComponent(out ISlowable slowable))
         {
-            slowable.ResetSpeed();
+            slowable.ResetSpeed(slowFactor);
         }
     }
 }

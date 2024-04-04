@@ -4,12 +4,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System;
 
-public class GameSettings : Singleton<GameSettings>
+public class GameSettings : MonoBehaviour
 {
     private int seed;
     [SerializeField] private int dungeonStartDepth;
     [SerializeField] private int generationLookahead;
     private string eventValue;
+
+    public static GameSettings Instance;
 
     public Action<string> OnEventChanged { get; set; }
     public GameObject canvas;
@@ -67,5 +69,10 @@ public class GameSettings : Singleton<GameSettings>
     public int GetSeed()
     {
         return seed;
+    }
+
+    private void Awake()
+    {
+        Instance = this;
     }
 }
