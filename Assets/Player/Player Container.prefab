@@ -1145,6 +1145,7 @@ MonoBehaviour:
   walkSpeed: 25
   runSpeed: 40
   crouchSpeed: 15
+  pushPower: 50
   toggleCrouch: 1
   crouchHeight: 9
   cameraCrouchOffset: -4.5
