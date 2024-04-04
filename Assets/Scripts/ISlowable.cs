@@ -5,5 +5,5 @@ using UnityEngine;
 public interface ISlowable
 {
     public void SlowDown(float slowFactor);
-    public void ResetSpeed();
+    public void ResetSpeed(float slowFactor);
 }
