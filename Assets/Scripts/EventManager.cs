@@ -101,7 +101,7 @@ public class EventManager : MonoBehaviour
 
     public void ResetFog()
     {
-        StartCoroutine(LerpFog(defaultFogAttenuationDistance, defaultLocalScatteringIntensity, 0f));
+        if(isActiveAndEnabled) StartCoroutine(LerpFog(defaultFogAttenuationDistance, defaultLocalScatteringIntensity, 0f));
     }
 
     void OnDisable()
