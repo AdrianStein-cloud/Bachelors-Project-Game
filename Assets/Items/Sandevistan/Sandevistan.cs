@@ -42,7 +42,6 @@ public class Sandevistan : Item
     {
         if (timer <= 0)
         {
-            timer = cooldown;
             StartCoroutine(SlowTime());
         }
     }
@@ -52,7 +51,6 @@ public class Sandevistan : Item
         float fov = 20;
         StartCoroutine(FadeIn(fov));
         yield return new WaitForSecondsRealtime(duration);
-        
         StartCoroutine(FadeOut(fov));
     }
 
@@ -96,6 +94,7 @@ public class Sandevistan : Item
             elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
+        timer = cooldown;
     }
 
     public override void Select()

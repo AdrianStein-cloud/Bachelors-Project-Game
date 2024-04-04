@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.Presets;
 using UnityEngine;
 using UniversalForwardPlusVolumetric;
@@ -14,6 +15,8 @@ public class LabTube : Interactable
     private AudioSource humSound;
     [SerializeField] private GameObject tubeContent;
     private int worth;
+    private TextMeshProUGUI countdownText;
+    private float countdownTimer = 80f;
 
     private void Update()
     {
@@ -25,6 +28,18 @@ public class LabTube : Interactable
         {
             Claim();
         }
+        if(pressed && countdownTimer >= 0)
+        {
+            countdownTimer -= Time.deltaTime;
+            if(countdownTimer <= 0)
+            {
+                countdownText.text = $"00:00";
+            }
+            else
+            {
+                countdownText.text = $"{Mathf.Floor(countdownTimer / 60).ToString("00")}:{((int)(countdownTimer % 60)).ToString("00")}";
+            }
+        }
     }
 
     private void Start()
@@ -32,6 +47,8 @@ public class LabTube : Interactable
         worth = UnityEngine.Random.Range(60, 100);
         buttonSound = GetComponent<AudioSource>();
         humSound = tubeContent.GetComponent<AudioSource>();
+        countdownText = transform.parent.GetComponentInChildren<TextMeshProUGUI>();
+        countdownText.text = $"{Mathf.Floor(countdownTimer / 60).ToString("00")}:{((int)(countdownTimer % 60)).ToString("00")}";
     }
 
     private void Claim()
@@ -85,7 +102,7 @@ public class LabTube : Interactable
     {
         float elapsedTime = 0;
         var startSizeY = tubeContent.transform.localScale.y;
-        float smoothTime = 80f;
+        float smoothTime = countdownTimer;
         while (elapsedTime < smoothTime)
         {
             tubeContent.transform.localScale = new Vector3(tubeContent.transform.localScale.x, Mathf.Lerp(startSizeY, 3.13f, elapsedTime / smoothTime), tubeContent.transform.localScale.z);
