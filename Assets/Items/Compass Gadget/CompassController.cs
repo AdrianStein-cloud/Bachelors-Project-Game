@@ -51,16 +51,17 @@ public class CompassController : Item
         var exit = FindObjectOfType<ElevatorExit>();
         if (exit != null) target = exit.transform;
 
-        StopAllCoroutines();
-        anim.SetBool("Show", true);
         isSelected = true;
+
+        StopAllCoroutines();
         compass.SetActive(true);
+        anim.SetBool("Show", true);
     }
 
     public override void Deselect()
     {
-        anim.SetBool("Show", false);
         isSelected = false;
+        anim.SetBool("Show", false);
         StartCoroutine(Wait());
         IEnumerator Wait()
         {
