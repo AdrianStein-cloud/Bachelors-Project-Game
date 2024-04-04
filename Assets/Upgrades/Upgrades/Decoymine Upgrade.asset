@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e6eb8c06cb5064ba77fcf813da9a03, type: 3}
+  m_Name: Decoymine Upgrade
+  m_EditorClassIdentifier: 
+  Name: Decoymine
+  description: Grants you a {0}
+  Rarity: 1
+  Tags: 48
+  NewlyAvailableUpgrades: []
+  item: {fileID: 3370495318929118181, guid: e84ad19488a92f242bd97ee0a746796b, type: 3}
