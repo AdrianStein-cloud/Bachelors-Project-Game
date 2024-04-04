@@ -8,6 +8,7 @@ using System.Linq;
 using Random = System.Random;
 using UniversalForwardPlusVolumetric;
 using BBUnity.Actions;
+using UnityEngine.Rendering;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -23,11 +24,10 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject floorPrefab;
 
     public WeightedRoom[] randomRooms;
-    [field: SerializeField] public WeightedEndRoom[] endRooms;
+    [field: SerializeField] public List<WeightedEndRoom> endRooms;
     public GameObject startRoom;
     public GameObject flood;
     public VolumetricConfig volumetricConfig;
-    private List<GameObject> rooms = new List<GameObject>();
 
     public List<GameObject> spawnedRooms { get; private set; } = new List<GameObject>();
     public List<(GameObject, int)> spawnedRoomsDepth = new List<(GameObject, int)>();
@@ -212,7 +212,7 @@ public class DungeonGenerator : MonoBehaviour
         bool roomFound = false;
         door.debugHighlight = true;
 
-        List<WeightedEndRoom> tempRandomRooms = new(endRooms);
+        List<WeightedEndRoom> tempRandomRooms = new(endRooms.Where(x => (x.useMaxAmount && x.maxAmount > 0) || !x.useMaxAmount));
 
         if (!isCorridor)
         {
@@ -245,6 +245,12 @@ public class DungeonGenerator : MonoBehaviour
             else
             {
                 var newRoom = Instantiate(randomRoom.room, door.gameObject.transform.position, door.direction, dungeon);
+
+                if (randomRoom.useMaxAmount)
+                {
+                    randomRoom.maxAmount--;
+                }
+
                 newRoomScript = newRoom.GetComponent<Room>();
                 door.SetDoorConnected(true);
                 newRoomScript.GetEntrance().GetComponent<Door>().SetDoorConnected(true);
@@ -512,6 +518,8 @@ public class WeightedEndRoom : IWeighted
 {
     public bool corridorOnly = true;
     public GameObject room;
+    public bool useMaxAmount;
+    public int maxAmount;
     [field: SerializeField] public int Weight { get; set; }
 }
 
