@@ -9,16 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76d9bd90450e3bc48a69488a55348d90, type: 3}
-  m_Name: Battery Upgrade
+  m_Script: {fileID: 11500000, guid: addb23fd73d8fa1468750d71c2439f57, type: 3}
+  m_Name: Battery Upgrade 1
   m_EditorClassIdentifier: 
-  Name: Supercharged Battery
-  description: '{3}% longer flashlight battery'
-  Rarity: 0
+  Name: Longer Battery
+  description: Batteries lasts {0}% longer
+  Rarity: 1
   Tags: 0
-  NewlyAvailableUpgrades:
-  - {fileID: 11400000}
-  intensity: 0
-  range: 0
-  angle: 0
-  batteryLife: 30
+  NewlyAvailableUpgrades: []
+  batteryLifePercentage: 35

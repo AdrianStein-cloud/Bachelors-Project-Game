@@ -8,7 +8,15 @@ using UnityEngine.UI;
 public class BatteryItem : Item
 {
     float batteryDrain;
-    public float batteryLife;
+
+    public float startBatteryLife;
+    float MaxBatteryLife 
+    {
+        get
+        {
+            return startBatteryLife * (1 + Stats.Instance.eletronics.batteryLifeMultiplier);
+        }
+    }
     public bool On { get; private set; }
     public Action OnDead;
 
@@ -23,7 +31,7 @@ public class BatteryItem : Item
     {
         Stats.Instance.eletronics.rechargeBattery += (fraction) =>
         {
-            currentBatteryLife = Mathf.Min(currentBatteryLife + batteryLife * fraction, batteryLife);
+            currentBatteryLife = Mathf.Min(currentBatteryLife + MaxBatteryLife * fraction, MaxBatteryLife);
             UpdateBar();
         };
         var gameManager = FindObjectOfType<GameManager>();
@@ -79,14 +87,8 @@ public class BatteryItem : Item
 
     public void FillBattery()
     {
-        currentBatteryLife = batteryLife;
+        currentBatteryLife = MaxBatteryLife;
     }
 
-    private void UpdateBar() => flashlightFill.fillAmount = currentBatteryLife / batteryLife;
-
-    public void UpgradeBattery(int batteryLife)
-    {
-        this.batteryLife *= 1 + (batteryLife/100);
-        currentBatteryLife = this.batteryLife;
-    }
+    private void UpdateBar() => flashlightFill.fillAmount = currentBatteryLife / MaxBatteryLife;
 }
