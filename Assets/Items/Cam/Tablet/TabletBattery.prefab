@@ -46,6 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: 
   icon: {fileID: 0}
-  batteryDrain: 0
-  batteryLife: 100
-  on: 0
+  startBatteryLife: 100

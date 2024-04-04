@@ -53,7 +53,5 @@ public class FlashlightController : Item
 
         this.intensity += intensity;
         if (battery.On) flashlight.intensity = this.intensity;
-
-        battery.UpgradeBattery(batteryLife);
     }
 }
