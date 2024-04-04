@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SimpleEnemySpawner : MonoBehaviour
@@ -18,42 +19,27 @@ public class SimpleEnemySpawner : MonoBehaviour
         random = new System.Random(GameSettings.Instance.GetSeed());
     }
 
-    public void SpawnEnemies(List<GameObject> rooms, Transform dungeon, int depth)
+    public void SpawnEnemies(List<GameObject> rooms, Transform dungeon)
     {
-        rooms = new List<GameObject>(rooms);
+        rooms = rooms.OrderByDescending(r => r.GetComponent<Room>().depth).ToList();
         for (int i = 0; i < GameSettings.Instance.EnemyAmount + extraEnemies + tempExtraEnemies; i++)
         {
-            GameObject room = rooms[UnityEngine.Random.Range(0, rooms.Count)];
-
-            while (room.GetComponent<Room>().depth != depth)
-            {
-                room = rooms[UnityEngine.Random.Range(0, rooms.Count)];
-            }
+            GameObject room = rooms[i];
 
             var enemy = enemies.GetRollFromWeights(random);
 
             Instantiate(enemy.enemyPrefab, room.transform.localPosition, Quaternion.identity, dungeon);
-
-            rooms.Remove(room);
         }
         tempExtraEnemies = 0;
     }
 
-    public void SpawnSingleEnemy(List<GameObject> rooms, Transform dungeon, int depth)
+    public void SpawnSingleEnemy(List<GameObject> rooms, Transform dungeon)
     {
-        rooms = new List<GameObject>(rooms);
-        GameObject room = rooms[UnityEngine.Random.Range(0, rooms.Count)];
-
-        while (room.GetComponent<Room>().depth != depth)
-        {
-            room = rooms[UnityEngine.Random.Range(0, rooms.Count)];
-        }
+        var room = rooms.OrderByDescending(r => r.GetComponent<Room>().depth).First();
 
         var enemy = enemies.GetRollFromWeights(random);
 
         Instantiate(enemy.enemyPrefab, room.transform.localPosition, Quaternion.identity, dungeon);
-
-        rooms.Remove(room);
     }
 
     public void AddExtraTemporaryEnemies(int amount)
