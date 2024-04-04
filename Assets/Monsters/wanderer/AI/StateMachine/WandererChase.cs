@@ -4,6 +4,7 @@ using UnityEngine;
 public class WandererChase : StateProcess<WandererState>
 {
     public float speed;
+    public AudioSource chaseScream;
 
     [Header("Attack")]
     public int damage;
@@ -33,6 +34,7 @@ public class WandererChase : StateProcess<WandererState>
     {
         info.IsChasing = true;
         anim.SetBool("Chase", true);
+        chaseScream.Play();
     }
 
     private void OnDisable()
@@ -41,6 +43,7 @@ public class WandererChase : StateProcess<WandererState>
         anim.SetBool("Chase", false);
         movement.Stop();
         canAttack = true;
+        chaseScream.Stop();
     }
 
     private void Update()
