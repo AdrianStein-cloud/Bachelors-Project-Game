@@ -64,7 +64,7 @@ public class CoilAttack : StateProcess<CoilState>
     bool IsPlayerHiding(Vector3 playerPosition)
     {
         int hitAmount = Physics.OverlapSphereNonAlloc(playerPosition, 7, hidingSpotColliderCastResults, LayerMask.GetMask("HidingSpot"));
-        Debug.Log(hitAmount);
+        //Debug.Log(hitAmount);
         return hitAmount > 0;
     }
 }
