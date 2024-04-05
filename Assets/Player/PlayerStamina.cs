@@ -36,6 +36,12 @@ public class PlayerStamina : MonoBehaviour
         };
     }
 
+    private void Start()
+    {
+        Stats.Instance.player.stamina = currentStamina;
+        Stats.Instance.player.staminaRecovery = recoverySpeed;
+    }
+
     private void Update()
     {
         if (player.IsRunning & enableStamina)
@@ -60,6 +66,8 @@ public class PlayerStamina : MonoBehaviour
         stamina *= staminaMultiplier / 100 + 1;
         recoverySpeed *= recoverySpeedMultiplier / 100 + 1;
         currentStamina = stamina;
+        Stats.Instance.player.stamina = currentStamina;
+        Stats.Instance.player.staminaRecovery = recoverySpeed;
     }
 
     public void SetStaminaEnabled(bool value)

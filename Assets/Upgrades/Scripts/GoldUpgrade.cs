@@ -9,6 +9,6 @@ public class GoldUpgrade : Upgrade
 
     public override void Apply(GameObject player)
     {
-        UnitySingleton<CurrencyManager>.Instance.currencyPerObjective += (int)(moreGoldPerHeart * (1 + Stats.Instance.money.IncreaseOnAllMoneyUpgrades));
+        UnitySingleton<CurrencyManager>.Instance.IncreaseObjectiveWorth(moreGoldPerHeart);
     }
 }

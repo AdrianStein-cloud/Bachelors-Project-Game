@@ -48,6 +48,7 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
 
     private void Start()
     {
+        upgrades.ForEach(x => x.Purchased = 0);
         currencyManager = GetComponent<CurrencyManager>();
         availableUpgrades = new List<Upgrade>(upgrades);
         upgradeUIController = FindAnyObjectByType<UpgradeUIController>();
@@ -55,6 +56,7 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
         upgradeUIController.SetRerollPrice(RerollPrice);
 
         player = GameObject.FindWithTag("Player");
+
 
         RefreshUpgrades();
 
@@ -82,7 +84,7 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
 
     public void RefreshUpgrades()
     {
-        var upgradesCopy = new List<Upgrade>(availableUpgrades);
+        var upgradesCopy = new List<Upgrade>(availableUpgrades.Where(x => x.Limit == 0 || (x.Limit > 0 && x.Purchased < x.Limit)));
         var randomUpgrades = Enumerable.Range(0, Math.Min(selectionAmount, upgradesCopy.Count)).Select(_ => {
             var upgrade = upgradesCopy.GetRollFromWeights(random);
             upgradesCopy.Remove(upgrade);
@@ -107,10 +109,11 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
     {
         if (currencyManager.Spend(upgrade.Price))
         {
+            upgrade.Purchased++;
             upgradeUIController.RemoveUpgrade(upgrade);
             availableUpgrades.Remove(upgrade);
             currentUpgrades.Remove(upgrade);
-            availableUpgrades.AddRange(upgrade.NewlyAvailableUpgrades);
+            availableUpgrades.AddRange(upgrade.NewlyAvailableUpgrades.Where(x => x.Limit == 0 || (x.Limit > 0 && x.Purchased < x.Limit)));
             upgrade.Apply(player);
 
             upgradeUIController.SetRerollPrice(RerollPrice);

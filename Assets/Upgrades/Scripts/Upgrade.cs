@@ -15,6 +15,9 @@ public abstract class Upgrade : ScriptableObject, IWeighted
     public int Price { get; set; }
     public string Description => string.Format(description, Args);
 
+    [field: SerializeField] public int Limit { get; set; }
+    public int Purchased { get; set; }
+
     protected virtual object[] Args => new object[0];
 
     public int Weight => Rarity.GetChance();

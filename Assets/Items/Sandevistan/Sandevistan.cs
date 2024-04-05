@@ -30,7 +30,7 @@ public class Sandevistan : Item
     {
         if(timer > 0)
         {
-            timer -= Time.unscaledDeltaTime;
+            timer -= Time.deltaTime;
             timerText.text = timer.ToString("F1") + " s";
             if (timer < 0.5) timerText.text = string.Empty;
         }
