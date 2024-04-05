@@ -27,10 +27,10 @@ public class EventManager : MonoBehaviour
 
         events = new List<WeightedEvent>
         {
-            //new WeightedEvent(Flooded, 100),
-            //new WeightedEvent(PowerOutage, 100),
+            new WeightedEvent(Flooded, 100),
+            new WeightedEvent(PowerOutage, 100),
             new WeightedEvent(Foggy, 100),
-            //new WeightedEvent(NoEvent, 200)
+            new WeightedEvent(NoEvent, 200)
         };
 
         Instance = this;
