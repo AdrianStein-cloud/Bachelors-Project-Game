@@ -33,8 +33,6 @@ public class WolfFlee : StateProcess<WolfState>
     {
         Debug.Log("RUN");
 
-        sounds.RunawaySound();
-
         rooms = new List<GameObject>(GameObject.FindObjectOfType<DungeonGenerator>().spawnedRooms).OrderBy(g => Vector3.Distance(transform.position, g.transform.position)).ToList();
 
         var farRooms = rooms.Where(g => Vector3.Distance(transform.position, g.transform.position) > minimumRange).ToList();

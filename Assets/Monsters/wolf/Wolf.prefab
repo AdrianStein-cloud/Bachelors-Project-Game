@@ -3035,8 +3035,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5dddb0529883f46acdb5865f3b8764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumRange: 150
-  speed: 50
+  minimumRange: 300
+  speed: 55
 --- !u!114 &3885766423454747285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3052,6 +3052,7 @@ MonoBehaviour:
   movespeed: 40
   attackStartRange: 15
   damage: 10
+  seenRangeAllowHit: 25
 --- !u!114 &8313918664003729253
 MonoBehaviour:
   m_ObjectHideFlags: 0
