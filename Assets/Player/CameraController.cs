@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Data.Common;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 //https://github.com/deadlykam/TutorialFPSRotation/blob/20c94069f25b51205404a644a49f7b378506668e/TutorialFPSRotation/Assets/TutorialFPSRotation/Scripts/PlayerRotateSmooth.cs
 public class CameraController : MonoBehaviour
@@ -18,6 +20,12 @@ public class CameraController : MonoBehaviour
     [SerializeField] Transform cameraPosition;
     [SerializeField] PlayerMovement player;
 
+    [Header("Lean Properties")]
+    [SerializeField] bool enableLeaning;
+    [SerializeField] float leanAngle;
+    [SerializeField] float leanTime;
+    [SerializeField] float leanOffset;
+
     [Header("Smoothing Properties")]
     [SerializeField] float smoothTime;
     [SerializeField] Transform horiRotHelper;
@@ -32,8 +40,12 @@ public class CameraController : MonoBehaviour
     float startingSensitivityMultiplier;
 
     float xOld;
+    float rotZ;
     float xAngularVelocity;
     float yAngularVelocity;
+
+    bool leaningLeft;
+    bool leaningRight;
 
     private void Start()
     {
@@ -61,26 +73,59 @@ public class CameraController : MonoBehaviour
         dir = context.ReadValue<Vector2>();
     }
 
-    public void LerpPosition(Vector3 position, float smoothTime)
+    void LeanLeft()
     {
-        CameraFollowsPlayer = false;
-        StartCoroutine(LerpPositionCoroutine(position, smoothTime));
+        if (InputManager.Player.LeanLeft.triggered)
+        {
+            StopAllCoroutines();
+            leaningLeft = !leaningLeft;
+            StartCoroutine(leaningLeft ? LerpLean(-leanOffset, leanAngle) : LerpLean(0f, 0f));
+            leaningRight = false;
+        }
     }
 
-    IEnumerator LerpPositionCoroutine(Vector3 position, float smoothTime)
+    void LeanRight()
+    {
+        if (InputManager.Player.LeanRight.triggered)
+        {
+            StopAllCoroutines();
+            leaningRight = !leaningRight;
+            StartCoroutine(leaningRight ? LerpLean(leanOffset, -leanAngle) : LerpLean(0f, 0f));
+            leaningLeft = false;
+        }
+    }
+
+    IEnumerator LerpLean(float positionValue, float rotationValue)
     {
         float elapsedTime = 0;
-        var startValue = transform.position;
-        while (elapsedTime < smoothTime)
+        var startPositionX = cameraPosition.localPosition.x;
+        var startRotationZ = transform.eulerAngles.z;
+        startRotationZ = startRotationZ > 180 ? -(360 - startRotationZ) : startRotationZ;
+
+        while (elapsedTime < leanTime)
         {
-            transform.position = Vector2.Lerp(startValue, position, elapsedTime / smoothTime);
-            elapsedTime += Time.unscaledDeltaTime;
+            var pos = cameraPosition.localPosition;
+            pos.x = Mathf.Lerp(startPositionX, positionValue, elapsedTime / leanTime);
+            cameraPosition.localPosition = pos;
+
+            rotZ = Mathf.Lerp(startRotationZ, rotationValue, elapsedTime / leanTime);
+
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        rotZ = rotationValue;
+        cameraPosition.localPosition = cameraPosition.localPosition.WithX(positionValue);
     }
 
     private void Update()
     {
+        if (enableLeaning)
+        {
+            LeanLeft();
+            LeanRight();
+        }
+
         Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, currentFov * (player.IsRunning ? runFOVChangeAmount : 1f), runFOVChangeSpeed * Time.deltaTime);
 
         if (CameraFollowsPlayer)
@@ -98,7 +143,7 @@ public class CameraController : MonoBehaviour
         //var yRotation = transform.localRotation.eulerAngles.y + mouseDir.x;
 
         horiRotHelper.Rotate(Vector3.up * mouseDir.x, Space.Self);
-        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        transform.localRotation = Quaternion.Euler(xRotation, yRotation, rotZ);
         player.transform.Rotate(Vector3.up * mouseDir.x);
     }
 

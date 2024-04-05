@@ -9,5 +9,6 @@ public class WandererInfo : MonoBehaviour
     public GameObject DoorToOpen;
     public GameObject TargetPlayer;
     public Vector3 LastSeenPlayerLocation;
+    public Vector3 DecoyPosition;
     public bool IsChasing;
 }
