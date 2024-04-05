@@ -199,6 +199,10 @@ MonoBehaviour:
     enemyPrefab: {fileID: 8978024783357441720, guid: 4dbec6c72cfa7da4e8a290c0d81fedd0,
       type: 3}
     <Weight>k__BackingField: 100
+  - name: Wolf
+    enemyPrefab: {fileID: 2570288785515748785, guid: 2a118a61456524b44ad0e3322b6be2dc,
+      type: 3}
+    <Weight>k__BackingField: 50
   extraEnemies: 0
 --- !u!114 &7560089572570469592
 MonoBehaviour:
