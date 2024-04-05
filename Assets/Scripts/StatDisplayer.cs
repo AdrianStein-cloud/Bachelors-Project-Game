@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,7 +18,9 @@ public class StatDisplayer : MonoBehaviour
 
     public void RefreshStats()
     {
-        statText.text = "Money: " + UnitySingleton<CurrencyManager>.Instance.Currency + "$\n" +
+        try
+        {
+            statText.text = "Money: " + UnitySingleton<CurrencyManager>.Instance.Currency + "$\n" +
                         "Health: " + Stats.Instance.player.health + "\n" +
                         "Stamina: " + Stats.Instance.player.stamina + "\n" +
                         "Stamina Recovery: " + Stats.Instance.player.staminaRecovery + "\n" +
@@ -25,6 +28,11 @@ public class StatDisplayer : MonoBehaviour
                         "Bill Gates Increase: " + Stats.Instance.money.IncreaseOnAllMoneyUpgrades * 100 + "%\n" +
                         "Heart Worth: " + Stats.Instance.money.HeartWorth + "$\n" +
                         "Money / Dmg Taken: " + GetRiskyMoves() + "$\n";
+        }
+        catch (Exception e)
+        {
+            statText.text = e.Message;
+        }
     }
 
     public int GetRiskyMoves()

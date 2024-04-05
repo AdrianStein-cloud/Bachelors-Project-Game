@@ -100,6 +100,11 @@ public class DramaMaker : Interactable
 
     private void PressButton()
     {
+        if(drama == null)
+        {
+            SetRandomDrama(0);
+            return;
+        }
         InteractionUIText.Instance.SetText("");
         buttonSound.Play();
         transform.position -= new Vector3(0, 0.09f, 0);
@@ -139,11 +144,11 @@ public class DramaMaker : Interactable
         {
             PressButton();
         }
-        if (drama.drama == TurnOffLights && GameSettings.Instance.PowerOutage)
+        if (drama != null && drama.drama == TurnOffLights && GameSettings.Instance.PowerOutage)
         {
             SetRandomDrama(0);
         }
-        if (drama.drama == TurnOffFog && GameSettings.Instance.Event != "Foggy!")
+        if (drama != null && drama.drama == TurnOffFog && GameSettings.Instance.Event != "Foggy!")
         {
             SetRandomDrama(0);
         }
