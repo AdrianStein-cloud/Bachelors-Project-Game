@@ -3049,7 +3049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 393dd7f42bba46445836d3f2c3636c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movespeed: 25
+  movespeed: 40
   attackStartRange: 15
   damage: 10
 --- !u!114 &8313918664003729253
@@ -3076,7 +3076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2750999c1a4ab904c8c00a1e0e021a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 20
   destRoom: {fileID: 0}
 --- !u!114 &694162290895148543
 MonoBehaviour:
