@@ -790,6 +790,9 @@ MonoBehaviour:
   runFOVChangeSpeed: 5
   cameraPosition: {fileID: 5697493602818644934}
   player: {fileID: 5852719042983267109}
+  leanAngle: 10
+  leanTime: 0.25
+  leanOffset: 2.5
   smoothTime: 0
   horiRotHelper: {fileID: 8539900549924396746}
   stunSensitivityMultiplier: 0.25
