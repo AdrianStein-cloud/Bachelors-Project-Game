@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WandererStateController : StateController<WandererState>, IStunnable
+public class WandererStateController : StateController<WandererState>, IStunnable, IDistractable
 {
     bool stunned = false;
 
@@ -22,6 +22,11 @@ public class WandererStateController : StateController<WandererState>, IStunnabl
         stunned = false;
     }
 
+    public void Distract(Vector3 position)
+    {
+        GetComponent<WandererInfo>().DecoyPosition = position;
+        SwitchState(WandererState.Distracted);
+    }
 }
 
 public enum WandererState
@@ -34,5 +39,6 @@ public enum WandererState
     OpenDoor,
     LookingForPlayer,
     FoundPlayer,
-    Stunned
+    Stunned,
+    Distracted
 }

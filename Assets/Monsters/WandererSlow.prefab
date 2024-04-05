@@ -1658,6 +1658,7 @@ GameObject:
   - component: {fileID: -3388323793867589819}
   - component: {fileID: -3565055126115186243}
   - component: {fileID: -1455468899765472073}
+  - component: {fileID: 8407968035854576419}
   m_Layer: 10
   m_Name: WandererSlow
   m_TagString: Enemy
@@ -1905,6 +1906,7 @@ MonoBehaviour:
   DoorToOpen: {fileID: 0}
   TargetPlayer: {fileID: 0}
   LastSeenPlayerLocation: {x: 0, y: 0, z: 0}
+  DecoyPosition: {x: 0, y: 0, z: 0}
   IsChasing: 0
 --- !u!114 &5701924974620700261
 MonoBehaviour:
@@ -1929,6 +1931,8 @@ MonoBehaviour:
     Value: {fileID: -3388323793867589819}
   - Key: 6
     Value: {fileID: -3565055126115186243}
+  - Key: 9
+    Value: {fileID: 8407968035854576419}
   stateInterrupts:
   - Key: 5
     Value: {fileID: 517689836278078639}
@@ -2102,6 +2106,18 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0deafc0b4d041fd4cb0369fd65a15a5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8407968035854576419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978024783357441720}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8ee9b05a6a3fe4787ab103c62ce52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3622890973146290634
