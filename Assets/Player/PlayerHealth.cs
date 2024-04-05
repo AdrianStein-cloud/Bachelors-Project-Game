@@ -44,6 +44,7 @@ public class PlayerHealth : MonoBehaviour
         maxHealth += health;
         this.health += health;
         UpdateHealthBar();
+        Stats.Instance.player.health = maxHealth;
     }
 
     public void RemoveMaxHealth(int health)
@@ -51,6 +52,7 @@ public class PlayerHealth : MonoBehaviour
         maxHealth -= health;
         if (this.health > maxHealth) this.health = maxHealth;
         UpdateHealthBar();
+        Stats.Instance.player.health = maxHealth;
     }
 
     public void TakeDamage(int damage)

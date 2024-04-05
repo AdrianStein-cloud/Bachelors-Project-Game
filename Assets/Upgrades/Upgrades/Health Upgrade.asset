@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Armor
   description: Gives +{0} health
-  rarity: 1
+  Rarity: 0
+  Tags: 0
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
-  health: 40
+  <Limit>k__BackingField: 1
+  health: 25

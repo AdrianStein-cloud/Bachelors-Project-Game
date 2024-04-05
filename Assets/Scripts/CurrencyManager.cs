@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CurrencyManager : MonoBehaviour
 {
-    public int currencyPerObjective = 10;
+    private int currencyPerObjective = 10;
 
     [SerializeField] int currentCurrency = 0;
 
@@ -18,6 +18,12 @@ public class CurrencyManager : MonoBehaviour
             currentCurrency = value;
             currencyText.text = $"{currentCurrency} $";
         }
+    }
+
+    public void IncreaseObjectiveWorth(int increase)
+    {
+        currencyPerObjective += (int)(increase * (1 + Stats.Instance.money.IncreaseOnAllMoneyUpgrades));
+        Stats.Instance.money.HeartWorth = currencyPerObjective;
     }
 
     TextMeshProUGUI currencyText;

@@ -24,12 +24,12 @@ public class DramaMaker : Interactable
 
         gameManager = FindObjectOfType<GameManager>();
 
-        SetRandomDrama();
+        UnitySingleton<GameManager>.Instance.OnDungeonGenerated += SetRandomDrama;
 
         buttonSound = GetComponent<AudioSource>();
     }
 
-    private void SetRandomDrama()
+    private void SetRandomDrama(int why)
     {
         dramaList = new List<WeightedDrama>
         {
@@ -46,9 +46,21 @@ public class DramaMaker : Interactable
             dramaList.Add(new WeightedDrama(TurnOnLights, 100, -50, "Warning!\nAre you sure you want to turn on the backup generators?\n(penalty -50$)"));
         }
 
+        if(GameSettings.Instance.Event == "Foggy!")
+        {
+            dramaList.Add(new WeightedDrama(TurnOffFog, 1000, -20, "Warning!\nAre you sure you want to turn on the ventilation system?\n(penalty -20$)"));
+        }
+
         drama = dramaList.GetRollFromWeights(random);
 
         computer.text = drama.ToString();
+    }
+
+    private void TurnOffFog()
+    {
+        StartCoroutine(SlowWrite(computer, "Successfully Started Ventilation System."));
+        GameSettings.Instance.Event = null;
+        EventManager.Instance.ResetFog();
     }
 
     private void TurnOffLights()
@@ -129,7 +141,11 @@ public class DramaMaker : Interactable
         }
         if (drama.drama == TurnOffLights && GameSettings.Instance.PowerOutage)
         {
-            SetRandomDrama();
+            SetRandomDrama(0);
+        }
+        if (drama.drama == TurnOffFog && GameSettings.Instance.Event != "Foggy!")
+        {
+            SetRandomDrama(0);
         }
     }
 
