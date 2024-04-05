@@ -10,6 +10,9 @@ public abstract class Throwable : MonoBehaviour
 
     bool canDetonate = true;
 
+    [SerializeField] private bool hasExplosionForce;
+    [SerializeField] private float explosionForce, explosionForceRadius;
+
     private void Awake()
     {
         throwSource.Play();
@@ -34,6 +37,7 @@ public abstract class Throwable : MonoBehaviour
         detonateSource.Play();
         OnDetonate();
         //Destroy(gameObject);
+        if (hasExplosionForce) DoExplosionForce();
     }
 
     protected abstract void OnDetonate();
@@ -44,5 +48,16 @@ public abstract class Throwable : MonoBehaviour
         {
             Detonate();
         }
+    }
+
+    void DoExplosionForce()
+    {
+        var hits = Physics.OverlapSphere(transform.position, explosionForceRadius);
+
+        foreach(var hit in hits)
+        {
+            if (hit.TryGetComponent(out Rigidbody rb)) rb.AddExplosionForce(explosionForce, transform.position, explosionForceRadius);
+        }
+
     }
 }

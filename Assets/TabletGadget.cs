@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class TabletGadget : MonoBehaviour
 
     public BatteryItem batteryPrefab;
     public BatteryItem battery;
+
+    public Action<bool> onToggle;
 
     Animator anim;
     float lastTimeUsed;
@@ -49,6 +52,7 @@ public class TabletGadget : MonoBehaviour
         lastTimeUsed = Time.time;
         equipped = !equipped;
         anim.SetTrigger("Toggle");
+        onToggle?.Invoke(equipped);
         //PostProcessingHandler.Instance.SetDOF(tabletEquipped);
         return true;
     }

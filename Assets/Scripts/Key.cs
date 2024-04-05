@@ -10,7 +10,7 @@ public class Key : Interactable
     {
         if (inFocus && InputManager.Player.Interact.triggered)
         {
-            Stats.Instance.player.keysHeld++;
+            Stats.Instance.player.AddKey();
             Destroy(gameObject);
         }
     }

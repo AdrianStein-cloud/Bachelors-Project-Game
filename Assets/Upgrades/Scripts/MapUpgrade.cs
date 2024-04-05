@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
-using static UnityEditorInternal.ReorderableList;
 
 [CreateAssetMenu(fileName = "Map upgrade", menuName = "Upgrades/Map upgrade")]
 public class MapUpgrade : Upgrade

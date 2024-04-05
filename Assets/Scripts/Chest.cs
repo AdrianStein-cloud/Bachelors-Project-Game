@@ -30,7 +30,7 @@ public class Chest : Interactable
         valuables.ForEach(x => x.GetComponentInChildren<Collectable>().onCollect = objectiveTracker.ObjetiveCollected);
 
         Destroy(GetComponent<BoxCollider>());
-        Stats.Instance.player.keysHeld--;
+        Stats.Instance.player.RemoveKey();
         animator.SetTrigger("Open");
         isOpen = true;
         StartCoroutine(EnableHearts());

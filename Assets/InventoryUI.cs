@@ -8,11 +8,19 @@ public class InventoryUI : MonoBehaviour
 
     public List<GameObject> inventorySlotBorders;
 
+    [SerializeField] private Image keyImage;
+
     public GameObject currentSlot;
 
     private void Awake()
     {
         Instance = this;
+        SetKeyImageActive(false);
+    }
+
+    public void SetKeyImageActive(bool active)
+    {
+        keyImage.gameObject.SetActive(active);
     }
 
     public void SetCurrentSlot(int index)

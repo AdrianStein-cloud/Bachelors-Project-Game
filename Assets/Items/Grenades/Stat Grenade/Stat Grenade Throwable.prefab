@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Buff Grenade
-  icon: {fileID: 21300000, guid: 25bcf9c9726c62f419dc64fe9d46359f, type: 3}
+  icon: {fileID: 21300000, guid: e671efc41a351f64288d509a5a471ecc, type: 3}
   throwablePrefab: {fileID: 6512612436465038166, guid: a593778ce835ed54fb9b6fce6a211c13,
     type: 3}
   throwForce: 100

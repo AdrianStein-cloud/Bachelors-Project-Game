@@ -12,9 +12,26 @@ public class SecurityCameraScript : MonoBehaviour
     public TextMeshProUGUI nameText;
     public string camName;
 
-    public void Init()
+    new Camera camera;
+    TabletGadget tablet;
+
+    public void Init(TabletGadget tablet)
     {
+        this.tablet = tablet;
+        camera = GetComponentInChildren<Camera>();
+        tablet.battery.OnDead += RemoveCamera;
+        tablet.onToggle += RemoveCameraIfFalse;
+
         nameText.text = camName;
+        UnitySingleton<CameraManager>.Instance.cameraPositions.Add(camera, gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        tablet.battery.OnDead -= RemoveCamera;
+        tablet.onToggle -= RemoveCameraIfFalse;
+        UnitySingleton<CameraManager>.Instance.activeCameras.Remove(camera);
+        UnitySingleton<CameraManager>.Instance.cameraPositions.Remove(camera);
     }
 
     private void Update()
@@ -28,6 +45,16 @@ public class SecurityCameraScript : MonoBehaviour
         var miliseconds = (timePlaced - (int)timePlaced) * 1000;
 
         timePlacedText.text = string.Format("{0:00}.{1:00}.{2:00}", hours, minutes, seconds);
+    }
+
+    void RemoveCamera()
+    {
+        UnitySingleton<CameraManager>.Instance.activeCameras.Remove(camera);
+    }
+
+    void RemoveCameraIfFalse(bool value)
+    {
+        if(!value) RemoveCamera();
     }
 
     private void OnTriggerStay(Collider other)

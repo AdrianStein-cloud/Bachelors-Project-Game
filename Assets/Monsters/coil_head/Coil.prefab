@@ -590,7 +590,7 @@ MonoBehaviour:
   doorFindDistance: 10
   blocking:
     serializedVersion: 2
-    m_Bits: 577
+    m_Bits: 65
   visiblePoints:
   - {fileID: 4370999595112572796}
   - {fileID: 4083371728497408759}

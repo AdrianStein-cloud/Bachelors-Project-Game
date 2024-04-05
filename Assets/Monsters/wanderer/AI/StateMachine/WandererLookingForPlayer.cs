@@ -14,11 +14,13 @@ public class WandererLookingForPlayer : StateProcess<WandererState>
         sight = GetComponent<WandererSight>();
         info = GetComponent<WandererInfo>();
         anim = GetComponent<Animator>();
+        GetComponent<WandererSounds>().OnScreamEnd += () => StartCoroutine(SearchRoom());
     }
 
     private void OnEnable()
     {
-        StartCoroutine(SearchRoom());
+        movement.Stop();
+        anim.SetTrigger("Scream");
     }
 
     private void OnDisable()

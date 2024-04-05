@@ -78,18 +78,33 @@ MonoBehaviour:
   endRooms:
   - corridorOnly: 0
     room: {fileID: 6404158268688364315, guid: 1986930d39facb443a5b4da6f1f53157, type: 3}
+    useMaxAmount: 0
+    maxAmount: 0
     <Weight>k__BackingField: 100
   - corridorOnly: 1
     room: {fileID: 7813503066319441342, guid: cf2c72df1e5e3b041907ae370b7991fd, type: 3}
+    useMaxAmount: 0
+    maxAmount: 0
     <Weight>k__BackingField: 200
   - corridorOnly: 1
     room: {fileID: 8620508088445856826, guid: dbd82918bb4dfb14993836d7172605f4, type: 3}
+    useMaxAmount: 0
+    maxAmount: 0
     <Weight>k__BackingField: 200
   - corridorOnly: 1
     room: {fileID: 7680414859084646631, guid: cf5d85f43e413e64aa01bdd92dbaed45, type: 3}
+    useMaxAmount: 0
+    maxAmount: 0
     <Weight>k__BackingField: 200
   - corridorOnly: 1
     room: {fileID: 1421951242794949396, guid: 955bdf06bec7c4a46a9cfda80bc0744e, type: 3}
+    useMaxAmount: 0
+    maxAmount: 0
+    <Weight>k__BackingField: 100
+  - corridorOnly: 0
+    room: {fileID: 6404158268688364315, guid: 66b24085c997b47458df89ec3f2f490b, type: 3}
+    useMaxAmount: 1
+    maxAmount: 1
     <Weight>k__BackingField: 200
   startRoom: {fileID: 3502592813776399691, guid: 71fc35092c2e358448a1f1ecca347030,
     type: 3}

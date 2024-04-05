@@ -942,6 +942,9 @@ MonoBehaviour:
   throwSource: {fileID: 6522320169110391759}
   detonateSource: {fileID: -2727665318585686433}
   detonationTime: 2
+  hasExplosionForce: 1
+  explosionForce: 10000
+  explosionForceRadius: 100
   explosionRadius: 30
   effectDuration: 4
   particles:
