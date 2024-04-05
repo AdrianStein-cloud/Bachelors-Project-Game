@@ -59,6 +59,6 @@ MonoBehaviour:
   activationLayer:
     serializedVersion: 2
     m_Bits: 8388608
-  placeDistance: 30
+  placeDistance: 20
   maxActivationDistance: 200
   <MineCount>k__BackingField: 3

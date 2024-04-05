@@ -8,8 +8,10 @@ public class Decoymine : MonoBehaviour
     [SerializeField] float soundDuration;
     [SerializeField] float blinkDelay;
 
+    public bool Activated { get; private set; }
+
     AudioSource source;
-    bool activated;
+    GameObject outline;
 
     private void Awake()
     {
@@ -19,12 +21,15 @@ public class Decoymine : MonoBehaviour
     public void Init()
     {
         GetComponent<Collider>().enabled = true;
+        outline = transform.GetChild(0).gameObject;
+        outline.SetActive(true);
     }
 
     public void Activate()
     {
-        if (activated) return;
-        activated = true;
+        if (Activated) return;
+        Activated = true;
+        SetOutline(false);
 
         StartCoroutine(Blink());
 
@@ -54,4 +59,6 @@ public class Decoymine : MonoBehaviour
             yield return new WaitForSeconds(blinkDelay);
         }
     }
+
+    public void SetOutline(bool value) => outline.SetActive(!Activated && value);
 }

@@ -39,6 +39,7 @@ public class DecoymineController : Item
         if (gameManager != null)
             gameManager.OnWaveOver += () =>
             {
+                mines = new();
                 currentMineCount = MineCount;
                 UpdateCounter();
             };
@@ -85,6 +86,11 @@ public class DecoymineController : Item
     public override void Select()
     {
         isSelected = true;
+
+        foreach (var mine in mines)
+        {
+            mine.SetOutline(true);
+        }
     }
 
     public override void Deselect()
@@ -92,6 +98,10 @@ public class DecoymineController : Item
         isSelected = false;
         canPlace = false;
         ghostMine.SetActive(false);
+        foreach (var mine in mines)
+        {
+            mine.SetOutline(false);
+        }
     }
 
     private void TryPlace()
