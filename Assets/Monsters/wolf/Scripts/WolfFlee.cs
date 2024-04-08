@@ -11,20 +11,14 @@ public class WolfFlee : StateProcess<WolfState>
     Animator anim;
     WolfInfo info;
     WolfMovement movement;
-    WolfStateController controller;
-    WolfSounds sounds;
-
-    List<GameObject> rooms;
 
     GameObject player;
 
-    // Start is called before the first frame update
+
     void Awake()
     {
-        sounds = GetComponent<WolfSounds>();
         info = GetComponent<WolfInfo>();
         movement = GetComponent<WolfMovement>();
-        controller = GetComponent<WolfStateController>();
         anim = GetComponentInChildren<Animator>();
     }
 
@@ -34,13 +28,16 @@ public class WolfFlee : StateProcess<WolfState>
         anim.SetBool("Run", true);
         Debug.Log("RUN");
 
-        /*rooms = new List<GameObject>(UnitySingleton<Dungeon>.Instance.Rooms.Select(r => r.gameObject)).OrderBy(g => Vector3.Distance(transform.position, g.transform.position)).ToList();
-
-        var farRooms = rooms.Where(g => Vector3.Distance(transform.position, g.transform.position) > minimumRange).ToList();
-
-        var roomCenter = farRooms.Count <= 0 ? rooms[rooms.Count - 1].GetComponent<Room>().centerObject : farRooms[0].GetComponent<Room>().centerObject;
-        movement.MoveTo(roomCenter.transform.position, speed, () => controller.SwitchState(WolfState.Roam));*/
-        Flee();
+        if (info.wasCornered | player == null)
+        {
+            info.wasCornered = false;
+            FleeFarAway();
+        }
+        else
+        {
+            Flee();
+        }
+        
     }
 
     void Flee()
@@ -48,36 +45,31 @@ public class WolfFlee : StateProcess<WolfState>
         var playerPos = player.transform.position;
         var distanceToPlayer = Vector3.Distance(transform.position, playerPos);
         if (distanceToPlayer > minimumRange) {
-            controller.SwitchState(WolfState.Roam);
+            StateController.SwitchState(WolfState.Roam);
             return;
         }
         var currentRoom = UnitySingleton<Dungeon>.Instance.GetCurrentRoom(transform.position);
         if(currentRoom == null)
         {
-            Debug.LogWarning("Wolf died of confusion"); //Couldn't get current room (wolf was probably bugged or in a connection room)
-            controller.SwitchState(WolfState.Dead);
+            FleeFarAway();
             return;
         }
-        var diff = playerPos - transform.position;
         var escapeDoor = currentRoom.AdjecentRooms.OrderByDescending(p => Vector3.Distance(p.Key.transform.position, playerPos)).First();
         var nextFleePosition = escapeDoor.Key.transform.position;
-        if (distanceToPlayer > Vector3.Distance(nextFleePosition, playerPos))
+        if (distanceToPlayer > Vector3.Distance(nextFleePosition, playerPos)) //If wolf can no longer run away, but only towards player
         {
-            if(info.seenByPlayer)
-            {
-                var farFleePosition = GetFarAwayRoom();
-                movement.MoveTo(farFleePosition, speed * 1.5f, Flee);
-            }
-            else
-            {
-                controller.SwitchState(WolfState.Roam);
-                return;
-            }
+            StateController.SwitchState(WolfState.Cornered);
         }
         else
         {
             movement.MoveTo(escapeDoor.Value.centerObject.transform.position, speed, Flee);
         }
+    }
+
+    void FleeFarAway()
+    {
+        var farAwayPos = GetFarAwayRoom();
+        movement.MoveTo(farAwayPos, speed, () => StateController.SwitchState(WolfState.Roam));
     }
 
     Vector3 GetFarAwayRoom()

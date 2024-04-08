@@ -2852,6 +2852,7 @@ GameObject:
   - component: {fileID: 8313918664003729253}
   - component: {fileID: 6472924231602981009}
   - component: {fileID: 694162290895148543}
+  - component: {fileID: -8849165241288054999}
   m_Layer: 10
   m_Name: Wolf
   m_TagString: Enemy
@@ -2968,6 +2969,8 @@ MonoBehaviour:
     Value: {fileID: 8313918664003729253}
   - Key: 2
     Value: {fileID: 6472924231602981009}
+  - Key: 4
+    Value: {fileID: -8849165241288054999}
   stateInterrupts: []
   start: 2
   currentState: 2
@@ -2987,6 +2990,7 @@ MonoBehaviour:
   canSeePlayer: 0
   seenByPlayer: 0
   dead: 0
+  wasCornered: 0
 --- !u!114 &5693858442478941618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3103,6 +3107,19 @@ MonoBehaviour:
   runawaySound: {fileID: 8300000, guid: 778edd614dc35eb4a92e52c882895ac7, type: 3}
   dieSound: {fileID: 8300000, guid: 02384d6c520f630429a5570c8e38f9c2, type: 3}
   biteSound: {fileID: 8300000, guid: 43dcc0b44053ba441b1685e7da0b71d9, type: 3}
+--- !u!114 &-8849165241288054999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2570288785515748785}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83148286d73792740ab6877821583ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  corneredDuration: 10
 --- !u!1 &2673547406611391993
 GameObject:
   m_ObjectHideFlags: 0
