@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class EffectGrenade<T> : Throwable
@@ -18,18 +19,18 @@ public abstract class EffectGrenade<T> : Throwable
         {
             if (TryExtractTargetComponent(collider, out T component))
             {
-                StartCoroutine(Effect(component));
+                var coroutineRunner = collider.AddComponent<EmptyScript>();
+                coroutineRunner.StartCoroutine(Effect(component, coroutineRunner));
             }
         }
     }
 
-    IEnumerator Effect(T target)
+    IEnumerator Effect(T target, MonoBehaviour coroutineRunner)
     {
-        if (target == null) Debug.LogWarning("Grenade target was null");
         StartEffect(target);
         yield return new WaitForSeconds(effectDuration);
-        if (target == null) Debug.LogWarning("Grenade target was null");
         EndEffect(target);
+        Destroy(coroutineRunner);
     }
 
     private void OnDrawGizmosSelected()
