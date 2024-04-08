@@ -3049,7 +3049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 393dd7f42bba46445836d3f2c3636c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movespeed: 60
+  movespeed: 50
   attackStartRange: 15
   damage: 10
   seenRangeAllowHit: 25
