@@ -7,6 +7,7 @@ public class Door : MonoBehaviour
     public Quaternion direction;
     private bool doorConnected = false;
     public bool debugHighlight = false;
+    public Door ConnectedDoor { get; private set; }
 
     [Header("Bounding Box")]
     [SerializeField] float bounding_x = 15;
@@ -30,15 +31,16 @@ public class Door : MonoBehaviour
         }
     }
 
-    public void SetDoorConnected(bool connected)
+    public void ConnectDoor(Door other)
     {
-        doorConnected = connected;
+        ConnectedDoor = other;
+        doorConnected = true;
         if(doorWallBlocker != null)
         {
-            if (connected) Destroy(doorWallBlocker);
+            Destroy(doorWallBlocker);
             if (doorRemoveIfNoRoom != null)
             {
-                doorRemoveIfNoRoom.SetActive(connected);
+                doorRemoveIfNoRoom.SetActive(true);
             }
         }
     }

@@ -81,7 +81,7 @@ public class DungeonGenerator : MonoBehaviour
         doorQueue = new Queue<(Door, int)>();
 
         //instantiate first object in rooms
-        GameObject entrance = Instantiate(startRoom, new Vector3(0, 0, 0), transform.rotation, dungeon.transform);
+        GameObject entrance = Instantiate(startRoom, Vector3.zero, Quaternion.identity, dungeon.transform);
         entrance.GetComponent<Room>().InitRoom(random, materials.wall, materials.floor, materials.ceiling);
         playerSpawnPosition = entrance.transform.Find("PlayerSpawnPosition").gameObject;
         spawnedRooms.Add(entrance);
@@ -93,6 +93,7 @@ public class DungeonGenerator : MonoBehaviour
             doorQueue.Enqueue((door, 0));
         }
 
+        Debug.Log(doorQueue.Count);
 
         while (doorQueue.Count > 0)
         {
@@ -156,9 +157,11 @@ public class DungeonGenerator : MonoBehaviour
         List<Door> doors = null;
 
         List<WeightedRoom> tempRandomRooms = new(randomRooms);
+        Debug.Log("Reached 123");
 
         while (tempRandomRooms.Count > 0)
         {
+            Debug.Log("Reached 127");
             WeightedRoom randomRoom;
 
             if (tempRandomRooms.Count > 1) randomRoom = tempRandomRooms.GetRollFromWeights(random);
@@ -170,6 +173,7 @@ public class DungeonGenerator : MonoBehaviour
             Room newRoomScript = randomRoom.room.GetComponent<Room>();
             newRoomScript.depth = depth;
             doors = newRoomScript.GetDoors();
+            Debug.Log("Doors: " + doors.Count);
 
             if (IsColliding(newRoomScript, door, out Door potentialConnection) || (doors.Count == 0 && (depth + 1) % GameSettings.Instance.GenerationLookahead != 0))
             {
@@ -179,11 +183,13 @@ public class DungeonGenerator : MonoBehaviour
             }
             else
             {
+                Debug.Log("Reached X");
                 var newRoom = Instantiate(randomRoom.room, door.gameObject.transform.position, door.direction, dungeon);
                 newRoomScript = newRoom.GetComponent<Room>();
                 doors = newRoomScript.GetDoors();
-                door.SetDoorConnected(true);
-                newRoomScript.GetEntrance().GetComponent<Door>().SetDoorConnected(true);
+                var newEntrance = newRoomScript.GetEntrance();
+                door.ConnectDoor(newEntrance);
+                newEntrance.ConnectDoor(door);
                 newRoomScript.InitRoom(random, materials.wall, materials.floor, materials.ceiling);
                 spawnedRooms.Add(newRoom);
                 spawnedRoomsDepth.Add((newRoom, depth));
@@ -252,8 +258,9 @@ public class DungeonGenerator : MonoBehaviour
                 }
 
                 newRoomScript = newRoom.GetComponent<Room>();
-                door.SetDoorConnected(true);
-                newRoomScript.GetEntrance().GetComponent<Door>().SetDoorConnected(true);
+                var newEntrance = newRoomScript.GetEntrance();
+                door.ConnectDoor(newEntrance);
+                newEntrance.ConnectDoor(door);
                 newRoomScript.InitRoom(random, materials.wall, materials.floor, materials.ceiling);
 
                 spawnedRooms.Add(newRoom);
@@ -343,8 +350,8 @@ public class DungeonGenerator : MonoBehaviour
         EnableCorridorOpeningIfCorridor(from);
         EnableCorridorOpeningIfCorridor(to);
 
-        from.SetDoorConnected(true);
-        to.SetDoorConnected(true);
+        from.ConnectDoor(to);
+        to.ConnectDoor(from);
 
         var floor = Instantiate(floorPrefab, from.transform.position, from.direction, dungeon);
         var scaler = floor.GetComponent<ConnectionRoom>();
@@ -501,8 +508,8 @@ public class DungeonGenerator : MonoBehaviour
                 .ToList()
                 .ForEach(t =>
                 {
-                    t.Item1.SetDoorConnected(true);
-                    t.Item2.SetDoorConnected(true);
+                    t.Item1.ConnectDoor(t.Item2);
+                    t.Item2.ConnectDoor(t.Item1);
                 });
 
 

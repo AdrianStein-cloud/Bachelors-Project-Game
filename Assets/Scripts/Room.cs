@@ -5,9 +5,36 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     [SerializeField] List<GameObject> doors;
+    List<Door> doorScripts;
+    List<Door> Doors { 
+        get
+        {
+            if(doorScripts == null || doorScripts.Count == 0)
+            {
+                doorScripts = doors.Select(d => d.GetComponent<Door>()).ToList();
+            }
+            return doorScripts;
+        } 
+    }
+
+
+    Dictionary<Door, Room> adjecentRooms;
+    public Dictionary<Door, Room> AdjecentRooms
+    {
+        get
+        {
+            if (adjecentRooms == null)
+            {
+                adjecentRooms = Doors
+                    .Where(d => d.GetDoorConnected())
+                    .ToDictionary(d => d, d => d.ConnectedDoor.transform.parent.GetComponent<Room>());
+            }
+            return adjecentRooms;
+        }
+    }
 
     Rigidbody rigidbody;
-    private GameObject entrance;
+    private Door entrance;
 
     [Header("Bounding Box")]
     [SerializeField] public float bounding_x = 50;
@@ -37,16 +64,18 @@ public class Room : MonoBehaviour
     [SerializeField] List<GameObject> floors;
     [SerializeField] List<GameObject> ceilings;
 
+    BoxCollider boxCollider;
+
     private void Awake()
     {
-        BoxCollider boxCollider = GetComponent<BoxCollider>();
+        boxCollider = GetComponent<BoxCollider>();
 
         if (boxCollider == null)
         {
-            BoxCollider detectionCollider = gameObject.AddComponent<BoxCollider>();
-            detectionCollider.isTrigger = true;
-            detectionCollider.size = new Vector3(bounding_x - 1, bounding_y, bounding_z - 1);
-            detectionCollider.center = new Vector3(0 + offset_x, bounding_y / 2 + offset_y, bounding_z / 2 + offset_z);
+            boxCollider = gameObject.AddComponent<BoxCollider>();
+            boxCollider.isTrigger = true;
+            boxCollider.size = new Vector3(bounding_x - 1, bounding_y, bounding_z - 1);
+            boxCollider.center = new Vector3(0 + offset_x, bounding_y / 2 + offset_y, bounding_z / 2 + offset_z);
         }
 
         if(GetComponent<Rigidbody>() == null)
@@ -57,14 +86,7 @@ public class Room : MonoBehaviour
             rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         }
 
-        foreach (GameObject door in doors)
-        {
-            if (door.GetComponent<Door>().isEntrance)
-            {
-                entrance = door;
-                break;
-            }
-        }
+        entrance = Doors.First(d => d.isEntrance);
     }
 
     void OnDrawGizmos()
@@ -75,25 +97,34 @@ public class Room : MonoBehaviour
         Gizmos.DrawWireCube(new Vector3(0 + offset_x, bounding_y/2 + offset_y, bounding_z / 2 + offset_z), new Vector3(bounding_x, bounding_y, bounding_z));
     }
 
-    public GameObject GetEntrance()
+    public bool IsPointWithinRoom(Vector3 point)
+    {
+        /*Vector3 center = boxCollider.center + transform.position;
+        var test = new GameObject("CENTER");
+        test.transform.position = center;
+        Vector3 size = boxCollider.size / 2;
+
+        bool x = point.x >= center.x - size.x & point.x <= center.x + size.x;
+        bool y = point.y >= center.y - size.y & point.y <= center.y + size.y;
+        bool z = point.z >= center.z - size.z & point.z <= center.z + size.z;
+        return x & y & z;*/
+        return boxCollider.bounds.Contains(point);
+    }
+
+    public Door GetEntrance()
     {
         return entrance;
     }
 
     public List<Door> GetDoors()
     {
-        List<Door> doorScripts = new List<Door>();
+        Debug.Log("Count " + doors.Count);
+        return Doors.Where(d => !d.isEntrance).ToList();
+    }
 
-        foreach (GameObject door in doors)
-        {
-            Door doorScript = door.GetComponent<Door>();
-            if (!doorScript.isEntrance)
-            {
-                doorScripts.Add(doorScript);
-            }
-        }
-
-        return doorScripts;
+    public IEnumerable<(Door, Room)> GetAdjecentRooms()
+    {
+        return Doors.Where(d => d.GetDoorConnected()).Select(d => (d, d.ConnectedDoor.transform.parent.GetComponent<Room>()));
     }
 
     public void InitRoom(System.Random random, Material wallMaterial, Material floorMaterial, Material ceilingMaterial)

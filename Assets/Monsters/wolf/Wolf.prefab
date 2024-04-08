@@ -2888,7 +2888,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 5
   m_Speed: 3.5
-  m_Acceleration: 100
+  m_Acceleration: 300
   avoidancePriority: 50
   m_AngularSpeed: 360
   m_StoppingDistance: 12
@@ -3036,7 +3036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimumRange: 300
-  speed: 55
+  speed: 70
 --- !u!114 &3885766423454747285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3049,7 +3049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 393dd7f42bba46445836d3f2c3636c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movespeed: 40
+  movespeed: 60
   attackStartRange: 15
   damage: 10
   seenRangeAllowHit: 25
@@ -3599,7 +3599,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 0
-  MinDistance: 5
+  MinDistance: 3
   MaxDistance: 150
   Pan2D: 0
   rolloffMode: 0

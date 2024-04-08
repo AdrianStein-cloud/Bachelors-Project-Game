@@ -19,13 +19,6 @@ public class WolfPlayerDetection : MonoBehaviour
         info = GetComponent<WolfInfo>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         info.canSeePlayer = CheckIfPlayerNearby(out info.TargetPlayer);
