@@ -20,9 +20,13 @@ public class GameManager : MonoBehaviour
 
     GameObject dungeon;
 
-    private void Start()
+    private void Awake()
     {
         UnitySingleton<GameManager>.BecomeSingleton(this);
+    }
+
+    private void Start()
+    {
         waitingRoomSpawnPoint = GameObject.Find("WaitingRoomSpawnPoint");
         player = GameObject.FindGameObjectWithTag("Player");
         dungeonGenerator = GetComponent<DungeonGenerator>();

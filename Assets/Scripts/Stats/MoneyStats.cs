@@ -9,4 +9,6 @@ public class MoneyStats
     public int HeartWorth = 10;
 
     public int CalculatedFreeRerolls => (int)((1 + IncreaseOnAllMoneyUpgrades) * FreeRerolls);
+
+    public int PiggyBanks = 0;
 }

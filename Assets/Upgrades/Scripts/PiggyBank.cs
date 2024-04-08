@@ -11,12 +11,16 @@ public class PiggyBank : Upgrade
 
     public override void Apply(GameObject player)
     {
-        UnitySingleton<GameManager>.Instance.OnDungeonEnter += () =>
+        if (Stats.Instance.money.PiggyBanks == 0)
         {
-            var currencyManager = UnitySingleton<CurrencyManager>.Instance;
-            float returnOnSavings = currencyManager.Currency * (dungeonEnterGoldPercent / 100f) * (1 + Stats.Instance.money.IncreaseOnAllMoneyUpgrades);
-            currencyManager.AddCurrency((int)returnOnSavings);
+            UnitySingleton<GameManager>.Instance.OnDungeonEnter += () =>
+            {
+                var currencyManager = UnitySingleton<CurrencyManager>.Instance;
+                float returnOnSavings = currencyManager.Currency * (dungeonEnterGoldPercent / 100f) * Stats.Instance.money.PiggyBanks * (1 + Stats.Instance.money.IncreaseOnAllMoneyUpgrades);
+                currencyManager.AddCurrency((int)returnOnSavings);
 
-        };
+            };
+        }
+        Stats.Instance.money.PiggyBanks++;
     }
 }
