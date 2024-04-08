@@ -8,4 +8,5 @@ public class WolfInfo : MonoBehaviour
     public bool canSeePlayer;
     public bool seenByPlayer;
     public bool dead;
+    public bool wasCornered;
 }

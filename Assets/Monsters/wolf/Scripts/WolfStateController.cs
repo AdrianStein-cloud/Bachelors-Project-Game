@@ -29,5 +29,6 @@ public enum WolfState
     Bite,
     Flee,
     Roam,
-    Dead
+    Dead,
+    Cornered
 }
