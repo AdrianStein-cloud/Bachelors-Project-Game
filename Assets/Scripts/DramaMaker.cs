@@ -20,13 +20,12 @@ public class DramaMaker : Interactable
 
     private void Awake()
     {
+        if (random == null) random = new System.Random(GameSettings.Instance.GetSeed());
         UnitySingleton<GameManager>.Instance.OnDungeonGenerated += SetRandomDrama;
     }
 
     private void Start()
     {
-        if (random == null) random = new System.Random(GameSettings.Instance.GetSeed());
-
         gameManager = FindObjectOfType<GameManager>();
 
         buttonSound = GetComponent<AudioSource>();
