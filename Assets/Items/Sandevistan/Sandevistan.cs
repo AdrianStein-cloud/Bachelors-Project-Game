@@ -94,7 +94,7 @@ public class Sandevistan : Item
             elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
-        timer = cooldown;
+        timer = cooldown * Stats.Instance.cooldown.CalculatedRecoverySpeedMultiplier;
     }
 
     public override void Select()

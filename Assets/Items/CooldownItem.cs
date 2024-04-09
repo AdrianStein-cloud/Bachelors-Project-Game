@@ -10,11 +10,13 @@ public abstract class CooldownItem : Item
 
     float usedTime;
 
+    float usedCooldown;
+
     private void FixedUpdate()
     {
         if (!IsOffCooldown)
         {
-            UnitySingleton<Inventory>.Instance.UpdateItemText(this, (cooldown - (Time.time - usedTime)).ToString("N0"));
+            UnitySingleton<Inventory>.Instance.UpdateItemText(this, (usedCooldown - (Time.time - usedTime)).ToString("N0"));
         }
     }
 
@@ -22,7 +24,8 @@ public abstract class CooldownItem : Item
     {
         usedTime = Time.time;
         IsOffCooldown = false;
-        yield return new WaitForSeconds(cooldown);
+        usedCooldown = cooldown * Stats.Instance.cooldown.CalculatedRecoverySpeedMultiplier;
+        yield return new WaitForSeconds(usedCooldown);
         IsOffCooldown = true;
         UnitySingleton<Inventory>.Instance.UpdateItemText(this, "");
     }

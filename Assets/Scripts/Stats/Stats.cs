@@ -8,6 +8,7 @@ public class Stats : MonoBehaviour
     public ElectronicStats eletronics;
     public PlayerStats player;
     public MoneyStats money;
+    public CooldownStats cooldown;
 
 
     private void Awake()
