@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour, IStunnable, ISlowable
     [SerializeField] float smoothCrouchTime;
     [SerializeField] float smoothCrouchSpeed;
     [SerializeField] float ceilingCheckDistance;
+    [SerializeField] LayerMask ceilingCheckMask;
 
     [Header("Jump and Gravity")]
     [SerializeField] bool enableJump = true;
@@ -102,7 +103,7 @@ public class PlayerMovement : MonoBehaviour, IStunnable, ISlowable
         currentSpeed = (IsRunning ? runSpeed : (IsCrouching ? crouchSpeed : walkSpeed)) * speedMultiplier * Stats.Instance.player.speedMultiplier;
         IsWalking = dir.magnitude > 0f && !IsRunning && isGrounded;
 
-        canStand = !Physics.Raycast(groundCheck.position, Vector3.up, ceilingCheckDistance, ~LayerMask.GetMask("Player")) && IsCrouching;
+        canStand = !Physics.Raycast(groundCheck.position, Vector3.up, ceilingCheckDistance, ceilingCheckMask, QueryTriggerInteraction.Ignore) && IsCrouching;
 
         var move = transform.right * dir.x + transform.forward * dir.y;
         controller.Move(Time.unscaledDeltaTime * ((isGrounded ? currentSpeed : airSpeed) * move + velocity));

@@ -38,7 +38,8 @@ public class EventManager : MonoBehaviour
 
     public void SpawnRandomEvent(System.Random random)
     {
-        flood.gameObject.SetActive(false);
+        FindObjectOfType<ElevatorRoom>().OnInDungeon -= EnableFlood;
+        flood.SetActive(false);
         GameSettings.Instance.PowerOutage = false;
         ResetFog();
         if (!guaranteeFlood)
@@ -69,7 +70,7 @@ public class EventManager : MonoBehaviour
     {
         if (GameSettings.Instance.Wave > 3 || guaranteeFlood)
         {
-            flood.SetActive(true);
+            FindObjectOfType<ElevatorRoom>().OnInDungeon += EnableFlood;
             GameSettings.Instance.Event = "Flooded!";
             guaranteeFlood = false;
         }
@@ -78,6 +79,8 @@ public class EventManager : MonoBehaviour
             NoEvent();
         }
     }
+
+    void EnableFlood() => flood.SetActive(true);
 
     private void Foggy()
     {
@@ -139,18 +142,12 @@ public class EventManager : MonoBehaviour
 
     public void SetSizeOfDungeon(Vector3 size)
     {
-        if (flood.activeInHierarchy)
-        {
-            flood.transform.localScale = new Vector3(size.x/10, 1, size.z/10);
-        }
+        flood.transform.localScale = new Vector3(size.x/10, 1, size.z/10);
     }
 
     public void SetCenterOfDungeon(Vector3 center)
     {
-        if (flood.activeInHierarchy)
-        {
-            flood.transform.position = new Vector3(center.x, 3, center.z);
-        }
+        flood.transform.position = new Vector3(center.x, 3, center.z);
     }
 }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,12 +20,12 @@ public class ObjectiveTracker : MonoBehaviour
     private void Awake()
     {
         elevator = FindObjectOfType<ElevatorButton>();
-        elevator.LeaveDungeon = Leave;
+        elevator.LeaveDungeon += Leave;
         exit = FindObjectOfType<ElevatorExit>();
     }
 
-    #if UNITY_EDITOR
-        private void Update()
+#if UNITY_EDITOR
+    private void Update()
         {
             if (Input.GetKeyDown(KeyCode.L))
             {
@@ -66,6 +67,7 @@ public class ObjectiveTracker : MonoBehaviour
 
     private void OnDestroy()
     {
+        elevator.LeaveDungeon -= Leave;
         if(objectiveFill) objectiveFill.fillAmount = 0;
     }
 }

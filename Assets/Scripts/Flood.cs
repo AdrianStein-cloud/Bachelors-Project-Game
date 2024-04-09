@@ -15,6 +15,11 @@ public class Flood : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        FindObjectOfType<ElevatorButton>().LeaveDungeon += () => gameObject.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out ISlowable slowable))

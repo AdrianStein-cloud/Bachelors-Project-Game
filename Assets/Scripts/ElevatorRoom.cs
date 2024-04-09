@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -12,6 +13,8 @@ public class ElevatorRoom : MonoBehaviour
     [SerializeField] float elevatorTime;
 
     public bool Moving { get; private set; }
+    public Action OnInDungeon { get; set; }
+    public Action OnInWaitingRoom { get; set; }
 
     float startPositionY;
 
@@ -42,6 +45,7 @@ public class ElevatorRoom : MonoBehaviour
             yield return new WaitForSeconds(elevatorTime);
             ToggleExitElevator(true);
             Moving = false;
+            OnInDungeon?.Invoke();
 
             var navmeshSurface = FindFirstObjectByType<NavMeshSurface>();
             navmeshSurface.BuildNavMesh();
@@ -58,6 +62,7 @@ public class ElevatorRoom : MonoBehaviour
             yield return new WaitForSeconds(elevatorTime);
             ToggleEntranceElevator(true);
             Moving = false;
+            OnInWaitingRoom?.Invoke();
         }
     }
 

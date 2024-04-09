@@ -1157,6 +1157,9 @@ MonoBehaviour:
   smoothCrouchTime: 1
   smoothCrouchSpeed: 6
   ceilingCheckDistance: 18
+  ceilingCheckMask:
+    serializedVersion: 2
+    m_Bits: 65
   enableJump: 1
   jumpHeight: 12
   groundCheckRadius: 2
