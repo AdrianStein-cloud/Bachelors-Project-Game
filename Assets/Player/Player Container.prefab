@@ -1156,7 +1156,7 @@ MonoBehaviour:
   cameraCrouchOffset: -4.5
   smoothCrouchTime: 1
   smoothCrouchSpeed: 6
-  ceilingCheckDistance: 0
+  ceilingCheckDistance: 18
   enableJump: 1
   jumpHeight: 12
   groundCheckRadius: 2

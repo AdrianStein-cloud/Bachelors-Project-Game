@@ -42,6 +42,7 @@ public class DungeonGenerator : MonoBehaviour
 
     [SerializeField] private GameObject keyPrefab;
     [SerializeField] private GameObject chestPrefab;
+    [SerializeField] private GameObject resetPositionTrigger;
 
     void Awake()
     {
@@ -141,8 +142,15 @@ public class DungeonGenerator : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             var navMesh = Instantiate(navmeshSurface, dungeon.transform);
             navMesh.BuildNavMesh();
-            eventManager.SetSizeOfDungeon(navMesh.navMeshData.sourceBounds.size);
-            eventManager.SetCenterOfDungeon(navMesh.navMeshData.sourceBounds.center);
+
+            var size = navMesh.navMeshData.sourceBounds.size;
+            var center = navMesh.navMeshData.sourceBounds.center;
+
+            eventManager.SetSizeOfDungeon(size);
+            eventManager.SetCenterOfDungeon(center);
+
+            resetPositionTrigger.transform.localScale = new Vector3(size.x + 200, resetPositionTrigger.transform.localScale.y, size.z + 200);
+            resetPositionTrigger.transform.position = new Vector3(center.x, resetPositionTrigger.transform.position.y, center.z);
         }
     }
 
