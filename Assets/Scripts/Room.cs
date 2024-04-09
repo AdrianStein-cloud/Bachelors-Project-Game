@@ -92,9 +92,9 @@ public class Room : MonoBehaviour
 
         entrance = Doors.First(d => d.isEntrance);
 
-        #if !UNITY_EDITOR
+        //#if !UNITY_EDITOR
         UnitySingleton<GameManager>.Instance.OnDungeonGenerated += ReduceLag;
-        #endif
+        //#endif
     }
 
     private void ReduceLag(int why)
@@ -107,7 +107,7 @@ public class Room : MonoBehaviour
         player = FindObjectOfType<PlayerMovement>().gameObject;
         renderers = GetComponentsInChildren<Renderer>();
 
-        float renderDistance = 250f;
+        float renderDistance = 400f;
         bool visible = true;
 
         while (enabled)

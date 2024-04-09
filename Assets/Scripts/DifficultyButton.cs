@@ -14,9 +14,11 @@ public class DifficultyButton : MonoBehaviour
     private static bool isVisible = true;
     public Image _lock;
     private bool locked;
+    private Button button;
 
     private void Start()
     {
+        button = GetComponent<Button>();
         isVisible = true;
         background = gameObject.transform.parent.GetComponent<Image>();
         background.color = new Color(1, 1, 1, 0);
@@ -49,6 +51,7 @@ public class DifficultyButton : MonoBehaviour
     private void Lock(bool locked)
     {
         this.locked = locked;
+        button.enabled = !locked;
 
         if(_lock != null) _lock.gameObject.SetActive(locked);
 
