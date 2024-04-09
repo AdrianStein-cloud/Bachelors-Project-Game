@@ -157,11 +157,9 @@ public class DungeonGenerator : MonoBehaviour
         List<Door> doors = null;
 
         List<WeightedRoom> tempRandomRooms = new(randomRooms);
-        Debug.Log("Reached 123");
 
         while (tempRandomRooms.Count > 0)
         {
-            Debug.Log("Reached 127");
             WeightedRoom randomRoom;
 
             if (tempRandomRooms.Count > 1) randomRoom = tempRandomRooms.GetRollFromWeights(random);
@@ -173,7 +171,6 @@ public class DungeonGenerator : MonoBehaviour
             Room newRoomScript = randomRoom.room.GetComponent<Room>();
             newRoomScript.depth = depth;
             doors = newRoomScript.GetDoors();
-            Debug.Log("Doors: " + doors.Count);
 
             if (IsColliding(newRoomScript, door, out Door potentialConnection) || (doors.Count == 0 && (depth + 1) % GameSettings.Instance.GenerationLookahead != 0))
             {
@@ -183,7 +180,6 @@ public class DungeonGenerator : MonoBehaviour
             }
             else
             {
-                Debug.Log("Reached X");
                 var newRoom = Instantiate(randomRoom.room, door.gameObject.transform.position, door.direction, dungeon);
                 newRoomScript = newRoom.GetComponent<Room>();
                 doors = newRoomScript.GetDoors();
