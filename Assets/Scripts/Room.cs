@@ -1,11 +1,15 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Room : MonoBehaviour
 {
     [SerializeField] List<GameObject> doors;
     List<Door> doorScripts;
+    GameObject player;
+    Renderer[] renderers;
     List<Door> Doors { 
         get
         {
@@ -87,6 +91,53 @@ public class Room : MonoBehaviour
         }
 
         entrance = Doors.First(d => d.isEntrance);
+
+        UnitySingleton<GameManager>.Instance.OnDungeonGenerated += ReduceLag;
+    }
+
+    private void ReduceLag(int why)
+    {
+        StartCoroutine(ReduceLagCoroutine());
+    }
+
+    IEnumerator ReduceLagCoroutine()
+    {
+        player = FindObjectOfType<PlayerMovement>().gameObject;
+        renderers = GetComponentsInChildren<Renderer>();
+
+        float renderDistance = 250f;
+        bool visible = true;
+
+        while (enabled)
+        {
+            yield return new WaitForSeconds(1f);
+            if(Vector3.Distance(player.transform.position, transform.position) >= renderDistance && visible)
+            {
+                foreach(Renderer renderer in renderers)
+                {
+                    if(renderer == null)
+                    {
+                        renderers = GetComponentsInChildren<Renderer>();
+                        break;
+                    }
+                    renderer.enabled = false;
+                }
+                visible = false;
+            }
+            else if(Vector3.Distance(player.transform.position, transform.position) < renderDistance && !visible)
+            {
+                foreach (Renderer renderer in renderers)
+                {
+                    if (renderer == null)
+                    {
+                        renderers = GetComponentsInChildren<Renderer>();
+                        break;
+                    }
+                    renderer.enabled = true;
+                }
+                visible = true;
+            }
+        }
     }
 
     void OnDrawGizmos()
