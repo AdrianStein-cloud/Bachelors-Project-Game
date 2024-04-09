@@ -26,7 +26,6 @@ public class WolfFlee : StateProcess<WolfState>
     {
         player = info.TargetPlayer;
         anim.SetBool("Run", true);
-        Debug.Log("RUN");
 
         if (info.wasCornered | player == null)
         {
