@@ -61,6 +61,7 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
 
         player = GameObject.FindWithTag("Player");
 
+        FindObjectOfType<Inventory>().OnInventoryFull += RemoveItemUpgrades;
 
         RefreshUpgrades();
 
@@ -112,6 +113,14 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
         });
 
         upgradeUIController.SetRerollPrice(RerollPrice);
+    }
+
+    void RemoveItemUpgrades()
+    {
+        availableUpgrades = availableUpgrades.Where(x => x is not ItemUpgrade).ToList();
+        var itemUpgrades = currentUpgrades.Where(x => x is ItemUpgrade).ToList();
+        currentUpgrades = currentUpgrades.Where(x => x is not ItemUpgrade).ToList();
+        itemUpgrades.ForEach(x => upgradeUIController.RemoveUpgrade(x));
     }
 
     public void ChooseUpgrade(Upgrade upgrade)
