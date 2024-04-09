@@ -29,6 +29,7 @@ public class WolfCornered : StateProcess<WolfState>
     private void OnDisable()
     {
         agent.updateRotation = true;
+        anim.SetBool("Idle", false);
     }
 
     private void Update()

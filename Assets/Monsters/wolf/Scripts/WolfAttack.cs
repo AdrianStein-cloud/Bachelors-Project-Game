@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class WolfAttack : StateProcess<WolfState>
@@ -10,7 +8,6 @@ public class WolfAttack : StateProcess<WolfState>
     public int damage;
     public float seenRangeAllowHit;
 
-    WolfStateController controller;
     WolfInfo info;
     WolfMovement movement;
     WolfSounds sounds;
@@ -23,7 +20,6 @@ public class WolfAttack : StateProcess<WolfState>
 
     private void Awake()
     {
-        controller = GetComponent<WolfStateController>();
         movement = GetComponent<WolfMovement>();
         info = GetComponent<WolfInfo>();
         sounds = GetComponent<WolfSounds>();
@@ -33,6 +29,12 @@ public class WolfAttack : StateProcess<WolfState>
 
     void Update()
     {
+        if(info.TargetPlayer == null)
+        {
+            StateController.SwitchState(WolfState.Roam);
+            return;
+        }
+
         if (info.seenByPlayer && !hasBeenSeen)
         {
             hasBeenSeen = true;
@@ -68,7 +70,7 @@ public class WolfAttack : StateProcess<WolfState>
     IEnumerator WaitBeforeFlee()
     {
         yield return new WaitForSeconds(0.5f);
-        controller.SwitchState(WolfState.Flee);
+        StateController.SwitchState(WolfState.Flee);
     }
 
     void Attack()
@@ -87,7 +89,7 @@ public class WolfAttack : StateProcess<WolfState>
         if (health != null) health.TakeDamage(damage);
 
         //wait animation length
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         anim.SetBool("Attack", false);
         attacking = false;
@@ -95,18 +97,21 @@ public class WolfAttack : StateProcess<WolfState>
         if (hasBeenSeen)
         {
             //Change to flee
-            StartCoroutine(WaitBeforeFlee());
+            StateController.SwitchState(WolfState.Flee);
         }
     }
 
     private void OnEnable()
     {
         hasBeenSeen = false;
+        attacking = false;
         seenRange = 0;
     }
 
     private void OnDisable()
     {
+        anim.SetBool("Attack", false);
+        anim.SetBool("Run", false);
         StopAllCoroutines();
     }
 }
