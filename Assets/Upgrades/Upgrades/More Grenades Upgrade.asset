@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: More Grenades Upgrade
   m_EditorClassIdentifier: 
   Name: More Grenades
-  description: '+{0} grenade foreach different grenade you have.
+  description: '+{0} grenade for each different grenade you have.
 
 
     -{1} health'
-  Rarity: 2
+  Rarity: 3
   Tags: 0
   NewlyAvailableUpgrades: []
   <Limit>k__BackingField: 0
