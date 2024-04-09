@@ -9,12 +9,14 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] Button exitButton;
     [SerializeField] GameObject difficultyMenu;
+    [SerializeField] GameObject credits;
 
     // Start is called before the first frame update
     void Start()
     {
         exitButton.onClick.AddListener(ExitGame);
         difficultyMenu.SetActive(false);
+        HideCredits();
     }
 
     private void ExitGame()
@@ -25,5 +27,15 @@ public class MainMenu : MonoBehaviour
     public void LoadDifficulties()
     {
         difficultyMenu.SetActive(true);
+    }
+
+    public void ShowCredits()
+    {
+        credits.SetActive(true);
+    }
+
+    public void HideCredits()
+    {
+        credits.SetActive(false);
     }
 }
