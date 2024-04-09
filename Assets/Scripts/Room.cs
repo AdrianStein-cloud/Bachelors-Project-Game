@@ -92,7 +92,9 @@ public class Room : MonoBehaviour
 
         entrance = Doors.First(d => d.isEntrance);
 
+        #if !UNITY_EDITOR
         UnitySingleton<GameManager>.Instance.OnDungeonGenerated += ReduceLag;
+        #endif
     }
 
     private void ReduceLag(int why)
