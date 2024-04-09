@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Piggy Bank
   description: Gain {0}% of current $ each floor
-  Rarity: 2
+  Rarity: 1
   Tags: 128
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
-  dungeonEnterGoldPercent: 20
+  <Limit>k__BackingField: 0
+  dungeonEnterGoldPercent: 10

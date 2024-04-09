@@ -15,6 +15,8 @@ public abstract class Throwable : MonoBehaviour
 
     private void Awake()
     {
+        detonationTime = Stats.Instance.grenade.detonateOnImpact ? 0 : detonationTime;
+
         throwSource.Play();
 
         if (detonationTime > 0)
@@ -22,8 +24,6 @@ public abstract class Throwable : MonoBehaviour
             StartCoroutine(DetonateAfterTime());
         }
     }
-
-    protected virtual void Start() { }
 
     private IEnumerator DetonateAfterTime()
     {

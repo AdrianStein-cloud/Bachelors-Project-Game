@@ -37,7 +37,7 @@ public enum Rarity
 public enum Tag
 {
     Cooldown = 1 << 0,
-    Throwable = 1 << 1,
+    Grenade = 1 << 1,
     Electronic = 1 << 2,
     Tablet = 1 << 3,
     Placeable = 1 << 4,
