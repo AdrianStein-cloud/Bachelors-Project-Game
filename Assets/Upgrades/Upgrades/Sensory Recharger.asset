@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Sensory Recharger
   description: Sensor beeps from enemies recharges all batteries by {0}%
-  Rarity: 2
+  Rarity: 0
   Tags: 0
   NewlyAvailableUpgrades: []
-  rechargePercent: 25
+  <Limit>k__BackingField: 5
+  rechargePercent: 5
