@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95e450775eafea4e8d807aa8b3c58fd, type: 3}
   m_Name: Cooldown Upgrade
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Cooldown Reducer
   description: Increases cooldown recovery speed by {0}%
   Rarity: 0
   Tags: 0
-  NewlyAvailableUpgrades: []
+  NewlyAvailableUpgrades:
+  - {fileID: 11400000}
   <Limit>k__BackingField: 0
   cooldownRecoverySpeedPrecentage: 2
