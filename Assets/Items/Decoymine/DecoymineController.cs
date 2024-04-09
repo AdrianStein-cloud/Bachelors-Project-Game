@@ -70,6 +70,11 @@ public class DecoymineController : Item
             ghostMine.SetActive(false);
         }
 
+        foreach (var mine in mines)
+        {
+            var distance = Vector3.Distance(mine.transform.position, Camera.main.transform.position);
+            mine.SetOutline(distance <= maxActivationDistance);
+        }
     }
 
     void Rotate(Transform mine)
@@ -86,11 +91,6 @@ public class DecoymineController : Item
     public override void Select()
     {
         isSelected = true;
-
-        foreach (var mine in mines)
-        {
-            mine.SetOutline(true);
-        }
     }
 
     public override void Deselect()

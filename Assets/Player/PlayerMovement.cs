@@ -129,6 +129,7 @@ public class PlayerMovement : MonoBehaviour, IStunnable, ISlowable
     public void Teleport(Vector3 position)
     {
         controller.enabled = false;
+        ResetSpeed(slowFactor);
         transform.position = position;
         controller.enabled = true;
     }
@@ -233,13 +234,17 @@ public class PlayerMovement : MonoBehaviour, IStunnable, ISlowable
         cameraController.EndStun();
     }
 
+    float slowFactor = 1f;
+
     public void SlowDown(float slowFactor)
     {
+        this.slowFactor = slowFactor;
         speedMultiplier *= slowFactor;
     }
 
     public void ResetSpeed(float slowFactor)
     {
+        this.slowFactor = 1f;
         speedMultiplier /= slowFactor;
     }
 

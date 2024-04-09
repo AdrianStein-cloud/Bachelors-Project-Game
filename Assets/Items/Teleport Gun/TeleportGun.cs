@@ -89,7 +89,7 @@ public class TeleportGun : CooldownItem
 
     bool IsLocationTeleportable(Vector3 location)
     {
-        if (Physics.Raycast(location, Vector3.down, out RaycastHit hit, Mathf.Infinity))
+        if (Physics.Raycast(location, Vector3.down, out RaycastHit hit, Mathf.Infinity, ~LayerMask.GetMask("Water")))
         {
             var gameobject = hit.collider.gameObject;
             if (gameobject.layer == LayerMask.NameToLayer("Ground") 
