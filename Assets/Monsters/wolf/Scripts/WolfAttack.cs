@@ -95,7 +95,6 @@ public class WolfAttack : StateProcess<WolfState>
 
     private void OnEnable()
     {
-        Debug.Log("ATTACK");
         hasBeenSeen = false;
         seenRange = 0;
     }

@@ -25,7 +25,6 @@ public class WolfRoam : StateProcess<WolfState>
 
     private void OnEnable()
     {
-        Debug.Log("Roam");
         Roam();
     }
 

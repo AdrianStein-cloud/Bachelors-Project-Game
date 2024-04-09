@@ -118,7 +118,6 @@ public class Room : MonoBehaviour
 
     public List<Door> GetDoors()
     {
-        Debug.Log("Count " + doors.Count);
         return Doors.Where(d => !d.isEntrance).ToList();
     }
 
