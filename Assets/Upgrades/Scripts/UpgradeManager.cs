@@ -45,6 +45,10 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
 
     readonly System.Random random = new System.Random();
 
+    private void Awake()
+    {
+        UnitySingleton<UpgradeManager>.BecomeSingleton(this);
+    }
 
     private void Start()
     {
@@ -70,6 +74,11 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
             currentRerolls = 0;
             freeRerollsUsed = 0;
         };
+    }
+
+    public List<Upgrade> GetUpgrades()
+    {
+        return upgrades;
     }
 
     public void DisplayUpgrades(Action upgradeChosen = null)
