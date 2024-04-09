@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,9 @@ public class Inventory : MonoBehaviour
     public int itemIndex = 0;
 
     int lastIndex = 0;
+    bool inventoryFull = false;
+
+    public Action OnInventoryFull { get; set; }
 
     private void Awake()
     {
@@ -55,6 +59,13 @@ public class Inventory : MonoBehaviour
         items[index] = item;
         InventoryUI.Instance.SetIcon(index, item.icon);
         items[itemIndex]?.Select();
+
+        if (!inventoryFull && items.Where(x => x != null).Count() >= size)
+        {
+            inventoryFull = true;
+            OnInventoryFull?.Invoke();
+        }
+
         return item;
     }
 
