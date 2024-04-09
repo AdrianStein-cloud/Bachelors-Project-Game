@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Risky Moves
   description: Gain gold equal to damage taken
   Rarity: 2
-  Tags: 128
+  Tags: 192
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
+  <Limit>k__BackingField: 0

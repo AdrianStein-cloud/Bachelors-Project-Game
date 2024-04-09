@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Armor
   description: Gives +{0} health
   Rarity: 0
-  Tags: 0
+  Tags: 64
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
   <Limit>k__BackingField: 12

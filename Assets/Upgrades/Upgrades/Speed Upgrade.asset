@@ -15,5 +15,7 @@ MonoBehaviour:
   Name: Speed
   description: Makes you {0}% faster
   Rarity: 1
+  Tags: 64
   NewlyAvailableUpgrades: []
+  <Limit>k__BackingField: 0
   speedPercentIncrease: 10

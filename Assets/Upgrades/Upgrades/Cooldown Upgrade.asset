@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Cooldown Upgrade
   m_EditorClassIdentifier: 
   Name: 
-  description: 
+  description: Increases cooldown recovery speed by {0}%
   Rarity: 0
   Tags: 0
   NewlyAvailableUpgrades: []
   <Limit>k__BackingField: 0
-  cooldownRecoverySpeedPrecentage: 0
+  cooldownRecoverySpeedPrecentage: 2
