@@ -16,9 +16,10 @@ MonoBehaviour:
   description: '+{0} grenade foreach different grenade you have.
 
 
-    -{1}% speed;'
+    -{1} health'
   Rarity: 2
   Tags: 0
   NewlyAvailableUpgrades: []
+  <Limit>k__BackingField: 0
   extraGrenadesPerGrenade: 1
-  movementSpeedPrecentageDecrease: 20
+  healthPrecentageDecrease: 50
