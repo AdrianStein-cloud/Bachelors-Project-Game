@@ -93,8 +93,6 @@ public class DungeonGenerator : MonoBehaviour
             doorQueue.Enqueue((door, 0));
         }
 
-        Debug.Log(doorQueue.Count);
-
         while (doorQueue.Count > 0)
         {
             if(spawnedRooms.Count == 4)
