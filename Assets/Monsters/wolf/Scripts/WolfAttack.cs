@@ -41,7 +41,7 @@ public class WolfAttack : StateProcess<WolfState>
 
             if (seenRange > seenRangeAllowHit)
             {
-                controller.SwitchState(WolfState.Flee);
+                StartCoroutine(WaitBeforeFlee());
                 return;
             }
         }
@@ -63,6 +63,12 @@ public class WolfAttack : StateProcess<WolfState>
         {
             //If on attack and can't see player, go to roam / idle mode.
         }
+    }
+
+    IEnumerator WaitBeforeFlee()
+    {
+        yield return new WaitForSeconds(0.5f);
+        controller.SwitchState(WolfState.Flee);
     }
 
     void Attack()
@@ -89,7 +95,7 @@ public class WolfAttack : StateProcess<WolfState>
         if (hasBeenSeen)
         {
             //Change to flee
-            controller.SwitchState(WolfState.Flee);
+            StartCoroutine(WaitBeforeFlee());
         }
     }
 

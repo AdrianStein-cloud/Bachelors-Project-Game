@@ -9,4 +9,5 @@ public class WolfInfo : MonoBehaviour
     public bool seenByPlayer;
     public bool dead;
     public bool wasCornered;
+    public Vector3 DecoyPosition;
 }

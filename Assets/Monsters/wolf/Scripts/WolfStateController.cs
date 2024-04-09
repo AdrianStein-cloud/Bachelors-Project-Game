@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WolfStateController : StateController<WolfState>, IStunnable
+public class WolfStateController : StateController<WolfState>, IStunnable, IDistractable
 {
     WolfInfo info;
 
@@ -22,6 +22,12 @@ public class WolfStateController : StateController<WolfState>, IStunnable
         if (!info.dead) SwitchState(WolfState.Dead);
         return this;
     }
+
+    public void Distract(Vector3 position)
+    {
+        GetComponent<WolfInfo>().DecoyPosition = position;
+        SwitchState(WolfState.Distracted);
+    }
 }
 
 public enum WolfState
@@ -30,5 +36,6 @@ public enum WolfState
     Flee,
     Roam,
     Dead,
-    Cornered
+    Cornered,
+    Distracted
 }
