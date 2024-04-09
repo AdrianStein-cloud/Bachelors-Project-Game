@@ -97,6 +97,11 @@ public class Room : MonoBehaviour
         //#endif
     }
 
+    private void OnDestroy()
+    {
+        UnitySingleton<GameManager>.Instance.OnDungeonGenerated -= ReduceLag;
+    }
+
     private void ReduceLag(int why)
     {
         StartCoroutine(ReduceLagCoroutine());
@@ -110,7 +115,7 @@ public class Room : MonoBehaviour
         float renderDistance = 400f;
         bool visible = true;
 
-        while (enabled)
+        while (isActiveAndEnabled)
         {
             yield return new WaitForSeconds(1f);
             if(Vector3.Distance(player.transform.position, transform.position) >= renderDistance && visible)
