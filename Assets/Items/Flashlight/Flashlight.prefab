@@ -42,7 +42,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6773988555761615230}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
@@ -139,6 +139,8 @@ MonoBehaviour:
     type: 3}
   battery: {fileID: 0}
   batteryDrain: 2
+  hand: {fileID: 0}
+  handAnim: {fileID: 0}
 --- !u!82 &8677481591294598909
 AudioSource:
   m_ObjectHideFlags: 0
