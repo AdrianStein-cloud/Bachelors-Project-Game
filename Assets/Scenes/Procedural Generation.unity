@@ -226,6 +226,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 775176127590199493, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: relesaeAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 775176127590199493, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
+      propertyPath: releaseGapMiniutes
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: flood
