@@ -2040,7 +2040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c30ab5d4f875a4a8ca409cf958d82f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
+  speed: 30
   chaseScream: {fileID: 5527971462489736785}
   damage: 35
   damageDelay: 0.7
@@ -2071,6 +2071,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fef6acc98b41bb64ba5deae8bff8a0e1, type: 3}
   - {fileID: 8300000, guid: 8e45bbbf84ddf924f914dbd42dab34cd, type: 3}
   attackSource: {fileID: 0}
+  pitchRange: {x: 1, y: 1}
 --- !u!114 &-3388323793867589819
 MonoBehaviour:
   m_ObjectHideFlags: 0
