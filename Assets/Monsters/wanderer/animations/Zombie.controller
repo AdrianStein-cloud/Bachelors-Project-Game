@@ -86,6 +86,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Chase
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Wander
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2404209493304681646}
   m_Solo: 0
@@ -347,6 +350,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: Search
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Chase
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2237490492820209553}
@@ -722,7 +728,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Scream
-  m_Speed: 1
+  m_Speed: 1.25
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2362078693350921367}
