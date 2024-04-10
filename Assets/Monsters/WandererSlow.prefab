@@ -2042,7 +2042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 30
   chaseScream: {fileID: 5527971462489736785}
-  damage: 35
+  damage: 60
   damageDelay: 0.7
   cooldown: 1.4
   attackStartRange: 20
