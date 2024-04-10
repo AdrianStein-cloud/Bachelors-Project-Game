@@ -19,5 +19,5 @@ MonoBehaviour:
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
   <Limit>k__BackingField: 0
-  staminaPercentIncrease: 10
+  staminaPercentIncrease: 20
   recoverySpeedPercentIncrease: 0
