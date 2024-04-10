@@ -83,7 +83,6 @@ public class DungeonGenerator : MonoBehaviour
 
         //instantiate first object in rooms
         GameObject entrance = Instantiate(startRoom, Vector3.zero, Quaternion.identity, dungeon.transform);
-        entrance.GetComponent<Room>().InitRoom(random, materials.wall, materials.floor, materials.ceiling);
         playerSpawnPosition = entrance.transform.Find("PlayerSpawnPosition").gameObject;
         spawnedRooms.Add(entrance);
 
@@ -135,6 +134,7 @@ public class DungeonGenerator : MonoBehaviour
 
 
             Stats.Instance.player.keysHeld = 0;
+            spawnedRooms.ForEach(r => r.GetComponent<Room>().InitRoom(random, materials.wall, materials.floor, materials.ceiling));
             SpawnChestWithKeys();
             dungeon.GetComponent<Dungeon>().Init(spawnedRooms, GameSettings.Instance.Wave);
 
@@ -192,7 +192,6 @@ public class DungeonGenerator : MonoBehaviour
                 var newEntrance = newRoomScript.GetEntrance();
                 door.ConnectDoor(newEntrance);
                 newEntrance.ConnectDoor(door);
-                newRoomScript.InitRoom(random, materials.wall, materials.floor, materials.ceiling);
                 spawnedRooms.Add(newRoom);
                 spawnedRoomsDepth.Add((newRoom, depth));
                 roomFound = true;
@@ -263,7 +262,6 @@ public class DungeonGenerator : MonoBehaviour
                 var newEntrance = newRoomScript.GetEntrance();
                 door.ConnectDoor(newEntrance);
                 newEntrance.ConnectDoor(door);
-                newRoomScript.InitRoom(random, materials.wall, materials.floor, materials.ceiling);
 
                 spawnedRooms.Add(newRoom);
                 spawnedRoomsDepth.Add((newRoom, depth));

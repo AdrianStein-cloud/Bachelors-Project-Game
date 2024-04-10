@@ -189,12 +189,13 @@ public class Room : MonoBehaviour
         SpawnRandomObjects(random);
         ApplyMaterials(wallMaterial, floorMaterial, ceilingMaterial);
     }
-
+    public GameObject test;
     private void ApplyMaterials(Material wallMaterial, Material floorMaterial, Material ceilingMaterial)
     {
         foreach (GameObject wall in walls)
         {
-            wall.GetComponent<MeshRenderer>().material = wallMaterial;
+            if(wall != null)
+                wall.GetComponent<MeshRenderer>().material = wallMaterial;
         }
         foreach (GameObject floor in floors)
         {
@@ -211,24 +212,30 @@ public class Room : MonoBehaviour
         foreach (RandomObjects _randomObjects in randomObjects)
         {
             _randomObjects.randomObjects.Shuffle(random);
-
             for (int i = 0; i < _randomObjects.randomObjects.Count; i++)
             {
-                _randomObjects.randomObjects[i].SetActive(false);
-                if (i < _randomObjects.maxAmount && random.Next(1, 101) <= _randomObjects.percentageChance)
+                float spawnChanceModifier = 1f;
+                var obj = _randomObjects.randomObjects[i];
+                obj.SetActive(false);
+                if (obj.name.Contains("Locker")) //Make lockers more likely at end rooms and less likely when the player has other run options
                 {
-                    _randomObjects.randomObjects[i].SetActive(true);
+                    if (AdjecentRooms.Count == 1) spawnChanceModifier = 2f;
+                    if (AdjecentRooms.Count > 2) spawnChanceModifier = 0.5f;
+                }
+                if (i < _randomObjects.maxAmount && random.Next(1, 101) <= _randomObjects.percentageChance * spawnChanceModifier)
+                {
+                    obj.SetActive(true);
                 }
             }
 
             //destroy all the objects that are not active
-            for(int i = 0; i < _randomObjects.randomObjects.Count; i++)
+            /*for(int i = 0; i < _randomObjects.randomObjects.Count; i++)
             {
                 if (!_randomObjects.randomObjects[i].activeSelf)
                 {
                     Destroy(_randomObjects.randomObjects[i]);
                 }
-            }
+            }*/
         }
 
         ObjectiveSpawnPositions = GetComponentsInChildren<Transform>()
