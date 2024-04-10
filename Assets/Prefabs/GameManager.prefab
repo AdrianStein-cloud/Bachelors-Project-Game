@@ -191,7 +191,7 @@ MonoBehaviour:
   - name: WandererSlow
     enemyPrefab: {fileID: 8978024783357441720, guid: b2f69f53191684f438498148e6df7f2b,
       type: 3}
-    <Weight>k__BackingField: 300
+    <Weight>k__BackingField: 200
     MaxAmount: 0
     MinWave: 0
   - name: Wolf
