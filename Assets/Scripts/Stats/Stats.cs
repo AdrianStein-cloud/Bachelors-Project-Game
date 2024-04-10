@@ -9,6 +9,7 @@ public class Stats : MonoBehaviour
     public PlayerStats player;
     public MoneyStats money;
     public CooldownStats cooldown;
+    public TeleportStats teleport;
 
 
     private void Awake()
