@@ -2359,7 +2359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff58dd7ec089dc54f8a262d8376ac98b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
+  speed: 20
   destRoom: {fileID: 0}
   growlMinMaxCooldown: {x: 15, y: 40}
   growlStartMinMaxCooldown: {x: 6, y: 15}
