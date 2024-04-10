@@ -66,11 +66,11 @@ public class ElevatorButton : Interactable
         {
             if (exit.CanLeaveDungeon)
             {
-                InteractionUIText.Instance.SetText("Press E to exit dungeon");
+                InteractionUIText.Instance.SetText("Press E to start elevator");
             }
             else InteractionUIText.Instance.SetText("");
         }
-        else InteractionUIText.Instance.SetText($"Press E to enter dungeon");
+        else InteractionUIText.Instance.SetText($"Press E to start elevator");
         
     }
 
