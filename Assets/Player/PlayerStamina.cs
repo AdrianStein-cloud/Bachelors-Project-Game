@@ -63,11 +63,14 @@ public class PlayerStamina : MonoBehaviour
 
     public void UpgradeStamina(float staminaMultiplier, float recoverySpeedMultiplier)
     {
-        stamina *= staminaMultiplier / 100 + 1;
-        recoverySpeed *= recoverySpeedMultiplier / 100 + 1;
+
+        Stats.Instance.player.staminaIncrease += staminaMultiplier;
+        Stats.Instance.player.staminaRecoveryIncrease += recoverySpeedMultiplier;
+
+        stamina = Stats.Instance.player.FinalStamina;
+        recoverySpeed = Stats.Instance.player.FinalStaminaRecovery;
+
         currentStamina = stamina;
-        Stats.Instance.player.stamina = currentStamina;
-        Stats.Instance.player.staminaRecovery = recoverySpeed;
     }
 
     public void SetStaminaEnabled(bool value)
