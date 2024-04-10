@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91eafb0511dedf24c983fcff3faf2af1, type: 3}
+  m_Name: TeleportMadnessUpgrade
+  m_EditorClassIdentifier: 
+  Name: Teleport Madness
+  description: If you are hit within {0}s after teleporting, teleport to a random
+    location
+  Rarity: 1
+  Tags: 320
+  NewlyAvailableUpgrades: []
+  <Limit>k__BackingField: 0
+  secondsAfterTeleport: 5
+  teleportSound: {fileID: 8300000, guid: 0b08892d886d155488c42f7967ab13ab, type: 3}

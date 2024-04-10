@@ -58,6 +58,7 @@ public class TeleportGun : CooldownItem
         //Debug.Log("Triggerd");
         teleportSound.Play();
         movement.Teleport(tpLocation);
+        Stats.Instance.teleport.OnTeleport?.Invoke();
         StartCoroutine(Cooldown());
     }
 

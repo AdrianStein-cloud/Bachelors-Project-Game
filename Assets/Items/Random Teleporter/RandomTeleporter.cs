@@ -20,6 +20,7 @@ public class RandomTeleporter : QuantityItem
             var randomRoom = rooms[Random.Range(0, rooms.Count)];
             var position = randomRoom.centerObject.transform.position + Vector3.up * 6;
             movement.Teleport(position);
+            Stats.Instance.teleport.OnTeleport?.Invoke();
             teleportSound.Play();
             SpendQuantity();
         }

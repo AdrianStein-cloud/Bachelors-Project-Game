@@ -9,7 +9,7 @@ public class Room : MonoBehaviour
     [SerializeField] List<GameObject> doors;
     List<Door> doorScripts;
     GameObject player;
-    Renderer[] renderers;
+    List<Renderer> renderers;
     List<Door> Doors { 
         get
         {
@@ -93,7 +93,8 @@ public class Room : MonoBehaviour
         entrance = Doors.First(d => d.isEntrance);
 
         //#if !UNITY_EDITOR
-        UnitySingleton<GameManager>.Instance.OnDungeonGenerated += ReduceLag;
+        //Camera has builtin distance culling
+        //UnitySingleton<GameManager>.Instance.OnDungeonGenerated += ReduceLag;
         //#endif
     }
 
@@ -110,7 +111,7 @@ public class Room : MonoBehaviour
     IEnumerator ReduceLagCoroutine()
     {
         player = FindObjectOfType<PlayerMovement>().gameObject;
-        renderers = GetComponentsInChildren<Renderer>();
+        renderers = GetComponentsInChildren<Renderer>().ToList();
 
         float renderDistance = 400f;
         bool visible = true;
@@ -118,30 +119,15 @@ public class Room : MonoBehaviour
         while (isActiveAndEnabled)
         {
             yield return new WaitForSeconds(1f);
-            if(Vector3.Distance(player.transform.position, transform.position) >= renderDistance && visible)
+            float distance = Vector3.Distance(player.transform.position, transform.position);
+            if (distance >= renderDistance && visible)
             {
-                foreach(Renderer renderer in renderers)
-                {
-                    if(renderer == null)
-                    {
-                        renderers = GetComponentsInChildren<Renderer>();
-                        break;
-                    }
-                    renderer.enabled = false;
-                }
+                renderers.ForEach(r => r.enabled = false);
                 visible = false;
             }
-            else if(Vector3.Distance(player.transform.position, transform.position) < renderDistance && !visible)
+            else if(distance < renderDistance && !visible)
             {
-                foreach (Renderer renderer in renderers)
-                {
-                    if (renderer == null)
-                    {
-                        renderers = GetComponentsInChildren<Renderer>();
-                        break;
-                    }
-                    renderer.enabled = true;
-                }
+                renderers.ForEach(r => r.enabled = true);
                 visible = true;
             }
         }
@@ -189,7 +175,6 @@ public class Room : MonoBehaviour
         SpawnRandomObjects(random);
         ApplyMaterials(wallMaterial, floorMaterial, ceilingMaterial);
     }
-    public GameObject test;
     private void ApplyMaterials(Material wallMaterial, Material floorMaterial, Material ceilingMaterial)
     {
         foreach (GameObject wall in walls)
