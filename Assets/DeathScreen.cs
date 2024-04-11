@@ -64,7 +64,7 @@ public class DeathScreen : MonoBehaviour
             switch (GameSettings.Instance.DifficultyConfig.difficulty)
             {
                 case Difficulty.Hard:
-                    if(currentHighscore <= 5 && score > 5)
+                    if(currentHighscore <= 4 && score > 4)
                     {
                         newDifficulty.gameObject.SetActive(true);
                         newDifficulty.text = "Nightmare Unlocked!";

@@ -85,6 +85,7 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
     public void DisplayUpgrades(Action upgradeChosen = null)
     {
         InputManager.Player.Disable();
+        InputManager.Actions.UI.Enable();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         this.DoneChoosingUpgrades = upgradeChosen;
@@ -155,6 +156,7 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         InputManager.Player.Enable();
+        InputManager.Actions.UI.Disable();
         DoneChoosingUpgrades?.Invoke();
     }
 

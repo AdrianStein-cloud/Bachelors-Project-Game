@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,17 +7,18 @@ using UnityEngine;
 
 public class SimpleEnemySpawner : MonoBehaviour
 {
-    public WeightedEnemy[] roundStartEnemies;
+    public WeightedEnemy[] spawnPool;
 
-    public WeightedEnemy[] duringRoundEnemies;
-    public float releaseGapMiniutes = 5;
-    public int relesaeAmount = 2;
+    [Header("(Wave, Min, Min)")]
+    public Vector3[] spawnTimes;
 
     public int extraEnemies;
 
     private System.Random random;
 
     private int tempExtraEnemies = 0;
+
+    Dictionary<WeightedEnemy, int> currentPool;
 
     private void Start()
     {
@@ -25,15 +27,17 @@ public class SimpleEnemySpawner : MonoBehaviour
 
     public void SpawnEnemies()
     {
+        currentPool = spawnPool.ToDictionary(e => e, _ => 0);
         int enemyAmount = GameSettings.Instance.EnemyAmount + extraEnemies + tempExtraEnemies;
         tempExtraEnemies = 0;
-        ChooseAndSpawnEnemies(roundStartEnemies, enemyAmount);
+        ChooseAndSpawnEnemies(spawnPool, enemyAmount, r => r.depth);
         UnitySingleton<Dungeon>.Instance.AddComponent<EmptyScript>().StartCoroutine(SpawnAddtionalEnemiesAfterDelay());
     }
 
     public void SpawnSingleEnemy()
     {
-        ChooseAndSpawnEnemies(roundStartEnemies, 1);
+        var player = GameObject.FindGameObjectWithTag("Player");
+        ChooseAndSpawnEnemies(spawnPool, 1, r => Vector3.Distance(r.transform.position, player.transform.position));
     }
 
     public void AddExtraTemporaryEnemies(int amount)
@@ -43,46 +47,53 @@ public class SimpleEnemySpawner : MonoBehaviour
 
     IEnumerator SpawnAddtionalEnemiesAfterDelay()
     {
-        while (true)
+        var dungeon = UnitySingleton<Dungeon>.Instance;
+        var spawnTimeVector = spawnTimes.Where(t => t.x <= dungeon.Wave).MaxBy(t => t.x);
+        var spawnTime = new List<float> { spawnTimeVector.y}; 
+        if(spawnTimeVector.z != 0)
+            spawnTime.Add(spawnTimeVector.z);
+
+        for (int i = 0; i < spawnTime.Count; i++)
         {
-            float duration = releaseGapMiniutes * 60;
-            UnitySingleton<SpawnTimerUIController>.Instance.StartTimer(duration);
-            yield return new WaitForSeconds(duration);
-            ChooseAndSpawnEnemies(duringRoundEnemies, relesaeAmount);
-            break;
+            float wait = spawnTime[i] * 60;
+            yield return new WaitForSeconds(wait);
+            SpawnSingleEnemy();
+            if (i == spawnTime.Count - 1) //Loop on last element
+                i--;
         }
     }
 
-    void ChooseAndSpawnEnemies(IEnumerable<WeightedEnemy> enemies, int amount)
+    void ChooseAndSpawnEnemies(IEnumerable<WeightedEnemy> enemies, int amount, Func<Room, float> orderFunc)
     {
         var dungeon = UnitySingleton<Dungeon>.Instance;
-        var player = GameObject.FindGameObjectWithTag("Player");
         var chosenEnemies = ChooseEnemiesToSpawn(enemies, dungeon, amount);
-        SpawnEnemies(chosenEnemies, dungeon, player);
+        SpawnEnemies(chosenEnemies, dungeon, orderFunc);
     }
 
     IEnumerable<GameObject> ChooseEnemiesToSpawn(IEnumerable<WeightedEnemy> weightedEnemies, Dungeon dungeon, int amount)
     {
-        var enemies = weightedEnemies.Where(e => e.MinWave <= dungeon.Wave).ToList();
-        var enemiesToSpawn = enemies.ToDictionary(e => e, _ => 0);
+        var enemies = weightedEnemies.Where(e => e.MinWave <= dungeon.Wave & currentPool.ContainsKey(e)).ToList();
+        var toSpawn = new List<GameObject>();
 
         for (int i = 0; i < amount && enemies.Count > 0; i++)
         {
             var enemy = enemies.GetRollFromWeights(random);
-            enemiesToSpawn[enemy]++;
-            if (enemiesToSpawn[enemy] == enemy.MaxAmount)
+            toSpawn.Add(enemy.enemyPrefab);
+            currentPool[enemy]++;
+            if (currentPool[enemy] == enemy.MaxAmount)
             {
                 enemies.Remove(enemy);
+                currentPool.Remove(enemy);
             }
         }
-        return enemiesToSpawn.SelectMany(p => Enumerable.Range(0, p.Value).Select(_ => p.Key.enemyPrefab));
+        return toSpawn;
     }
 
-    void SpawnEnemies(IEnumerable<GameObject> enemyPrefabs, Dungeon dungeon, GameObject player)
+    void SpawnEnemies(IEnumerable<GameObject> enemyPrefabs, Dungeon dungeon, Func<Room, float> orderFunc)
     {
         var enemies = enemyPrefabs.ToList();
         var rooms = dungeon.Rooms
-            .OrderByDescending(r => Vector3.Distance(r.transform.position, player.transform.position))
+            .OrderByDescending(orderFunc)
             .ToList();
 
         for (int i = 0; i < rooms.Count & i < enemies.Count; i++)

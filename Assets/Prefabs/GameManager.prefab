@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30cceb777f7791488021e715464cd34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dungeonStartDepth: 4
+  dungeonStartDepth: 2
   generationLookahead: 3
   canvas: {fileID: 0}
 --- !u!114 &775176127590199493
@@ -187,52 +187,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a38dca21e367f4cab8f44f642cc6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundStartEnemies:
-  - name: WandererSlow
+  spawnPool:
+  - name: 
     enemyPrefab: {fileID: 8978024783357441720, guid: b2f69f53191684f438498148e6df7f2b,
       type: 3}
     <Weight>k__BackingField: 200
     MaxAmount: 0
     MinWave: 0
-  - name: Wolf
-    enemyPrefab: {fileID: 2570288785515748785, guid: 2a118a61456524b44ad0e3322b6be2dc,
-      type: 3}
-    <Weight>k__BackingField: 150
-    MaxAmount: 0
-    MinWave: 2
-  - name: Coil
+  - name: 
     enemyPrefab: {fileID: 8978024783357441720, guid: 767e425ea2925be4d8dac8cba5ea560a,
       type: 3}
     <Weight>k__BackingField: 150
     MaxAmount: 0
     MinWave: 2
-  - name: WandererFast
+  - name: 
+    enemyPrefab: {fileID: 2570288785515748785, guid: 2a118a61456524b44ad0e3322b6be2dc,
+      type: 3}
+    <Weight>k__BackingField: 150
+    MaxAmount: 0
+    MinWave: 2
+  - name: 
     enemyPrefab: {fileID: 8978024783357441720, guid: 4dbec6c72cfa7da4e8a290c0d81fedd0,
       type: 3}
     <Weight>k__BackingField: 100
     MaxAmount: 2
     MinWave: 4
-  duringRoundEnemies:
-  - name: 
-    enemyPrefab: {fileID: 8978024783357441720, guid: b2f69f53191684f438498148e6df7f2b,
-      type: 3}
-    <Weight>k__BackingField: 100
-    MaxAmount: 0
-    MinWave: 0
-  - name: 
-    enemyPrefab: {fileID: 8978024783357441720, guid: 767e425ea2925be4d8dac8cba5ea560a,
-      type: 3}
-    <Weight>k__BackingField: 50
-    MaxAmount: 0
-    MinWave: 0
-  - name: 
-    enemyPrefab: {fileID: 2570288785515748785, guid: 2a118a61456524b44ad0e3322b6be2dc,
-      type: 3}
-    <Weight>k__BackingField: 100
-    MaxAmount: 0
-    MinWave: 0
-  releaseGapMiniutes: 5
-  relesaeAmount: 3
+  spawnTimes:
+  - {x: 1, y: 4, z: 0}
+  - {x: 2, y: 3, z: 2}
+  - {x: 3, y: 2, z: 0}
+  - {x: 6, y: 2, z: 1}
+  - {x: 8, y: 1, z: 0}
   extraEnemies: 0
 --- !u!114 &7560089572570469592
 MonoBehaviour:

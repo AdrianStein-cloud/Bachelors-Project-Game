@@ -37,7 +37,7 @@ public class StatDisplayer : MonoBehaviour
         try
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach(Upgrade upgrade in UnitySingleton<UpgradeManager>.Instance.GetUpgrades().Where(x => x.Purchased > 0))
+            foreach(Upgrade upgrade in UnitySingleton<UpgradeManager>.Instance.GetUpgrades().Where(x => x.Purchased > 0).OrderBy(x => x.Name))
             {
                 stringBuilder.Append(upgrade.Name + ": " + upgrade.Purchased + "\n");
             }

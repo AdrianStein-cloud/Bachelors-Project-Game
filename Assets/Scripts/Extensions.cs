@@ -35,6 +35,18 @@ public static class Extensions
         throw new Exception("No roll");
     }
 
+    public static T MaxBy<T>(this IEnumerable<T> enumerable, Func<T, float> selector)
+    {
+        float max = float.MinValue;
+        T best = default;
+        foreach (var element in enumerable)
+        {
+            if(selector(element) > max)
+                best = element;
+        }
+        return best;
+    }
+
     public static void OnAnyEvent(this InputAction inputAction, Action<InputAction.CallbackContext> action)
     {
         inputAction.started += action;
