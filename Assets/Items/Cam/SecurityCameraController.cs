@@ -57,13 +57,13 @@ public class SecurityCameraController : Item
                 }
 
                 cameras = new List<GameObject>();
-                
+
                 currentCamCount = MaxCamCount;
                 currentCameraIndex = 0;
                 UpdateCounter();
             };
     }
-    
+
     private void Start()
     {
         UpdateCounter();
@@ -81,16 +81,10 @@ public class SecurityCameraController : Item
 
             Rotate(ghostCamera.transform);
 
-            if (ghostScript.colliding)
-            {
-                UpdateMaterials(invalidMaterial);
-                canPlace = false;
-            }
-            else
-            {
-                UpdateMaterials(validMaterial);
-                canPlace = true;
-            }
+
+            UpdateMaterials(validMaterial);
+            canPlace = true;
+
         }
         else
         {
@@ -132,7 +126,7 @@ public class SecurityCameraController : Item
         {
             UnitySingleton<CameraManager>.Instance.activeCameras.Add(camera);
         }
-        if(!enable)
+        if (!enable)
         {
             UnitySingleton<CameraManager>.Instance.activeCameras.Remove(camera);
         }
@@ -199,7 +193,7 @@ public class SecurityCameraController : Item
 
         var instance = Instantiate(cameraPrefab, hit.point, Quaternion.identity);
         var camScript = instance.GetComponent<SecurityCameraScript>();
-        
+
 
         Rotate(instance.transform);
         instance.transform.SetParent(hit.transform);
