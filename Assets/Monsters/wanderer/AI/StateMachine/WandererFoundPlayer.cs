@@ -8,6 +8,7 @@ public class WandererFoundPlayer : StateProcess<WandererState>
     WandererMovement movement;
     WandererInfo info;
     Animator anim;
+    EnemyVisionInfo visionInfo;
 
     bool canScream = true;
 
@@ -17,10 +18,12 @@ public class WandererFoundPlayer : StateProcess<WandererState>
         info = GetComponent<WandererInfo>();
         anim = GetComponent<Animator>();
         GetComponent<WandererSounds>().OnScreamEnd += StartChase;
+        visionInfo = GetComponent<EnemyVisionInfo>();
     }
 
     private void OnEnable()
     {
+        visionInfo.BeginEffect();
         if (canScream)
         {
             StartCoroutine(ScreamCooldown());

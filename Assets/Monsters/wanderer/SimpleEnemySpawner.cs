@@ -20,6 +20,9 @@ public class SimpleEnemySpawner : MonoBehaviour
 
     Dictionary<WeightedEnemy, int> currentPool;
 
+    public CameraShakePreset shakePreset;
+    public AudioSource spawnAudioSource;
+
     private void Start()
     {
         random = new System.Random(GameSettings.Instance.GetSeed());
@@ -36,6 +39,7 @@ public class SimpleEnemySpawner : MonoBehaviour
 
     public void SpawnSingleEnemy()
     {
+        EnemySpawnEffect();
         var player = GameObject.FindGameObjectWithTag("Player");
         ChooseAndSpawnEnemies(spawnPool, 1, r => Vector3.Distance(r.transform.position, player.transform.position));
     }
@@ -100,6 +104,12 @@ public class SimpleEnemySpawner : MonoBehaviour
         {
             Instantiate(enemies[i], rooms[i].centerObject.transform.position, Quaternion.identity, dungeon.transform);
         }
+    }
+
+    void EnemySpawnEffect()
+    {
+        spawnAudioSource.Play();
+        Camera.main.GetComponent<CameraShake>().Shake(shakePreset);
     }
 }
 

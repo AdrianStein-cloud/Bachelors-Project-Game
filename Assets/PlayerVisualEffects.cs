@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 using UnityEngine.VFX;
 
 public class PlayerVisualEffects : MonoBehaviour
@@ -21,7 +22,7 @@ public class PlayerVisualEffects : MonoBehaviour
     float currentLostvisionTime;
 
     public float effectCooldown;
-    float lastTimeUsed;
+    float lastTimeUsed = 0;
 
 
     // Start is called before the first frame update
@@ -73,6 +74,10 @@ public class PlayerVisualEffects : MonoBehaviour
 
     public void BeginChaseEffect(EnemyVisionInfo visionInfo)
     {
+        var cooldownTime = lastTimeUsed == 0 ? 0 : lastTimeUsed + effectCooldown;
+        if (doingChaseEffect || cooldownTime > Time.time) return;
+
+        doingChaseEffect = true;
         enemySeen = visionInfo;
         visionInfo.StartVisionCooldown(effectCooldown);
 
@@ -86,21 +91,24 @@ public class PlayerVisualEffects : MonoBehaviour
                 break;
         }
 
-        doingChaseEffect = true;
-        PostProcessingHandler.Instance.SetChromaticAberration(1f, 1f);
-        PostProcessingHandler.Instance.SetLensDistortion(1f, -0.2f);
+        PostProcessingHandler.Instance.SetChromaticAberration(1f, 0.5f);
+        PostProcessingHandler.Instance.SetLensDistortion(1f, -0.15f);
         PostProcessingHandler.Instance.SetVignette(0.2f, 1f);
+        Camera.main.GetComponentInParent<CameraController>().IncrementFov(15);
     }
 
-    public void EndChaseEffect()
+    public void EndChaseEffect(EnemyVisionInfo visionInfo)
     {
+        if (visionInfo != enemySeen) return;
+
+        doingChaseEffect = false;
         lastTimeUsed = Time.time;
         enemySeen = null;
         PlaySoundEffect(outOfVisionSound, 0.5f);
-        doingChaseEffect = false;
         PostProcessingHandler.Instance.SetChromaticAberration(2f, 0);
         PostProcessingHandler.Instance.SetLensDistortion(2f, 0);
         PostProcessingHandler.Instance.ResetVignette(1f);
+        Camera.main.GetComponentInParent<CameraController>().IncrementFov(-15);
     }
 
     void PlaySoundEffect(AudioClip clip, float volume = 0.7f)

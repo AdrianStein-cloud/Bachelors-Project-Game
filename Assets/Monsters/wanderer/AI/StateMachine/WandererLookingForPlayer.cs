@@ -24,6 +24,7 @@ public class WandererLookingForPlayer : StateProcess<WandererState>
         movement.Stop();
         anim.SetTrigger("Scream");
         visionInfo.CanSeePlayer = false;
+        visionInfo.EndEffect();
     }
 
     private void OnDisable()
