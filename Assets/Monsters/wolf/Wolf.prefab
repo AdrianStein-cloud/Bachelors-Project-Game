@@ -2777,7 +2777,6 @@ GameObject:
   - component: {fileID: 4803819143098516043}
   - component: {fileID: 6110108347875979422}
   - component: {fileID: 8662524043438943087}
-  - component: {fileID: 4325742650318059546}
   m_Layer: 14
   m_Name: Cylinder
   m_TagString: Untagged
@@ -4031,28 +4030,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2515750608439811109}
   m_Mesh: {fileID: 0}
---- !u!64 &4325742650318059546
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2515750608439811109}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &2528860983444993951
 GameObject:
   m_ObjectHideFlags: 0
@@ -4346,9 +4323,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 393dd7f42bba46445836d3f2c3636c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movespeed: 50
+  movespeed: 40
   attackStartRange: 15
-  damage: 30
+  damage: 20
   seenRangeAllowHit: 25
 --- !u!114 &8313918664003729253
 MonoBehaviour:
