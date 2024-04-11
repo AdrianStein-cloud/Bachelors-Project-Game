@@ -77,7 +77,6 @@ public class UpgradeUIController : MonoBehaviour
         RerollController.gameObject.SetActive(true);
         CloseButton.gameObject.SetActive(true);
         backgroundImage.gameObject.SetActive(true);
-        InputManager.Actions.UI.Enable();
         currency.text = $"{UnitySingleton<CurrencyManager>.Instance.Currency}$";
         int i = 0;
         foreach (var upgrade in upgrades)

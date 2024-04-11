@@ -88,7 +88,7 @@ public class PlayerVisualEffects : MonoBehaviour
 
         doingChaseEffect = true;
         PostProcessingHandler.Instance.SetChromaticAberration(1f, 1f);
-        PostProcessingHandler.Instance.SetLensDistortion(1f, -0.3f);
+        PostProcessingHandler.Instance.SetLensDistortion(1f, -0.2f);
         PostProcessingHandler.Instance.SetVignette(0.2f, 1f);
     }
 
