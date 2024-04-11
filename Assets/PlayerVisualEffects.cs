@@ -23,8 +23,6 @@ public class PlayerVisualEffects : MonoBehaviour
     public float effectCooldown;
     float lastTimeUsed;
 
-    public CameraShakePreset shake;
-
 
     // Start is called before the first frame update
     void Start()
@@ -35,43 +33,42 @@ public class PlayerVisualEffects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H)) Camera.main.GetComponent<CameraShake>().Shake(shake);
+        //if (!doingChaseEffect && lastTimeUsed + effectCooldown <= Time.time)
+        //{
+        //    var hits = Physics.OverlapSphereNonAlloc(transform.position, detectRadiusStart, cols, enemyLayer);
+        //    if (hits > 0)
+        //    {
+        //        foreach (Collider col in cols)
+        //        {
+        //            if (col == null) continue;
+        //            if (col.TryGetComponent(out EnemyVisionInfo visionInfo) && visionInfo.CanSeePlayer && !visionInfo.effectRecently){
+        //                Vector3 viewPos = Camera.main.WorldToViewportPoint(col.transform.position);
 
-        if (!doingChaseEffect && lastTimeUsed + effectCooldown <= Time.time)
-        {
-            var hits = Physics.OverlapSphereNonAlloc(transform.position, detectRadiusStart, cols, enemyLayer);
-            if (hits > 0)
-            {
-                foreach (Collider col in cols)
-                {
-                    if (col == null) continue;
-                    if (col.TryGetComponent(out EnemyVisionInfo visionInfo) && visionInfo.CanSeePlayer && !visionInfo.effectRecently){
-                        Vector3 viewPos = Camera.main.WorldToViewportPoint(col.transform.position);
+        //                Physics.Raycast(transform.position, col.transform.position - transform.position, out RaycastHit hit, Mathf.Infinity, enemyAndObstacleLayer);
+        //                if (hit.transform.CompareTag("Enemy"))
+        //                {
 
-                        Physics.Raycast(transform.position, col.transform.position - transform.position, out RaycastHit hit, Mathf.Infinity, enemyAndObstacleLayer);
-                        if (hit.transform.CompareTag("Enemy"))
-                        {
-
-                            if (viewPos.x >= viewOffset && viewPos.x <= 1 - viewOffset && viewPos.y >= viewOffset && viewPos.y <= 1 - viewOffset && viewPos.z > 0)
-                            {
-                                // Your object is in the range of the camera, you can apply your behaviour
-                                BeginChaseEffect(visionInfo);
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        else if (enemySeen != null)
-        {
-            if (!enemySeen.CanSeePlayer)
-            {
-                currentLostvisionTime += Time.deltaTime;
-                if (currentLostvisionTime >= lostVisionTime) EndChaseEffect();
-            }
-            else currentLostvisionTime = 0;
-        }
+        //                    if (viewPos.x >= viewOffset && viewPos.x <= 1 - viewOffset && viewPos.y >= viewOffset && viewPos.y <= 1 - viewOffset && viewPos.z > 0)
+        //                    {
+        //                        // Your object is in the range of the camera, you can apply your behaviour
+        //                        BeginChaseEffect(visionInfo);
+        //                        return;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+        //else
+        //if (enemySeen != null)
+        //{
+        //    if (!enemySeen.CanSeePlayer)
+        //    {
+        //        currentLostvisionTime += Time.deltaTime;
+        //        if (currentLostvisionTime >= lostVisionTime) EndChaseEffect();
+        //    }
+        //    else currentLostvisionTime = 0;
+        //}
     }
 
     public void BeginChaseEffect(EnemyVisionInfo visionInfo)
