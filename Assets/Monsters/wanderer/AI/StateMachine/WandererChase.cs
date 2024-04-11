@@ -37,6 +37,7 @@ public class WandererChase : StateProcess<WandererState>
         info.IsChasing = true;
         anim.SetBool("Chase", true);
         chaseScream.Play();
+        GetComponent<PosterController>().SetPoster();
     }
 
     private void OnDisable()

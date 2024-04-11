@@ -65,9 +65,11 @@ public class Inventory : MonoBehaviour
         }
         var itemObject = Instantiate(item.gameObject, transform);
         item = itemObject.GetComponent<Item>();
+
         items[index] = item;
         InventoryUI.Instance.SetIcon(index, item.icon);
         items[itemIndex]?.Select();
+        UpdateDescriptions();
 
         if (!inventoryFull && items.Where(x => x != null).Count() >= size)
         {
@@ -111,6 +113,11 @@ public class Inventory : MonoBehaviour
         InventoryUI.Instance.SetCurrentSlot(value);
         items[itemIndex]?.Select();
 
+        UpdateDescriptions();
+    }
+
+    void UpdateDescriptions()
+    {
         if (items[itemIndex] == null)
         {
             primaryGO.SetActive(false);

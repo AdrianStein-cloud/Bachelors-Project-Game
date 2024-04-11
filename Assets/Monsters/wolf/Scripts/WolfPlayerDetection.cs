@@ -29,7 +29,11 @@ public class WolfPlayerDetection : MonoBehaviour
     {
         info.canSeePlayer = CheckIfPlayerNearby(out info.TargetPlayer);
 
-        if (info.canSeePlayer) info.seenByPlayer = PlayerCanSee();
+        if (info.canSeePlayer) 
+        {
+            info.seenByPlayer = PlayerCanSee(); 
+            if (info.seenByPlayer) GetComponent<PosterController>().SetPoster();
+        }
     }
 
     bool CheckIfPlayerNearby(out GameObject player)
