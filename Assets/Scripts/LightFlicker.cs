@@ -54,14 +54,30 @@ public class LightFlicker : MonoBehaviour
             failed = Random.Range(0, 100) < GameSettings.Instance.LightFailPercentage;
         }
 
-        if (!failed || GameSettings.Instance.PowerOutage)
+        if (!failed || !GameSettings.Instance.PowerOutage)
         {
-            StartCoroutine(Flicker());
+            TurnOn();
         }
         else
         {
             TurnOff();
         }
+
+        UnitySingleton<GameManager>.Instance.OnDungeonEnter += SetLifetime;
+    }
+
+    private void SetLifetime()
+    {
+        float minLifetime = 2.5f;
+        float maxLifetime = 10f;
+
+        StartCoroutine(StartLife(Random.Range(minLifetime * 60f, maxLifetime * 60f)));
+    }
+
+    IEnumerator StartLife(float lifetime)
+    {
+        yield return new WaitForSeconds(lifetime);
+        TurnOff();
     }
 
     void ReverseFlicker()
@@ -77,10 +93,16 @@ public class LightFlicker : MonoBehaviour
         onFlickerSpeedMin = temp;
     }
 
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
     void TurnOff()
     {
         if (!alwaysOn)
         {
+            StopAllCoroutines();
             for (int i = 0; i < childObjects.Length; i++)
             {
                 childObjects[i].GetComponent<Light>().intensity = 0;
@@ -103,10 +125,10 @@ public class LightFlicker : MonoBehaviour
             if (GameSettings.Instance.PowerOnMode)
             {
                 off = false;
-                StartCoroutine(Flicker());
+                TurnOn();
                 yield break;
             }
-            else if (canScare && Random.Range(0, 100) < 5)
+            else if (off && canScare && Random.Range(0, 100) < 5)
             {
                 for (int i = 0; i < Random.Range(0, 3); i++)
                 {
@@ -136,6 +158,12 @@ public class LightFlicker : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void TurnOn()
+    {
+        StopAllCoroutines();
+        StartCoroutine(Flicker());
     }
 
     IEnumerator Flicker()
