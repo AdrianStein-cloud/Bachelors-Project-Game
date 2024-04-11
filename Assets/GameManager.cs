@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
         dangerScaler.ScaleDanger();
         yield return dungeonGenerator.GenerateDungeon(dungeon, GameSettings.Instance.CurrentDepth);
         elevator.DungeonIsAvailable = true;
+        SaveScore();
         OnDungeonGenerated?.Invoke(GameSettings.Instance.Wave);
     }
 
@@ -56,6 +57,19 @@ public class GameManager : MonoBehaviour
         enemySpawner.SpawnEnemies();
         objectiveSpawner.SpawnObjectives(dungeonGenerator.spawnedRoomsDepth, dungeon.transform, SwitchToUpgrades);
         OnDungeonEnter?.Invoke();
+    }
+
+    private void SaveScore()
+    {
+        PlayerPrefs.SetInt("player_score_" + GameSettings.Instance.DifficultyConfig.difficulty, GameSettings.Instance.Wave);
+
+        int score = PlayerPrefs.GetInt("player_score_" + GameSettings.Instance.DifficultyConfig.difficulty);
+        int currentHighscore = PlayerPrefs.GetInt("high_score_" + GameSettings.Instance.DifficultyConfig.difficulty);
+
+        if (score > currentHighscore)
+        {
+            PlayerPrefs.SetInt("high_score_" + GameSettings.Instance.DifficultyConfig.difficulty, score);
+        }
     }
 
     public void SpawnSingleEnemy()
