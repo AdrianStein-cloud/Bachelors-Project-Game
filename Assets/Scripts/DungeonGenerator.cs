@@ -207,14 +207,14 @@ public class DungeonGenerator : MonoBehaviour
             foreach (Door doorTemp in doors)
             {
                 if (depth + 1 < this.depth) doorQueue.Enqueue((doorTemp, depth + 1));
-                else yield return SpawnEndRoomAtDoor(doorTemp, dungeon, isCorridor);
+                else yield return SpawnEndRoomAtDoor(doorTemp, dungeon, isCorridor, depth + 1);
             }
         }
 
         yield return null;
     }
 
-    IEnumerator SpawnEndRoomAtDoor(Door door, Transform dungeon, bool isCorridor)
+    IEnumerator SpawnEndRoomAtDoor(Door door, Transform dungeon, bool isCorridor, int depth)
     {
         bool roomFound = false;
         door.debugHighlight = true;
@@ -259,6 +259,7 @@ public class DungeonGenerator : MonoBehaviour
                 }
 
                 newRoomScript = newRoom.GetComponent<Room>();
+                //newRoomScript.depth = depth;
                 var newEntrance = newRoomScript.GetEntrance();
                 door.ConnectDoor(newEntrance);
                 newEntrance.ConnectDoor(door);
