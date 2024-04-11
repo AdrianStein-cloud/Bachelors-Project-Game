@@ -18,6 +18,11 @@ public class InventoryUI : MonoBehaviour
         SetKeyImageActive(false);
     }
 
+    private void Start()
+    {
+        UnitySingleton<GameManager>.Instance.OnDungeonGenerated += (int why) => SetKeyImageActive(false);
+    }
+
     public void SetKeyImageActive(bool active)
     {
         keyImage.gameObject.SetActive(active);
