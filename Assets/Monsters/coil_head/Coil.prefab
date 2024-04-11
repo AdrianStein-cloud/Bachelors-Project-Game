@@ -438,6 +438,7 @@ GameObject:
   - component: {fileID: 5018436924629602712}
   - component: {fileID: 8396227508461569314}
   - component: {fileID: -1970392576782877669}
+  - component: {fileID: -5002989455770718782}
   m_Layer: 10
   m_Name: Coil
   m_TagString: Enemy
@@ -674,6 +675,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   effectRecently: 0
+--- !u!114 &-5002989455770718782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978024783357441720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6b6d91a32da674d9dd807f93a97197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posterName: Coil
 --- !u!1001 &227254927815958481
 PrefabInstance:
   m_ObjectHideFlags: 0

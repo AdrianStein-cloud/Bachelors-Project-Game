@@ -36,7 +36,6 @@ public class WolfFlee : StateProcess<WolfState>
         {
             Flee();
         }
-        
     }
 
     void Flee()

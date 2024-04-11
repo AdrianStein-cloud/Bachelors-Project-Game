@@ -4119,6 +4119,7 @@ GameObject:
   - component: {fileID: 694162290895148543}
   - component: {fileID: -8849165241288054999}
   - component: {fileID: 6154362468196088437}
+  - component: {fileID: -3777019954192597305}
   m_Layer: 10
   m_Name: Wolf
   m_TagString: Enemy
@@ -4402,6 +4403,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbf1bad9a9f5304ea232e0021b0fc62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3777019954192597305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2570288785515748785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6b6d91a32da674d9dd807f93a97197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posterName: Wolf
 --- !u!1 &2673547406611391993
 GameObject:
   m_ObjectHideFlags: 0

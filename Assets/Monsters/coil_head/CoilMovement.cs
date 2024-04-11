@@ -40,6 +40,7 @@ public class CoilMovement : MonoBehaviour
         {
             agent.isStopped = true;
             info.IsVisible = true;
+            GetComponent<PosterController>().SetPoster();
         }
         else
         {
