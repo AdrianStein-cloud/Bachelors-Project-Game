@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Camera
   icon: {fileID: 21300000, guid: df7abdf9b2ca33440a02ddca80fadd0f, type: 3}
+  primaryDescription: Place/Cycle Cameras
+  secondaryDescription: Show/Hide Tablet
   cameraPrefab: {fileID: 8236595763525196196, guid: 44df1badbf63bde43a7f9e66307bfb80,
     type: 3}
   validMaterial: {fileID: 2100000, guid: 7ba16966935462841af7f2401fb8eeb7, type: 2}

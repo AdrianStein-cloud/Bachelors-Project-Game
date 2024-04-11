@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Inventory : MonoBehaviour
 {
+    public TextMeshProUGUI primaryDescription;
+    public TextMeshProUGUI secondaryDescription;
     public int size;
     public List<Item> items;
 
@@ -14,12 +17,16 @@ public class Inventory : MonoBehaviour
 
     int lastIndex = 0;
     bool inventoryFull = false;
+    GameObject primaryGO;
+    GameObject secondaryGO;
 
     public Action OnInventoryFull { get; set; }
 
     private void Awake()
     {
         UnitySingleton<Inventory>.BecomeSingleton(this);
+        primaryGO = primaryDescription.transform.parent.gameObject;
+        secondaryGO = secondaryDescription.transform.parent.gameObject;
     }
 
     private void Start()
@@ -29,7 +36,9 @@ public class Inventory : MonoBehaviour
             if (items[i] != null) InventoryUI.Instance.SetIcon(i, items[i].icon);
         }
 
-        items[itemIndex]?.Select();
+        //items[itemIndex]?.Select();
+        itemIndex = -1;
+        SetItemIndex(0);
 
         InputManager.Player.SwitchItemNumKeys.performed += SwitchItem;
     }
@@ -97,9 +106,31 @@ public class Inventory : MonoBehaviour
     void SetItemIndex(int value)
     {
         if (itemIndex == value) return;
-        items[itemIndex]?.Deselect();
+        if (itemIndex >= 0 && itemIndex < size) items[itemIndex]?.Deselect();
         itemIndex = value;
         InventoryUI.Instance.SetCurrentSlot(value);
         items[itemIndex]?.Select();
+
+        if (items[itemIndex] == null)
+        {
+            primaryGO.SetActive(false);
+            secondaryGO.SetActive(false);
+            return;
+        }
+
+        primaryGO.SetActive(true);
+        secondaryGO.SetActive(items[itemIndex].secondaryDescription.Length > 0);
+        primaryDescription.text = items[itemIndex].primaryDescription;
+        secondaryDescription.text = items[itemIndex].secondaryDescription;
+
+        StopAllCoroutines();
+        StartCoroutine(HideDescriptions());
+    }
+    
+    IEnumerator HideDescriptions()
+    {
+        yield return new WaitForSeconds(5f);
+        primaryGO.SetActive(false);
+        secondaryGO.SetActive(false);
     }
 }

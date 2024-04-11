@@ -7,6 +7,9 @@ public abstract class Item : MonoBehaviour
     public string itemName;
     public Sprite icon;
 
+    public string primaryDescription;
+    public string secondaryDescription;
+
     public virtual void Select() { }
     public virtual void Deselect() { }
 
