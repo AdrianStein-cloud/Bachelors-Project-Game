@@ -259,7 +259,7 @@ public class DungeonGenerator : MonoBehaviour
                 }
 
                 newRoomScript = newRoom.GetComponent<Room>();
-                newRoomScript.depth = depth;
+                //newRoomScript.depth = depth;
                 var newEntrance = newRoomScript.GetEntrance();
                 door.ConnectDoor(newEntrance);
                 newEntrance.ConnectDoor(door);
