@@ -14,6 +14,6 @@ public class EnemyPoster : MonoBehaviour
 
     void SetPoster()
     {
-        gameObject.SetActive(PlayerPrefs.GetInt(posterName) == 1);
+        GetComponent<MeshRenderer>().enabled = PlayerPrefs.GetInt(posterName) == 1;
     }
 }

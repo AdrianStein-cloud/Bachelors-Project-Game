@@ -3150,7 +3150,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c9047541a1a7dd54abaa12ef873349bf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 533460390}
   m_SourcePrefab: {fileID: 100100000, guid: c9047541a1a7dd54abaa12ef873349bf, type: 3}
 --- !u!4 &533460388 stripped
 Transform:
@@ -3158,6 +3162,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 533460387}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &533460389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c9047541a1a7dd54abaa12ef873349bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 533460387}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &533460390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533460389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267d8e6d4de114f48a900f5c51005d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posterName: WandererSlow
 --- !u!1 &619831188
 GameObject:
   m_ObjectHideFlags: 0
@@ -5203,6 +5226,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: c9047541a1a7dd54abaa12ef873349bf,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: c9047541a1a7dd54abaa12ef873349bf,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5c38a4d8dc4cab345bada53293b4b156, type: 2}
@@ -5214,8 +5242,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c9047541a1a7dd54abaa12ef873349bf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1158653573}
   m_SourcePrefab: {fileID: 100100000, guid: c9047541a1a7dd54abaa12ef873349bf, type: 3}
+--- !u!1 &1158653572 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c9047541a1a7dd54abaa12ef873349bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1158653571}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1158653573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158653572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267d8e6d4de114f48a900f5c51005d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posterName: Coil
 --- !u!114 &1250938591 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7505779266958946749, guid: 12311705e3030ab4aa48c58cf8664e57,
@@ -6301,7 +6352,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c9047541a1a7dd54abaa12ef873349bf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1537099634}
   m_SourcePrefab: {fileID: 100100000, guid: c9047541a1a7dd54abaa12ef873349bf, type: 3}
 --- !u!4 &1537099632 stripped
 Transform:
@@ -6309,6 +6364,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1537099631}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1537099633 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c9047541a1a7dd54abaa12ef873349bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1537099631}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1537099634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537099633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267d8e6d4de114f48a900f5c51005d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posterName: WandererFast
 --- !u!1 &1544787725
 GameObject:
   m_ObjectHideFlags: 0
@@ -7225,7 +7299,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c9047541a1a7dd54abaa12ef873349bf,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1710005356}
   m_SourcePrefab: {fileID: 100100000, guid: c9047541a1a7dd54abaa12ef873349bf, type: 3}
 --- !u!4 &1710005354 stripped
 Transform:
@@ -7233,6 +7311,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1710005353}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1710005355 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c9047541a1a7dd54abaa12ef873349bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1710005353}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1710005356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710005355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267d8e6d4de114f48a900f5c51005d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posterName: Wolf
 --- !u!1001 &1719707022
 PrefabInstance:
   m_ObjectHideFlags: 0
