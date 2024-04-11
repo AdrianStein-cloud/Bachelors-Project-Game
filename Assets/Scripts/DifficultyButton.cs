@@ -38,7 +38,7 @@ public class DifficultyButton : MonoBehaviour
                 Lock(false);
                 break;
             case Difficulty.Nightmare:
-                if(PlayerPrefs.GetInt("high_score_" + Difficulty.Hard) <= 5) Lock(true);
+                if(PlayerPrefs.GetInt("high_score_" + Difficulty.Hard) <= 4) Lock(true);
                 else Lock(false);
                 break;
             case Difficulty.Hell:
