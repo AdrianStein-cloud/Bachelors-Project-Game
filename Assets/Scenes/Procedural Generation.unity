@@ -238,6 +238,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
+      propertyPath: seed
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602676733554203394, guid: 133054512c61b764891ea66fa32972e3,
+        type: 3}
       propertyPath: flood
       value: 
       objectReference: {fileID: 1786471875}
