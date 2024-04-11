@@ -12,6 +12,10 @@ public class NotePoster : MonoBehaviour
         GameSettings.Instance.OnEventChanged += (value) =>
         {
             notes.text = value;
+            if(value == null)
+            {
+                notes.text = "Hostile Creatures!";
+            }
         };
     }
 }

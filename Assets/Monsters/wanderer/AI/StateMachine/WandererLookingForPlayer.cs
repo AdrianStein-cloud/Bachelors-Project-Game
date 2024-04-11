@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WandererLookingForPlayer : StateProcess<WandererState>
@@ -24,6 +25,7 @@ public class WandererLookingForPlayer : StateProcess<WandererState>
         movement.Stop();
         anim.SetTrigger("Scream");
         visionInfo.CanSeePlayer = false;
+        visionInfo.EndEffect();
     }
 
     private void OnDisable()
@@ -41,6 +43,11 @@ public class WandererLookingForPlayer : StateProcess<WandererState>
             anim.SetBool("Wander", false);
             StateController.SwitchState(WandererState.Chase);
         }
+    }
+
+    void OnDestroy()
+    {
+        visionInfo.EndEffect();
     }
 
     IEnumerator SearchRoom()

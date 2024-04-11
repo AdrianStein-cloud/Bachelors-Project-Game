@@ -16,7 +16,6 @@ public class CoilMovement : MonoBehaviour
     CoilInfo info;
     Animation anim;
     NavMeshAgent agent;
-    EnemyVisionInfo visionInfo;
 
     CameraManager cameraManager => UnitySingleton<CameraManager>.Instance;
 
@@ -27,14 +26,13 @@ public class CoilMovement : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         anim = GetComponentInChildren<Animation>();
-        visionInfo = GetComponent<EnemyVisionInfo>();
     }
 
     private void FixedUpdate()
     {
         var camPositions = cameraManager.cameraPositions;
         bool isVisible = UnitySingleton<CameraManager>.Instance.activeCameras.FirstOrDefault(cam => IsCoilVisisble(cam, camPositions[cam])) != null;
-        visionInfo.CanSeePlayer = isVisible;
+        
 
         //bool isVisible = IsCoilVisisble(Camera.main);
 
