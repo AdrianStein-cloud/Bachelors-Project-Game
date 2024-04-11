@@ -16,6 +16,7 @@ public class WandererChase : StateProcess<WandererState>
     WandererMovement movement;
     WandererSight sight;
     WandererInfo info;
+    EnemyVisionInfo visionInfo;
 
     Animator anim;
 
@@ -28,6 +29,7 @@ public class WandererChase : StateProcess<WandererState>
         sight = GetComponent<WandererSight>();
         info = GetComponent<WandererInfo>();
         anim = GetComponent<Animator>();
+        visionInfo = GetComponent<EnemyVisionInfo>();
     }
 
     private void OnEnable()
