@@ -877,7 +877,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1487,6 +1487,7 @@ MonoBehaviour:
     type: 3}
   lostVisionTime: 3
   effectCooldown: 5
+  shake: {fileID: 0}
 --- !u!1 &6995078530207280390
 GameObject:
   m_ObjectHideFlags: 0
