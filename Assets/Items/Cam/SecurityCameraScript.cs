@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SecurityCameraScript : MonoBehaviour
 {
-    public bool colliding;
     float timePlaced = 0;
 
     public TextMeshProUGUI timePlacedText;
@@ -14,6 +13,7 @@ public class SecurityCameraScript : MonoBehaviour
 
     new Camera camera;
     TabletGadget tablet;
+    public LayerMask layerCol;
 
     public void Init(TabletGadget tablet)
     {
@@ -28,8 +28,11 @@ public class SecurityCameraScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        tablet.battery.OnDead -= RemoveCamera;
-        tablet.onToggle -= RemoveCameraIfFalse;
+        if (tablet != null)
+        {
+            tablet.battery.OnDead -= RemoveCamera;
+            tablet.onToggle -= RemoveCameraIfFalse;
+        }
         UnitySingleton<CameraManager>.Instance.activeCameras.Remove(camera);
         UnitySingleton<CameraManager>.Instance.cameraPositions.Remove(camera);
     }
@@ -55,15 +58,5 @@ public class SecurityCameraScript : MonoBehaviour
     void RemoveCameraIfFalse(bool value)
     {
         if(!value) RemoveCamera();
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (!other.CompareTag("Room")) colliding = true;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (!other.CompareTag("Room")) colliding = false;
     }
 }
