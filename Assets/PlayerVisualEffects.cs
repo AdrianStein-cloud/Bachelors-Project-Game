@@ -24,6 +24,8 @@ public class PlayerVisualEffects : MonoBehaviour
     public float effectCooldown;
     float lastTimeUsed = 0;
 
+    bool ending = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -99,8 +101,9 @@ public class PlayerVisualEffects : MonoBehaviour
 
     public void EndChaseEffect(EnemyVisionInfo visionInfo)
     {
-        if (visionInfo != enemySeen) return;
+        if (visionInfo != enemySeen && ending) return;
 
+        ending = true;
         doingChaseEffect = false;
         lastTimeUsed = Time.time;
         enemySeen = null;
@@ -109,8 +112,16 @@ public class PlayerVisualEffects : MonoBehaviour
         PostProcessingHandler.Instance.SetLensDistortion(2f, 0);
         PostProcessingHandler.Instance.ResetVignette(1f);
         Camera.main.GetComponentInParent<CameraController>().IncrementFov(-15);
+
+        StartCoroutine(StopEnding());
     }
 
+    IEnumerator StopEnding()
+    {
+        yield return new WaitForSeconds(2f);
+        ending = false;
+    }
+    
     void PlaySoundEffect(AudioClip clip, float volume = 0.7f)
     {
         visionSoundSource.PlayOneShot(clip, volume);
