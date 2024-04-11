@@ -67,6 +67,8 @@ public class UpgradeUIController : MonoBehaviour
         RerollController.OnClick = upgradeManager.Reroll;
         CloseButton.OnClick += CloseUpgrades;
         CloseButton.OnClick += upgradeManager.CloseUpgrades;
+        InputManager.Actions.UI.Unpause.started += _ => CloseUpgrades();
+        InputManager.Actions.UI.Unpause.started += _ => upgradeManager.CloseUpgrades();
     }
 
     public void EnableCards(IEnumerable<Upgrade> upgrades)
@@ -75,6 +77,7 @@ public class UpgradeUIController : MonoBehaviour
         RerollController.gameObject.SetActive(true);
         CloseButton.gameObject.SetActive(true);
         backgroundImage.gameObject.SetActive(true);
+        InputManager.Actions.UI.Enable();
         currency.text = $"{UnitySingleton<CurrencyManager>.Instance.Currency}$";
         int i = 0;
         foreach (var upgrade in upgrades)
