@@ -96,6 +96,7 @@ public class LightFlicker : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
+        UnitySingleton<GameManager>.Instance.OnDungeonEnter -= SetLifetime;
     }
 
     void TurnOff()
