@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30cceb777f7791488021e715464cd34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dungeonStartDepth: 2
+  dungeonStartDepth: 3
   generationLookahead: 3
   canvas: {fileID: 0}
 --- !u!114 &775176127590199493
