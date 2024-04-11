@@ -1486,7 +1486,9 @@ MonoBehaviour:
   normalEnemyVisionSound: {fileID: 8300000, guid: 5713b2ea31bd2bd419d5cb05a05e694b,
     type: 3}
   lostVisionTime: 3
-  effectCooldown: 45
+  effectCooldown: 1
+  fov: 15
+  fadeDuration: 7
 --- !u!1 &6995078530207280390
 GameObject:
   m_ObjectHideFlags: 0

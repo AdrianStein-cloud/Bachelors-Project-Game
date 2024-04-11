@@ -25,12 +25,19 @@ public class PlayerVisualEffects : MonoBehaviour
     float lastTimeUsed = 0;
 
     bool ending = false;
+    public int fov = 20;
+    public int fadeDuration = 2;
+    int targetFovIncrement = 0;
+    float currentFovIncrement = 0;
+
+    CameraController cameraController;
 
 
     // Start is called before the first frame update
     void Start()
     {
         cols = new Collider[16];
+        cameraController = Camera.main.GetComponentInParent<CameraController>();
     }
 
     // Update is called once per frame
@@ -72,6 +79,24 @@ public class PlayerVisualEffects : MonoBehaviour
         //    }
         //    else currentLostvisionTime = 0;
         //}
+
+        if (targetFovIncrement != currentFovIncrement)
+        {
+            float newCurrentFovIncrement = Mathf.Lerp(currentFovIncrement, targetFovIncrement, fov / fadeDuration * Time.deltaTime);
+            float increment = newCurrentFovIncrement - currentFovIncrement;
+            currentFovIncrement = newCurrentFovIncrement;
+            cameraController.IncrementFov(increment);
+            /*float sign = targetFovIncrement > currentFovIncrement ? 1 : -1;
+            float fovChange = sign * fov / fadeDuration;
+
+            float diff = targetFovIncrement - currentFovIncrement;
+            float resultFovIncrement = diff + fovChange;
+            if (diff > 0 & resultFovIncrement < 0 || diff < 0 & resultFovIncrement > 0)
+            {
+                fovChange = targetFovIncrement;
+            }*/
+
+        }
     }
 
     public void BeginChaseEffect(EnemyVisionInfo visionInfo)
@@ -96,7 +121,8 @@ public class PlayerVisualEffects : MonoBehaviour
         PostProcessingHandler.Instance.SetChromaticAberration(1f, 0.5f);
         PostProcessingHandler.Instance.SetLensDistortion(1f, -0.15f);
         PostProcessingHandler.Instance.SetVignette(0.2f, 1f);
-        Camera.main.GetComponentInParent<CameraController>().IncrementFov(15);
+        //Camera.main.GetComponentInParent<CameraController>().IncrementFov(fov);
+        targetFovIncrement = 20;
     }
 
     public void EndChaseEffect(EnemyVisionInfo visionInfo)
@@ -111,8 +137,8 @@ public class PlayerVisualEffects : MonoBehaviour
         PostProcessingHandler.Instance.SetChromaticAberration(2f, 0);
         PostProcessingHandler.Instance.SetLensDistortion(2f, 0);
         PostProcessingHandler.Instance.ResetVignette(1f);
-        Camera.main.GetComponentInParent<CameraController>().IncrementFov(-15);
-
+        //Camera.main.GetComponentInParent<CameraController>().IncrementFov(-fov);
+        targetFovIncrement = 0;
         StartCoroutine(StopEnding());
     }
 

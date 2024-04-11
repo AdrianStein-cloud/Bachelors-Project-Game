@@ -15,7 +15,7 @@ public class ObjectiveSpawner : MonoBehaviour
     public GameObject collectablePrefab;
     public GameObject objectiveTracker;
 
-    public int multiplicationFrequancy = 5;
+    public int multiplicationFrequency = 5;
 
 
     Image objectiveFill;
@@ -31,9 +31,9 @@ public class ObjectiveSpawner : MonoBehaviour
 
     public void SpawnObjectives(List<(GameObject room, int depth)> roomsDepth, Transform dungeon, Action<int> leave)
     {
-        int objectiveAmount = (int)(this.objectiveAmount * (1 + GameSettings.Instance.Wave / (float)multiplicationFrequancy));
-        int leaveThreshold = (int)(this.leaveThreshold * (1 + GameSettings.Instance.Wave / (float)multiplicationFrequancy));
-        int maxObtainableObjectives = (int)(this.maxObtainableObjectives * (1 + GameSettings.Instance.Wave / (float)multiplicationFrequancy));
+        int objectiveAmount = (int)(this.objectiveAmount * (1 + GameSettings.Instance.Wave / (float)multiplicationFrequency));
+        int leaveThreshold = (int)(this.leaveThreshold * (1 + GameSettings.Instance.Wave / (float)multiplicationFrequency));
+        int maxObtainableObjectives = (int)(this.maxObtainableObjectives * (1 + GameSettings.Instance.Wave / (float)multiplicationFrequency));
 
         var tracker = Instantiate(objectiveTracker, dungeon).GetComponent<ObjectiveTracker>();
         Action giveCurrencyOnCollect = GetComponent<CurrencyManager>().OnObjectiveCollected;
