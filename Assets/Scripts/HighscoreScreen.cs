@@ -10,6 +10,15 @@ public class HighscoreScreen : MonoBehaviour
 
     void Start()
     {
+        Refresh();
+        UnitySingleton<GameManager>.Instance.OnDungeonGenerated += _ =>
+        {
+            Refresh();
+        };
+    }
+
+    private void Refresh()
+    {
         highscoreText.text = PlayerPrefs.GetInt("high_score_" + GameSettings.Instance.DifficultyConfig.difficulty).ToString();
         difficultyText.text = GameSettings.Instance.DifficultyConfig.difficulty.ToString();
     }
