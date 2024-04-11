@@ -197,19 +197,19 @@ MonoBehaviour:
   - name: 
     enemyPrefab: {fileID: 8978024783357441720, guid: 767e425ea2925be4d8dac8cba5ea560a,
       type: 3}
-    <Weight>k__BackingField: 150
+    <Weight>k__BackingField: 10
     MaxAmount: 0
     MinWave: 2
   - name: 
     enemyPrefab: {fileID: 2570288785515748785, guid: 2a118a61456524b44ad0e3322b6be2dc,
       type: 3}
-    <Weight>k__BackingField: 150
+    <Weight>k__BackingField: 100
     MaxAmount: 0
     MinWave: 2
   - name: 
     enemyPrefab: {fileID: 8978024783357441720, guid: 4dbec6c72cfa7da4e8a290c0d81fedd0,
       type: 3}
-    <Weight>k__BackingField: 100
+    <Weight>k__BackingField: 50
     MaxAmount: 2
     MinWave: 4
   spawnTimes:
