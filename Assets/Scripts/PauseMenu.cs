@@ -19,6 +19,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject pauseScreen;
     [SerializeField] GameObject settingsMenu;
     [SerializeField] TMP_Dropdown graphicsDropdown;
+    [SerializeField] Slider volumeSlider;
+    [SerializeField] TMP_InputField volumeInputField;
     [SerializeField] Slider sensSlider;
     [SerializeField] TMP_InputField sensInputField;
     [SerializeField] Toggle crosshairToggle;
@@ -53,6 +55,16 @@ public class PauseMenu : MonoBehaviour
         sensSlider.value = value;
         sensInputField.text = value.ToString();
 
+        value = PlayerPrefs.GetFloat("Volume") - 1;
+        if (value + 1 == 0)
+        {
+            value = 100f;
+            PlayerPrefs.SetFloat("Volume", value + 1);
+        }
+        AudioListener.volume = value / 100f;
+        volumeSlider.value = value;
+        volumeInputField.text = value.ToString();
+
         if(PlayerPrefs.GetInt("Graphics") == 0)
         {
             PlayerPrefs.SetInt("Graphics", 2);
@@ -62,6 +74,8 @@ public class PauseMenu : MonoBehaviour
         QualitySettings.renderPipeline = graphics[PlayerPrefs.GetInt("Graphics") - 1];
         graphicsDropdown.onValueChanged.AddListener(SetGraphics);
 
+        volumeSlider.onValueChanged.AddListener(SetVolume);
+        volumeInputField.onValueChanged.AddListener(SetVolume);
         sensSlider.onValueChanged.AddListener(SetSensitivity);
         sensInputField.onValueChanged.AddListener(SetSensitivity);
         crosshair.SetActive(PlayerPrefs.GetInt("Crosshair") == 1);
@@ -97,6 +111,21 @@ public class PauseMenu : MonoBehaviour
         player.HorizontalSensitivity = value;
         player.VerticalSensitivity = value;
         PlayerPrefs.SetFloat("Sensitivity", value);
+    }
+
+    private void SetVolume(float input)
+    {
+        volumeInputField.text = input.ToString();
+        AudioListener.volume = input / 100f;
+        PlayerPrefs.SetFloat("Volume", input + 1);
+    }
+
+    private void SetVolume(string input)
+    {
+        float value = float.Parse(input);
+        volumeSlider.value = value;
+        AudioListener.volume = value / 100f;
+        PlayerPrefs.SetFloat("Volume", value + 1);
     }
 
     private void OpenSettings()
