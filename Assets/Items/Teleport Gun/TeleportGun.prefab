@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Teleport Gun
-  icon: {fileID: 21300000, guid: eafc4e6e58088bf4cab544d3d156baa1, type: 3}
+  icon: {fileID: 21300000, guid: eb4e2054a4160a04a827bc51b8a42215, type: 3}
   cooldown: 30
   range: 150
   chargeTime: 1
