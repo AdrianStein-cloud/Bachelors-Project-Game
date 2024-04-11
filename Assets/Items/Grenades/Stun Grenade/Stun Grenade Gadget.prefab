@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Stun Grenade
   icon: {fileID: 21300000, guid: 25bcf9c9726c62f419dc64fe9d46359f, type: 3}
+  primaryDescription: Throw
+  secondaryDescription: 
   throwablePrefab: {fileID: 8677083464190677367, guid: 3c25b2cb34c098a44a6b8d4042c77d55,
     type: 3}
   throwForce: 100

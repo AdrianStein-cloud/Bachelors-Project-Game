@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e6eb8c06cb5064ba77fcf813da9a03, type: 3}
   m_Name: Decoymine Upgrade
   m_EditorClassIdentifier: 
-  Name: Decoymine
-  description: Grants you a {0}
+  Name: Decoy
+  description: Grants you 3 {0}s
   Rarity: 1
   Tags: 48
   NewlyAvailableUpgrades: []
+  <Limit>k__BackingField: 0
   item: {fileID: -9199799484161613014, guid: e84ad19488a92f242bd97ee0a746796b, type: 3}

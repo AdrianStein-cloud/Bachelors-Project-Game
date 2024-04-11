@@ -33,8 +33,12 @@ public class SecurityCameraScript : MonoBehaviour
             tablet.battery.OnDead -= RemoveCamera;
             tablet.onToggle -= RemoveCameraIfFalse;
         }
-        UnitySingleton<CameraManager>.Instance.activeCameras.Remove(camera);
-        UnitySingleton<CameraManager>.Instance.cameraPositions.Remove(camera);
+
+        if (camera != null)
+        {
+            UnitySingleton<CameraManager>.Instance.activeCameras.Remove(camera);
+            UnitySingleton<CameraManager>.Instance.cameraPositions.Remove(camera);
+        }
     }
 
     private void Update()
