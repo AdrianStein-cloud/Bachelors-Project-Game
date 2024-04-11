@@ -232,7 +232,7 @@ MonoBehaviour:
     MaxAmount: 0
     MinWave: 0
   releaseGapMiniutes: 5
-  relesaeAmount: 2
+  relesaeAmount: 3
   extraEnemies: 0
 --- !u!114 &7560089572570469592
 MonoBehaviour:
@@ -326,13 +326,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localSounds:
   - {fileID: 8300000, guid: 93f68ec3b7fa705479d83431e14684f4, type: 3}
-  - {fileID: 8300000, guid: 7eff499e73d43b54eb42324408e62024, type: 3}
-  - {fileID: 8300000, guid: f9d498ff5bdce07439f223fd8d246c0a, type: 3}
   - {fileID: 8300000, guid: a600d1a9f558e7e41abb226e36510301, type: 3}
   - {fileID: 8300000, guid: b05a3f0193c4d6443b82ab18473276d5, type: 3}
   - {fileID: 8300000, guid: 5808d146a84520f4386937f586fefd4e, type: 3}
   - {fileID: 8300000, guid: 0d157928800907e4082e6cab2e929171, type: 3}
-  - {fileID: 8300000, guid: 4c05a4a3e6b52dd47afca5d2d01a8d0e, type: 3}
   - {fileID: 8300000, guid: e8de10376d1739041a8e1f9eaf62fb82, type: 3}
   - {fileID: 8300000, guid: ad4f464d26d792d43b9580b7a2e21f64, type: 3}
   - {fileID: 8300000, guid: 1f949aae86f44ca468758da84e06c0e6, type: 3}
@@ -349,8 +346,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 48c983af01285c34c9c29620fdb64edb, type: 3}
   - {fileID: 8300000, guid: c7c55d21ece4c114b9cadc80ccf2497b, type: 3}
   - {fileID: 8300000, guid: 0053efa23e7c77c4788949f4a3774552, type: 3}
-  soundIntervalMin: 20
-  soundIntervalMax: 40
+  soundIntervalMin: 30
+  soundIntervalMax: 50
   localSoundMinimumDistance: 200
   localSoundMaximumDistance: 500
 --- !u!114 &6552894007565172604
