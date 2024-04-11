@@ -2051,6 +2051,7 @@ GameObject:
   - component: {fileID: -3565055126115186243}
   - component: {fileID: 8383628497288003706}
   - component: {fileID: -3325801244017822583}
+  - component: {fileID: 8912377215838327860}
   m_Layer: 10
   m_Name: WandererFast
   m_TagString: Enemy
@@ -2514,6 +2515,18 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e8ee9b05a6a3fe4787ab103c62ce52d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8912377215838327860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978024783357441720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24d31dcbfb055084787a563aa999c266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &9174250730009375274

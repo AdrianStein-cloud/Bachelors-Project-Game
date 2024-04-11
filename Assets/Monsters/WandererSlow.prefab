@@ -1659,6 +1659,7 @@ GameObject:
   - component: {fileID: -3565055126115186243}
   - component: {fileID: -1455468899765472073}
   - component: {fileID: 8407968035854576419}
+  - component: {fileID: 950233330823005724}
   m_Layer: 10
   m_Name: WandererSlow
   m_TagString: Enemy
@@ -2121,6 +2122,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8ee9b05a6a3fe4787ab103c62ce52d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &950233330823005724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978024783357441720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24d31dcbfb055084787a563aa999c266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
 --- !u!1001 &3622890973146290634
 PrefabInstance:
   m_ObjectHideFlags: 0

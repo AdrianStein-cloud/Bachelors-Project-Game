@@ -29,6 +29,7 @@ public class WandererSight : MonoBehaviour
 
 
     WandererInfo info;
+    EnemyVisionInfo visionInfo;
 
     GameObject target;
     GameObject door;
@@ -45,6 +46,7 @@ public class WandererSight : MonoBehaviour
         info = GetComponent<WandererInfo>();
 
         target = GameObject.FindGameObjectWithTag("Player");
+        visionInfo = GetComponent<EnemyVisionInfo>();
     }
 
     private void Update()
@@ -64,6 +66,8 @@ public class WandererSight : MonoBehaviour
         if (targetPlayer == null) targetPlayer = CheckForPlayerInSight(angle, distance);
 
         info.TargetPlayer = targetPlayer;
+
+        if (targetPlayer != null) visionInfo.CanSeePlayer = true;
 
         if (info.TargetPlayer != null)
         {

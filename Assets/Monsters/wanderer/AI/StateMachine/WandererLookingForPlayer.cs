@@ -7,6 +7,7 @@ public class WandererLookingForPlayer : StateProcess<WandererState>
     WandererSight sight;
     WandererInfo info;
     Animator anim;
+    EnemyVisionInfo visionInfo;
 
     private void Awake()
     {
@@ -14,6 +15,7 @@ public class WandererLookingForPlayer : StateProcess<WandererState>
         sight = GetComponent<WandererSight>();
         info = GetComponent<WandererInfo>();
         anim = GetComponent<Animator>();
+        visionInfo = GetComponent<EnemyVisionInfo>();
         GetComponent<WandererSounds>().OnScreamEnd += () => StartCoroutine(SearchRoom());
     }
 
@@ -21,6 +23,7 @@ public class WandererLookingForPlayer : StateProcess<WandererState>
     {
         movement.Stop();
         anim.SetTrigger("Scream");
+        visionInfo.CanSeePlayer = false;
     }
 
     private void OnDisable()
