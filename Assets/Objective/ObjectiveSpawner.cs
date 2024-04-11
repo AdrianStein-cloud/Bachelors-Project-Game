@@ -19,12 +19,14 @@ public class ObjectiveSpawner : MonoBehaviour
 
 
     Image objectiveFill;
+
+    System.Random random;
     
 
     private void Awake()
     {
         objectiveFill = GameObject.Find("ObjectiveBar").transform.Find("Fill").GetComponent<Image>();
-
+        random = new System.Random();
     }
 
     public void SpawnObjectives(List<(GameObject room, int depth)> roomsDepth, Transform dungeon, Action<int> leave)
@@ -36,19 +38,15 @@ public class ObjectiveSpawner : MonoBehaviour
         var tracker = Instantiate(objectiveTracker, dungeon).GetComponent<ObjectiveTracker>();
         Action giveCurrencyOnCollect = GetComponent<CurrencyManager>().OnObjectiveCollected;
         tracker.Init(maxObtainableObjectives, leaveThreshold, objectiveFill, giveCurrencyOnCollect, leave);
-        
 
         var rooms = roomsDepth
-            .Select(t => new { room = t.room.GetComponent<Room>(), depth = t.depth })
-            .SelectMany(t => Enumerable.Range(0, t.depth).Select(_ => t.room)) //Weights
-            .ToList();
+            .Select(t => new Weighted<Room> { element = t.room.GetComponent<Room>(), Weight = t.depth}).ToList();
 
         //Debug.LogError("Dont TP me");
 
         for (int i = objectiveAmount; i > 0 && rooms.Count > 0; i--)
         {
-            var randomRoom = rooms[UnityEngine.Random.Range(0, rooms.Count)];
-            rooms.Remove(randomRoom);
+            var randomRoom = rooms.GetRollFromWeights(random).element;
             var spawnPostions = randomRoom.ObjectiveSpawnPositions;
             if (spawnPostions.Count == 0) {
                 Debug.LogWarning("Room has no spawnpositions: " + randomRoom.name);
@@ -72,4 +70,10 @@ public class ObjectiveSpawner : MonoBehaviour
     {
         return Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0);
     }
+}
+
+public class Weighted<T> : IWeighted
+{
+    public T element;
+    public int Weight { get; set; }
 }
