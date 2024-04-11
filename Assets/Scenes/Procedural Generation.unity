@@ -3866,6 +3866,12 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1362994284}
+    - target: {fileID: 6316439307033216479, guid: 190f930b5f042b247adeab89b9c2a294,
+        type: 3}
+      propertyPath: shake
+      value: 
+      objectReference: {fileID: 11400000, guid: ba6ad188e8fc5104983bce018b3a1fcb,
+        type: 2}
     - target: {fileID: 8054601432520321005, guid: 190f930b5f042b247adeab89b9c2a294,
         type: 3}
       propertyPath: m_Mesh

@@ -23,6 +23,7 @@ public class PlayerVisualEffects : MonoBehaviour
     public float effectCooldown;
     float lastTimeUsed;
 
+    public CameraShakePreset shake;
 
 
     // Start is called before the first frame update
@@ -34,6 +35,8 @@ public class PlayerVisualEffects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.H)) Camera.main.GetComponent<CameraShake>().Shake(shake);
+
         if (!doingChaseEffect && lastTimeUsed + effectCooldown <= Time.time)
         {
             var hits = Physics.OverlapSphereNonAlloc(transform.position, detectRadiusStart, cols, enemyLayer);
@@ -103,7 +106,7 @@ public class PlayerVisualEffects : MonoBehaviour
         PostProcessingHandler.Instance.ResetVignette(1f);
     }
 
-    void PlaySoundEffect(AudioClip clip, float volume = 1f)
+    void PlaySoundEffect(AudioClip clip, float volume = 0.7f)
     {
         visionSoundSource.PlayOneShot(clip, volume);
     }

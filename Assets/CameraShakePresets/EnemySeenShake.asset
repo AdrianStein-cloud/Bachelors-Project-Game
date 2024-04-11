@@ -17,11 +17,11 @@ MonoBehaviour:
   rotationAmount: 6
   rotationAngle: 12
   rotationShake: 1
-  scaleShakeTime: 0
-  zoomSteps: 0
-  zoomAmount: 0
-  scaleShake: 0
+  scaleShakeTime: 0.1
+  zoomSteps: 2
+  zoomAmount: 2
+  scaleShake: 1
   moveRandom: 0.075
   moveShakeTime: 0.15
-  moveSteps: 6
+  moveSteps: 4
   movementShake: 1
