@@ -21,7 +21,8 @@ public class StatDisplayer : MonoBehaviour
     {
         try
         {
-            statText.text = "Money: " + UnitySingleton<CurrencyManager>.Instance.Currency + "$\n" +
+            statText.text = "Wave: " + GameSettings.Instance.Wave + "\n" +
+                        "Money: " + UnitySingleton<CurrencyManager>.Instance.Currency + "$\n" +
                         "Health: " + Stats.Instance.player.health + "\n" +
                         "Stamina: " + Stats.Instance.player.stamina + "\n" +
                         "Stamina Recovery: " + Stats.Instance.player.staminaRecovery + "\n" +
