@@ -19,4 +19,4 @@ MonoBehaviour:
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
   <Limit>k__BackingField: 0
-  cooldownRecoverySpeedPrecentage: 2
+  cooldownRecoverySpeedPrecentage: 5

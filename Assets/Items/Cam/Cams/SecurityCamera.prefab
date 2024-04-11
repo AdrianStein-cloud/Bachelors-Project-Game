@@ -1498,6 +1498,9 @@ MonoBehaviour:
   timePlacedText: {fileID: 1856752586207148938}
   nameText: {fileID: 2840777602502786502}
   camName: 
+  layerCol:
+    serializedVersion: 2
+    m_Bits: 8388673
 --- !u!114 &4555112414785604550
 MonoBehaviour:
   m_ObjectHideFlags: 0

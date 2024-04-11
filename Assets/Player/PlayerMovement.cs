@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour, IStunnable, ISlowable
 
         if (dir.y <= 0 && toggleRun || !stamina.SufficientStamina) run = false;
 
-        currentSpeed = (IsRunning ? runSpeed : (IsCrouching ? crouchSpeed : walkSpeed)) * speedMultiplier * Stats.Instance.player.speedMultiplier;
+        currentSpeed = (IsRunning ? runSpeed : (IsCrouching ? crouchSpeed : walkSpeed)) * speedMultiplier * Stats.Instance.player.speedMultiplier * Stats.Instance.GlobalSpeedModifier;
         IsWalking = dir.magnitude > 0f && !IsRunning && isGrounded;
 
         canStand = !Physics.Raycast(groundCheck.position, Vector3.up, ceilingCheckDistance, ceilingCheckMask, QueryTriggerInteraction.Ignore) && IsCrouching;

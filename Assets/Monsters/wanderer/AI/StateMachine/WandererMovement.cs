@@ -41,7 +41,7 @@ public class WandererMovement : MonoBehaviour, ISlowable
         moving = true;
         targetPosition = target;
         agent.SetDestination(target);
-        agent.speed = speed * slowFactor;
+        agent.speed = speed * slowFactor * Stats.Instance.GlobalSpeedModifier;
         agent.isStopped = false;
 
         info.DestinationRoom = GetRoomAtLocation(target);

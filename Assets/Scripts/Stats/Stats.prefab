@@ -52,6 +52,16 @@ MonoBehaviour:
   player:
     keysHeld: 0
     speedMultiplier: 1
+    health: 100
+    stamina: 0
+    staminaRecovery: 0
+    staminaIncrease: 0
+    staminaRecoveryIncrease: 0
   money:
     IncreaseOnAllMoneyUpgrades: 0
     FreeRerolls: 0
+    HeartWorth: 10
+    PiggyBanks: 0
+  cooldown:
+    RecoverySpeedPercentage: 0
+  GlobalSpeedModifier: 1.2

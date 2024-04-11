@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Piggy Bank
   m_EditorClassIdentifier: 
   Name: Piggy Bank
-  description: Gain {0}% of current $ each floor
+  description: Gain {0}% of current $ when you enter the dungeon
   Rarity: 1
   Tags: 128
   NewlyAvailableUpgrades:
