@@ -5,42 +5,24 @@ using System.Data.Common;
 using TMPro;
 using UnityEngine;
 
-public class Sandevistan : Item
+public class Sandevistan : CooldownItem
 {
-    private GameObject distanceCounter;
-    private TextMeshProUGUI timerText;
-    private float timer = 0f;
-    public float cooldown;
     public float duration;
     public float timeScale;
-    private CameraController cameraController;
 
-    private void Awake()
-    {
-        distanceCounter = GameSettings.Instance.canvas.transform.Find("GadgetText").gameObject;
-        timerText = distanceCounter.GetComponent<TextMeshProUGUI>();
-    }
+    bool inUse = false;
+    CameraController cameraController;
 
     private void Start()
     {
         cameraController = FindObjectOfType<CameraController>();
     }
 
-    private void Update()
-    {
-        if(timer > 0)
-        {
-            timer -= Time.deltaTime;
-            timerText.text = timer.ToString("F1") + " s";
-            if (timer < 0.5) timerText.text = string.Empty;
-        }
-    }
-
     public override void Primary() => TrySlowTime();
 
     private void TrySlowTime()
     {
-        if (timer <= 0)
+        if (IsOffCooldown & !inUse)
         {
             StartCoroutine(SlowTime());
         }
@@ -52,10 +34,12 @@ public class Sandevistan : Item
         StartCoroutine(FadeIn(fov));
         yield return new WaitForSecondsRealtime(duration);
         StartCoroutine(FadeOut(fov));
+
     }
 
     IEnumerator FadeIn(float fov)
     {
+        inUse = true;
         float elapsedTime = 0f;
         var startValue = 1f;
         float smoothTime = 1f;
@@ -77,7 +61,6 @@ public class Sandevistan : Item
     IEnumerator FadeOut(float fov)
     {
         Time.timeScale = 1f;
-        //cameraController.SetFov(fov);
 
         float elapsedTime = 0f;
         float smoothTime = 1f;
@@ -94,17 +77,13 @@ public class Sandevistan : Item
             elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
-        timer = cooldown * Stats.Instance.cooldown.CalculatedRecoverySpeedMultiplier;
+        StartCoroutine(Cooldown());
+        inUse = false;
     }
 
-    public override void Select()
-    {
-        distanceCounter.SetActive(true);
-        timerText.text = string.Empty;
-    }
 
-    public override void Deselect()
+    private void OnDestroy()
     {
-        distanceCounter.SetActive(false);
+        Time.timeScale = 1f;
     }
 }
