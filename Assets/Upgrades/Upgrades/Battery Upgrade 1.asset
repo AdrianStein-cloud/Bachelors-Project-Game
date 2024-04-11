@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Longer Battery
   description: Batteries last {0}% longer
-  Rarity: 1
+  Rarity: 0
   Tags: 0
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
-  batteryLifePercentage: 35
+  <Limit>k__BackingField: 0
+  batteryLifePercentage: 15
