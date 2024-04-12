@@ -360,6 +360,7 @@ GameObject:
   - component: {fileID: 1504339209475863350}
   - component: {fileID: 6682991536864658150}
   - component: {fileID: 1788399335745204759}
+  - component: {fileID: 4892379659964232884}
   m_Layer: 0
   m_Name: lock
   m_TagString: Untagged
@@ -432,6 +433,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4892379659964232884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916297758784421747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &1462987493133188831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,6 +1125,7 @@ GameObject:
   - component: {fileID: 6299378166988427361}
   - component: {fileID: 555055667526180406}
   - component: {fileID: 6704748114111295098}
+  - component: {fileID: 4674364820117364966}
   m_Layer: 0
   m_Name: wires
   m_TagString: Untagged
@@ -1177,6 +1198,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4674364820117364966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6466149747872898188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &6553941164863773583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,6 +1262,7 @@ GameObject:
   - component: {fileID: 6713336364817613679}
   - component: {fileID: 2435105730982034549}
   - component: {fileID: 4354595214055828575}
+  - component: {fileID: 8516732232793942140}
   m_Layer: 0
   m_Name: head
   m_TagString: Untagged
@@ -1296,6 +1337,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8516732232793942140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7788402701654779873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &8215907106700433882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,7 +1554,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ded41344ccc07b4da7d3e1aa02ebdd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliding: 0
   timePlacedText: {fileID: 1856752586207148938}
   nameText: {fileID: 2840777602502786502}
   camName: 
@@ -1566,7 +1625,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 1}
   m_Intensity: 300
-  m_Range: 200
+  m_Range: 500
   m_SpotAngle: 141.4321
   m_InnerSpotAngle: 141.4321
   m_CookieSize: 10
