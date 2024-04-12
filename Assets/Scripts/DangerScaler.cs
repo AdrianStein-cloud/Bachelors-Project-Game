@@ -22,7 +22,10 @@ public class DangerScaler
         }
         else
         {
-            GameSettings.Instance.CurrentDepth = (int)Mathf.Floor(GameSettings.Instance.DungeonStartDepth + GameSettings.Instance.Wave / 2.5f);
+            if(GameSettings.Instance.CurrentDepth < 8)
+            {
+                GameSettings.Instance.CurrentDepth = (int)Mathf.Floor(GameSettings.Instance.DungeonStartDepth + GameSettings.Instance.Wave / 2.5f);
+            }
             GameSettings.Instance.EnemyAmount = (int) MathF.Ceiling((GameSettings.Instance.Wave - 1) / GameSettings.Instance.DifficultyConfig.enemySpawnRate);
         }
     }
