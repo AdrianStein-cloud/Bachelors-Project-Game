@@ -214,14 +214,20 @@ MonoBehaviour:
     MaxAmount: 2
     MinWave: 4
   spawnTimes:
-  - {x: 1, y: 5, z: 0}
-  - {x: 2, y: 4, z: 0}
-  - {x: 3, y: 4, z: 0}
-  - {x: 6, y: 3.5, z: 3}
-  - {x: 8, y: 3.5, z: 2.5}
+  - spawnTime: {x: 1, y: 0.1, z: 0}
+    maxSpawn: 2
+  - spawnTime: {x: 2, y: 4, z: 0}
+    maxSpawn: 3
+  - spawnTime: {x: 3, y: 4, z: 0}
+    maxSpawn: 3
+  - spawnTime: {x: 6, y: 3.5, z: 3}
+    maxSpawn: 4
+  - spawnTime: {x: 8, y: 3.5, z: 2.5}
+    maxSpawn: 5
   extraEnemies: 0
   shakePreset: {fileID: 11400000, guid: ba6ad188e8fc5104983bce018b3a1fcb, type: 2}
   spawnAudioSource: {fileID: 2260359006969132685}
+  enemiesSpawned: 0
 --- !u!114 &7560089572570469592
 MonoBehaviour:
   m_ObjectHideFlags: 0
