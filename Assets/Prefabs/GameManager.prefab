@@ -218,12 +218,12 @@ MonoBehaviour:
     maxSpawn: 2
   - spawnTime: {x: 2, y: 4, z: 0}
     maxSpawn: 3
-  - spawnTime: {x: 3, y: 4, z: 0}
-    maxSpawn: 3
-  - spawnTime: {x: 6, y: 3.5, z: 3}
+  - spawnTime: {x: 3, y: 3.5, z: 0}
     maxSpawn: 4
-  - spawnTime: {x: 8, y: 3.5, z: 2.5}
-    maxSpawn: 5
+  - spawnTime: {x: 6, y: 3, z: 2.5}
+    maxSpawn: 6
+  - spawnTime: {x: 8, y: 2.5, z: 0}
+    maxSpawn: 8
   extraEnemies: 0
   shakePreset: {fileID: 11400000, guid: ba6ad188e8fc5104983bce018b3a1fcb, type: 2}
   spawnAudioSource: {fileID: 2260359006969132685}
