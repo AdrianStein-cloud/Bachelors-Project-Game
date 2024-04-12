@@ -10,7 +10,7 @@ public class SimpleEnemySpawner : MonoBehaviour
     public WeightedEnemy[] spawnPool;
 
     [Header("(Wave, Min, Min)")]
-    public Vector3[] spawnTimes;
+    [field: SerializeField] EnemySpawnSetting[] spawnTimes;
 
     public int extraEnemies;
 
@@ -23,9 +23,13 @@ public class SimpleEnemySpawner : MonoBehaviour
     public CameraShakePreset shakePreset;
     public AudioSource spawnAudioSource;
 
+    [SerializeField] float enemiesSpawned;
+
     private void Start()
     {
         random = new System.Random(GameSettings.Instance.GetSeed());
+
+        GetComponent<GameManager>().OnWaveOver += () => enemiesSpawned = 0;
     }
 
     public void SpawnEnemies()
@@ -52,13 +56,20 @@ public class SimpleEnemySpawner : MonoBehaviour
     IEnumerator SpawnAddtionalEnemiesAfterDelay()
     {
         var dungeon = UnitySingleton<Dungeon>.Instance;
-        var spawnTimeVector = spawnTimes.Where(t => t.x <= dungeon.Wave).MaxBy(t => t.x);
-        var spawnTime = new List<float> { spawnTimeVector.y}; 
-        if(spawnTimeVector.z != 0)
-            spawnTime.Add(spawnTimeVector.z);
+        var spawnTimeVector = spawnTimes.Where(t => t.spawnTime.x <= dungeon.Wave).MaxBy(t => t.spawnTime.x);
+        var maxSpawn = spawnTimeVector.maxSpawn;
+        var spawnTime = new List<float> { spawnTimeVector.spawnTime.y}; 
+        if(spawnTimeVector.spawnTime.z != 0)
+            spawnTime.Add(spawnTimeVector.spawnTime.z);
 
         for (int i = 0; i < spawnTime.Count; i++)
         {
+            if (enemiesSpawned >= maxSpawn)
+            {
+                Debug.Log("Max enemies spawned");
+                yield break;
+            }
+
             float wait = spawnTime[i] * 60 + (GameSettings.Instance.Event != null ? 60 : 0);
             yield return new WaitForSeconds(wait);
             SpawnSingleEnemy();
@@ -102,6 +113,7 @@ public class SimpleEnemySpawner : MonoBehaviour
 
         for (int i = 0; i < rooms.Count & i < enemies.Count; i++)
         {
+            enemiesSpawned++;
             Instantiate(enemies[i], rooms[i].centerObject.transform.position, Quaternion.identity, dungeon.transform);
         }
     }
@@ -121,4 +133,11 @@ public class WeightedEnemy : IWeighted
     [field: SerializeField] public int Weight { get; set; }
     public int MaxAmount;
     public int MinWave;
+}
+
+[System.Serializable]
+class EnemySpawnSetting
+{
+    public Vector3 spawnTime;
+    public int maxSpawn;
 }
