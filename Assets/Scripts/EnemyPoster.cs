@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyPoster : MonoBehaviour
 {
     [SerializeField] string posterName;
+    [SerializeField] bool alwaysVisible;
 
     private void Start()
     {
@@ -14,6 +15,9 @@ public class EnemyPoster : MonoBehaviour
 
     void SetPoster()
     {
-        GetComponent<MeshRenderer>().enabled = PlayerPrefs.GetInt(posterName) == 1;
+        if (!alwaysVisible)
+        {
+            GetComponent<MeshRenderer>().enabled = PlayerPrefs.GetInt(posterName) == 1;
+        }
     }
 }
