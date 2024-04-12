@@ -214,7 +214,7 @@ MonoBehaviour:
     MaxAmount: 2
     MinWave: 4
   spawnTimes:
-  - spawnTime: {x: 1, y: 0.1, z: 0}
+  - spawnTime: {x: 1, y: 5, z: 0}
     maxSpawn: 2
   - spawnTime: {x: 2, y: 4, z: 0}
     maxSpawn: 3
