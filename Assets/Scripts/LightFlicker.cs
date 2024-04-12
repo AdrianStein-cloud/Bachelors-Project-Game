@@ -69,7 +69,7 @@ public class LightFlicker : MonoBehaviour
     private void SetLifetime()
     {
         float minLifetime = 2.5f;
-        float maxLifetime = 10f;
+        float maxLifetime = 8f;
 
         StartCoroutine(StartLife(Random.Range(minLifetime * 60f, maxLifetime * 60f)));
     }

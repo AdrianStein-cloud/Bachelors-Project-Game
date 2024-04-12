@@ -12,7 +12,18 @@ public abstract class Upgrade : ScriptableObject, IWeighted
     public Rarity Rarity;
     public Tag Tags;
     public List<Upgrade> NewlyAvailableUpgrades;
-    public int Price { get; set; }
+    private int price;
+    public int Price
+    {
+        get
+        {
+            return price + (Purchased * 2);
+        }
+        set
+        {
+            price = value;
+        }
+    }
     public string Description => string.Format(description, Args);
 
     [field: SerializeField] public int Limit { get; set; }

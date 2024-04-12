@@ -309,7 +309,7 @@ PrefabInstance:
     - target: {fileID: 6552894007565172604, guid: 133054512c61b764891ea66fa32972e3,
         type: 3}
       propertyPath: currentCurrency
-      value: 0
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5938,6 +5938,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 37640139862126885, guid: 12311705e3030ab4aa48c58cf8664e57,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1773698726988887517, guid: 12311705e3030ab4aa48c58cf8664e57,
         type: 3}
       propertyPath: m_AnchorMax.x
