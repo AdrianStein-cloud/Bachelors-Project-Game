@@ -59,7 +59,7 @@ public class SimpleEnemySpawner : MonoBehaviour
 
         for (int i = 0; i < spawnTime.Count; i++)
         {
-            float wait = spawnTime[i] * 60;
+            float wait = spawnTime[i] * 60 + (GameSettings.Instance.Event != null ? 60 : 0);
             yield return new WaitForSeconds(wait);
             SpawnSingleEnemy();
             if (i == spawnTime.Count - 1) //Loop on last element
