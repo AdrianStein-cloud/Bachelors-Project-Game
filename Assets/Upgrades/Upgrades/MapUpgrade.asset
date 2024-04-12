@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Map
   description: Minimap App
-  Rarity: 2
+  Rarity: 3
   Tags: 12
   NewlyAvailableUpgrades:
   - {fileID: 11400000, guid: 0ccd71196a3f4f9488539d5c4b5baf1a, type: 2}
   - {fileID: 11400000, guid: e8def8e332926d14a898c8db8c6b1a1a, type: 2}
+  <Limit>k__BackingField: 0
   item: {fileID: 1980060430063386299, guid: 299b45930ebc340448bd4be5943c3076, type: 3}

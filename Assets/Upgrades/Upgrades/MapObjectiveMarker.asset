@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d3ea129df5aca419ebb45dc9922d9a, type: 3}
   m_Name: MapObjectiveMarker
   m_EditorClassIdentifier: 
-  Name: Objective Marker
-  description: Objectives are visible on the map
+  Name: Heart Marker
+  description: Hearts are visible on the map
   Rarity: 1
   Tags: 0
   NewlyAvailableUpgrades: []
+  <Limit>k__BackingField: 0
   layerToSeeName: ObjectiveMarker

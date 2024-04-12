@@ -17,9 +17,9 @@ MonoBehaviour:
 
 
     -{1} health'
-  Rarity: 3
+  Rarity: 2
   Tags: 0
   NewlyAvailableUpgrades: []
   <Limit>k__BackingField: 0
   extraGrenadesPerGrenade: 1
-  healthPrecentageDecrease: 30
+  healthPrecentageDecrease: 25

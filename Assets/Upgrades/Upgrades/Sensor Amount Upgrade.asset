@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Sensory Amplifier Plus
   description: Gives you {0} additional sensors
-  Rarity: 2
+  Rarity: 1
   Tags: 0
   NewlyAvailableUpgrades: []
+  <Limit>k__BackingField: 0
   amount: 3

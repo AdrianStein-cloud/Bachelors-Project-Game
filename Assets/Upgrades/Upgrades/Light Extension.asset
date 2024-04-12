@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Light Extension
   description: Increases the range of your flashlight by {1}
-  rarity: 0
+  Rarity: 0
+  Tags: 0
   NewlyAvailableUpgrades:
   - {fileID: 11400000}
+  <Limit>k__BackingField: 3
   intensity: 0
   range: 100
   angle: 0
