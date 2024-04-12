@@ -32,7 +32,7 @@ public class SecurityCameraController : Item
 
     List<MeshRenderer> renderers;
 
-    private void Awake()
+    private void Start()
     {
         tablet = GameObject.FindGameObjectWithTag("Tablet").GetComponent<TabletGadget>();
 
@@ -62,10 +62,7 @@ public class SecurityCameraController : Item
                 currentCameraIndex = 0;
                 UpdateCounter();
             };
-    }
 
-    private void Start()
-    {
         UpdateCounter();
     }
 

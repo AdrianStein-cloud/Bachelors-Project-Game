@@ -21,7 +21,7 @@ public class TabletGadget : MonoBehaviour
     public bool holdingTabletGadget;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         battery = Instantiate(batteryPrefab, this.transform);
         battery.OnDead += () => textureRenderer.SetActive(false);

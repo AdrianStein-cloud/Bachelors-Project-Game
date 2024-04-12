@@ -12,10 +12,13 @@ public class MapGadgetController : Item
 
     bool gadgetOn;
 
-    private void Awake()
+    private void Start()
     {
         tablet = GameObject.FindGameObjectWithTag("Tablet").GetComponent<TabletGadget>();
         mapCam = GameObject.FindGameObjectWithTag("MapCamera").GetComponentInChildren<Camera>();
+
+        tablet.battery.OnDead += () => { if (gadgetOn) gadgetOn = false; };
+        
     }
 
     public override void Select()
