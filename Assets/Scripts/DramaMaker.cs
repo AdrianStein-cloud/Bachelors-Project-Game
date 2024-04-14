@@ -38,7 +38,7 @@ public class DramaMaker : Interactable
             new WeightedDrama(ReleaseMonster, 100, 50, "Warning!\nAre you sure you want to release another monster?\n(bonus +50$)"),
             new WeightedDrama(ReleaseMonsterNextFloor, 100, 75, "Warning!\nRelease another monster on the next floor?\n(bonus +75$)"),
             new WeightedDrama(FloodNextFloor, 100, 50, $"Warning!\nAre you sure you want to open the floodgates on floor {GameSettings.Instance.Wave + 1}?\n(bonus +50$)"),
-            new WeightedDrama(Nothing, 100, 0, "Are you sure you want to recharge all batteries?\n(penalty -50$)"),
+            //new WeightedDrama(Nothing, 100, 0, "Are you sure you want to recharge all batteries?\n(penalty -50$)"),
             new WeightedDrama(Nothing, 100, 0, "ERROR 404: command not found"),
         };
 
