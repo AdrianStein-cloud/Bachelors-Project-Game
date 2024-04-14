@@ -27,10 +27,10 @@ public class EventManager : MonoBehaviour
 
         events = new List<WeightedEvent>
         {
-            new WeightedEvent(Flooded, 100),
-            new WeightedEvent(PowerOutage, 100),
+            //new WeightedEvent(Flooded, 100),
+            //new WeightedEvent(PowerOutage, 100),
             new WeightedEvent(Foggy, 100),
-            new WeightedEvent(NoEvent, 200)
+            //new WeightedEvent(NoEvent, 200)
         };
 
         Instance = this;
@@ -84,7 +84,7 @@ public class EventManager : MonoBehaviour
 
     private void Foggy()
     {
-        if (GameSettings.Instance.Wave > 2)
+        if (GameSettings.Instance.Wave > 0)
         {
             GameSettings.Instance.Event = "Foggy!";
             SetFoggy();
@@ -102,12 +102,15 @@ public class EventManager : MonoBehaviour
 
     private void SetFoggy()
     {
-        StartCoroutine(LerpFog(400, 30, 0.05f));
+        StartCoroutine(LerpFog(400, 12, 0.05f));
     }
 
     public void ResetFog()
     {
-        if(isActiveAndEnabled) StartCoroutine(LerpFog(defaultFogAttenuationDistance, defaultLocalScatteringIntensity, 0f));
+        if (isActiveAndEnabled)
+        {
+            StartCoroutine(LerpFog(defaultFogAttenuationDistance, defaultLocalScatteringIntensity, 0f));
+        }
     }
 
     void OnDisable()
