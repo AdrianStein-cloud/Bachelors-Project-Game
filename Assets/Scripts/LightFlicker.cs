@@ -82,7 +82,7 @@ public class LightFlicker : MonoBehaviour
 
     void ReverseFlicker()
     {
-        reversed = true;
+        reversed = !reversed;
 
         var temp = offFlickerSpeedMax;
         offFlickerSpeedMax = onFlickerSpeedMax;
@@ -126,6 +126,7 @@ public class LightFlicker : MonoBehaviour
             if (GameSettings.Instance.PowerOnMode)
             {
                 off = false;
+                if (reversed) ReverseFlicker();
                 TurnOn();
                 yield break;
             }
