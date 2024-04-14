@@ -14,7 +14,7 @@ public class NotePoster : MonoBehaviour
             notes.text = value;
             if(value == null)
             {
-                notes.text = "Hostile Creatures!";
+                notes.text = "Unknown.";
             }
         };
     }
