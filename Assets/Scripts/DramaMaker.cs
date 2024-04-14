@@ -55,7 +55,7 @@ public class DramaMaker : Interactable
 
         drama = dramaList.GetRollFromWeights(random);
 
-        computer.text = drama.ToString();
+        StartCoroutine(SlowWrite(computer, drama.ToString(), 0.05f));
     }
 
     private void TurnOffFog()
@@ -126,14 +126,14 @@ public class DramaMaker : Interactable
         transform.position += new Vector3(0, 0.09f, 0);
     }
 
-    IEnumerator SlowWrite(TextMeshProUGUI text, string content)
+    IEnumerator SlowWrite(TextMeshProUGUI text, string content, float timeBetween = 0.12f)
     {
         char[] chars = content.ToCharArray();
         string currentString = "";
 
         foreach (char c in chars)
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(timeBetween);
             currentString += c;
             typeSound.Play();
             text.text = currentString;
@@ -146,11 +146,11 @@ public class DramaMaker : Interactable
         {
             PressButton();
         }
-        if (drama != null && drama.drama == TurnOffLights && GameSettings.Instance.PowerOutage)
+        if (drama != null && drama.drama == TurnOffLights && GameSettings.Instance.PowerOutage && !pressed)
         {
             SetRandomDrama(0);
         }
-        if (drama != null && drama.drama == TurnOffFog && GameSettings.Instance.Event != "Foggy!")
+        if (drama != null && drama.drama == TurnOffFog && GameSettings.Instance.Event != "Foggy!" && !pressed)
         {
             SetRandomDrama(0);
         }
