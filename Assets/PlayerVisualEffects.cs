@@ -111,10 +111,10 @@ public class PlayerVisualEffects : MonoBehaviour
         switch (visionInfo.type)
         {
             case EnemyType.wanderer:
-                PlaySoundEffect(normalEnemyVisionSound);
+                //PlaySoundEffect(normalEnemyVisionSound);
                 break;
             case EnemyType.coil:
-                PlaySoundEffect(coilSound);
+                //PlaySoundEffect(coilSound);
                 break;
         }
 
