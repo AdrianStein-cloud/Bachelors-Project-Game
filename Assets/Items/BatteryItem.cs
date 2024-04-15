@@ -23,17 +23,33 @@ public class BatteryItem : Item
     public bool Dead => currentBatteryLife <= 0;
 
     GameObject powerBar;
-    float currentBatteryLife;
+    GameObject PowerBar { get
+        {
+            if(powerBar == null)
+            {
+                powerBar = GameSettings.Instance.canvas.transform.Find("PowerBar").gameObject;
+            }
+            return powerBar;
+        }
+    }
     Image flashlightFill;
+    Image FlashlightFill
+    {
+        get
+        {
+            if (flashlightFill == null)
+            {
+                flashlightFill = flashlightFill = powerBar.transform.Find("Fill").GetComponent<Image>(); ;
+            }
+            return flashlightFill;
+        }
+    }
+    float currentBatteryLife;
+
     bool selected;
 
     private void Awake()
     {
-        Stats.Instance.eletronics.rechargeBattery += (fraction) =>
-        {
-            currentBatteryLife = Mathf.Min(currentBatteryLife + MaxBatteryLife * fraction, MaxBatteryLife);
-            UpdateBar();
-        };
         var gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
         {
@@ -42,10 +58,19 @@ public class BatteryItem : Item
                 FillBattery();
             };
         }
-
-        powerBar = GameSettings.Instance.canvas.transform.Find("PowerBar").gameObject;
-        flashlightFill = powerBar.transform.Find("Fill").GetComponent<Image>();
+        /*powerBar = GameSettings.Instance.canvas.transform.Find("PowerBar").gameObject;
+        flashlightFill = powerBar.transform.Find("Fill").GetComponent<Image>();*/
         FillBattery();
+
+    }
+
+    private void Start()
+    {
+        Stats.Instance.eletronics.rechargeBattery += (fraction) =>
+        {
+            currentBatteryLife = Mathf.Min(currentBatteryLife + MaxBatteryLife * fraction, MaxBatteryLife);
+            UpdateBar();
+        };
     }
 
     private void Update()
@@ -76,13 +101,13 @@ public class BatteryItem : Item
     public override void Select()
     {
         selected = true;
-        powerBar.SetActive(true);
+        PowerBar.SetActive(true);
     }
 
     public override void Deselect()
     {
         selected = false;
-        powerBar.SetActive(false);
+        PowerBar.SetActive(false);
     }
 
     public void FillBattery()
@@ -90,5 +115,5 @@ public class BatteryItem : Item
         currentBatteryLife = MaxBatteryLife;
     }
 
-    private void UpdateBar() => flashlightFill.fillAmount = currentBatteryLife / MaxBatteryLife;
+    private void UpdateBar() => FlashlightFill.fillAmount = currentBatteryLife / MaxBatteryLife;
 }
