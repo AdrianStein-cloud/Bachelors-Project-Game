@@ -107,4 +107,10 @@ public class DifficultyButton : MonoBehaviour
         PlayerPrefs.SetInt("Difficulty", (int) difficulty);
         SceneManager.LoadScene("Procedural Generation");
     }
+
+    public void StartGame(Difficulty difficulty)
+    {
+        this.difficulty = difficulty;
+        StartGame();
+    }
 }
