@@ -10,7 +10,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Button exitButton;
     [SerializeField] GameObject difficultyMenu;
     [SerializeField] GameObject credits;
-    [SerializeField] bool alwaysNightmare = false;
+    [SerializeField] bool canChooseDifficulty = true;
+    [SerializeField] Difficulty forcedDifficulty;
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +28,8 @@ public class MainMenu : MonoBehaviour
 
     public void LoadDifficulties()
     {
-        if (!alwaysNightmare) difficultyMenu.SetActive(true);
-        else difficultyMenu.GetComponentInChildren<DifficultyButton>().StartGame(Difficulty.Nightmare);
+        if (canChooseDifficulty) difficultyMenu.SetActive(true);
+        else difficultyMenu.GetComponentInChildren<DifficultyButton>().StartGame(forcedDifficulty);
     }
 
     public void ShowCredits()
