@@ -2017,7 +2017,8 @@ MonoBehaviour:
   exitButton: {fileID: 513092802}
   difficultyMenu: {fileID: 1756810977}
   credits: {fileID: 534358330}
-  alwaysNightmare: 1
+  canChooseDifficulty: 0
+  forcedDifficulty: 1
 --- !u!1 &608216752
 GameObject:
   m_ObjectHideFlags: 0
