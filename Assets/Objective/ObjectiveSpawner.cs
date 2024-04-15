@@ -31,7 +31,7 @@ public class ObjectiveSpawner : MonoBehaviour
 
     public void SpawnObjectives(List<(GameObject room, int depth)> roomsDepth, Transform dungeon, Action<int> leave)
     {
-        int objectiveAmount = (int)(this.objectiveAmount * (1 + GameSettings.Instance.Wave / (float)multiplicationFrequency));
+        int objectiveAmount = (int)(this.objectiveAmount * (1 + 2 * GameSettings.Instance.Wave / (float)multiplicationFrequency));
         int leaveThreshold = (int)(this.leaveThreshold * (1 + GameSettings.Instance.Wave / (float)multiplicationFrequency));
         int maxObtainableObjectives = (int)(this.maxObtainableObjectives * (1 + GameSettings.Instance.Wave / (float)multiplicationFrequency));
 
