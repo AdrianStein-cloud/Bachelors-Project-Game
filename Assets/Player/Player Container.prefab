@@ -1488,7 +1488,7 @@ MonoBehaviour:
   lostVisionTime: 3
   effectCooldown: 1
   fov: 15
-  fadeDuration: 7
+  fadeDuration: 15
 --- !u!1 &6995078530207280390
 GameObject:
   m_ObjectHideFlags: 0
