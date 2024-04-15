@@ -24,6 +24,11 @@ public class DramaMaker : Interactable
         UnitySingleton<GameManager>.Instance.OnDungeonGenerated += SetRandomDrama;
     }
 
+    private void OnDestroy()
+    {
+        UnitySingleton<GameManager>.Instance.OnDungeonGenerated -= SetRandomDrama;
+    }
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();

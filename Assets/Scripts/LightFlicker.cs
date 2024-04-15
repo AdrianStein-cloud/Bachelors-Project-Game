@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LightFlicker : MonoBehaviour
 {
@@ -63,7 +64,10 @@ public class LightFlicker : MonoBehaviour
             TurnOff();
         }
 
-        UnitySingleton<GameManager>.Instance.OnDungeonEnter += SetLifetime;
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            UnitySingleton<GameManager>.Instance.OnDungeonEnter += SetLifetime;
+        }
     }
 
     private void SetLifetime()
@@ -96,7 +100,10 @@ public class LightFlicker : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
-        UnitySingleton<GameManager>.Instance.OnDungeonEnter -= SetLifetime;
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            UnitySingleton<GameManager>.Instance.OnDungeonEnter -= SetLifetime;
+        }
     }
 
     void TurnOff()
