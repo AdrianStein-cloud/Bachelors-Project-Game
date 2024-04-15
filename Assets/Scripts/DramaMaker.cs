@@ -34,6 +34,7 @@ public class DramaMaker : Interactable
         gameManager = FindObjectOfType<GameManager>();
 
         buttonSound = GetComponent<AudioSource>();
+        SetRandomDrama(0);
     }
 
     private void SetRandomDrama(int why)
