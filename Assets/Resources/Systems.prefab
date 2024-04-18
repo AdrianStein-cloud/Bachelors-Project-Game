@@ -55,13 +55,13 @@ MonoBehaviour:
     Value: 180
   chance:
   - Key: 0
-    Value: 40
+    Value: 50
   - Key: 1
     Value: 30
   - Key: 2
-    Value: 20
+    Value: 15
   - Key: 3
-    Value: 10
+    Value: 5
   colors:
   - Key: 0
     Value: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}

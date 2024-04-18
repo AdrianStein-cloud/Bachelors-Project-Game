@@ -96,9 +96,15 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
     public void RefreshUpgrades()
     {
         var upgradesCopy = new List<Upgrade>(availableUpgrades.Where(x => x.Limit == 0 || (x.Limit > 0 && x.Purchased < x.Limit)));
+        var rarityUpgrades = upgradesCopy.GroupBy(u => u.Rarity).ToDictionary(g => g.Key, g => g.ToList());
         var randomUpgrades = Enumerable.Range(0, Math.Min(selectionAmount, upgradesCopy.Count)).Select(_ => {
-            var upgrade = upgradesCopy.GetRollFromWeights(random);
-            upgradesCopy.Remove(upgrade);
+            var rarity = rarityUpgrades.Keys.GetRollFromWeights(r => r.GetChance());
+            var upgrade = rarityUpgrades[rarity].GetRollFromWeights(random);
+            rarityUpgrades[rarity].Remove(upgrade);
+            if (rarityUpgrades[rarity].Count == 0)
+            {
+                rarityUpgrades.Remove(rarity);
+            }
             return upgrade;
         });
 

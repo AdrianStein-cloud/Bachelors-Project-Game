@@ -35,6 +35,21 @@ public static class Extensions
         throw new Exception("No roll");
     }
 
+    public static T GetRollFromWeights<T>(this IEnumerable<T> elements, Func<T, int> weight)
+    {
+        var totalWeight = elements.Sum(e => weight(e));
+
+        var roll = UnityEngine.Random.Range(1, totalWeight + 1);
+        var tempWeight = 0f;
+        foreach (var e in elements)
+        {
+            tempWeight += weight(e);
+            if (tempWeight >= roll) return e;
+        }
+
+        throw new Exception("No roll");
+    }
+
     public static T MaxBy<T>(this IEnumerable<T> enumerable, Func<T, float> selector)
     {
         float max = float.MinValue;
