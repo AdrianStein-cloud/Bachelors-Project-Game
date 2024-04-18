@@ -1742,6 +1742,9 @@ MonoBehaviour:
   - contribution: Landmine
     contributorName: FeelsBadMan
     contributorUrl: https://sketchfab.com/3d-models/landmine-d0d63bfd117c40e4938473caf5333847
+  - contribution: SCP-173 Unity (With Poses)
+    contributorName: ThatJamGuy
+    contributorUrl: https://sketchfab.com/3d-models/scp-173-unity-with-poses-29036901b47a497c97b6f625fc57f23c
   - contribution: Cry Wolf Free low-poly 3D model
     contributorName: skinrender-artworks
     contributorUrl: https://www.cgtrader.com/free-3d-models/character/sci-fi-character/cry-wolf
@@ -2017,7 +2020,7 @@ MonoBehaviour:
   exitButton: {fileID: 513092802}
   difficultyMenu: {fileID: 1756810977}
   credits: {fileID: 534358330}
-  canChooseDifficulty: 0
+  canChooseDifficulty: 1
   forcedDifficulty: 1
 --- !u!1 &608216752
 GameObject:
