@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Detonate on Impact Upgrade
   m_EditorClassIdentifier: 
   Name: The Impactor
-  description: All throwables now detonate on impact
+  description: All grenades now detonate on impact
   Rarity: 1
-  Tags: 2
+  Tags: 0
   NewlyAvailableUpgrades: []
   <Limit>k__BackingField: 0
