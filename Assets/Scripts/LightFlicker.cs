@@ -108,6 +108,8 @@ public class LightFlicker : MonoBehaviour
 
     void TurnOff()
     {
+        off = true;
+
         if (!alwaysOn)
         {
             StopAllCoroutines();
