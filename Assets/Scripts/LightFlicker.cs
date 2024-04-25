@@ -139,7 +139,7 @@ public class LightFlicker : MonoBehaviour
                 TurnOn();
                 yield break;
             }
-            else if (off && canScare && Random.Range(0, 100) < 5)
+            else if (off && canScare && Random.Range(0, 100) < 8)
             {
                 for (int i = 0; i < Random.Range(0, 3); i++)
                 {
