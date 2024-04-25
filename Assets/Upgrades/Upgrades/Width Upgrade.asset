@@ -16,9 +16,8 @@ MonoBehaviour:
   description: Makes your flashlight {2} degrees wider
   Rarity: 0
   Tags: 0
-  NewlyAvailableUpgrades:
-  - {fileID: 11400000}
-  <Limit>k__BackingField: 1
+  NewlyAvailableUpgrades: []
+  <Limit>k__BackingField: 0
   intensity: 0
   range: 0
   angle: 20
