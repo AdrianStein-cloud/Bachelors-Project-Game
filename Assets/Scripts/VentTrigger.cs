@@ -5,13 +5,11 @@ using UnityEngine;
 public class VentTrigger : MonoBehaviour
 {
     [SerializeField] int triggerChance;
-    private static System.Random random;
     private Rigidbody rb;
     private AudioSource source;
 
     private void Start()
     {
-        if (random == null) random = new System.Random(GameSettings.Instance.GetSeed());
         rb = GetComponent<Rigidbody>();
         source = GetComponent<AudioSource>();
     }
@@ -32,7 +30,7 @@ public class VentTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (random.Next(0, 100) < triggerChance)
+            if (Random.Range(0, 100) < triggerChance)
             {
                 rb.isKinematic = false;
             }
