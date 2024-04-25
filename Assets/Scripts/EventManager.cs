@@ -102,7 +102,7 @@ public class EventManager : MonoBehaviour
 
     private void SetFoggy()
     {
-        StartCoroutine(LerpFog(400, 12, 0.05f));
+        StartCoroutine(LerpFog(400, 10, 0.04f));
     }
 
     public void ResetFog()
