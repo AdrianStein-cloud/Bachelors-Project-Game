@@ -61,6 +61,7 @@ public class DramaMaker : Interactable
 
         drama = dramaList.GetRollFromWeights(random);
 
+        StopAllCoroutines();
         StartCoroutine(SlowWrite(computer, drama.ToString(), 0.05f));
     }
 
