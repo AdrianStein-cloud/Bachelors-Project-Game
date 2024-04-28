@@ -1,6 +1,6 @@
-using UnityEngine;
+using Unity.Netcode;
 
-public abstract class Interactable : MonoBehaviour
+public abstract class Interactable : NetworkBehaviour
 {
     public abstract void EnableInteractability();
     public abstract void DisableInteractability();

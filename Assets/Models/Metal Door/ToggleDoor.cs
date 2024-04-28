@@ -1,7 +1,3 @@
-using BBUnity.Actions;
-using BBUnity.Conditions;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,7 +13,6 @@ public class ToggleDoor : Interactable
 
     Animator anim;
     GameObject player;
-    GameObject cam;
     AudioSource audioSource;
 
     public AudioClip openSound, closeSound;
@@ -32,7 +27,6 @@ public class ToggleDoor : Interactable
         audioSource = GetComponent<AudioSource>();
         anim = transform.parent.GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
-        cam = Camera.main.gameObject;
         navObstacle = GetComponentInChildren<NavMeshObstacle>();
         if (!isLocked) navObstacle.enabled = false;
     }

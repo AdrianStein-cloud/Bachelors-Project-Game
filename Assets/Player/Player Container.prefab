@@ -200,6 +200,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8969642763786446042}
   - component: {fileID: 4589036519682442241}
+  - component: {fileID: 6612975273868570831}
+  - component: {fileID: 543149233612209591}
   m_Layer: 9
   m_Name: Player Container
   m_TagString: Untagged
@@ -321,6 +323,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6612975273868570831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994622128118365023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3667298011
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &543149233612209591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994622128118365023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f755bfbb5b9aa974d872c1a85525ce22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3248148408429186608
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +690,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 10622327
+    m_Bits: 10622839
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1097,6 +1131,7 @@ GameObject:
   - component: {fileID: 7433321139317267936}
   - component: {fileID: 7471892163566371439}
   - component: {fileID: 6316439307033216479}
+  - component: {fileID: 28159168946561905}
   m_Layer: 9
   m_Name: Player Controller
   m_TagString: Player
@@ -1489,6 +1524,36 @@ MonoBehaviour:
   effectCooldown: 1
   fov: 15
   fadeDuration: 15
+--- !u!114 &28159168946561905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6358394087113186272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502b7d544a3685748891da1c9a59b63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
+  SyncRotAngleZ: 0
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.1
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &6995078530207280390
 GameObject:
   m_ObjectHideFlags: 0

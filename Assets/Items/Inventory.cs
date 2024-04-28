@@ -25,8 +25,10 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         UnitySingleton<Inventory>.BecomeSingleton(this);
-        primaryGO = primaryDescription.transform.parent.gameObject;
-        secondaryGO = secondaryDescription.transform.parent.gameObject;
+        primaryGO = GameObject.FindGameObjectWithTag("Canvas").transform.Find("PrimaryDescription").gameObject;
+        secondaryGO = GameObject.FindGameObjectWithTag("Canvas").transform.Find("SecondaryDescription").gameObject;
+        primaryDescription = primaryGO.GetComponentInChildren<TextMeshProUGUI>();
+        secondaryDescription = secondaryGO.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Start()

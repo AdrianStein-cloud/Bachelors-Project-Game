@@ -43,27 +43,34 @@ public class PauseMenu : MonoBehaviour
         InputManager.Actions.UI.Unpause.started += _ => UnpauseGame();
 
         settingsMenu.SetActive(false);
-        player = GameObject.FindObjectOfType<CameraController>();
-        var value = PlayerPrefs.GetFloat("Sensitivity");
-        if (value == 0)
+        float sensitivity = PlayerPrefs.GetFloat("Sensitivity");
+        if (sensitivity == 0)
         {
-            value = 20f;
-            PlayerPrefs.SetFloat("Sensitivity", value);
+            sensitivity = 20f;
+            PlayerPrefs.SetFloat("Sensitivity", sensitivity);
         }
-        player.HorizontalSensitivity = value;
-        player.VerticalSensitivity = value;
-        sensSlider.value = value;
-        sensInputField.text = value.ToString();
 
-        value = PlayerPrefs.GetFloat("Volume") - 1;
-        if (value + 1 == 0)
+        UnitySingleton<PlayerManager>.Instance.OnPlayerSpawned(player =>
         {
-            value = 100f;
-            PlayerPrefs.SetFloat("Volume", value + 1);
+            var cameraController = player.transform.parent.GetComponentInChildren<CameraController>();
+            this.player = cameraController;
+            cameraController.HorizontalSensitivity = sensitivity;
+            cameraController.VerticalSensitivity = sensitivity;
+
+        });
+
+        sensSlider.value = sensitivity;
+        sensInputField.text = sensitivity.ToString();
+
+        float volume = PlayerPrefs.GetFloat("Volume") - 1;
+        if (volume + 1 == 0)
+        {
+            volume = 100f;
+            PlayerPrefs.SetFloat("Volume", volume + 1);
         }
-        AudioListener.volume = value / 100f;
-        volumeSlider.value = value;
-        volumeInputField.text = value.ToString();
+        AudioListener.volume = volume / 100f;
+        volumeSlider.value = volume;
+        volumeInputField.text = volume.ToString();
 
         if(PlayerPrefs.GetInt("Graphics") == 0)
         {

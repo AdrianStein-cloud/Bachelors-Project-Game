@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour, IStunnable, ISlowable
+public class PlayerMovement : NetworkBehaviour, IStunnable, ISlowable
 {
     [Header("Assignables")]
     [SerializeField] Transform cam;
@@ -70,6 +70,7 @@ public class PlayerMovement : MonoBehaviour, IStunnable, ISlowable
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+        Teleport(GameObject.Find("WaitingRoomSpawnPoint").transform.position);
         stamina = GetComponent<PlayerStamina>();
         audio = GetComponent<Audio>();
         cameraController = FindObjectOfType<CameraController>();

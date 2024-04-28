@@ -59,16 +59,19 @@ public class UpgradeManager : MonoBehaviour, IUpgradeManager
         upgradeUIController.Init(this);
         upgradeUIController.SetRerollPrice(RerollPrice);
 
-        player = GameObject.FindWithTag("Player");
-
-        FindObjectOfType<Inventory>().OnInventoryFull += RemoveItemUpgrades;
+        UnitySingleton<PlayerManager>.Instance.OnPlayerSpawned(player =>
+        {
+            this.player = player;
+            var inventory = player.transform.parent.GetComponentInChildren<Inventory>();
+            inventory.OnInventoryFull += RemoveItemUpgrades;
+            foreach (var upgrade in startUpgrades)
+            {
+                upgrade.Apply(player);
+            }
+        });
 
         RefreshUpgrades();
 
-        foreach (var upgrade in startUpgrades)
-        {
-            upgrade.Apply(player);
-        }
 
         GetComponent<GameManager>().OnWaveOver += () =>
         {

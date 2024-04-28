@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        waitingRoomSpawnPoint = GameObject.Find("WaitingRoomSpawnPoint");
+        //waitingRoomSpawnPoint = GameObject.Find("WaitingRoomSpawnPoint");
         player = GameObject.FindGameObjectWithTag("Player");
         dungeonGenerator = GetComponent<DungeonGenerator>();
         objectiveSpawner = GetComponent<ObjectiveSpawner>();
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         upgradeManager = GetComponent<UpgradeManager>();
         elevator = FindAnyObjectByType<ElevatorButton>();
         elevator.EnterDungeon = StartLevel;
-        player.transform.position = waitingRoomSpawnPoint.transform.position;
+        //player.transform.position = waitingRoomSpawnPoint.transform.position;
         dangerScaler = new DangerScaler();
         StartCoroutine(SpawnDungeon());
     }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElevatorButton : Interactable
+public class ElevatorButton : NetworkInteractable
 {
     public bool DungeonIsAvailable { get; set; } = false;
     public Action EnterDungeon { get; set; }
@@ -20,19 +20,7 @@ public class ElevatorButton : Interactable
     {
         if (inFocus && InputManager.Player.Interact.triggered && !elevator.Moving)
         {
-            if (DungeonIsAvailable && !GameSettings.Instance.PlayerInDungeon)
-            {
-                GameSettings.Instance.PlayerInDungeon = true;
-                StartCoroutine(Enter());
-                EnterDungeon();
-            }
-            else if (FindObjectOfType<ElevatorExit>().CanLeaveDungeon && GameSettings.Instance.PlayerInDungeon)
-            {
-                DungeonIsAvailable = false;
-                GameSettings.Instance.PlayerInDungeon = false;
-                FindObjectOfType<ElevatorExit>().CanLeaveDungeon = false;
-                StartCoroutine(Exit());
-            }
+            InteractServerRpc();
         }
     }
 
@@ -78,5 +66,22 @@ public class ElevatorButton : Interactable
     {
         inFocus = false;
         InteractionUIText.Instance.SetText("");
+    }
+
+    protected override void Interact()
+    {
+        if (DungeonIsAvailable && !GameSettings.Instance.PlayerInDungeon)
+        {
+            GameSettings.Instance.PlayerInDungeon = true;
+            StartCoroutine(Enter());
+            EnterDungeon();
+        }
+        else if (FindObjectOfType<ElevatorExit>().CanLeaveDungeon && GameSettings.Instance.PlayerInDungeon)
+        {
+            DungeonIsAvailable = false;
+            GameSettings.Instance.PlayerInDungeon = false;
+            FindObjectOfType<ElevatorExit>().CanLeaveDungeon = false;
+            StartCoroutine(Exit());
+        }
     }
 }

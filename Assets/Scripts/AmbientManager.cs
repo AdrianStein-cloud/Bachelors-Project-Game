@@ -20,8 +20,12 @@ public class AmbientManager : MonoBehaviour
 
     private void Start()
     {
-        player = FindObjectOfType<PlayerMovement>().gameObject;
-        playerAudioSource = player.GetComponent<AudioSource>();
+        UnitySingleton<PlayerManager>.Instance.OnPlayerSpawned(player =>
+        {
+            this.player = player;
+            playerAudioSource = player.GetComponent<AudioSource>();
+
+        });
         timer = soundIntervalMax;
     }
 

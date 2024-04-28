@@ -10,6 +10,7 @@ TagManager:
   - MapCamera
   - NoiseMaker
   - Enemy
+  - Canvas
   layers:
   - Default
   - TransparentFX
