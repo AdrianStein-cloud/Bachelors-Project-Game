@@ -53,9 +53,10 @@ public class LightFlicker : MonoBehaviour
         if (!alwaysOn || !cantFail)
         {
             failed = Random.Range(0, 100) < GameSettings.Instance.LightFailPercentage;
+            if (failed) Debug.Log("Failed");
         }
 
-        if (!failed || !GameSettings.Instance.PowerOutage)
+        if (!failed && !GameSettings.Instance.PowerOutage)
         {
             TurnOn();
         }
